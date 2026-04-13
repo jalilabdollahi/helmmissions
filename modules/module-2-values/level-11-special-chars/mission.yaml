@@ -1,0 +1,12 @@
+name: Escape Artist
+description: Password value with special characters breaks YAML parsing.
+objective: 'Quote the value: `db.password: "p@ss!word#1"`'
+xp: 200
+difficulty: intermediate
+expected_time: 12m
+concepts:
+- YAML quoting
+- special characters
+- strings
+module: module-2-values
+level: level-11-special-chars

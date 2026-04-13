@@ -1,0 +1,13 @@
+name: Pipe Dream
+description: Template produces wrong output — pipe order incorrect.
+objective: Understand that empty string is falsy for `default` — use `| default "latest"`
+  correctly OR use `required`
+xp: 250
+difficulty: intermediate
+expected_time: 12m
+concepts:
+- default with empty string
+- falsy values
+- pipe order
+module: module-3-templates
+level: level-6-pipe-order

@@ -1,0 +1,1 @@
+Concrete direction: Fix URL path in test template. When you think you have it, verify the result the same way the mission describes: `helm test <release>` passes

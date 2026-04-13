@@ -1,0 +1,1 @@
+The fix revolves around --dry-run, helm template, nil pointer. Compare the current state with the objective: Use `helm install --dry-run` to catch the error, then add `default` function If the level is stateful, inspect the existing release history before reinstalling anything.

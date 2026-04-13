@@ -1,0 +1,13 @@
+name: toYaml Without Indent
+description: Deployment fails — resources block is not properly indented.
+objective: Change to `{{ .Values.resources | toYaml | indent 12 }}`
+xp: 250
+difficulty: intermediate
+expected_time: 15m
+concepts:
+- toYaml
+- indent
+- nindent
+- multi-line values
+module: module-3-templates
+level: level-2-yaml-indent-to

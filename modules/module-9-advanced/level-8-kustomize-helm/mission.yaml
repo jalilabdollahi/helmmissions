@@ -1,0 +1,12 @@
+name: Kustomize Meets Helm
+description: Kustomize inflates Helm chart but values file path wrong.
+objective: Correct path, ensure kustomize can locate values
+xp: 400
+difficulty: expert
+expected_time: 30m
+concepts:
+- kustomize helmCharts generator
+- valuesFile
+- kustomize + helm
+module: module-9-advanced
+level: level-8-kustomize-helm

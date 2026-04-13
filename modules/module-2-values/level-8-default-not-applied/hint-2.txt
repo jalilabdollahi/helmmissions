@@ -1,0 +1,1 @@
+The fix revolves around default function, optional values, defensive templates. Compare the current state with the objective: Add `{{ .Values.optional.timeout | default 30 }}` in template If the level is stateful, inspect the existing release history before reinstalling anything.

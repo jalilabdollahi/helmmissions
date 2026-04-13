@@ -1,0 +1,1 @@
+The fix revolves around ArgoCD Helm support, valueFiles, helm.parameters. Compare the current state with the objective: Correct path to values file relative to chart root in git If the level is stateful, inspect the existing release history before reinstalling anything.

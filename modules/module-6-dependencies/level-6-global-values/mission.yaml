@@ -1,0 +1,12 @@
+name: Share With Everyone
+description: Multiple subcharts need same cluster name — must use global values.
+objective: Use `global.clusterName` — accessible in all subcharts via `.Values.global`
+xp: 300
+difficulty: advanced
+expected_time: 20m
+concepts:
+- global values
+- .Values.global
+- cross-subchart sharing
+module: module-6-dependencies
+level: level-6-global-values

@@ -1,0 +1,13 @@
+name: Quoted Numbers
+description: Deployment fails — replicas field receives a string.
+objective: Remove quotes OR add `| int` in template
+xp: 150
+difficulty: beginner
+expected_time: 8m
+concepts:
+- YAML types
+- int conversion
+- toYaml
+- type coercion
+module: module-2-values
+level: level-1-string-as-int

@@ -1,0 +1,1 @@
+The fix revolves around ResourceQuota, requests required, quota enforcement. Compare the current state with the objective: Add resources.requests.cpu and resources.requests.memory to values If the level is stateful, inspect the existing release history before reinstalling anything.

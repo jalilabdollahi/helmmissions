@@ -1,0 +1,11 @@
+name: Wrong Version
+description: helm upgrade rejects chart because appVersion doesn't match running app.
+objective: Align appVersion in Chart.yaml or update image tag in values
+xp: 150
+difficulty: beginner
+expected_time: 10m
+concepts:
+- chart version vs appVersion
+- versioning strategy
+module: module-1-basics
+level: level-12-chart-version-mismatch

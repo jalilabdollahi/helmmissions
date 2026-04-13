@@ -1,0 +1,1 @@
+The fix revolves around YAML spec, tabs vs spaces, indent rules. Compare the current state with the objective: Replace all tabs with spaces (2-space indent) If the level is stateful, inspect the existing release history before reinstalling anything.

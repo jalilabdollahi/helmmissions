@@ -1,0 +1,1 @@
+Concrete direction: Create docker-registry Secret, set imagePullSecrets in values. When you think you have it, verify the result the same way the mission describes: Image pulled from private registry, pod running

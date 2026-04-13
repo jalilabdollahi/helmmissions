@@ -1,0 +1,1 @@
+Concrete direction: Use `helm rollback --wait <release> <revision>`. When you think you have it, verify the result the same way the mission describes: All pods ready after rollback

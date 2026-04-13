@@ -1,0 +1,1 @@
+The fix revolves around release name rules, helm install syntax. Compare the current state with the objective: Use a valid release name like `nginx-app` If the level is stateful, inspect the existing release history before reinstalling anything.

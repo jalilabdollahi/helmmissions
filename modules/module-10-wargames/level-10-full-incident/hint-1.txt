@@ -1,0 +1,1 @@
+Treat this like an incident. Establish what is broken first, then fix the highest-dependency problem before the rest. The broken state says: Final mission. Complete production incident: 4 services down, bad Helm upgrade, wrong values across 3 environments, stuck hooks, and a dependency version conflict.

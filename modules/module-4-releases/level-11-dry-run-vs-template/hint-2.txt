@@ -1,0 +1,1 @@
+The fix revolves around template vs dry-run, cluster connectivity, lookup availability. Compare the current state with the objective: Use `--dry-run` for cluster-aware checks If the level is stateful, inspect the existing release history before reinstalling anything.

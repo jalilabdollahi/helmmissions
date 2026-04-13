@@ -1,0 +1,12 @@
+name: My Overrides Are Gone
+description: Player provides `-f custom.yaml` but the values don't appear to apply.
+objective: Fix indentation — values.yaml structure must match chart expectations
+xp: 150
+difficulty: beginner
+expected_time: 8m
+concepts:
+- -f flag
+- YAML indentation
+- values merging
+module: module-2-values
+level: level-7-values-file-ignored

@@ -1,0 +1,1 @@
+Concrete direction: Use `global.clusterName` — accessible in all subcharts via `.Values.global`. When you think you have it, verify the result the same way the mission describes: All subcharts render with same clusterName

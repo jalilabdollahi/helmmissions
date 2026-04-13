@@ -1,0 +1,13 @@
+name: The Big Picture
+description: Umbrella chart orchestrating 5 microservices — one subchart fails and
+  blocks all.
+objective: Fix subchart template error; understand umbrella chart failure modes
+xp: 450
+difficulty: expert
+expected_time: 35m
+concepts:
+- umbrella charts
+- chart composition
+- partial failure handling
+module: module-9-advanced
+level: level-10-umbrella-chart

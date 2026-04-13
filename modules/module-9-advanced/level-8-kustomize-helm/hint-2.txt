@@ -1,0 +1,1 @@
+The fix revolves around kustomize helmCharts generator, valuesFile, kustomize + helm. Compare the current state with the objective: Correct path, ensure kustomize can locate values If the level is stateful, inspect the existing release history before reinstalling anything.

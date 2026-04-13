@@ -1,0 +1,1 @@
+This level is about revision history. Start with `helm history` and identify the good revision before changing anything. The broken state says: Blue/green deployment via Helm — bad green deploy, switch back to blue.

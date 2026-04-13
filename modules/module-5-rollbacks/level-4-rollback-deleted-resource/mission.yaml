@@ -1,0 +1,11 @@
+name: Can't Rollback That
+description: Rollback fails because a manually deleted resource can't be restored.
+objective: Recreate the ConfigMap manually, then retry rollback
+xp: 300
+difficulty: advanced
+expected_time: 20m
+concepts:
+- rollback limitations
+- manual changes vs helm managed
+module: module-5-rollbacks
+level: level-4-rollback-deleted-resource

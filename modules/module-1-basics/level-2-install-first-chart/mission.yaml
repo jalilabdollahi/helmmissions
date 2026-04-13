@@ -1,0 +1,12 @@
+name: The First Deploy
+description: A simple nginx chart exists but `helm install` fails with "release name
+  not valid".
+objective: Use a valid release name like `nginx-app`
+xp: 100
+difficulty: beginner
+expected_time: 5m
+concepts:
+- release name rules
+- helm install syntax
+module: module-1-basics
+level: level-2-install-first-chart

@@ -1,0 +1,12 @@
+name: Mega vs Mebi
+description: Memory limit set to `256` (bytes) instead of `256Mi`.
+objective: 'Change to `resources.limits.memory: 256Mi`'
+xp: 150
+difficulty: beginner
+expected_time: 8m
+concepts:
+- Kubernetes resource units
+- Mi vs M
+- CPU millicores
+module: module-2-values
+level: level-12-wrong-units

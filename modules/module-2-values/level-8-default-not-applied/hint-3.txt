@@ -1,0 +1,1 @@
+Concrete direction: Add `{{ .Values.optional.timeout | default 30 }}` in template. When you think you have it, verify the result the same way the mission describes: Template renders with fallback value

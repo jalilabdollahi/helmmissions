@@ -1,0 +1,1 @@
+Inspect `values.yaml` closely and compare the key path with the template fields consuming it. The broken state says: Memory limit set to `256` (bytes) instead of `256Mi`.

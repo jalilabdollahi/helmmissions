@@ -1,0 +1,6 @@
+apiVersion: v2
+name: rollback-deleted-resource
+description: Broken chart for Can't Rollback That
+type: application
+version: 0.1.0
+appVersion: 1.0.0

@@ -1,0 +1,6 @@
+apiVersion: v2
+name: force-upgrade
+description: Broken chart for Force It Through
+type: application
+version: 0.1.0
+appVersion: 1.0.0

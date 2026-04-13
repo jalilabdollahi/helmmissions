@@ -1,0 +1,12 @@
+name: Your Own Repository
+description: ChartMuseum is running but helm push fails — auth wrong.
+objective: Add credentials to push command
+xp: 350
+difficulty: advanced
+expected_time: 25m
+concepts:
+- ChartMuseum
+- private chart repositories
+- helm-push plugin
+module: module-9-advanced
+level: level-7-chartmuseum

@@ -1,0 +1,11 @@
+name: One Step Back
+description: Bad upgrade broke the app — perform a simple rollback.
+objective: '`helm rollback <release> 1`'
+xp: 200
+difficulty: intermediate
+expected_time: 10m
+concepts:
+- helm rollback
+- revision numbers
+module: module-5-rollbacks
+level: level-1-simple-rollback

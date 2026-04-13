@@ -1,0 +1,1 @@
+Concrete direction: Correct path to values file relative to chart root in git. When you think you have it, verify the result the same way the mission describes: ArgoCD syncs and applies correct values

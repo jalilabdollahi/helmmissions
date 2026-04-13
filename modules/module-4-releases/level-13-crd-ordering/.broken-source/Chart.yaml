@@ -1,0 +1,6 @@
+apiVersion: v2
+name: crd-ordering
+description: Broken chart for CRD First
+type: application
+version: 0.1.0
+appVersion: 1.0.0

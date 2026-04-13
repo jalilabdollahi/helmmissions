@@ -1,0 +1,12 @@
+name: Secret's Not a Secret
+description: Plaintext password in values.yaml committed to git.
+objective: Remove from values.yaml; use `--set` for secrets or external-secrets
+xp: 250
+difficulty: intermediate
+expected_time: 15m
+concepts:
+- secret management
+- values.yaml in git
+- --set for secrets
+module: module-8-security
+level: level-1-secret-in-values

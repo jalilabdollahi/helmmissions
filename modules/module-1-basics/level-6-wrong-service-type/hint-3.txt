@@ -1,0 +1,1 @@
+Concrete direction: Change to `ClusterIP`. When you think you have it, verify the result the same way the mission describes: Service exists with correct type, pod endpoints populated

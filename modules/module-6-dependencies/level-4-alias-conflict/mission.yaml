@@ -1,0 +1,11 @@
+name: Name Collision
+description: Two dependencies with same name — one needs an alias.
+objective: 'Add `alias: postgresql-replica` to second dependency'
+xp: 250
+difficulty: intermediate
+expected_time: 15m
+concepts:
+- alias field
+- multiple instances of same chart
+module: module-6-dependencies
+level: level-4-alias-conflict

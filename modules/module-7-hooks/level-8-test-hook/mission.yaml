@@ -1,0 +1,12 @@
+name: Test Your Work
+description: helm test fails — test pod checks wrong URL.
+objective: Fix URL path in test template
+xp: 250
+difficulty: intermediate
+expected_time: 15m
+concepts:
+- test hook
+- 'helm.sh/hook: test'
+- validation tests
+module: module-7-hooks
+level: level-8-test-hook

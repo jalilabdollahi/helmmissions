@@ -1,0 +1,13 @@
+name: One Command Rules All
+description: CI pipeline fails on first deploy (no release exists) with plain `helm
+  upgrade`.
+objective: Change to `helm upgrade --install myapp ./chart`
+xp: 200
+difficulty: intermediate
+expected_time: 10m
+concepts:
+- upgrade --install
+- idempotency
+- CI patterns
+module: module-4-releases
+level: level-5-upgrade-install

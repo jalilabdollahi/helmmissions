@@ -1,0 +1,1 @@
+The fix revolves around multiline YAML, block scalars, quote vs nindent. Compare the current state with the objective: Use `|` block scalar or `{{ .Values.config | nindent 4 }}` If the level is stateful, inspect the existing release history before reinstalling anything.

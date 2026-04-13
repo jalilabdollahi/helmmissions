@@ -1,0 +1,1 @@
+These patterns rely on surrounding tooling. Read the chart plus the extra config files in the level directory. The broken state says: Kustomize inflates Helm chart but values file path wrong.

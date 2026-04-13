@@ -1,0 +1,12 @@
+name: Private Registry Auth
+description: Pod fails with ImagePullBackOff from private registry.
+objective: Create docker-registry Secret, set imagePullSecrets in values
+xp: 250
+difficulty: intermediate
+expected_time: 15m
+concepts:
+- imagePullSecrets
+- docker-registry secrets
+- private registries
+module: module-8-security
+level: level-5-image-pull-secret

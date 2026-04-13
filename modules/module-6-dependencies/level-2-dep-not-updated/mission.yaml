@@ -1,0 +1,11 @@
+name: Stale Dependencies
+description: Chart.yaml updated with new dependency version but Chart.lock not regenerated.
+objective: '`helm dependency update` to sync lock with Chart.yaml'
+xp: 200
+difficulty: intermediate
+expected_time: 10m
+concepts:
+- Chart.yaml vs Chart.lock
+- dependency pinning
+module: module-6-dependencies
+level: level-2-dep-not-updated

@@ -1,0 +1,12 @@
+name: Hook Timed Out
+description: post-install hook Job times out — Helm marks release failed.
+objective: 'Add `activeDeadlineSeconds: 60` to Job spec'
+xp: 250
+difficulty: intermediate
+expected_time: 15m
+concepts:
+- activeDeadlineSeconds
+- hook timeout
+- Job completion
+module: module-7-hooks
+level: level-2-post-install-timeout

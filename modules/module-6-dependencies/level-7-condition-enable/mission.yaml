@@ -1,0 +1,13 @@
+name: Optional Component
+description: Redis subchart deploys even when caching is disabled.
+objective: 'Add `condition: redis.enabled` to dependency; `redis.enabled: false` in
+  values'
+xp: 250
+difficulty: intermediate
+expected_time: 15m
+concepts:
+- condition field
+- optional dependencies
+- tags
+module: module-6-dependencies
+level: level-7-condition-enable

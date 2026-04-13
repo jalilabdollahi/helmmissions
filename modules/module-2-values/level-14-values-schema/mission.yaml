@@ -1,0 +1,12 @@
+name: Schema Says No
+description: helm install fails with JSON schema validation error.
+objective: Set replicaCount to at least 1
+xp: 250
+difficulty: intermediate
+expected_time: 15m
+concepts:
+- values.schema.json
+- JSON Schema validation
+- chart contracts
+module: module-2-values
+level: level-14-values-schema

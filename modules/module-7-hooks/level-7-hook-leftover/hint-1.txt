@@ -1,0 +1,1 @@
+Hook levels usually fail before or after the main workload. Inspect annotations, Jobs, and hook ordering. The broken state says: Upgrade fails because old hook Job still exists (from previous run).

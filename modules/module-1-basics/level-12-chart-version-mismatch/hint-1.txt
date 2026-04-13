@@ -1,0 +1,1 @@
+Start with `helm lint`, `helm template`, or a fresh `helm install` against the broken chart. The broken state says: helm upgrade rejects chart because appVersion doesn't match running app.

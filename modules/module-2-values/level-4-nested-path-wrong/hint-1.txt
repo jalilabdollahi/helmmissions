@@ -1,0 +1,1 @@
+Inspect `values.yaml` closely and compare the key path with the template fields consuming it. The broken state says: Override is passed but has no effect — wrong nesting path.

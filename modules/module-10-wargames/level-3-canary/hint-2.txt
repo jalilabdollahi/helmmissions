@@ -1,0 +1,1 @@
+The fix revolves around canary deployment, replica-based traffic splitting, Helm values for canary. Compare the current state with the objective: Adjust replica counts to achieve ~10% canary split If the level is stateful, inspect the existing release history before reinstalling anything.

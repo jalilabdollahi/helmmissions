@@ -1,0 +1,1 @@
+Start with `helm lint`, `helm template`, or a fresh `helm install` against the broken chart. The broken state says: helm install fails immediately with a parse error.

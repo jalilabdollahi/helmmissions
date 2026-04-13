@@ -1,0 +1,1 @@
+Render the chart first. Template and indentation failures are fastest to spot in `helm template` output. The broken state says: Chart blindly recreates Secret on each upgrade losing existing credentials.

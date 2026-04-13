@@ -1,0 +1,1 @@
+The fix revolves around helm lint, best practices, linting in CI. Compare the current state with the objective: Fix all lint errors per helm lint output If the level is stateful, inspect the existing release history before reinstalling anything.

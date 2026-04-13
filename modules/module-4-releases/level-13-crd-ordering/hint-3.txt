@@ -1,0 +1,1 @@
+Concrete direction: Move CRD to crds/ directory (installed before templates). When you think you have it, verify the result the same way the mission describes: CRD installed first, CR applies successfully

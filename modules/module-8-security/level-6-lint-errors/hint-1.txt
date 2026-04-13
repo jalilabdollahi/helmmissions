@@ -1,0 +1,1 @@
+Use `helm lint` and then verify the rendered security-related resources or pod settings with kubectl. The broken state says: Chart has 4 lint errors — fix all of them.

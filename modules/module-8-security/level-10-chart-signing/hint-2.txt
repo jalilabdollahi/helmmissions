@@ -1,0 +1,1 @@
+The fix revolves around helm sign, helm verify, provenance files. Compare the current state with the objective: Generate keypair, sign chart, verify with --verify flag If the level is stateful, inspect the existing release history before reinstalling anything.

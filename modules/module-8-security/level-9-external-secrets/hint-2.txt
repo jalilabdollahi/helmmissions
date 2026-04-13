@@ -1,0 +1,1 @@
+The fix revolves around ExternalSecret operator, secret store references, external-secrets.io. Compare the current state with the objective: Change to ExternalSecret resource referencing secret store If the level is stateful, inspect the existing release history before reinstalling anything.

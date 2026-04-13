@@ -1,0 +1,6 @@
+apiVersion: v2
+name: oci-registry
+description: Broken chart for Push and Pull
+type: application
+version: 0.1.0
+appVersion: 1.0.0

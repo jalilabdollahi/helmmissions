@@ -1,0 +1,1 @@
+Treat this like an incident. Establish what is broken first, then fix the highest-dependency problem before the rest. The broken state says: 3-tier app (frontend/backend/database) fails on install. Database hook fails, backend CrashLoops, frontend has wrong backend URL.

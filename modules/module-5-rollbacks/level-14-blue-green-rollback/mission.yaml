@@ -1,0 +1,11 @@
+name: Switch Lanes
+description: Blue/green deployment via Helm — bad green deploy, switch back to blue.
+objective: Helm upgrade to switch Service selector back to blue
+xp: 350
+difficulty: advanced
+expected_time: 25m
+concepts:
+- blue/green with Helm
+- selector-based routing
+module: module-5-rollbacks
+level: level-14-blue-green-rollback

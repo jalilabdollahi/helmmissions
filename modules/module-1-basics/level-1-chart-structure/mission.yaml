@@ -1,0 +1,12 @@
+name: Missing API Version
+description: helm install fails immediately with a parse error.
+objective: 'Add `apiVersion: v2` to Chart.yaml'
+xp: 100
+difficulty: beginner
+expected_time: 5m
+concepts:
+- Chart.yaml
+- apiVersion
+- chart structure
+module: module-1-basics
+level: level-1-chart-structure

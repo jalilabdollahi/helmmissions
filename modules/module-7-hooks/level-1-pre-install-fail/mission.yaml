@@ -1,0 +1,12 @@
+name: Before We Begin
+description: pre-install hook Job fails — blocks entire release.
+objective: Fix DB host in hook Job spec
+xp: 250
+difficulty: intermediate
+expected_time: 15m
+concepts:
+- pre-install hook
+- Job hooks
+- hook failure
+module: module-7-hooks
+level: level-1-pre-install-fail

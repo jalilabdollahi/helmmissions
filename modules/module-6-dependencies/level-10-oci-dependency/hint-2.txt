@@ -1,0 +1,1 @@
+The fix revolves around OCI registries, oci:// scheme, helm OCI support. Compare the current state with the objective: Correct OCI URL format, handle authentication If the level is stateful, inspect the existing release history before reinstalling anything.

@@ -1,0 +1,12 @@
+name: YAML Indent Hell
+description: values.yaml fails to parse — mixed tabs and spaces.
+objective: Replace all tabs with spaces (2-space indent)
+xp: 200
+difficulty: intermediate
+expected_time: 12m
+concepts:
+- YAML spec
+- tabs vs spaces
+- indent rules
+module: module-2-values
+level: level-9-values-indentation

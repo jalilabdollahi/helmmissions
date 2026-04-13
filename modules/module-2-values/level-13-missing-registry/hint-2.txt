@@ -1,0 +1,1 @@
+The fix revolves around image registry, repository naming, imagePullSecrets. Compare the current state with the objective: Add full registry path to image.repository If the level is stateful, inspect the existing release history before reinstalling anything.

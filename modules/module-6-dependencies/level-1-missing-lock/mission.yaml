@@ -1,0 +1,12 @@
+name: Lock It Down
+description: helm install fails — Chart.lock is missing.
+objective: Run `helm dependency update` to generate Chart.lock and download charts/
+xp: 200
+difficulty: intermediate
+expected_time: 10m
+concepts:
+- Chart.lock
+- helm dependency update
+- charts/ directory
+module: module-6-dependencies
+level: level-1-missing-lock

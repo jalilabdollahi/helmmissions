@@ -1,0 +1,13 @@
+name: Extra Blank Line
+description: Rendered YAML has unexpected blank line causing parse error.
+objective: Use `nindent` which adds newline before indenting, or remove the extra
+  newline in helper
+xp: 200
+difficulty: intermediate
+expected_time: 10m
+concepts:
+- indent vs nindent
+- whitespace control
+- YAML parsing
+module: module-3-templates
+level: level-8-nindent-vs-indent

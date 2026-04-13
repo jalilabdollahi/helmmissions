@@ -1,0 +1,1 @@
+The fix revolves around imagePullSecrets, docker-registry secrets, private registries. Compare the current state with the objective: Create docker-registry Secret, set imagePullSecrets in values If the level is stateful, inspect the existing release history before reinstalling anything.

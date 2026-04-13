@@ -1,0 +1,12 @@
+name: You Can't Change That
+description: helm upgrade fails with "field is immutable".
+objective: '`helm uninstall` then reinstall (or use `helm upgrade --force` to recreate)'
+xp: 250
+difficulty: intermediate
+expected_time: 15m
+concepts:
+- immutable fields
+- selector labels
+- --force recreation
+module: module-4-releases
+level: level-7-immutable-field

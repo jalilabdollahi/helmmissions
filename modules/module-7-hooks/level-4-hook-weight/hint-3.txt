@@ -1,0 +1,1 @@
+Concrete direction: Set weights: DB creation hook weight -1, migration weight 0. When you think you have it, verify the result the same way the mission describes: Hooks execute in correct order

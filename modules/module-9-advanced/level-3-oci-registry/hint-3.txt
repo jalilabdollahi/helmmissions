@@ -1,0 +1,1 @@
+Concrete direction: Correct OCI URL: `oci://registry.example.com/charts`. When you think you have it, verify the result the same way the mission describes: Chart pushed and pulled successfully

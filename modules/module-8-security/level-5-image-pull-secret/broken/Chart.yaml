@@ -1,0 +1,6 @@
+apiVersion: v2
+name: image-pull-secret
+description: Broken chart for Private Registry Auth
+type: application
+version: 0.1.0
+appVersion: 1.0.0

@@ -1,0 +1,1 @@
+Inspect `values.yaml` closely and compare the key path with the template fields consuming it. The broken state says: Feature flag in values is `"true"` (string) but template uses `if .Values.feature.enabled` — always evaluates to truthy.

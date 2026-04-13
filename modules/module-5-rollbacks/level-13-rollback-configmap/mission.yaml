@@ -1,0 +1,11 @@
+name: Config Restored
+description: Wrong nginx config deployed — rollback should restore working config.
+objective: '`helm rollback` restores previous ConfigMap'
+xp: 200
+difficulty: intermediate
+expected_time: 10m
+concepts:
+- ConfigMap in rollback
+- configuration management
+module: module-5-rollbacks
+level: level-13-rollback-configmap

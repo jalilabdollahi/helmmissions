@@ -1,0 +1,1 @@
+The fix revolves around helm get values, helm get manifest, debugging live releases. Compare the current state with the objective: Use `helm upgrade` with corrected image.repository in values.yaml If the level is stateful, inspect the existing release history before reinstalling anything.

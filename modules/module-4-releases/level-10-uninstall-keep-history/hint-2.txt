@@ -1,0 +1,1 @@
+The fix revolves around --keep-history, rollback after uninstall. Compare the current state with the objective: `helm rollback <release> <revision>` to restore from kept history If the level is stateful, inspect the existing release history before reinstalling anything.

@@ -1,0 +1,6 @@
+apiVersion: v2
+name: history-inspection
+description: Broken chart for History Lesson
+type: application
+version: 0.1.0
+appVersion: 1.0.0

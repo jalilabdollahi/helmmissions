@@ -1,0 +1,1 @@
+Concrete direction: Create ClusterRole with required permissions, bind to ServiceAccount. When you think you have it, verify the result the same way the mission describes: helm install succeeds

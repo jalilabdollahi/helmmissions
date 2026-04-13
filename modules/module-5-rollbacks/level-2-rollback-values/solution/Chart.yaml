@@ -1,0 +1,6 @@
+apiVersion: v2
+name: rollback-values
+description: Broken chart for Values Travel Back Too
+type: application
+version: 0.1.0
+appVersion: 1.0.0

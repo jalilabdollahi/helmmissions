@@ -1,0 +1,12 @@
+name: Registry Not Found
+description: Pod fails with ImagePullBackOff — image registry prefix missing.
+objective: Add full registry path to image.repository
+xp: 150
+difficulty: beginner
+expected_time: 8m
+concepts:
+- image registry
+- repository naming
+- imagePullSecrets
+module: module-2-values
+level: level-13-missing-registry

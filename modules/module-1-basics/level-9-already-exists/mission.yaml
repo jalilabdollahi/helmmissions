@@ -1,0 +1,13 @@
+name: Already Taken
+description: Second `helm install` fails with "cannot re-use a name that is still
+  in use".
+objective: Use `helm upgrade --install webapp` instead of `helm install webapp`
+xp: 150
+difficulty: beginner
+expected_time: 8m
+concepts:
+- helm install vs upgrade
+- --install flag
+- idempotency
+module: module-1-basics
+level: level-9-already-exists

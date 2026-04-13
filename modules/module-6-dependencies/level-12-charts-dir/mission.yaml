@@ -1,0 +1,12 @@
+name: Local vs Remote
+description: Development using local chart in charts/ directory — path not resolving.
+objective: Correct relative path for local chart dependency
+xp: 250
+difficulty: intermediate
+expected_time: 15m
+concepts:
+- file:// dependencies
+- local chart development
+- path resolution
+module: module-6-dependencies
+level: level-12-charts-dir

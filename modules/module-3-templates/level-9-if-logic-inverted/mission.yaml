@@ -1,0 +1,13 @@
+name: Backwards Logic
+description: Service type is NodePort when it should be ClusterIP (and vice versa).
+objective: 'Swap the if/else: `{{ if .Values.ingress.enabled }}ClusterIP{{ else }}NodePort{{
+  end }}`'
+xp: 200
+difficulty: intermediate
+expected_time: 10m
+concepts:
+- if/else
+- not
+- boolean logic in templates
+module: module-3-templates
+level: level-9-if-logic-inverted

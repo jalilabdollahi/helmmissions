@@ -1,0 +1,1 @@
+The fix revolves around immutable fields, selector labels, --force recreation. Compare the current state with the objective: `helm uninstall` then reinstall (or use `helm upgrade --force` to recreate) If the level is stateful, inspect the existing release history before reinstalling anything.

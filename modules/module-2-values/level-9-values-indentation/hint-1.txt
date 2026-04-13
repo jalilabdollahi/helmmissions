@@ -1,0 +1,1 @@
+Inspect `values.yaml` closely and compare the key path with the template fields consuming it. The broken state says: values.yaml fails to parse — mixed tabs and spaces.

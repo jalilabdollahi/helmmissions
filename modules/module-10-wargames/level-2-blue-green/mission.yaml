@@ -1,0 +1,13 @@
+name: Blue Green Deploy
+description: Implement blue/green deployment with Helm using two releases and Service
+  selector switch.
+objective: Helm upgrade to switch Service selector to green
+xp: 400
+difficulty: expert
+expected_time: 30m
+concepts:
+- blue/green patterns
+- selector switching
+- zero-downtime
+module: module-10-wargames
+level: level-2-blue-green

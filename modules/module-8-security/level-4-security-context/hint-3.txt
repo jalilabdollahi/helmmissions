@@ -1,0 +1,1 @@
+Concrete direction: Either change securityContext or use image that supports non-root. When you think you have it, verify the result the same way the mission describes: Pod starts with correct security context

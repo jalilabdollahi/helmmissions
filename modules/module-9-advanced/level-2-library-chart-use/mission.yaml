@@ -1,0 +1,12 @@
+name: Stand on Shoulders
+description: Application chart uses library chart but include path wrong.
+objective: Correct the include name to match library's define
+xp: 300
+difficulty: advanced
+expected_time: 20m
+concepts:
+- library chart consumption
+- include naming
+- define naming
+module: module-9-advanced
+level: level-2-library-chart-use

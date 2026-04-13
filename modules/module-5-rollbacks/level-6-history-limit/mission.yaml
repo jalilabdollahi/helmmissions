@@ -1,0 +1,12 @@
+name: History Is Full
+description: helm history only shows 10 entries — older revisions gone.
+objective: Configure --history-max larger, or accept limitation and fix forward
+xp: 200
+difficulty: intermediate
+expected_time: 10m
+concepts:
+- --history-max
+- helm config
+- history cleanup
+module: module-5-rollbacks
+level: level-6-history-limit

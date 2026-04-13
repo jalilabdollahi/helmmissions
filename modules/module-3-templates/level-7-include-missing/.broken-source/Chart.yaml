@@ -1,0 +1,6 @@
+apiVersion: v2
+name: include-missing
+description: Broken chart for Helper Not Found
+type: application
+version: 0.1.0
+appVersion: 1.0.0

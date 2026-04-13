@@ -1,0 +1,6 @@
+apiVersion: v2
+name: whitespace-control
+description: Broken chart for Blank Line Invasion
+type: application
+version: 0.1.0
+appVersion: 1.0.0

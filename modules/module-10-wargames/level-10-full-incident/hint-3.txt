@@ -1,0 +1,1 @@
+Concrete direction: Systematic diagnosis and fix of all issues. When you think you have it, verify the result the same way the mission describes: All services healthy, clean history, correct values across environments

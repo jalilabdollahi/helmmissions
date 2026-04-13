@@ -1,0 +1,1 @@
+Concrete direction: Add `"helm.sh/hook-delete-policy": "hook-succeeded"` annotation. When you think you have it, verify the result the same way the mission describes: Hook Job deleted after success

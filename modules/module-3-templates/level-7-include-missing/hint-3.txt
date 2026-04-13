@@ -1,0 +1,1 @@
+Concrete direction: Either rename the helper or fix the include call to match. When you think you have it, verify the result the same way the mission describes: Template renders, labels block included correctly

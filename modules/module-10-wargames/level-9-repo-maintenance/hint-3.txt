@@ -1,0 +1,1 @@
+Concrete direction: Regenerate index.yaml with `helm repo index`; push to repository. When you think you have it, verify the result the same way the mission describes: `helm repo update` succeeds, charts searchable

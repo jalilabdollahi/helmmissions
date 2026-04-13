@@ -1,0 +1,13 @@
+name: Blank Line Invasion
+description: Rendered YAML has many blank lines making it hard to read and causing
+  parse issues.
+objective: Add `-` to `{{-` and `-}}` consistently to trim whitespace
+xp: 250
+difficulty: intermediate
+expected_time: 15m
+concepts:
+- whitespace trimming
+- '{{- and -}}'
+- clean templates
+module: module-3-templates
+level: level-17-whitespace-control

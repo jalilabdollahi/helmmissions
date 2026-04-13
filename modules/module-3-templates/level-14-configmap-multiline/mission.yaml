@@ -1,0 +1,12 @@
+name: Multiline Madness
+description: ConfigMap data has wrong multiline block syntax.
+objective: Use `|` block scalar or `{{ .Values.config | nindent 4 }}`
+xp: 250
+difficulty: intermediate
+expected_time: 15m
+concepts:
+- multiline YAML
+- block scalars
+- quote vs nindent
+module: module-3-templates
+level: level-14-configmap-multiline

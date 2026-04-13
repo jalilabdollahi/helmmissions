@@ -1,0 +1,1 @@
+Concrete direction: `helm rollback` restores previous ConfigMap. When you think you have it, verify the result the same way the mission describes: nginx serves requests after rollback

@@ -1,0 +1,1 @@
+Concrete direction: Swap the if/else: `{{ if .Values.ingress.enabled }}ClusterIP{{ else }}NodePort{{ end }}`. When you think you have it, verify the result the same way the mission describes: Correct service type based on ingress.enabled flag

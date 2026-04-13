@@ -1,0 +1,12 @@
+name: Wrong Door
+description: Service created but no endpoints. Port mismatch between service and container.
+objective: Change targetPort to 80
+xp: 150
+difficulty: beginner
+expected_time: 8m
+concepts:
+- port vs targetPort
+- containerPort
+- service routing
+module: module-1-basics
+level: level-7-port-mismatch

@@ -1,0 +1,1 @@
+The fix revolves around environment-specific values files, values layering, -f precedence. Compare the current state with the objective: Create `values-dev.yaml` overriding database.url, apply with `-f values-dev.yaml` If the level is stateful, inspect the existing release history before reinstalling anything.

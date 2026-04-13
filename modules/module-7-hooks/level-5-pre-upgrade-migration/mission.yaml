@@ -1,0 +1,12 @@
+name: Migrate Before Upgrade
+description: App upgrade requires DB schema migration — it must run before new pods
+  start.
+objective: Change hook type to pre-upgrade
+xp: 350
+difficulty: advanced
+expected_time: 25m
+concepts:
+- pre-upgrade vs post-upgrade hooks
+- migration ordering
+module: module-7-hooks
+level: level-5-pre-upgrade-migration

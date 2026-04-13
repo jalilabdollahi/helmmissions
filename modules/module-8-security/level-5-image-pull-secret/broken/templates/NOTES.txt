@@ -1,0 +1,5 @@
+1. Inspect the rendered manifests:
+   helm template {{ .Release.Name }} {{ .Chart.Name }}
+
+2. Check the live release:
+   helm status {{ .Release.Name }} -n {{ .Release.Namespace }}

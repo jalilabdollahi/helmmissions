@@ -1,0 +1,24 @@
+        ════════════════════════════════════
+        Chart Dependencies
+        ════════════════════════════════════
+
+        OVERVIEW
+        Train on chart dependencies scenarios inside HelmMissions.
+
+        SKILLS COVERED
+        Helm troubleshooting, chart debugging, validation, and safe release workflows.
+
+        LEVELS
+        - Level 1: Lock It Down (level-1-missing-lock)
+- Level 2: Stale Dependencies (level-2-dep-not-updated)
+- Level 3: Version Constraint (level-3-wrong-version-range)
+- Level 4: Name Collision (level-4-alias-conflict)
+- Level 5: Pass It Down (level-5-subchart-values)
+- Level 6: Share With Everyone (level-6-global-values)
+- Level 7: Optional Component (level-7-condition-enable)
+- Level 8: Group Deploy (level-8-tags-grouping)
+- Level 9: Where's the Repo? (level-9-repo-not-added)
+- Level 10: OCI Repository (level-10-oci-dependency)
+- Level 11: Two Levels Deep (level-11-deep-override)
+- Level 12: Local vs Remote (level-12-charts-dir)
+- Level 13: Hooks in Subcharts (level-13-dep-hooks)

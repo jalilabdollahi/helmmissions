@@ -1,0 +1,6 @@
+apiVersion: v2
+name: named-template-args
+description: Broken chart for Call With Context
+type: application
+version: 0.1.0
+appVersion: 1.0.0

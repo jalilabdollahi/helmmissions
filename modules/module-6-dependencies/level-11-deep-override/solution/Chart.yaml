@@ -1,0 +1,6 @@
+apiVersion: v2
+name: deep-override
+description: Broken chart for Two Levels Deep
+type: application
+version: 0.1.0
+appVersion: 1.0.0

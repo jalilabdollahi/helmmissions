@@ -1,0 +1,1 @@
+The fix revolves around --history-max, helm config, history cleanup. Compare the current state with the objective: Configure --history-max larger, or accept limitation and fix forward If the level is stateful, inspect the existing release history before reinstalling anything.

@@ -1,0 +1,12 @@
+name: OCI Repository
+description: Dependency uses `oci://` protocol — requires different auth/syntax.
+objective: Correct OCI URL format, handle authentication
+xp: 300
+difficulty: advanced
+expected_time: 20m
+concepts:
+- OCI registries
+- oci:// scheme
+- helm OCI support
+module: module-6-dependencies
+level: level-10-oci-dependency

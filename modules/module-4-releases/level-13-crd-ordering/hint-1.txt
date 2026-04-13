@@ -1,0 +1,1 @@
+Look at live release state first: `helm list`, `helm status`, and `helm history` tell you more than the files alone. The broken state says: Chart installs CRD and CR in same release — CR fails because CRD not ready yet.

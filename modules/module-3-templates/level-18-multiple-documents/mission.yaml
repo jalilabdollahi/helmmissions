@@ -1,0 +1,12 @@
+name: Separate Your Resources
+description: Template file creates two resources but missing `---` separator.
+objective: Add `---` YAML document separator between resources
+xp: 250
+difficulty: intermediate
+expected_time: 12m
+concepts:
+- YAML document separator
+- multiple resources per file
+- helm conventions
+module: module-3-templates
+level: level-18-multiple-documents

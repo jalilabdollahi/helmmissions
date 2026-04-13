@@ -1,0 +1,1 @@
+The fix revolves around indent vs nindent, whitespace control, YAML parsing. Compare the current state with the objective: Use `nindent` which adds newline before indenting, or remove the extra newline in helper If the level is stateful, inspect the existing release history before reinstalling anything.

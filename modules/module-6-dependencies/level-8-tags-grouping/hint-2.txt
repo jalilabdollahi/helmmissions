@@ -1,0 +1,1 @@
+The fix revolves around tags field, subchart groups, batch enable/disable. Compare the current state with the objective: Add `tags: [monitoring]` to each; use `tags.monitoring: false` in values If the level is stateful, inspect the existing release history before reinstalling anything.

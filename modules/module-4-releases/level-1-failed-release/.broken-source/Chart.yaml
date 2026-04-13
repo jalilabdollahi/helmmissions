@@ -1,0 +1,6 @@
+apiVersion: v2
+name: failed-release
+description: Broken chart for The Failed State
+type: application
+version: 0.1.0
+appVersion: 1.0.0

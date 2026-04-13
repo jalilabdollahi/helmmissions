@@ -1,0 +1,1 @@
+Concrete direction: Use `nindent` which adds newline before indenting, or remove the extra newline in helper. When you think you have it, verify the result the same way the mission describes: YAML parses correctly, no extra blank lines

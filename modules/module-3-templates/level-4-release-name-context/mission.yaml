@@ -1,0 +1,13 @@
+name: Lost Context
+description: Template uses `.Release.Name` inside a `with` block — returns empty.
+objective: Use `{{ with .Values.config }}{{ $.Release.Name }}{{ end }}` (dollar sign
+  for root)
+xp: 250
+difficulty: intermediate
+expected_time: 12m
+concepts:
+- with block context
+- $ root object
+- scope
+module: module-3-templates
+level: level-4-release-name-context

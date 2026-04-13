@@ -1,0 +1,1 @@
+The fix revolves around incident response, umbrella charts, rollback under pressure. Compare the current state with the objective: Helm history analysis, targeted rollback of specific subchart If the level is stateful, inspect the existing release history before reinstalling anything.

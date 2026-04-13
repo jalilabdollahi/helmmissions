@@ -1,0 +1,2707 @@
+{
+  "generated_at": "2026-04-13T17:22:42.526383+00:00",
+  "level_count": 133,
+  "modules": [
+    {
+      "name": "module-1-basics",
+      "levels": [
+        {
+          "id": "module-1-basics/level-1-chart-structure",
+          "name": "level-1-chart-structure",
+          "path": "modules/module-1-basics/level-1-chart-structure",
+          "mission": {
+            "name": "Missing API Version",
+            "description": "helm install fails immediately with a parse error.",
+            "objective": "Add `apiVersion: v2` to Chart.yaml",
+            "xp": 100,
+            "difficulty": "beginner",
+            "expected_time": "5m",
+            "concepts": [
+              "Chart.yaml",
+              "apiVersion",
+              "chart structure"
+            ],
+            "module": "module-1-basics",
+            "level": "level-1-chart-structure"
+          }
+        },
+        {
+          "id": "module-1-basics/level-2-install-first-chart",
+          "name": "level-2-install-first-chart",
+          "path": "modules/module-1-basics/level-2-install-first-chart",
+          "mission": {
+            "name": "The First Deploy",
+            "description": "A simple nginx chart exists but `helm install` fails with \"release name not valid\".",
+            "objective": "Use a valid release name like `nginx-app`",
+            "xp": 100,
+            "difficulty": "beginner",
+            "expected_time": "5m",
+            "concepts": [
+              "release name rules",
+              "helm install syntax"
+            ],
+            "module": "module-1-basics",
+            "level": "level-2-install-first-chart"
+          }
+        },
+        {
+          "id": "module-1-basics/level-3-wrong-image-tag",
+          "name": "level-3-wrong-image-tag",
+          "path": "modules/module-1-basics/level-3-wrong-image-tag",
+          "mission": {
+            "name": "Image Not Found",
+            "description": "Chart installs but Pod goes into ImagePullBackOff.",
+            "objective": "Change tag to `latest`",
+            "xp": 100,
+            "difficulty": "beginner",
+            "expected_time": "5m",
+            "concepts": [
+              "values.yaml",
+              "image.tag",
+              "ImagePullBackOff"
+            ],
+            "module": "module-1-basics",
+            "level": "level-3-wrong-image-tag"
+          }
+        },
+        {
+          "id": "module-1-basics/level-4-replica-type-error",
+          "name": "level-4-replica-type-error",
+          "path": "modules/module-1-basics/level-4-replica-type-error",
+          "mission": {
+            "name": "Not a Number",
+            "description": "helm install fails with \"cannot unmarshal string into Go value of type int32\".",
+            "objective": "Change to `replicaCount: 3` (no quotes)",
+            "xp": 150,
+            "difficulty": "beginner",
+            "expected_time": "8m",
+            "concepts": [
+              "YAML types",
+              "string vs integer",
+              "helm type coercion"
+            ],
+            "module": "module-1-basics",
+            "level": "level-4-replica-type-error"
+          }
+        },
+        {
+          "id": "module-1-basics/level-5-missing-required-value",
+          "name": "level-5-missing-required-value",
+          "path": "modules/module-1-basics/level-5-missing-required-value",
+          "mission": {
+            "name": "Required But Missing",
+            "description": "helm install fails with \"required value missing: .Values.app.name\".",
+            "objective": "Add `app:\\n  name: my-app` to values.yaml",
+            "xp": 150,
+            "difficulty": "beginner",
+            "expected_time": "8m",
+            "concepts": [
+              "required function",
+              "values structure",
+              "template errors"
+            ],
+            "module": "module-1-basics",
+            "level": "level-5-missing-required-value"
+          }
+        },
+        {
+          "id": "module-1-basics/level-6-wrong-service-type",
+          "name": "level-6-wrong-service-type",
+          "path": "modules/module-1-basics/level-6-wrong-service-type",
+          "mission": {
+            "name": "Can't Reach It",
+            "description": "App deploys but isn't accessible. Service type is wrong.",
+            "objective": "Change to `ClusterIP`",
+            "xp": 100,
+            "difficulty": "beginner",
+            "expected_time": "5m",
+            "concepts": [
+              "Service types",
+              "ClusterIP",
+              "NodePort",
+              "values"
+            ],
+            "module": "module-1-basics",
+            "level": "level-6-wrong-service-type"
+          }
+        },
+        {
+          "id": "module-1-basics/level-7-port-mismatch",
+          "name": "level-7-port-mismatch",
+          "path": "modules/module-1-basics/level-7-port-mismatch",
+          "mission": {
+            "name": "Wrong Door",
+            "description": "Service created but no endpoints. Port mismatch between service and container.",
+            "objective": "Change targetPort to 80",
+            "xp": 150,
+            "difficulty": "beginner",
+            "expected_time": "8m",
+            "concepts": [
+              "port vs targetPort",
+              "containerPort",
+              "service routing"
+            ],
+            "module": "module-1-basics",
+            "level": "level-7-port-mismatch"
+          }
+        },
+        {
+          "id": "module-1-basics/level-8-namespace-missing",
+          "name": "level-8-namespace-missing",
+          "path": "modules/module-1-basics/level-8-namespace-missing",
+          "mission": {
+            "name": "Where Am I?",
+            "description": "`helm install` fails with \"namespace not found\".",
+            "objective": "Add `--create-namespace` flag or pre-create the namespace",
+            "xp": 100,
+            "difficulty": "beginner",
+            "expected_time": "5m",
+            "concepts": [
+              "namespaces",
+              "--create-namespace",
+              "helm install flags"
+            ],
+            "module": "module-1-basics",
+            "level": "level-8-namespace-missing"
+          }
+        },
+        {
+          "id": "module-1-basics/level-9-already-exists",
+          "name": "level-9-already-exists",
+          "path": "modules/module-1-basics/level-9-already-exists",
+          "mission": {
+            "name": "Already Taken",
+            "description": "Second `helm install` fails with \"cannot re-use a name that is still in use\".",
+            "objective": "Use `helm upgrade --install webapp` instead of `helm install webapp`",
+            "xp": 150,
+            "difficulty": "beginner",
+            "expected_time": "8m",
+            "concepts": [
+              "helm install vs upgrade",
+              "--install flag",
+              "idempotency"
+            ],
+            "module": "module-1-basics",
+            "level": "level-9-already-exists"
+          }
+        },
+        {
+          "id": "module-1-basics/level-10-set-wrong-key",
+          "name": "level-10-set-wrong-key",
+          "path": "modules/module-1-basics/level-10-set-wrong-key",
+          "mission": {
+            "name": "Override Miss",
+            "description": "`helm upgrade --set` is used but the replica count doesn't change.",
+            "objective": "Change to `--set replicaCount=5` (camelCase)",
+            "xp": 150,
+            "difficulty": "beginner",
+            "expected_time": "8m",
+            "concepts": [
+              "--set flag",
+              "case sensitivity",
+              "values path"
+            ],
+            "module": "module-1-basics",
+            "level": "level-10-set-wrong-key"
+          }
+        },
+        {
+          "id": "module-1-basics/level-11-get-values",
+          "name": "level-11-get-values",
+          "path": "modules/module-1-basics/level-11-get-values",
+          "mission": {
+            "name": "What's Actually Running?",
+            "description": "Player must identify a misconfigured value in the running release.",
+            "objective": "Use `helm upgrade` with corrected image.repository in values.yaml",
+            "xp": 100,
+            "difficulty": "beginner",
+            "expected_time": "5m",
+            "concepts": [
+              "helm get values",
+              "helm get manifest",
+              "debugging live releases"
+            ],
+            "module": "module-1-basics",
+            "level": "level-11-get-values"
+          }
+        },
+        {
+          "id": "module-1-basics/level-12-chart-version-mismatch",
+          "name": "level-12-chart-version-mismatch",
+          "path": "modules/module-1-basics/level-12-chart-version-mismatch",
+          "mission": {
+            "name": "Wrong Version",
+            "description": "helm upgrade rejects chart because appVersion doesn't match running app.",
+            "objective": "Align appVersion in Chart.yaml or update image tag in values",
+            "xp": 150,
+            "difficulty": "beginner",
+            "expected_time": "10m",
+            "concepts": [
+              "chart version vs appVersion",
+              "versioning strategy"
+            ],
+            "module": "module-1-basics",
+            "level": "level-12-chart-version-mismatch"
+          }
+        },
+        {
+          "id": "module-1-basics/level-13-show-commands",
+          "name": "level-13-show-commands",
+          "path": "modules/module-1-basics/level-13-show-commands",
+          "mission": {
+            "name": "Inspect Before You Deploy",
+            "description": "Chart has wrong default resources. Player must identify via helm show.",
+            "objective": "Override with `-f custom-values.yaml` setting memory to 256Mi",
+            "xp": 100,
+            "difficulty": "beginner",
+            "expected_time": "5m",
+            "concepts": [
+              "helm show values",
+              "helm show chart",
+              "pre-install inspection"
+            ],
+            "module": "module-1-basics",
+            "level": "level-13-show-commands"
+          }
+        },
+        {
+          "id": "module-1-basics/level-14-dry-run",
+          "name": "level-14-dry-run",
+          "path": "modules/module-1-basics/level-14-dry-run",
+          "mission": {
+            "name": "Test Before You Break",
+            "description": "Chart has a template error. Player must catch it before real install.",
+            "objective": "Use `helm install --dry-run` to catch the error, then add `default` function",
+            "xp": 150,
+            "difficulty": "beginner",
+            "expected_time": "8m",
+            "concepts": [
+              "--dry-run",
+              "helm template",
+              "nil pointer",
+              "default function"
+            ],
+            "module": "module-1-basics",
+            "level": "level-14-dry-run"
+          }
+        },
+        {
+          "id": "module-1-basics/level-15-helm-lint",
+          "name": "level-15-helm-lint",
+          "path": "modules/module-1-basics/level-15-helm-lint",
+          "mission": {
+            "name": "Lint It First",
+            "description": "Chart has multiple lint errors blocking install.",
+            "objective": "Add description, rename template file",
+            "xp": 150,
+            "difficulty": "beginner",
+            "expected_time": "8m",
+            "concepts": [
+              "helm lint",
+              "Chart.yaml required fields",
+              "template naming"
+            ],
+            "module": "module-1-basics",
+            "level": "level-15-helm-lint"
+          }
+        }
+      ]
+    },
+    {
+      "name": "module-2-values",
+      "levels": [
+        {
+          "id": "module-2-values/level-1-string-as-int",
+          "name": "level-1-string-as-int",
+          "path": "modules/module-2-values/level-1-string-as-int",
+          "mission": {
+            "name": "Quoted Numbers",
+            "description": "Deployment fails — replicas field receives a string.",
+            "objective": "Remove quotes OR add `| int` in template",
+            "xp": 150,
+            "difficulty": "beginner",
+            "expected_time": "8m",
+            "concepts": [
+              "YAML types",
+              "int conversion",
+              "toYaml",
+              "type coercion"
+            ],
+            "module": "module-2-values",
+            "level": "level-1-string-as-int"
+          }
+        },
+        {
+          "id": "module-2-values/level-2-bool-as-string",
+          "name": "level-2-bool-as-string",
+          "path": "modules/module-2-values/level-2-bool-as-string",
+          "mission": {
+            "name": "True or 'True'?",
+            "description": "Feature flag in values is `\"true\"` (string) but template uses `if .Values.feature.enabled` — always evaluates to truthy.",
+            "objective": "Change to `feature.enabled: false` (boolean)",
+            "xp": 150,
+            "difficulty": "beginner",
+            "expected_time": "8m",
+            "concepts": [
+              "YAML booleans",
+              "truthy strings",
+              "if evaluation"
+            ],
+            "module": "module-2-values",
+            "level": "level-2-bool-as-string"
+          }
+        },
+        {
+          "id": "module-2-values/level-3-nil-nested-key",
+          "name": "level-3-nil-nested-key",
+          "path": "modules/module-2-values/level-3-nil-nested-key",
+          "mission": {
+            "name": "Nil Pointer Panic",
+            "description": "helm template crashes with nil pointer dereference.",
+            "objective": "Add `database:\\n  host: localhost` to values.yaml OR use `{{ if .Values.database }}` guard",
+            "xp": 200,
+            "difficulty": "intermediate",
+            "expected_time": "10m",
+            "concepts": [
+              "nil pointer",
+              "defensive templates",
+              "with block"
+            ],
+            "module": "module-2-values",
+            "level": "level-3-nil-nested-key"
+          }
+        },
+        {
+          "id": "module-2-values/level-4-nested-path-wrong",
+          "name": "level-4-nested-path-wrong",
+          "path": "modules/module-2-values/level-4-nested-path-wrong",
+          "mission": {
+            "name": "Lost in the Tree",
+            "description": "Override is passed but has no effect — wrong nesting path.",
+            "objective": "Change --set to `--set database.host=db` (remove extra `config.` prefix)",
+            "xp": 150,
+            "difficulty": "beginner",
+            "expected_time": "8m",
+            "concepts": [
+              "nested values",
+              "--set path syntax",
+              "dot notation"
+            ],
+            "module": "module-2-values",
+            "level": "level-4-nested-path-wrong"
+          }
+        },
+        {
+          "id": "module-2-values/level-5-array-vs-string",
+          "name": "level-5-array-vs-string",
+          "path": "modules/module-2-values/level-5-array-vs-string",
+          "mission": {
+            "name": "One or Many?",
+            "description": "Template expects a list for `ingress.hosts` but values has a single string.",
+            "objective": "Change to `ingress.hosts:\\n  - \"example.com\"` (YAML list)",
+            "xp": 200,
+            "difficulty": "intermediate",
+            "expected_time": "12m",
+            "concepts": [
+              "YAML arrays",
+              "range",
+              "list vs scalar"
+            ],
+            "module": "module-2-values",
+            "level": "level-5-array-vs-string"
+          }
+        },
+        {
+          "id": "module-2-values/level-6-set-array-syntax",
+          "name": "level-6-set-array-syntax",
+          "path": "modules/module-2-values/level-6-set-array-syntax",
+          "mission": {
+            "name": "Arrays in --set",
+            "description": "`--set` flag for an array value is malformed.",
+            "objective": "Use `--set ingress.hosts={host1.com,host2.com}` (curly braces for arrays)",
+            "xp": 200,
+            "difficulty": "intermediate",
+            "expected_time": "12m",
+            "concepts": [
+              "--set array syntax",
+              "{}",
+              "comma-separated values"
+            ],
+            "module": "module-2-values",
+            "level": "level-6-set-array-syntax"
+          }
+        },
+        {
+          "id": "module-2-values/level-7-values-file-ignored",
+          "name": "level-7-values-file-ignored",
+          "path": "modules/module-2-values/level-7-values-file-ignored",
+          "mission": {
+            "name": "My Overrides Are Gone",
+            "description": "Player provides `-f custom.yaml` but the values don't appear to apply.",
+            "objective": "Fix indentation — values.yaml structure must match chart expectations",
+            "xp": 150,
+            "difficulty": "beginner",
+            "expected_time": "8m",
+            "concepts": [
+              "-f flag",
+              "YAML indentation",
+              "values merging"
+            ],
+            "module": "module-2-values",
+            "level": "level-7-values-file-ignored"
+          }
+        },
+        {
+          "id": "module-2-values/level-8-default-not-applied",
+          "name": "level-8-default-not-applied",
+          "path": "modules/module-2-values/level-8-default-not-applied",
+          "mission": {
+            "name": "Where's My Default?",
+            "description": "Template fails when optional value is unset — no `default` used.",
+            "objective": "Add `{{ .Values.optional.timeout | default 30 }}` in template",
+            "xp": 150,
+            "difficulty": "beginner",
+            "expected_time": "8m",
+            "concepts": [
+              "default function",
+              "optional values",
+              "defensive templates"
+            ],
+            "module": "module-2-values",
+            "level": "level-8-default-not-applied"
+          }
+        },
+        {
+          "id": "module-2-values/level-9-values-indentation",
+          "name": "level-9-values-indentation",
+          "path": "modules/module-2-values/level-9-values-indentation",
+          "mission": {
+            "name": "YAML Indent Hell",
+            "description": "values.yaml fails to parse — mixed tabs and spaces.",
+            "objective": "Replace all tabs with spaces (2-space indent)",
+            "xp": 200,
+            "difficulty": "intermediate",
+            "expected_time": "12m",
+            "concepts": [
+              "YAML spec",
+              "tabs vs spaces",
+              "indent rules"
+            ],
+            "module": "module-2-values",
+            "level": "level-9-values-indentation"
+          }
+        },
+        {
+          "id": "module-2-values/level-10-env-specific-values",
+          "name": "level-10-env-specific-values",
+          "path": "modules/module-2-values/level-10-env-specific-values",
+          "mission": {
+            "name": "Wrong Environment",
+            "description": "App deployed with production database URL in dev environment.",
+            "objective": "Create `values-dev.yaml` overriding database.url, apply with `-f values-dev.yaml`",
+            "xp": 200,
+            "difficulty": "intermediate",
+            "expected_time": "12m",
+            "concepts": [
+              "environment-specific values files",
+              "values layering",
+              "-f precedence"
+            ],
+            "module": "module-2-values",
+            "level": "level-10-env-specific-values"
+          }
+        },
+        {
+          "id": "module-2-values/level-11-special-chars",
+          "name": "level-11-special-chars",
+          "path": "modules/module-2-values/level-11-special-chars",
+          "mission": {
+            "name": "Escape Artist",
+            "description": "Password value with special characters breaks YAML parsing.",
+            "objective": "Quote the value: `db.password: \"p@ss!word#1\"`",
+            "xp": 200,
+            "difficulty": "intermediate",
+            "expected_time": "12m",
+            "concepts": [
+              "YAML quoting",
+              "special characters",
+              "strings"
+            ],
+            "module": "module-2-values",
+            "level": "level-11-special-chars"
+          }
+        },
+        {
+          "id": "module-2-values/level-12-wrong-units",
+          "name": "level-12-wrong-units",
+          "path": "modules/module-2-values/level-12-wrong-units",
+          "mission": {
+            "name": "Mega vs Mebi",
+            "description": "Memory limit set to `256` (bytes) instead of `256Mi`.",
+            "objective": "Change to `resources.limits.memory: 256Mi`",
+            "xp": 150,
+            "difficulty": "beginner",
+            "expected_time": "8m",
+            "concepts": [
+              "Kubernetes resource units",
+              "Mi vs M",
+              "CPU millicores"
+            ],
+            "module": "module-2-values",
+            "level": "level-12-wrong-units"
+          }
+        },
+        {
+          "id": "module-2-values/level-13-missing-registry",
+          "name": "level-13-missing-registry",
+          "path": "modules/module-2-values/level-13-missing-registry",
+          "mission": {
+            "name": "Registry Not Found",
+            "description": "Pod fails with ImagePullBackOff — image registry prefix missing.",
+            "objective": "Add full registry path to image.repository",
+            "xp": 150,
+            "difficulty": "beginner",
+            "expected_time": "8m",
+            "concepts": [
+              "image registry",
+              "repository naming",
+              "imagePullSecrets"
+            ],
+            "module": "module-2-values",
+            "level": "level-13-missing-registry"
+          }
+        },
+        {
+          "id": "module-2-values/level-14-values-schema",
+          "name": "level-14-values-schema",
+          "path": "modules/module-2-values/level-14-values-schema",
+          "mission": {
+            "name": "Schema Says No",
+            "description": "helm install fails with JSON schema validation error.",
+            "objective": "Set replicaCount to at least 1",
+            "xp": 250,
+            "difficulty": "intermediate",
+            "expected_time": "15m",
+            "concepts": [
+              "values.schema.json",
+              "JSON Schema validation",
+              "chart contracts"
+            ],
+            "module": "module-2-values",
+            "level": "level-14-values-schema"
+          }
+        },
+        {
+          "id": "module-2-values/level-15-helm-set-string",
+          "name": "level-15-helm-set-string",
+          "path": "modules/module-2-values/level-15-helm-set-string",
+          "mission": {
+            "name": "Force a String",
+            "description": "`--set version=1.0` passes an integer but template expects string for label.",
+            "objective": "Use `--set-string image.tag=1.0` to force string",
+            "xp": 200,
+            "difficulty": "intermediate",
+            "expected_time": "10m",
+            "concepts": [
+              "--set-string",
+              "type forcing",
+              "--set vs --set-string"
+            ],
+            "module": "module-2-values",
+            "level": "level-15-helm-set-string"
+          }
+        }
+      ]
+    },
+    {
+      "name": "module-3-templates",
+      "levels": [
+        {
+          "id": "module-3-templates/level-1-missing-braces",
+          "name": "level-1-missing-braces",
+          "path": "modules/module-3-templates/level-1-missing-braces",
+          "mission": {
+            "name": "Unclosed Action",
+            "description": "helm template fails with \"unclosed action\".",
+            "objective": "Add missing `}` → `{{ .Values.app.name }}`",
+            "xp": 200,
+            "difficulty": "intermediate",
+            "expected_time": "10m",
+            "concepts": [
+              "Go template syntax",
+              "action delimiters"
+            ],
+            "module": "module-3-templates",
+            "level": "level-1-missing-braces"
+          }
+        },
+        {
+          "id": "module-3-templates/level-2-yaml-indent-to",
+          "name": "level-2-yaml-indent-to",
+          "path": "modules/module-3-templates/level-2-yaml-indent-to",
+          "mission": {
+            "name": "toYaml Without Indent",
+            "description": "Deployment fails — resources block is not properly indented.",
+            "objective": "Change to `{{ .Values.resources | toYaml | indent 12 }}`",
+            "xp": 250,
+            "difficulty": "intermediate",
+            "expected_time": "15m",
+            "concepts": [
+              "toYaml",
+              "indent",
+              "nindent",
+              "multi-line values"
+            ],
+            "module": "module-3-templates",
+            "level": "level-2-yaml-indent-to"
+          }
+        },
+        {
+          "id": "module-3-templates/level-3-values-typo",
+          "name": "level-3-values-typo",
+          "path": "modules/module-3-templates/level-3-values-typo",
+          "mission": {
+            "name": "The Missing Dot",
+            "description": "Template renders empty string where image name should be.",
+            "objective": "Correct to `{{ .Values.image.repository }}`",
+            "xp": 200,
+            "difficulty": "intermediate",
+            "expected_time": "10m",
+            "concepts": [
+              "case sensitivity",
+              "typos in template paths"
+            ],
+            "module": "module-3-templates",
+            "level": "level-3-values-typo"
+          }
+        },
+        {
+          "id": "module-3-templates/level-4-release-name-context",
+          "name": "level-4-release-name-context",
+          "path": "modules/module-3-templates/level-4-release-name-context",
+          "mission": {
+            "name": "Lost Context",
+            "description": "Template uses `.Release.Name` inside a `with` block — returns empty.",
+            "objective": "Use `{{ with .Values.config }}{{ $.Release.Name }}{{ end }}` (dollar sign for root)",
+            "xp": 250,
+            "difficulty": "intermediate",
+            "expected_time": "12m",
+            "concepts": [
+              "with block context",
+              "$ root object",
+              "scope"
+            ],
+            "module": "module-3-templates",
+            "level": "level-4-release-name-context"
+          }
+        },
+        {
+          "id": "module-3-templates/level-5-template-function-error",
+          "name": "level-5-template-function-error",
+          "path": "modules/module-3-templates/level-5-template-function-error",
+          "mission": {
+            "name": "Function Not Found",
+            "description": "Template fails with \"function 'uppercase' not defined\".",
+            "objective": "Change to `{{ .Values.app.name | upper }}`",
+            "xp": 200,
+            "difficulty": "intermediate",
+            "expected_time": "10m",
+            "concepts": [
+              "Sprig functions",
+              "upper vs uppercase",
+              "function names"
+            ],
+            "module": "module-3-templates",
+            "level": "level-5-template-function-error"
+          }
+        },
+        {
+          "id": "module-3-templates/level-6-pipe-order",
+          "name": "level-6-pipe-order",
+          "path": "modules/module-3-templates/level-6-pipe-order",
+          "mission": {
+            "name": "Pipe Dream",
+            "description": "Template produces wrong output — pipe order incorrect.",
+            "objective": "Understand that empty string is falsy for `default` — use `| default \"latest\"` correctly OR use `required`",
+            "xp": 250,
+            "difficulty": "intermediate",
+            "expected_time": "12m",
+            "concepts": [
+              "default with empty string",
+              "falsy values",
+              "pipe order"
+            ],
+            "module": "module-3-templates",
+            "level": "level-6-pipe-order"
+          }
+        },
+        {
+          "id": "module-3-templates/level-7-include-missing",
+          "name": "level-7-include-missing",
+          "path": "modules/module-3-templates/level-7-include-missing",
+          "mission": {
+            "name": "Helper Not Found",
+            "description": "helm template fails with \"no such template\".",
+            "objective": "Either rename the helper or fix the include call to match",
+            "xp": 250,
+            "difficulty": "intermediate",
+            "expected_time": "15m",
+            "concepts": [
+              "named templates",
+              "_helpers.tpl",
+              "include vs template"
+            ],
+            "module": "module-3-templates",
+            "level": "level-7-include-missing"
+          }
+        },
+        {
+          "id": "module-3-templates/level-8-nindent-vs-indent",
+          "name": "level-8-nindent-vs-indent",
+          "path": "modules/module-3-templates/level-8-nindent-vs-indent",
+          "mission": {
+            "name": "Extra Blank Line",
+            "description": "Rendered YAML has unexpected blank line causing parse error.",
+            "objective": "Use `nindent` which adds newline before indenting, or remove the extra newline in helper",
+            "xp": 200,
+            "difficulty": "intermediate",
+            "expected_time": "10m",
+            "concepts": [
+              "indent vs nindent",
+              "whitespace control",
+              "YAML parsing"
+            ],
+            "module": "module-3-templates",
+            "level": "level-8-nindent-vs-indent"
+          }
+        },
+        {
+          "id": "module-3-templates/level-9-if-logic-inverted",
+          "name": "level-9-if-logic-inverted",
+          "path": "modules/module-3-templates/level-9-if-logic-inverted",
+          "mission": {
+            "name": "Backwards Logic",
+            "description": "Service type is NodePort when it should be ClusterIP (and vice versa).",
+            "objective": "Swap the if/else: `{{ if .Values.ingress.enabled }}ClusterIP{{ else }}NodePort{{ end }}`",
+            "xp": 200,
+            "difficulty": "intermediate",
+            "expected_time": "10m",
+            "concepts": [
+              "if/else",
+              "not",
+              "boolean logic in templates"
+            ],
+            "module": "module-3-templates",
+            "level": "level-9-if-logic-inverted"
+          }
+        },
+        {
+          "id": "module-3-templates/level-10-range-nil",
+          "name": "level-10-range-nil",
+          "path": "modules/module-3-templates/level-10-range-nil",
+          "mission": {
+            "name": "Range Over Nothing",
+            "description": "helm template panics when env vars list is nil.",
+            "objective": "Add `extraEnv: []` to values.yaml as default, OR guard with `{{ if .Values.extraEnv }}`",
+            "xp": 250,
+            "difficulty": "intermediate",
+            "expected_time": "12m",
+            "concepts": [
+              "range",
+              "nil slice",
+              "empty list default",
+              "defensive templates"
+            ],
+            "module": "module-3-templates",
+            "level": "level-10-range-nil"
+          }
+        },
+        {
+          "id": "module-3-templates/level-11-with-context",
+          "name": "level-11-with-context",
+          "path": "modules/module-3-templates/level-11-with-context",
+          "mission": {
+            "name": "Who Am I?",
+            "description": "Template produces wrong output inside with block.",
+            "objective": "Use `{{ $.Values.app.name }}` (root context)",
+            "xp": 250,
+            "difficulty": "intermediate",
+            "expected_time": "12m",
+            "concepts": [
+              "with context",
+              "$ root",
+              "nested with blocks"
+            ],
+            "module": "module-3-templates",
+            "level": "level-11-with-context"
+          }
+        },
+        {
+          "id": "module-3-templates/level-12-tpl-function",
+          "name": "level-12-tpl-function",
+          "path": "modules/module-3-templates/level-12-tpl-function",
+          "mission": {
+            "name": "Template in Template",
+            "description": "tpl function used incorrectly causes infinite recursion warning.",
+            "objective": "Fix the values.yaml message to be a valid template string",
+            "xp": 300,
+            "difficulty": "advanced",
+            "expected_time": "20m",
+            "concepts": [
+              "tpl function",
+              "values as templates",
+              "security implications"
+            ],
+            "module": "module-3-templates",
+            "level": "level-12-tpl-function"
+          }
+        },
+        {
+          "id": "module-3-templates/level-13-required-blocks",
+          "name": "level-13-required-blocks",
+          "path": "modules/module-3-templates/level-13-required-blocks",
+          "mission": {
+            "name": "You Must Provide This",
+            "description": "helm install blocks with unhelpful error from required.",
+            "objective": "Set `global.clusterName: my-cluster` in values.yaml",
+            "xp": 200,
+            "difficulty": "intermediate",
+            "expected_time": "10m",
+            "concepts": [
+              "required function",
+              "error messages",
+              "documentation through code"
+            ],
+            "module": "module-3-templates",
+            "level": "level-13-required-blocks"
+          }
+        },
+        {
+          "id": "module-3-templates/level-14-configmap-multiline",
+          "name": "level-14-configmap-multiline",
+          "path": "modules/module-3-templates/level-14-configmap-multiline",
+          "mission": {
+            "name": "Multiline Madness",
+            "description": "ConfigMap data has wrong multiline block syntax.",
+            "objective": "Use `|` block scalar or `{{ .Values.config | nindent 4 }}`",
+            "xp": 250,
+            "difficulty": "intermediate",
+            "expected_time": "15m",
+            "concepts": [
+              "multiline YAML",
+              "block scalars",
+              "quote vs nindent"
+            ],
+            "module": "module-3-templates",
+            "level": "level-14-configmap-multiline"
+          }
+        },
+        {
+          "id": "module-3-templates/level-15-secret-b64enc",
+          "name": "level-15-secret-b64enc",
+          "path": "modules/module-3-templates/level-15-secret-b64enc",
+          "mission": {
+            "name": "Encode It",
+            "description": "Secret created but values are not base64 encoded — kubectl shows garbage.",
+            "objective": "Change to `password: {{ .Values.db.password | b64enc | quote }}`",
+            "xp": 200,
+            "difficulty": "intermediate",
+            "expected_time": "10m",
+            "concepts": [
+              "Secret data vs stringData",
+              "b64enc",
+              "base64 in Kubernetes"
+            ],
+            "module": "module-3-templates",
+            "level": "level-15-secret-b64enc"
+          }
+        },
+        {
+          "id": "module-3-templates/level-16-named-template-args",
+          "name": "level-16-named-template-args",
+          "path": "modules/module-3-templates/level-16-named-template-args",
+          "mission": {
+            "name": "Call With Context",
+            "description": "Named template produces empty output — passed wrong context.",
+            "objective": "Change to `{{ include \"myapp.fullname\" . }}`",
+            "xp": 300,
+            "difficulty": "advanced",
+            "expected_time": "20m",
+            "concepts": [
+              "include context",
+              "dict for multiple args",
+              "template args"
+            ],
+            "module": "module-3-templates",
+            "level": "level-16-named-template-args"
+          }
+        },
+        {
+          "id": "module-3-templates/level-17-whitespace-control",
+          "name": "level-17-whitespace-control",
+          "path": "modules/module-3-templates/level-17-whitespace-control",
+          "mission": {
+            "name": "Blank Line Invasion",
+            "description": "Rendered YAML has many blank lines making it hard to read and causing parse issues.",
+            "objective": "Add `-` to `{{-` and `-}}` consistently to trim whitespace",
+            "xp": 250,
+            "difficulty": "intermediate",
+            "expected_time": "15m",
+            "concepts": [
+              "whitespace trimming",
+              "{{- and -}}",
+              "clean templates"
+            ],
+            "module": "module-3-templates",
+            "level": "level-17-whitespace-control"
+          }
+        },
+        {
+          "id": "module-3-templates/level-18-multiple-documents",
+          "name": "level-18-multiple-documents",
+          "path": "modules/module-3-templates/level-18-multiple-documents",
+          "mission": {
+            "name": "Separate Your Resources",
+            "description": "Template file creates two resources but missing `---` separator.",
+            "objective": "Add `---` YAML document separator between resources",
+            "xp": 250,
+            "difficulty": "intermediate",
+            "expected_time": "12m",
+            "concepts": [
+              "YAML document separator",
+              "multiple resources per file",
+              "helm conventions"
+            ],
+            "module": "module-3-templates",
+            "level": "level-18-multiple-documents"
+          }
+        },
+        {
+          "id": "module-3-templates/level-19-define-reuse",
+          "name": "level-19-define-reuse",
+          "path": "modules/module-3-templates/level-19-define-reuse",
+          "mission": {
+            "name": "Don't Repeat Yourself",
+            "description": "Labels are hardcoded in 3 templates instead of using a named helper — one was updated but not others.",
+            "objective": "Move labels to `_helpers.tpl`, use `{{ include \"myapp.labels\" . }}` in all templates",
+            "xp": 300,
+            "difficulty": "advanced",
+            "expected_time": "20m",
+            "concepts": [
+              "DRY principle",
+              "_helpers.tpl",
+              "template reuse"
+            ],
+            "module": "module-3-templates",
+            "level": "level-19-define-reuse"
+          }
+        },
+        {
+          "id": "module-3-templates/level-20-lookup-function",
+          "name": "level-20-lookup-function",
+          "path": "modules/module-3-templates/level-20-lookup-function",
+          "mission": {
+            "name": "Does It Exist?",
+            "description": "Chart blindly recreates Secret on each upgrade losing existing credentials.",
+            "objective": "Use `lookup` to check if Secret exists, preserve existing value if so",
+            "xp": 350,
+            "difficulty": "advanced",
+            "expected_time": "25m",
+            "concepts": [
+              "lookup function",
+              "idempotent secrets",
+              "upgrade safety"
+            ],
+            "module": "module-3-templates",
+            "level": "level-20-lookup-function"
+          }
+        }
+      ]
+    },
+    {
+      "name": "module-4-releases",
+      "levels": [
+        {
+          "id": "module-4-releases/level-1-failed-release",
+          "name": "level-1-failed-release",
+          "path": "modules/module-4-releases/level-1-failed-release",
+          "mission": {
+            "name": "The Failed State",
+            "description": "Previous install left release in `failed` state — new install rejected.",
+            "objective": "`helm uninstall <release>` then reinstall, OR fix the chart and `helm upgrade`",
+            "xp": 200,
+            "difficulty": "intermediate",
+            "expected_time": "10m",
+            "concepts": [
+              "release states",
+              "failed vs deployed",
+              "cleanup"
+            ],
+            "module": "module-4-releases",
+            "level": "level-1-failed-release"
+          }
+        },
+        {
+          "id": "module-4-releases/level-2-upgrade-after-fail",
+          "name": "level-2-upgrade-after-fail",
+          "path": "modules/module-4-releases/level-2-upgrade-after-fail",
+          "mission": {
+            "name": "Upgrade From Failure",
+            "description": "`helm upgrade` on a failed release — must use `--force` or fix first.",
+            "objective": "Fix the chart error (broken template), then helm upgrade",
+            "xp": 250,
+            "difficulty": "intermediate",
+            "expected_time": "15m",
+            "concepts": [
+              "upgrade requirements",
+              "--force",
+              "fixing broken charts"
+            ],
+            "module": "module-4-releases",
+            "level": "level-2-upgrade-after-fail"
+          }
+        },
+        {
+          "id": "module-4-releases/level-3-wait-timeout",
+          "name": "level-3-wait-timeout",
+          "path": "modules/module-4-releases/level-3-wait-timeout",
+          "mission": {
+            "name": "Timed Out Waiting",
+            "description": "helm install with `--wait` times out — Pod never becomes Ready.",
+            "objective": "Fix readiness probe port in values.yaml",
+            "xp": 250,
+            "difficulty": "intermediate",
+            "expected_time": "15m",
+            "concepts": [
+              "--wait flag",
+              "readiness probes",
+              "liveness probes",
+              "timeout"
+            ],
+            "module": "module-4-releases",
+            "level": "level-3-wait-timeout"
+          }
+        },
+        {
+          "id": "module-4-releases/level-4-atomic-rollback",
+          "name": "level-4-atomic-rollback",
+          "path": "modules/module-4-releases/level-4-atomic-rollback",
+          "mission": {
+            "name": "Atomic or Nothing",
+            "description": "`helm upgrade --atomic` fails and auto-rolls back — player must diagnose original error.",
+            "objective": "Correct the image tag, upgrade again",
+            "xp": 300,
+            "difficulty": "advanced",
+            "expected_time": "20m",
+            "concepts": [
+              "--atomic flag",
+              "automatic rollback",
+              "revision tracking"
+            ],
+            "module": "module-4-releases",
+            "level": "level-4-atomic-rollback"
+          }
+        },
+        {
+          "id": "module-4-releases/level-5-upgrade-install",
+          "name": "level-5-upgrade-install",
+          "path": "modules/module-4-releases/level-5-upgrade-install",
+          "mission": {
+            "name": "One Command Rules All",
+            "description": "CI pipeline fails on first deploy (no release exists) with plain `helm upgrade`.",
+            "objective": "Change to `helm upgrade --install myapp ./chart`",
+            "xp": 200,
+            "difficulty": "intermediate",
+            "expected_time": "10m",
+            "concepts": [
+              "upgrade --install",
+              "idempotency",
+              "CI patterns"
+            ],
+            "module": "module-4-releases",
+            "level": "level-5-upgrade-install"
+          }
+        },
+        {
+          "id": "module-4-releases/level-6-resource-ownership",
+          "name": "level-6-resource-ownership",
+          "path": "modules/module-4-releases/level-6-resource-ownership",
+          "mission": {
+            "name": "Not My Resource",
+            "description": "helm install fails — resource already exists but not managed by this release.",
+            "objective": "Either delete the existing resource or adopt it with helm annotations",
+            "xp": 300,
+            "difficulty": "advanced",
+            "expected_time": "20m",
+            "concepts": [
+              "helm annotations",
+              "resource ownership",
+              "--force",
+              "adoption"
+            ],
+            "module": "module-4-releases",
+            "level": "level-6-resource-ownership"
+          }
+        },
+        {
+          "id": "module-4-releases/level-7-immutable-field",
+          "name": "level-7-immutable-field",
+          "path": "modules/module-4-releases/level-7-immutable-field",
+          "mission": {
+            "name": "You Can't Change That",
+            "description": "helm upgrade fails with \"field is immutable\".",
+            "objective": "`helm uninstall` then reinstall (or use `helm upgrade --force` to recreate)",
+            "xp": 250,
+            "difficulty": "intermediate",
+            "expected_time": "15m",
+            "concepts": [
+              "immutable fields",
+              "selector labels",
+              "--force recreation"
+            ],
+            "module": "module-4-releases",
+            "level": "level-7-immutable-field"
+          }
+        },
+        {
+          "id": "module-4-releases/level-8-history-inspection",
+          "name": "level-8-history-inspection",
+          "path": "modules/module-4-releases/level-8-history-inspection",
+          "mission": {
+            "name": "History Lesson",
+            "description": "App is broken — player must find which revision introduced the bug.",
+            "objective": "Use `helm history`, `helm get values --revision N`, identify bad revision",
+            "xp": 200,
+            "difficulty": "intermediate",
+            "expected_time": "10m",
+            "concepts": [
+              "helm history",
+              "helm get --revision",
+              "audit trail"
+            ],
+            "module": "module-4-releases",
+            "level": "level-8-history-inspection"
+          }
+        },
+        {
+          "id": "module-4-releases/level-9-orphaned-resources",
+          "name": "level-9-orphaned-resources",
+          "path": "modules/module-4-releases/level-9-orphaned-resources",
+          "mission": {
+            "name": "Left Behind",
+            "description": "After helm uninstall, some resources remain (they were created outside Helm).",
+            "objective": "Delete orphaned resource, then helm install",
+            "xp": 250,
+            "difficulty": "intermediate",
+            "expected_time": "15m",
+            "concepts": [
+              "helm uninstall scope",
+              "orphaned resources",
+              "resource tracking"
+            ],
+            "module": "module-4-releases",
+            "level": "level-9-orphaned-resources"
+          }
+        },
+        {
+          "id": "module-4-releases/level-10-uninstall-keep-history",
+          "name": "level-10-uninstall-keep-history",
+          "path": "modules/module-4-releases/level-10-uninstall-keep-history",
+          "mission": {
+            "name": "Gone But Not Forgotten",
+            "description": "Release uninstalled — player must restore it from history.",
+            "objective": "`helm rollback <release> <revision>` to restore from kept history",
+            "xp": 200,
+            "difficulty": "intermediate",
+            "expected_time": "10m",
+            "concepts": [
+              "--keep-history",
+              "rollback after uninstall"
+            ],
+            "module": "module-4-releases",
+            "level": "level-10-uninstall-keep-history"
+          }
+        },
+        {
+          "id": "module-4-releases/level-11-dry-run-vs-template",
+          "name": "level-11-dry-run-vs-template",
+          "path": "modules/module-4-releases/level-11-dry-run-vs-template",
+          "mission": {
+            "name": "Dry Run vs Template",
+            "description": "`helm template` works but `helm install --dry-run` fails — understand the difference.",
+            "objective": "Use `--dry-run` for cluster-aware checks",
+            "xp": 200,
+            "difficulty": "intermediate",
+            "expected_time": "10m",
+            "concepts": [
+              "template vs dry-run",
+              "cluster connectivity",
+              "lookup availability"
+            ],
+            "module": "module-4-releases",
+            "level": "level-11-dry-run-vs-template"
+          }
+        },
+        {
+          "id": "module-4-releases/level-12-pending-install",
+          "name": "level-12-pending-install",
+          "path": "modules/module-4-releases/level-12-pending-install",
+          "mission": {
+            "name": "Stuck Pending",
+            "description": "Release stuck in `pending-install` state — process was killed mid-install.",
+            "objective": "`helm uninstall <release>` to clear state (even for pending)",
+            "xp": 300,
+            "difficulty": "advanced",
+            "expected_time": "10m",
+            "concepts": [
+              "pending states",
+              "interrupted installs",
+              "recovery"
+            ],
+            "module": "module-4-releases",
+            "level": "level-12-pending-install"
+          }
+        },
+        {
+          "id": "module-4-releases/level-13-crd-ordering",
+          "name": "level-13-crd-ordering",
+          "path": "modules/module-4-releases/level-13-crd-ordering",
+          "mission": {
+            "name": "CRD First",
+            "description": "Chart installs CRD and CR in same release — CR fails because CRD not ready yet.",
+            "objective": "Move CRD to crds/ directory (installed before templates)",
+            "xp": 300,
+            "difficulty": "advanced",
+            "expected_time": "20m",
+            "concepts": [
+              "crds/ directory",
+              "CRD install ordering",
+              "helm CRD handling"
+            ],
+            "module": "module-4-releases",
+            "level": "level-13-crd-ordering"
+          }
+        },
+        {
+          "id": "module-4-releases/level-14-helm-test",
+          "name": "level-14-helm-test",
+          "path": "modules/module-4-releases/level-14-helm-test",
+          "mission": {
+            "name": "Test Your Release",
+            "description": "`helm test` fails — test pod has wrong command.",
+            "objective": "Fix the service name in the test template",
+            "xp": 250,
+            "difficulty": "intermediate",
+            "expected_time": "15m",
+            "concepts": [
+              "helm test",
+              "test hooks",
+              "release verification"
+            ],
+            "module": "module-4-releases",
+            "level": "level-14-helm-test"
+          }
+        },
+        {
+          "id": "module-4-releases/level-15-notes-template",
+          "name": "level-15-notes-template",
+          "path": "modules/module-4-releases/level-15-notes-template",
+          "mission": {
+            "name": "Post-Install Instructions",
+            "description": "NOTES.txt has a template error — install succeeds but notes crash.",
+            "objective": "Remove or fix the bad reference",
+            "xp": 150,
+            "difficulty": "beginner",
+            "expected_time": "8m",
+            "concepts": [
+              "NOTES.txt",
+              "post-install messages",
+              "template in NOTES"
+            ],
+            "module": "module-4-releases",
+            "level": "level-15-notes-template"
+          }
+        }
+      ]
+    },
+    {
+      "name": "module-5-rollbacks",
+      "levels": [
+        {
+          "id": "module-5-rollbacks/level-1-simple-rollback",
+          "name": "level-1-simple-rollback",
+          "path": "modules/module-5-rollbacks/level-1-simple-rollback",
+          "mission": {
+            "name": "One Step Back",
+            "description": "Bad upgrade broke the app — perform a simple rollback.",
+            "objective": "`helm rollback <release> 1`",
+            "xp": 200,
+            "difficulty": "intermediate",
+            "expected_time": "10m",
+            "concepts": [
+              "helm rollback",
+              "revision numbers"
+            ],
+            "module": "module-5-rollbacks",
+            "level": "level-1-simple-rollback"
+          }
+        },
+        {
+          "id": "module-5-rollbacks/level-2-rollback-values",
+          "name": "level-2-rollback-values",
+          "path": "modules/module-5-rollbacks/level-2-rollback-values",
+          "mission": {
+            "name": "Values Travel Back Too",
+            "description": "Player expects rollback to restore previous values — confirm this behavior.",
+            "objective": "Rollback restores replicaCount to 3",
+            "xp": 250,
+            "difficulty": "intermediate",
+            "expected_time": "12m",
+            "concepts": [
+              "values restored on rollback",
+              "what rollback restores"
+            ],
+            "module": "module-5-rollbacks",
+            "level": "level-2-rollback-values"
+          }
+        },
+        {
+          "id": "module-5-rollbacks/level-3-specific-revision",
+          "name": "level-3-specific-revision",
+          "path": "modules/module-5-rollbacks/level-3-specific-revision",
+          "mission": {
+            "name": "Time Machine",
+            "description": "Multiple upgrades; player must roll back 3 versions to find working state.",
+            "objective": "`helm rollback <release> 1`",
+            "xp": 250,
+            "difficulty": "intermediate",
+            "expected_time": "15m",
+            "concepts": [
+              "helm history",
+              "specific revision rollback"
+            ],
+            "module": "module-5-rollbacks",
+            "level": "level-3-specific-revision"
+          }
+        },
+        {
+          "id": "module-5-rollbacks/level-4-rollback-deleted-resource",
+          "name": "level-4-rollback-deleted-resource",
+          "path": "modules/module-5-rollbacks/level-4-rollback-deleted-resource",
+          "mission": {
+            "name": "Can't Rollback That",
+            "description": "Rollback fails because a manually deleted resource can't be restored.",
+            "objective": "Recreate the ConfigMap manually, then retry rollback",
+            "xp": 300,
+            "difficulty": "advanced",
+            "expected_time": "20m",
+            "concepts": [
+              "rollback limitations",
+              "manual changes vs helm managed"
+            ],
+            "module": "module-5-rollbacks",
+            "level": "level-4-rollback-deleted-resource"
+          }
+        },
+        {
+          "id": "module-5-rollbacks/level-5-rollback-with-wait",
+          "name": "level-5-rollback-with-wait",
+          "path": "modules/module-5-rollbacks/level-5-rollback-with-wait",
+          "mission": {
+            "name": "Wait For It",
+            "description": "Rollback completes but app not healthy — need --wait flag.",
+            "objective": "Use `helm rollback --wait <release> <revision>`",
+            "xp": 250,
+            "difficulty": "intermediate",
+            "expected_time": "15m",
+            "concepts": [
+              "--wait on rollback",
+              "readiness vs completion"
+            ],
+            "module": "module-5-rollbacks",
+            "level": "level-5-rollback-with-wait"
+          }
+        },
+        {
+          "id": "module-5-rollbacks/level-6-history-limit",
+          "name": "level-6-history-limit",
+          "path": "modules/module-5-rollbacks/level-6-history-limit",
+          "mission": {
+            "name": "History Is Full",
+            "description": "helm history only shows 10 entries — older revisions gone.",
+            "objective": "Configure --history-max larger, or accept limitation and fix forward",
+            "xp": 200,
+            "difficulty": "intermediate",
+            "expected_time": "10m",
+            "concepts": [
+              "--history-max",
+              "helm config",
+              "history cleanup"
+            ],
+            "module": "module-5-rollbacks",
+            "level": "level-6-history-limit"
+          }
+        },
+        {
+          "id": "module-5-rollbacks/level-7-force-upgrade",
+          "name": "level-7-force-upgrade",
+          "path": "modules/module-5-rollbacks/level-7-force-upgrade",
+          "mission": {
+            "name": "Force It Through",
+            "description": "Upgrade blocked by immutable field — use --force to recreate resources.",
+            "objective": "`helm upgrade --force` (deletes and recreates)",
+            "xp": 300,
+            "difficulty": "advanced",
+            "expected_time": "20m",
+            "concepts": [
+              "--force",
+              "resource recreation",
+              "downtime implications"
+            ],
+            "module": "module-5-rollbacks",
+            "level": "level-7-force-upgrade"
+          }
+        },
+        {
+          "id": "module-5-rollbacks/level-8-cleanup-failed",
+          "name": "level-8-cleanup-failed",
+          "path": "modules/module-5-rollbacks/level-8-cleanup-failed",
+          "mission": {
+            "name": "Clean Slate",
+            "description": "Repeated failed installs left many `failed` revisions; chart fundamentally broken.",
+            "objective": "Fix the template, helm upgrade to create successful revision",
+            "xp": 250,
+            "difficulty": "intermediate",
+            "expected_time": "15m",
+            "concepts": [
+              "recovery from repeated failures",
+              "upgrade vs reinstall"
+            ],
+            "module": "module-5-rollbacks",
+            "level": "level-8-cleanup-failed"
+          }
+        },
+        {
+          "id": "module-5-rollbacks/level-9-upgrade-path",
+          "name": "level-9-upgrade-path",
+          "path": "modules/module-5-rollbacks/level-9-upgrade-path",
+          "mission": {
+            "name": "The Long Road Back",
+            "description": "8 revisions; player must trace which revision introduced a memory leak (wrong limit).",
+            "objective": "Find the revision using `helm get values --revision N`, rollback",
+            "xp": 300,
+            "difficulty": "advanced",
+            "expected_time": "20m",
+            "concepts": [
+              "bisecting helm history",
+              "get values per revision"
+            ],
+            "module": "module-5-rollbacks",
+            "level": "level-9-upgrade-path"
+          }
+        },
+        {
+          "id": "module-5-rollbacks/level-10-rollback-hooks",
+          "name": "level-10-rollback-hooks",
+          "path": "modules/module-5-rollbacks/level-10-rollback-hooks",
+          "mission": {
+            "name": "Hooks on Rollback",
+            "description": "post-rollback hook fails — migration script not idempotent.",
+            "objective": "Make hook idempotent (IF NOT EXISTS pattern)",
+            "xp": 300,
+            "difficulty": "advanced",
+            "expected_time": "20m",
+            "concepts": [
+              "post-rollback hooks",
+              "idempotency",
+              "hook failure handling"
+            ],
+            "module": "module-5-rollbacks",
+            "level": "level-10-rollback-hooks"
+          }
+        },
+        {
+          "id": "module-5-rollbacks/level-11-revision-gaps",
+          "name": "level-11-revision-gaps",
+          "path": "modules/module-5-rollbacks/level-11-revision-gaps",
+          "mission": {
+            "name": "Missing Revisions",
+            "description": "helm history shows gaps (1, 2, 5) — player confused about what happened.",
+            "objective": "Understand gaps are from failed/cleaned revisions; rollback to 2",
+            "xp": 250,
+            "difficulty": "intermediate",
+            "expected_time": "15m",
+            "concepts": [
+              "history gaps",
+              "failed revision cleanup",
+              "--keep-history"
+            ],
+            "module": "module-5-rollbacks",
+            "level": "level-11-revision-gaps"
+          }
+        },
+        {
+          "id": "module-5-rollbacks/level-12-pvc-rollback",
+          "name": "level-12-pvc-rollback",
+          "path": "modules/module-5-rollbacks/level-12-pvc-rollback",
+          "mission": {
+            "name": "Persistent Volume Problem",
+            "description": "Rollback succeeds but StatefulSet PVC binding prevents pod from starting.",
+            "objective": "Understand PVC immutability; restore data manually if needed",
+            "xp": 350,
+            "difficulty": "advanced",
+            "expected_time": "25m",
+            "concepts": [
+              "PVC immutability",
+              "StatefulSet rollback limitations"
+            ],
+            "module": "module-5-rollbacks",
+            "level": "level-12-pvc-rollback"
+          }
+        },
+        {
+          "id": "module-5-rollbacks/level-13-rollback-configmap",
+          "name": "level-13-rollback-configmap",
+          "path": "modules/module-5-rollbacks/level-13-rollback-configmap",
+          "mission": {
+            "name": "Config Restored",
+            "description": "Wrong nginx config deployed — rollback should restore working config.",
+            "objective": "`helm rollback` restores previous ConfigMap",
+            "xp": 200,
+            "difficulty": "intermediate",
+            "expected_time": "10m",
+            "concepts": [
+              "ConfigMap in rollback",
+              "configuration management"
+            ],
+            "module": "module-5-rollbacks",
+            "level": "level-13-rollback-configmap"
+          }
+        },
+        {
+          "id": "module-5-rollbacks/level-14-blue-green-rollback",
+          "name": "level-14-blue-green-rollback",
+          "path": "modules/module-5-rollbacks/level-14-blue-green-rollback",
+          "mission": {
+            "name": "Switch Lanes",
+            "description": "Blue/green deployment via Helm — bad green deploy, switch back to blue.",
+            "objective": "Helm upgrade to switch Service selector back to blue",
+            "xp": 350,
+            "difficulty": "advanced",
+            "expected_time": "25m",
+            "concepts": [
+              "blue/green with Helm",
+              "selector-based routing"
+            ],
+            "module": "module-5-rollbacks",
+            "level": "level-14-blue-green-rollback"
+          }
+        },
+        {
+          "id": "module-5-rollbacks/level-15-production-incident",
+          "name": "level-15-production-incident",
+          "path": "modules/module-5-rollbacks/level-15-production-incident",
+          "mission": {
+            "name": "Production Is Down",
+            "description": "Full production incident simulation — identify broken revision, rollback, verify recovery.",
+            "objective": "Helm history analysis, targeted rollback of specific subchart",
+            "xp": 400,
+            "difficulty": "advanced",
+            "expected_time": "30m",
+            "concepts": [
+              "incident response",
+              "umbrella charts",
+              "rollback under pressure"
+            ],
+            "module": "module-5-rollbacks",
+            "level": "level-15-production-incident"
+          }
+        }
+      ]
+    },
+    {
+      "name": "module-6-dependencies",
+      "levels": [
+        {
+          "id": "module-6-dependencies/level-1-missing-lock",
+          "name": "level-1-missing-lock",
+          "path": "modules/module-6-dependencies/level-1-missing-lock",
+          "mission": {
+            "name": "Lock It Down",
+            "description": "helm install fails — Chart.lock is missing.",
+            "objective": "Run `helm dependency update` to generate Chart.lock and download charts/",
+            "xp": 200,
+            "difficulty": "intermediate",
+            "expected_time": "10m",
+            "concepts": [
+              "Chart.lock",
+              "helm dependency update",
+              "charts/ directory"
+            ],
+            "module": "module-6-dependencies",
+            "level": "level-1-missing-lock"
+          }
+        },
+        {
+          "id": "module-6-dependencies/level-2-dep-not-updated",
+          "name": "level-2-dep-not-updated",
+          "path": "modules/module-6-dependencies/level-2-dep-not-updated",
+          "mission": {
+            "name": "Stale Dependencies",
+            "description": "Chart.yaml updated with new dependency version but Chart.lock not regenerated.",
+            "objective": "`helm dependency update` to sync lock with Chart.yaml",
+            "xp": 200,
+            "difficulty": "intermediate",
+            "expected_time": "10m",
+            "concepts": [
+              "Chart.yaml vs Chart.lock",
+              "dependency pinning"
+            ],
+            "module": "module-6-dependencies",
+            "level": "level-2-dep-not-updated"
+          }
+        },
+        {
+          "id": "module-6-dependencies/level-3-wrong-version-range",
+          "name": "level-3-wrong-version-range",
+          "path": "modules/module-6-dependencies/level-3-wrong-version-range",
+          "mission": {
+            "name": "Version Constraint",
+            "description": "Dependency version constraint doesn't match any available version.",
+            "objective": "Correct version to available range (e.g., `\"~17.0.0\"`)",
+            "xp": 250,
+            "difficulty": "intermediate",
+            "expected_time": "15m",
+            "concepts": [
+              "semver constraints",
+              "~",
+              "^",
+              ">=",
+              "version ranges"
+            ],
+            "module": "module-6-dependencies",
+            "level": "level-3-wrong-version-range"
+          }
+        },
+        {
+          "id": "module-6-dependencies/level-4-alias-conflict",
+          "name": "level-4-alias-conflict",
+          "path": "modules/module-6-dependencies/level-4-alias-conflict",
+          "mission": {
+            "name": "Name Collision",
+            "description": "Two dependencies with same name — one needs an alias.",
+            "objective": "Add `alias: postgresql-replica` to second dependency",
+            "xp": 250,
+            "difficulty": "intermediate",
+            "expected_time": "15m",
+            "concepts": [
+              "alias field",
+              "multiple instances of same chart"
+            ],
+            "module": "module-6-dependencies",
+            "level": "level-4-alias-conflict"
+          }
+        },
+        {
+          "id": "module-6-dependencies/level-5-subchart-values",
+          "name": "level-5-subchart-values",
+          "path": "modules/module-6-dependencies/level-5-subchart-values",
+          "mission": {
+            "name": "Pass It Down",
+            "description": "Subchart (postgresql) has wrong password — values not passed correctly.",
+            "objective": "Scope values under the subchart name: `postgresql:\\n  auth:\\n    password: mypass`",
+            "xp": 300,
+            "difficulty": "advanced",
+            "expected_time": "20m",
+            "concepts": [
+              "subchart value scoping",
+              "values passthrough"
+            ],
+            "module": "module-6-dependencies",
+            "level": "level-5-subchart-values"
+          }
+        },
+        {
+          "id": "module-6-dependencies/level-6-global-values",
+          "name": "level-6-global-values",
+          "path": "modules/module-6-dependencies/level-6-global-values",
+          "mission": {
+            "name": "Share With Everyone",
+            "description": "Multiple subcharts need same cluster name — must use global values.",
+            "objective": "Use `global.clusterName` — accessible in all subcharts via `.Values.global`",
+            "xp": 300,
+            "difficulty": "advanced",
+            "expected_time": "20m",
+            "concepts": [
+              "global values",
+              ".Values.global",
+              "cross-subchart sharing"
+            ],
+            "module": "module-6-dependencies",
+            "level": "level-6-global-values"
+          }
+        },
+        {
+          "id": "module-6-dependencies/level-7-condition-enable",
+          "name": "level-7-condition-enable",
+          "path": "modules/module-6-dependencies/level-7-condition-enable",
+          "mission": {
+            "name": "Optional Component",
+            "description": "Redis subchart deploys even when caching is disabled.",
+            "objective": "Add `condition: redis.enabled` to dependency; `redis.enabled: false` in values",
+            "xp": 250,
+            "difficulty": "intermediate",
+            "expected_time": "15m",
+            "concepts": [
+              "condition field",
+              "optional dependencies",
+              "tags"
+            ],
+            "module": "module-6-dependencies",
+            "level": "level-7-condition-enable"
+          }
+        },
+        {
+          "id": "module-6-dependencies/level-8-tags-grouping",
+          "name": "level-8-tags-grouping",
+          "path": "modules/module-6-dependencies/level-8-tags-grouping",
+          "mission": {
+            "name": "Group Deploy",
+            "description": "Player wants to enable/disable a group of monitoring subcharts together.",
+            "objective": "Add `tags: [monitoring]` to each; use `tags.monitoring: false` in values",
+            "xp": 300,
+            "difficulty": "advanced",
+            "expected_time": "20m",
+            "concepts": [
+              "tags field",
+              "subchart groups",
+              "batch enable/disable"
+            ],
+            "module": "module-6-dependencies",
+            "level": "level-8-tags-grouping"
+          }
+        },
+        {
+          "id": "module-6-dependencies/level-9-repo-not-added",
+          "name": "level-9-repo-not-added",
+          "path": "modules/module-6-dependencies/level-9-repo-not-added",
+          "mission": {
+            "name": "Where's the Repo?",
+            "description": "`helm dependency update` fails — repository not added.",
+            "objective": "`helm repo add bitnami https://charts.bitnami.com/bitnami`",
+            "xp": 200,
+            "difficulty": "intermediate",
+            "expected_time": "10m",
+            "concepts": [
+              "helm repo add",
+              "repository management",
+              "helm repo list"
+            ],
+            "module": "module-6-dependencies",
+            "level": "level-9-repo-not-added"
+          }
+        },
+        {
+          "id": "module-6-dependencies/level-10-oci-dependency",
+          "name": "level-10-oci-dependency",
+          "path": "modules/module-6-dependencies/level-10-oci-dependency",
+          "mission": {
+            "name": "OCI Repository",
+            "description": "Dependency uses `oci://` protocol — requires different auth/syntax.",
+            "objective": "Correct OCI URL format, handle authentication",
+            "xp": 300,
+            "difficulty": "advanced",
+            "expected_time": "20m",
+            "concepts": [
+              "OCI registries",
+              "oci:// scheme",
+              "helm OCI support"
+            ],
+            "module": "module-6-dependencies",
+            "level": "level-10-oci-dependency"
+          }
+        },
+        {
+          "id": "module-6-dependencies/level-11-deep-override",
+          "name": "level-11-deep-override",
+          "path": "modules/module-6-dependencies/level-11-deep-override",
+          "mission": {
+            "name": "Two Levels Deep",
+            "description": "Values override for a sub-subchart (dependency of a dependency) not reaching target.",
+            "objective": "Understand Helm value scoping; use global or restructure",
+            "xp": 300,
+            "difficulty": "advanced",
+            "expected_time": "20m",
+            "concepts": [
+              "nested subchart values",
+              "value inheritance limitations"
+            ],
+            "module": "module-6-dependencies",
+            "level": "level-11-deep-override"
+          }
+        },
+        {
+          "id": "module-6-dependencies/level-12-charts-dir",
+          "name": "level-12-charts-dir",
+          "path": "modules/module-6-dependencies/level-12-charts-dir",
+          "mission": {
+            "name": "Local vs Remote",
+            "description": "Development using local chart in charts/ directory — path not resolving.",
+            "objective": "Correct relative path for local chart dependency",
+            "xp": 250,
+            "difficulty": "intermediate",
+            "expected_time": "15m",
+            "concepts": [
+              "file:// dependencies",
+              "local chart development",
+              "path resolution"
+            ],
+            "module": "module-6-dependencies",
+            "level": "level-12-charts-dir"
+          }
+        },
+        {
+          "id": "module-6-dependencies/level-13-dep-hooks",
+          "name": "level-13-dep-hooks",
+          "path": "modules/module-6-dependencies/level-13-dep-hooks",
+          "mission": {
+            "name": "Hooks in Subcharts",
+            "description": "Subchart has a pre-install hook that fails — blocks parent chart install.",
+            "objective": "Fix the hook script, or disable subchart hooks with --no-hooks",
+            "xp": 350,
+            "difficulty": "advanced",
+            "expected_time": "25m",
+            "concepts": [
+              "subchart hooks",
+              "hook propagation",
+              "--no-hooks flag"
+            ],
+            "module": "module-6-dependencies",
+            "level": "level-13-dep-hooks"
+          }
+        }
+      ]
+    },
+    {
+      "name": "module-7-hooks",
+      "levels": [
+        {
+          "id": "module-7-hooks/level-1-pre-install-fail",
+          "name": "level-1-pre-install-fail",
+          "path": "modules/module-7-hooks/level-1-pre-install-fail",
+          "mission": {
+            "name": "Before We Begin",
+            "description": "pre-install hook Job fails — blocks entire release.",
+            "objective": "Fix DB host in hook Job spec",
+            "xp": 250,
+            "difficulty": "intermediate",
+            "expected_time": "15m",
+            "concepts": [
+              "pre-install hook",
+              "Job hooks",
+              "hook failure"
+            ],
+            "module": "module-7-hooks",
+            "level": "level-1-pre-install-fail"
+          }
+        },
+        {
+          "id": "module-7-hooks/level-2-post-install-timeout",
+          "name": "level-2-post-install-timeout",
+          "path": "modules/module-7-hooks/level-2-post-install-timeout",
+          "mission": {
+            "name": "Hook Timed Out",
+            "description": "post-install hook Job times out — Helm marks release failed.",
+            "objective": "Add `activeDeadlineSeconds: 60` to Job spec",
+            "xp": 250,
+            "difficulty": "intermediate",
+            "expected_time": "15m",
+            "concepts": [
+              "activeDeadlineSeconds",
+              "hook timeout",
+              "Job completion"
+            ],
+            "module": "module-7-hooks",
+            "level": "level-2-post-install-timeout"
+          }
+        },
+        {
+          "id": "module-7-hooks/level-3-deletion-policy",
+          "name": "level-3-deletion-policy",
+          "path": "modules/module-7-hooks/level-3-deletion-policy",
+          "mission": {
+            "name": "Clean Up After Yourself",
+            "description": "Hook Jobs accumulate after each upgrade — cluster fills up.",
+            "objective": "Add `\"helm.sh/hook-delete-policy\": \"hook-succeeded\"` annotation",
+            "xp": 250,
+            "difficulty": "intermediate",
+            "expected_time": "15m",
+            "concepts": [
+              "hook-delete-policy",
+              "hook-succeeded",
+              "before-hook-creation"
+            ],
+            "module": "module-7-hooks",
+            "level": "level-3-deletion-policy"
+          }
+        },
+        {
+          "id": "module-7-hooks/level-4-hook-weight",
+          "name": "level-4-hook-weight",
+          "path": "modules/module-7-hooks/level-4-hook-weight",
+          "mission": {
+            "name": "Order Matters",
+            "description": "Two pre-install hooks run in wrong order (schema migration before DB creation).",
+            "objective": "Set weights: DB creation hook weight -1, migration weight 0",
+            "xp": 300,
+            "difficulty": "advanced",
+            "expected_time": "20m",
+            "concepts": [
+              "hook weight",
+              "execution ordering",
+              "negative weights"
+            ],
+            "module": "module-7-hooks",
+            "level": "level-4-hook-weight"
+          }
+        },
+        {
+          "id": "module-7-hooks/level-5-pre-upgrade-migration",
+          "name": "level-5-pre-upgrade-migration",
+          "path": "modules/module-7-hooks/level-5-pre-upgrade-migration",
+          "mission": {
+            "name": "Migrate Before Upgrade",
+            "description": "App upgrade requires DB schema migration — it must run before new pods start.",
+            "objective": "Change hook type to pre-upgrade",
+            "xp": 350,
+            "difficulty": "advanced",
+            "expected_time": "25m",
+            "concepts": [
+              "pre-upgrade vs post-upgrade hooks",
+              "migration ordering"
+            ],
+            "module": "module-7-hooks",
+            "level": "level-5-pre-upgrade-migration"
+          }
+        },
+        {
+          "id": "module-7-hooks/level-6-post-delete-cleanup",
+          "name": "level-6-post-delete-cleanup",
+          "path": "modules/module-7-hooks/level-6-post-delete-cleanup",
+          "mission": {
+            "name": "Leave No Trace",
+            "description": "Uninstalling the chart leaves orphaned PVCs — post-delete hook should clean them.",
+            "objective": "Add post-delete hook Job that deletes PVCs",
+            "xp": 300,
+            "difficulty": "advanced",
+            "expected_time": "20m",
+            "concepts": [
+              "post-delete hook",
+              "cleanup hooks",
+              "PVC management"
+            ],
+            "module": "module-7-hooks",
+            "level": "level-6-post-delete-cleanup"
+          }
+        },
+        {
+          "id": "module-7-hooks/level-7-hook-leftover",
+          "name": "level-7-hook-leftover",
+          "path": "modules/module-7-hooks/level-7-hook-leftover",
+          "mission": {
+            "name": "Old Hook Blocking",
+            "description": "Upgrade fails because old hook Job still exists (from previous run).",
+            "objective": "Manually delete the old hook Job, or change delete policy",
+            "xp": 300,
+            "difficulty": "advanced",
+            "expected_time": "20m",
+            "concepts": [
+              "before-hook-creation",
+              "stale hooks",
+              "manual cleanup"
+            ],
+            "module": "module-7-hooks",
+            "level": "level-7-hook-leftover"
+          }
+        },
+        {
+          "id": "module-7-hooks/level-8-test-hook",
+          "name": "level-8-test-hook",
+          "path": "modules/module-7-hooks/level-8-test-hook",
+          "mission": {
+            "name": "Test Your Work",
+            "description": "helm test fails — test pod checks wrong URL.",
+            "objective": "Fix URL path in test template",
+            "xp": 250,
+            "difficulty": "intermediate",
+            "expected_time": "15m",
+            "concepts": [
+              "test hook",
+              "helm.sh/hook: test",
+              "validation tests"
+            ],
+            "module": "module-7-hooks",
+            "level": "level-8-test-hook"
+          }
+        },
+        {
+          "id": "module-7-hooks/level-9-hook-rbac",
+          "name": "level-9-hook-rbac",
+          "path": "modules/module-7-hooks/level-9-hook-rbac",
+          "mission": {
+            "name": "Hook Needs Permission",
+            "description": "Hook Job fails with RBAC error — needs permission to list Pods.",
+            "objective": "Create ServiceAccount + Role + RoleBinding for hook, assign to Job",
+            "xp": 300,
+            "difficulty": "advanced",
+            "expected_time": "20m",
+            "concepts": [
+              "hook RBAC",
+              "ServiceAccount for Jobs",
+              "least privilege"
+            ],
+            "module": "module-7-hooks",
+            "level": "level-9-hook-rbac"
+          }
+        },
+        {
+          "id": "module-7-hooks/level-10-hook-order-complex",
+          "name": "level-10-hook-order-complex",
+          "path": "modules/module-7-hooks/level-10-hook-order-complex",
+          "mission": {
+            "name": "Orchestra of Hooks",
+            "description": "4 hooks (2 pre-install, 2 post-install) must run in specific order.",
+            "objective": "Assign weights -2, -1, 1, 2 to enforce correct order",
+            "xp": 350,
+            "difficulty": "advanced",
+            "expected_time": "25m",
+            "concepts": [
+              "hook orchestration",
+              "complex weight schemes",
+              "hook dependencies"
+            ],
+            "module": "module-7-hooks",
+            "level": "level-10-hook-order-complex"
+          }
+        }
+      ]
+    },
+    {
+      "name": "module-8-security",
+      "levels": [
+        {
+          "id": "module-8-security/level-1-secret-in-values",
+          "name": "level-1-secret-in-values",
+          "path": "modules/module-8-security/level-1-secret-in-values",
+          "mission": {
+            "name": "Secret's Not a Secret",
+            "description": "Plaintext password in values.yaml committed to git.",
+            "objective": "Remove from values.yaml; use `--set` for secrets or external-secrets",
+            "xp": 250,
+            "difficulty": "intermediate",
+            "expected_time": "15m",
+            "concepts": [
+              "secret management",
+              "values.yaml in git",
+              "--set for secrets"
+            ],
+            "module": "module-8-security",
+            "level": "level-1-secret-in-values"
+          }
+        },
+        {
+          "id": "module-8-security/level-2-rbac-for-helm",
+          "name": "level-2-rbac-for-helm",
+          "path": "modules/module-8-security/level-2-rbac-for-helm",
+          "mission": {
+            "name": "Helm Needs RBAC",
+            "description": "Helm deploy fails — ServiceAccount lacks permission to create Deployments.",
+            "objective": "Create ClusterRole with required permissions, bind to ServiceAccount",
+            "xp": 300,
+            "difficulty": "advanced",
+            "expected_time": "20m",
+            "concepts": [
+              "Helm RBAC",
+              "ServiceAccount for Helm",
+              "ClusterRole"
+            ],
+            "module": "module-8-security",
+            "level": "level-2-rbac-for-helm"
+          }
+        },
+        {
+          "id": "module-8-security/level-3-network-policy",
+          "name": "level-3-network-policy",
+          "path": "modules/module-8-security/level-3-network-policy",
+          "mission": {
+            "name": "Block the Traffic",
+            "description": "Chart deploys NetworkPolicy but it blocks traffic it shouldn't.",
+            "objective": "Add ingress rule for health check probe source",
+            "xp": 300,
+            "difficulty": "advanced",
+            "expected_time": "20m",
+            "concepts": [
+              "NetworkPolicy in charts",
+              "pod selector",
+              "ingress rules"
+            ],
+            "module": "module-8-security",
+            "level": "level-3-network-policy"
+          }
+        },
+        {
+          "id": "module-8-security/level-4-security-context",
+          "name": "level-4-security-context",
+          "path": "modules/module-8-security/level-4-security-context",
+          "mission": {
+            "name": "Run As Who?",
+            "description": "Pod fails to start — security context requires non-root but image runs as root.",
+            "objective": "Either change securityContext or use image that supports non-root",
+            "xp": 250,
+            "difficulty": "intermediate",
+            "expected_time": "15m",
+            "concepts": [
+              "securityContext",
+              "runAsNonRoot",
+              "allowPrivilegeEscalation"
+            ],
+            "module": "module-8-security",
+            "level": "level-4-security-context"
+          }
+        },
+        {
+          "id": "module-8-security/level-5-image-pull-secret",
+          "name": "level-5-image-pull-secret",
+          "path": "modules/module-8-security/level-5-image-pull-secret",
+          "mission": {
+            "name": "Private Registry Auth",
+            "description": "Pod fails with ImagePullBackOff from private registry.",
+            "objective": "Create docker-registry Secret, set imagePullSecrets in values",
+            "xp": 250,
+            "difficulty": "intermediate",
+            "expected_time": "15m",
+            "concepts": [
+              "imagePullSecrets",
+              "docker-registry secrets",
+              "private registries"
+            ],
+            "module": "module-8-security",
+            "level": "level-5-image-pull-secret"
+          }
+        },
+        {
+          "id": "module-8-security/level-6-lint-errors",
+          "name": "level-6-lint-errors",
+          "path": "modules/module-8-security/level-6-lint-errors",
+          "mission": {
+            "name": "Lint Police",
+            "description": "Chart has 4 lint errors — fix all of them.",
+            "objective": "Fix all lint errors per helm lint output",
+            "xp": 200,
+            "difficulty": "intermediate",
+            "expected_time": "10m",
+            "concepts": [
+              "helm lint",
+              "best practices",
+              "linting in CI"
+            ],
+            "module": "module-8-security",
+            "level": "level-6-lint-errors"
+          }
+        },
+        {
+          "id": "module-8-security/level-7-deprecated-api",
+          "name": "level-7-deprecated-api",
+          "path": "modules/module-8-security/level-7-deprecated-api",
+          "mission": {
+            "name": "API Graveyard",
+            "description": "Chart uses `extensions/v1beta1` Deployment — removed in Kubernetes 1.16+.",
+            "objective": "Change to `apiVersion: apps/v1`, add required selector field",
+            "xp": 300,
+            "difficulty": "advanced",
+            "expected_time": "20m",
+            "concepts": [
+              "deprecated API versions",
+              "API group migration",
+              "version skew"
+            ],
+            "module": "module-8-security",
+            "level": "level-7-deprecated-api"
+          }
+        },
+        {
+          "id": "module-8-security/level-8-resource-quotas",
+          "name": "level-8-resource-quotas",
+          "path": "modules/module-8-security/level-8-resource-quotas",
+          "mission": {
+            "name": "Quota Exceeded",
+            "description": "Namespace has ResourceQuota — chart doesn't set requests, install rejected.",
+            "objective": "Add resources.requests.cpu and resources.requests.memory to values",
+            "xp": 300,
+            "difficulty": "advanced",
+            "expected_time": "20m",
+            "concepts": [
+              "ResourceQuota",
+              "requests required",
+              "quota enforcement"
+            ],
+            "module": "module-8-security",
+            "level": "level-8-resource-quotas"
+          }
+        },
+        {
+          "id": "module-8-security/level-9-external-secrets",
+          "name": "level-9-external-secrets",
+          "path": "modules/module-8-security/level-9-external-secrets",
+          "mission": {
+            "name": "External Secret Store",
+            "description": "Chart should pull secrets from external-secrets operator, not bake them in.",
+            "objective": "Change to ExternalSecret resource referencing secret store",
+            "xp": 350,
+            "difficulty": "advanced",
+            "expected_time": "25m",
+            "concepts": [
+              "ExternalSecret operator",
+              "secret store references",
+              "external-secrets.io"
+            ],
+            "module": "module-8-security",
+            "level": "level-9-external-secrets"
+          }
+        },
+        {
+          "id": "module-8-security/level-10-chart-signing",
+          "name": "level-10-chart-signing",
+          "path": "modules/module-8-security/level-10-chart-signing",
+          "mission": {
+            "name": "Trust But Verify",
+            "description": "Unsigned chart from repository — must verify provenance.",
+            "objective": "Generate keypair, sign chart, verify with --verify flag",
+            "xp": 350,
+            "difficulty": "advanced",
+            "expected_time": "25m",
+            "concepts": [
+              "helm sign",
+              "helm verify",
+              "provenance files",
+              "GPG in Helm"
+            ],
+            "module": "module-8-security",
+            "level": "level-10-chart-signing"
+          }
+        }
+      ]
+    },
+    {
+      "name": "module-9-advanced",
+      "levels": [
+        {
+          "id": "module-9-advanced/level-1-library-chart-create",
+          "name": "level-1-library-chart-create",
+          "path": "modules/module-9-advanced/level-1-library-chart-create",
+          "mission": {
+            "name": "Build the Foundation",
+            "description": "Repeated label blocks across 3 charts — extract to library chart.",
+            "objective": "Create library chart with shared helpers, add as dependency",
+            "xp": 300,
+            "difficulty": "advanced",
+            "expected_time": "20m",
+            "concepts": [
+              "library chart type",
+              "type: library in Chart.yaml",
+              "shared helpers"
+            ],
+            "module": "module-9-advanced",
+            "level": "level-1-library-chart-create"
+          }
+        },
+        {
+          "id": "module-9-advanced/level-2-library-chart-use",
+          "name": "level-2-library-chart-use",
+          "path": "modules/module-9-advanced/level-2-library-chart-use",
+          "mission": {
+            "name": "Stand on Shoulders",
+            "description": "Application chart uses library chart but include path wrong.",
+            "objective": "Correct the include name to match library's define",
+            "xp": 300,
+            "difficulty": "advanced",
+            "expected_time": "20m",
+            "concepts": [
+              "library chart consumption",
+              "include naming",
+              "define naming"
+            ],
+            "module": "module-9-advanced",
+            "level": "level-2-library-chart-use"
+          }
+        },
+        {
+          "id": "module-9-advanced/level-3-oci-registry",
+          "name": "level-3-oci-registry",
+          "path": "modules/module-9-advanced/level-3-oci-registry",
+          "mission": {
+            "name": "Push and Pull",
+            "description": "Chart must be pushed to OCI registry and pulled back.",
+            "objective": "Correct OCI URL: `oci://registry.example.com/charts`",
+            "xp": 350,
+            "difficulty": "advanced",
+            "expected_time": "25m",
+            "concepts": [
+              "OCI support",
+              "helm push",
+              "helm pull from OCI",
+              "registry login"
+            ],
+            "module": "module-9-advanced",
+            "level": "level-3-oci-registry"
+          }
+        },
+        {
+          "id": "module-9-advanced/level-4-helmfile",
+          "name": "level-4-helmfile",
+          "path": "modules/module-9-advanced/level-4-helmfile",
+          "mission": {
+            "name": "Helmfile Harmony",
+            "description": "helmfile.yaml deploys 3 releases — one has wrong values file path.",
+            "objective": "Correct the path in helmfile.yaml",
+            "xp": 350,
+            "difficulty": "advanced",
+            "expected_time": "25m",
+            "concepts": [
+              "helmfile",
+              "multi-release management",
+              "environment files"
+            ],
+            "module": "module-9-advanced",
+            "level": "level-4-helmfile"
+          }
+        },
+        {
+          "id": "module-9-advanced/level-5-helm-plugin",
+          "name": "level-5-helm-plugin",
+          "path": "modules/module-9-advanced/level-5-helm-plugin",
+          "mission": {
+            "name": "Extend Helm",
+            "description": "CI script uses `helm diff` plugin but it's not installed.",
+            "objective": "`helm plugin install https://github.com/databus23/helm-diff`",
+            "xp": 300,
+            "difficulty": "advanced",
+            "expected_time": "20m",
+            "concepts": [
+              "helm plugins",
+              "helm-diff",
+              "plugin management"
+            ],
+            "module": "module-9-advanced",
+            "level": "level-5-helm-plugin"
+          }
+        },
+        {
+          "id": "module-9-advanced/level-6-post-renderer",
+          "name": "level-6-post-renderer",
+          "path": "modules/module-9-advanced/level-6-post-renderer",
+          "mission": {
+            "name": "After the Render",
+            "description": "Chart needs kustomize patches applied after Helm render.",
+            "objective": "Create kustomization.yaml with required patches",
+            "xp": 400,
+            "difficulty": "expert",
+            "expected_time": "30m",
+            "concepts": [
+              "post-renderer",
+              "kustomize as post-renderer",
+              "extending Helm"
+            ],
+            "module": "module-9-advanced",
+            "level": "level-6-post-renderer"
+          }
+        },
+        {
+          "id": "module-9-advanced/level-7-chartmuseum",
+          "name": "level-7-chartmuseum",
+          "path": "modules/module-9-advanced/level-7-chartmuseum",
+          "mission": {
+            "name": "Your Own Repository",
+            "description": "ChartMuseum is running but helm push fails — auth wrong.",
+            "objective": "Add credentials to push command",
+            "xp": 350,
+            "difficulty": "advanced",
+            "expected_time": "25m",
+            "concepts": [
+              "ChartMuseum",
+              "private chart repositories",
+              "helm-push plugin"
+            ],
+            "module": "module-9-advanced",
+            "level": "level-7-chartmuseum"
+          }
+        },
+        {
+          "id": "module-9-advanced/level-8-kustomize-helm",
+          "name": "level-8-kustomize-helm",
+          "path": "modules/module-9-advanced/level-8-kustomize-helm",
+          "mission": {
+            "name": "Kustomize Meets Helm",
+            "description": "Kustomize inflates Helm chart but values file path wrong.",
+            "objective": "Correct path, ensure kustomize can locate values",
+            "xp": 400,
+            "difficulty": "expert",
+            "expected_time": "30m",
+            "concepts": [
+              "kustomize helmCharts generator",
+              "valuesFile",
+              "kustomize + helm"
+            ],
+            "module": "module-9-advanced",
+            "level": "level-8-kustomize-helm"
+          }
+        },
+        {
+          "id": "module-9-advanced/level-9-argocd-helm",
+          "name": "level-9-argocd-helm",
+          "path": "modules/module-9-advanced/level-9-argocd-helm",
+          "mission": {
+            "name": "GitOps Helm",
+            "description": "ArgoCD Application using Helm — custom values not applying.",
+            "objective": "Correct path to values file relative to chart root in git",
+            "xp": 400,
+            "difficulty": "expert",
+            "expected_time": "30m",
+            "concepts": [
+              "ArgoCD Helm support",
+              "valueFiles",
+              "helm.parameters"
+            ],
+            "module": "module-9-advanced",
+            "level": "level-9-argocd-helm"
+          }
+        },
+        {
+          "id": "module-9-advanced/level-10-umbrella-chart",
+          "name": "level-10-umbrella-chart",
+          "path": "modules/module-9-advanced/level-10-umbrella-chart",
+          "mission": {
+            "name": "The Big Picture",
+            "description": "Umbrella chart orchestrating 5 microservices — one subchart fails and blocks all.",
+            "objective": "Fix subchart template error; understand umbrella chart failure modes",
+            "xp": 450,
+            "difficulty": "expert",
+            "expected_time": "35m",
+            "concepts": [
+              "umbrella charts",
+              "chart composition",
+              "partial failure handling"
+            ],
+            "module": "module-9-advanced",
+            "level": "level-10-umbrella-chart"
+          }
+        }
+      ]
+    },
+    {
+      "name": "module-10-wargames",
+      "levels": [
+        {
+          "id": "module-10-wargames/level-1-multi-tier-failure",
+          "name": "level-1-multi-tier-failure",
+          "path": "modules/module-10-wargames/level-1-multi-tier-failure",
+          "mission": {
+            "name": "Full Stack Down",
+            "description": "3-tier app (frontend/backend/database) fails on install. Database hook fails, backend CrashLoops, frontend has wrong backend URL.",
+            "objective": "Fix in dependency order: database hook → backend env → frontend config",
+            "xp": 400,
+            "difficulty": "expert",
+            "expected_time": "30m",
+            "concepts": [
+              "debugging multiple failures",
+              "dependency order",
+              "systematic approach"
+            ],
+            "module": "module-10-wargames",
+            "level": "level-1-multi-tier-failure"
+          }
+        },
+        {
+          "id": "module-10-wargames/level-2-blue-green",
+          "name": "level-2-blue-green",
+          "path": "modules/module-10-wargames/level-2-blue-green",
+          "mission": {
+            "name": "Blue Green Deploy",
+            "description": "Implement blue/green deployment with Helm using two releases and Service selector switch.",
+            "objective": "Helm upgrade to switch Service selector to green",
+            "xp": 400,
+            "difficulty": "expert",
+            "expected_time": "30m",
+            "concepts": [
+              "blue/green patterns",
+              "selector switching",
+              "zero-downtime"
+            ],
+            "module": "module-10-wargames",
+            "level": "level-2-blue-green"
+          }
+        },
+        {
+          "id": "module-10-wargames/level-3-canary",
+          "name": "level-3-canary",
+          "path": "modules/module-10-wargames/level-3-canary",
+          "mission": {
+            "name": "Canary in the Coalmine",
+            "description": "Canary deployment where 10% traffic should go to new version — weight wrong.",
+            "objective": "Adjust replica counts to achieve ~10% canary split",
+            "xp": 400,
+            "difficulty": "expert",
+            "expected_time": "30m",
+            "concepts": [
+              "canary deployment",
+              "replica-based traffic splitting",
+              "Helm values for canary"
+            ],
+            "module": "module-10-wargames",
+            "level": "level-3-canary"
+          }
+        },
+        {
+          "id": "module-10-wargames/level-4-cross-namespace",
+          "name": "level-4-cross-namespace",
+          "path": "modules/module-10-wargames/level-4-cross-namespace",
+          "mission": {
+            "name": "Crossing the Aisle",
+            "description": "Service in namespace A needs to call Service in namespace B — DNS not working.",
+            "objective": "Change to `backend-svc.namespace-b.svc.cluster.local` via chart values",
+            "xp": 400,
+            "difficulty": "expert",
+            "expected_time": "30m",
+            "concepts": [
+              "cross-namespace DNS",
+              "FQDN",
+              "Kubernetes DNS patterns"
+            ],
+            "module": "module-10-wargames",
+            "level": "level-4-cross-namespace"
+          }
+        },
+        {
+          "id": "module-10-wargames/level-5-wrong-image-prod",
+          "name": "level-5-wrong-image-prod",
+          "path": "modules/module-10-wargames/level-5-wrong-image-prod",
+          "mission": {
+            "name": "Wrong Image in Production",
+            "description": "Prod incident — wrong image tag deployed. Production environment has wrong values override.",
+            "objective": "Emergency upgrade with correct tag from production values file",
+            "xp": 450,
+            "difficulty": "expert",
+            "expected_time": "35m",
+            "concepts": [
+              "environment separation",
+              "production incidents",
+              "emergency upgrades"
+            ],
+            "module": "module-10-wargames",
+            "level": "level-5-wrong-image-prod"
+          }
+        },
+        {
+          "id": "module-10-wargames/level-6-resource-exhaustion",
+          "name": "level-6-resource-exhaustion",
+          "path": "modules/module-10-wargames/level-6-resource-exhaustion",
+          "mission": {
+            "name": "Out of Resources",
+            "description": "Bad limits causing node resource exhaustion — other pods evicted.",
+            "objective": "Add appropriate resource limits to chart, upgrade all affected releases",
+            "xp": 450,
+            "difficulty": "expert",
+            "expected_time": "35m",
+            "concepts": [
+              "resource exhaustion",
+              "limits vs requests",
+              "cluster stability"
+            ],
+            "module": "module-10-wargames",
+            "level": "level-6-resource-exhaustion"
+          }
+        },
+        {
+          "id": "module-10-wargames/level-7-multi-env-pipeline",
+          "name": "level-7-multi-env-pipeline",
+          "path": "modules/module-10-wargames/level-7-multi-env-pipeline",
+          "mission": {
+            "name": "Pipeline Breakdown",
+            "description": "Helmfile pipeline promotes dev→staging→prod — staging values file missing.",
+            "objective": "Add staging environment to helmfile.yaml with correct values",
+            "xp": 450,
+            "difficulty": "expert",
+            "expected_time": "35m",
+            "concepts": [
+              "helmfile environments",
+              "promotion pipeline",
+              "environment-specific config"
+            ],
+            "module": "module-10-wargames",
+            "level": "level-7-multi-env-pipeline"
+          }
+        },
+        {
+          "id": "module-10-wargames/level-8-cicd-upgrade",
+          "name": "level-8-cicd-upgrade",
+          "path": "modules/module-10-wargames/level-8-cicd-upgrade",
+          "mission": {
+            "name": "CI/CD Upgrade Crisis",
+            "description": "CI/CD Helm upgrade script fails at step 3 of 5 — remaining steps skipped.",
+            "objective": "Add proper error handling and rollback logic to upgrade script",
+            "xp": 450,
+            "difficulty": "expert",
+            "expected_time": "10m",
+            "concepts": [
+              "CI/CD error handling",
+              "rollback on failure",
+              "deployment automation"
+            ],
+            "module": "module-10-wargames",
+            "level": "level-8-cicd-upgrade"
+          }
+        },
+        {
+          "id": "module-10-wargames/level-9-repo-maintenance",
+          "name": "level-9-repo-maintenance",
+          "path": "modules/module-10-wargames/level-9-repo-maintenance",
+          "mission": {
+            "name": "Keep Your Repo Clean",
+            "description": "Chart repository has stale/corrupted index — helm repo update fails.",
+            "objective": "Regenerate index.yaml with `helm repo index`; push to repository",
+            "xp": 400,
+            "difficulty": "expert",
+            "expected_time": "30m",
+            "concepts": [
+              "helm repo index",
+              "repository maintenance",
+              "index.yaml"
+            ],
+            "module": "module-10-wargames",
+            "level": "level-9-repo-maintenance"
+          }
+        },
+        {
+          "id": "module-10-wargames/level-10-full-incident",
+          "name": "level-10-full-incident",
+          "path": "modules/module-10-wargames/level-10-full-incident",
+          "mission": {
+            "name": "Zero-to-Hero Incident Response",
+            "description": "Final mission. Complete production incident: 4 services down, bad Helm upgrade, wrong values across 3 environments, stuck hooks, and a dependency version conflict.",
+            "objective": "Systematic diagnosis and fix of all issues",
+            "xp": 500,
+            "difficulty": "expert",
+            "expected_time": "45m",
+            "concepts": [
+              "all module concepts combined",
+              "incident command",
+              "systematic debugging"
+            ],
+            "module": "module-10-wargames",
+            "level": "level-10-full-incident"
+          }
+        }
+      ]
+    }
+  ]
+}

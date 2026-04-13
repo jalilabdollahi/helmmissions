@@ -1,0 +1,6 @@
+apiVersion: v2
+name: revision-gaps
+description: Broken chart for Missing Revisions
+type: application
+version: 0.1.0
+appVersion: 1.0.0

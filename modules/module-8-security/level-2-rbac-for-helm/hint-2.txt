@@ -1,0 +1,1 @@
+The fix revolves around Helm RBAC, ServiceAccount for Helm, ClusterRole. Compare the current state with the objective: Create ClusterRole with required permissions, bind to ServiceAccount If the level is stateful, inspect the existing release history before reinstalling anything.

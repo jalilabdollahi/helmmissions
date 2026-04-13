@@ -1,0 +1,12 @@
+name: Inspect Before You Deploy
+description: Chart has wrong default resources. Player must identify via helm show.
+objective: Override with `-f custom-values.yaml` setting memory to 256Mi
+xp: 100
+difficulty: beginner
+expected_time: 5m
+concepts:
+- helm show values
+- helm show chart
+- pre-install inspection
+module: module-1-basics
+level: level-13-show-commands

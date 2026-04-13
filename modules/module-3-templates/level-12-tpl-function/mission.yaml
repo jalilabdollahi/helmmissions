@@ -1,0 +1,12 @@
+name: Template in Template
+description: tpl function used incorrectly causes infinite recursion warning.
+objective: Fix the values.yaml message to be a valid template string
+xp: 300
+difficulty: advanced
+expected_time: 20m
+concepts:
+- tpl function
+- values as templates
+- security implications
+module: module-3-templates
+level: level-12-tpl-function

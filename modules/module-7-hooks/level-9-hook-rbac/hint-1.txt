@@ -1,0 +1,1 @@
+Hook levels usually fail before or after the main workload. Inspect annotations, Jobs, and hook ordering. The broken state says: Hook Job fails with RBAC error — needs permission to list Pods.

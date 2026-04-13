@@ -1,0 +1,1 @@
+Concrete direction: Use `{{ with .Values.config }}{{ $.Release.Name }}{{ end }}` (dollar sign for root). When you think you have it, verify the result the same way the mission describes: Resource name includes release name correctly

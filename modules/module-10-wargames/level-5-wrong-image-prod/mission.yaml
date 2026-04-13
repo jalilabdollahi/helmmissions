@@ -1,0 +1,13 @@
+name: Wrong Image in Production
+description: Prod incident — wrong image tag deployed. Production environment has
+  wrong values override.
+objective: Emergency upgrade with correct tag from production values file
+xp: 450
+difficulty: expert
+expected_time: 35m
+concepts:
+- environment separation
+- production incidents
+- emergency upgrades
+module: module-10-wargames
+level: level-5-wrong-image-prod

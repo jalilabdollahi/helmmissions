@@ -1,0 +1,6 @@
+apiVersion: v2
+name: dry-run
+description: Broken chart for Test Before You Break
+type: application
+version: 0.1.0
+appVersion: 1.0.0

@@ -1,0 +1,1 @@
+Use `helm lint` and then verify the rendered security-related resources or pod settings with kubectl. The broken state says: Namespace has ResourceQuota — chart doesn't set requests, install rejected.

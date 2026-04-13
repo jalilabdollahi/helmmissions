@@ -1,0 +1,12 @@
+name: Out of Resources
+description: Bad limits causing node resource exhaustion — other pods evicted.
+objective: Add appropriate resource limits to chart, upgrade all affected releases
+xp: 450
+difficulty: expert
+expected_time: 35m
+concepts:
+- resource exhaustion
+- limits vs requests
+- cluster stability
+module: module-10-wargames
+level: level-6-resource-exhaustion

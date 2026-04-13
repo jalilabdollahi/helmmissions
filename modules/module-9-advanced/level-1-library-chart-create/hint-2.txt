@@ -1,0 +1,1 @@
+The fix revolves around library chart type, type: library in Chart.yaml, shared helpers. Compare the current state with the objective: Create library chart with shared helpers, add as dependency If the level is stateful, inspect the existing release history before reinstalling anything.

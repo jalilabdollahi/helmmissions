@@ -1,0 +1,1 @@
+The fix revolves around cross-namespace DNS, FQDN, Kubernetes DNS patterns. Compare the current state with the objective: Change to `backend-svc.namespace-b.svc.cluster.local` via chart values If the level is stateful, inspect the existing release history before reinstalling anything.

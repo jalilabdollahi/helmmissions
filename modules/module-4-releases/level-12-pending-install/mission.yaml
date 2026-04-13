@@ -1,0 +1,12 @@
+name: Stuck Pending
+description: Release stuck in `pending-install` state — process was killed mid-install.
+objective: '`helm uninstall <release>` to clear state (even for pending)'
+xp: 300
+difficulty: advanced
+expected_time: 10m
+concepts:
+- pending states
+- interrupted installs
+- recovery
+module: module-4-releases
+level: level-12-pending-install

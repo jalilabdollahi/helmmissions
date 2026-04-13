@@ -1,0 +1,21 @@
+        ════════════════════════════════════
+        Advanced Patterns
+        ════════════════════════════════════
+
+        OVERVIEW
+        Train on advanced patterns scenarios inside HelmMissions.
+
+        SKILLS COVERED
+        Helm troubleshooting, chart debugging, validation, and safe release workflows.
+
+        LEVELS
+        - Level 1: Build the Foundation (level-1-library-chart-create)
+- Level 2: Stand on Shoulders (level-2-library-chart-use)
+- Level 3: Push and Pull (level-3-oci-registry)
+- Level 4: Helmfile Harmony (level-4-helmfile)
+- Level 5: Extend Helm (level-5-helm-plugin)
+- Level 6: After the Render (level-6-post-renderer)
+- Level 7: Your Own Repository (level-7-chartmuseum)
+- Level 8: Kustomize Meets Helm (level-8-kustomize-helm)
+- Level 9: GitOps Helm (level-9-argocd-helm)
+- Level 10: The Big Picture (level-10-umbrella-chart)

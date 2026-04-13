@@ -1,0 +1,12 @@
+name: Hook Needs Permission
+description: Hook Job fails with RBAC error — needs permission to list Pods.
+objective: Create ServiceAccount + Role + RoleBinding for hook, assign to Job
+xp: 300
+difficulty: advanced
+expected_time: 20m
+concepts:
+- hook RBAC
+- ServiceAccount for Jobs
+- least privilege
+module: module-7-hooks
+level: level-9-hook-rbac

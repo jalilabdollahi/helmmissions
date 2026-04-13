@@ -1,0 +1,1 @@
+The fix revolves around values.schema.json, JSON Schema validation, chart contracts. Compare the current state with the objective: Set replicaCount to at least 1 If the level is stateful, inspect the existing release history before reinstalling anything.

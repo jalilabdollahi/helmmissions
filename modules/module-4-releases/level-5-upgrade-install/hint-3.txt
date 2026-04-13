@@ -1,0 +1,1 @@
+Concrete direction: Change to `helm upgrade --install myapp ./chart`. When you think you have it, verify the result the same way the mission describes: Works on both first install and subsequent upgrades

@@ -1,0 +1,1 @@
+Concrete direction: Use `--set ingress.hosts={host1.com,host2.com}` (curly braces for arrays). When you think you have it, verify the result the same way the mission describes: Both hosts appear in Ingress spec

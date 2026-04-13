@@ -1,0 +1,12 @@
+name: Build the Foundation
+description: Repeated label blocks across 3 charts — extract to library chart.
+objective: Create library chart with shared helpers, add as dependency
+xp: 300
+difficulty: advanced
+expected_time: 20m
+concepts:
+- library chart type
+- 'type: library in Chart.yaml'
+- shared helpers
+module: module-9-advanced
+level: level-1-library-chart-create

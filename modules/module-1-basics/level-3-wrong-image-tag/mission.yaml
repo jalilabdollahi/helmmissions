@@ -1,0 +1,12 @@
+name: Image Not Found
+description: Chart installs but Pod goes into ImagePullBackOff.
+objective: Change tag to `latest`
+xp: 100
+difficulty: beginner
+expected_time: 5m
+concepts:
+- values.yaml
+- image.tag
+- ImagePullBackOff
+module: module-1-basics
+level: level-3-wrong-image-tag

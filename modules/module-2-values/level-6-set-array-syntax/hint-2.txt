@@ -1,0 +1,1 @@
+The fix revolves around --set array syntax, {}, comma-separated values. Compare the current state with the objective: Use `--set ingress.hosts={host1.com,host2.com}` (curly braces for arrays) If the level is stateful, inspect the existing release history before reinstalling anything.

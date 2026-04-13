@@ -1,0 +1,13 @@
+name: Dry Run vs Template
+description: '`helm template` works but `helm install --dry-run` fails — understand
+  the difference.'
+objective: Use `--dry-run` for cluster-aware checks
+xp: 200
+difficulty: intermediate
+expected_time: 10m
+concepts:
+- template vs dry-run
+- cluster connectivity
+- lookup availability
+module: module-4-releases
+level: level-11-dry-run-vs-template

@@ -1,0 +1,1 @@
+Concrete direction: Change hook type to pre-upgrade. When you think you have it, verify the result the same way the mission describes: Migration runs before new deployment, app starts cleanly

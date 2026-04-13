@@ -1,0 +1,1 @@
+Concrete direction: Use `helm history`, `helm get values --revision N`, identify bad revision. When you think you have it, verify the result the same way the mission describes: Player identifies bad revision and rolls back

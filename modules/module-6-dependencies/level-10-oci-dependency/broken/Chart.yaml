@@ -1,0 +1,6 @@
+apiVersion: v2
+name: oci-dependency
+description: Broken chart for OCI Repository
+type: application
+version: 0.1.0
+appVersion: 1.0.0

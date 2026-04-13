@@ -1,0 +1,1 @@
+Concrete direction: Add `---` YAML document separator between resources. When you think you have it, verify the result the same way the mission describes: Both resources created correctly

@@ -1,0 +1,26 @@
+        ════════════════════════════════════
+        Release Management
+        ════════════════════════════════════
+
+        OVERVIEW
+        Train on release management scenarios inside HelmMissions.
+
+        SKILLS COVERED
+        Helm troubleshooting, chart debugging, validation, and safe release workflows.
+
+        LEVELS
+        - Level 1: The Failed State (level-1-failed-release)
+- Level 2: Upgrade From Failure (level-2-upgrade-after-fail)
+- Level 3: Timed Out Waiting (level-3-wait-timeout)
+- Level 4: Atomic or Nothing (level-4-atomic-rollback)
+- Level 5: One Command Rules All (level-5-upgrade-install)
+- Level 6: Not My Resource (level-6-resource-ownership)
+- Level 7: You Can't Change That (level-7-immutable-field)
+- Level 8: History Lesson (level-8-history-inspection)
+- Level 9: Left Behind (level-9-orphaned-resources)
+- Level 10: Gone But Not Forgotten (level-10-uninstall-keep-history)
+- Level 11: Dry Run vs Template (level-11-dry-run-vs-template)
+- Level 12: Stuck Pending (level-12-pending-install)
+- Level 13: CRD First (level-13-crd-ordering)
+- Level 14: Test Your Release (level-14-helm-test)
+- Level 15: Post-Install Instructions (level-15-notes-template)

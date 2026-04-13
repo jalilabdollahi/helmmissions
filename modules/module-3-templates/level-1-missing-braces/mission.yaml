@@ -1,0 +1,11 @@
+name: Unclosed Action
+description: helm template fails with "unclosed action".
+objective: Add missing `}` → `{{ .Values.app.name }}`
+xp: 200
+difficulty: intermediate
+expected_time: 10m
+concepts:
+- Go template syntax
+- action delimiters
+module: module-3-templates
+level: level-1-missing-braces

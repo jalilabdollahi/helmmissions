@@ -1,0 +1,13 @@
+name: Order Matters
+description: Two pre-install hooks run in wrong order (schema migration before DB
+  creation).
+objective: 'Set weights: DB creation hook weight -1, migration weight 0'
+xp: 300
+difficulty: advanced
+expected_time: 20m
+concepts:
+- hook weight
+- execution ordering
+- negative weights
+module: module-7-hooks
+level: level-4-hook-weight

@@ -1,0 +1,1 @@
+Concrete direction: Correct the include name to match library's define. When you think you have it, verify the result the same way the mission describes: App chart renders with library-provided labels

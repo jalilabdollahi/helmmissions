@@ -1,0 +1,1 @@
+Concrete direction: Change to `feature.enabled: false` (boolean). When you think you have it, verify the result the same way the mission describes: Feature is disabled, related resources not created

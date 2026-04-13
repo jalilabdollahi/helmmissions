@@ -1,0 +1,6 @@
+apiVersion: v2
+name: values-schema
+description: Broken chart for Schema Says No
+type: application
+version: 0.1.0
+appVersion: 1.0.0

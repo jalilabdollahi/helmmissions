@@ -1,0 +1,12 @@
+name: One or Many?
+description: Template expects a list for `ingress.hosts` but values has a single string.
+objective: Change to `ingress.hosts:\n  - "example.com"` (YAML list)
+xp: 200
+difficulty: intermediate
+expected_time: 12m
+concepts:
+- YAML arrays
+- range
+- list vs scalar
+module: module-2-values
+level: level-5-array-vs-string

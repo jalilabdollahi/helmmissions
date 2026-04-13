@@ -1,0 +1,6 @@
+apiVersion: v2
+name: replica-type-error
+description: Broken chart for Not a Number
+type: application
+version: 0.1.0
+appVersion: 1.0.0

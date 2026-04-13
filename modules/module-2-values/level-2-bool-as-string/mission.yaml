@@ -1,0 +1,13 @@
+name: True or 'True'?
+description: Feature flag in values is `"true"` (string) but template uses `if .Values.feature.enabled`
+  — always evaluates to truthy.
+objective: 'Change to `feature.enabled: false` (boolean)'
+xp: 150
+difficulty: beginner
+expected_time: 8m
+concepts:
+- YAML booleans
+- truthy strings
+- if evaluation
+module: module-2-values
+level: level-2-bool-as-string

@@ -1,0 +1,12 @@
+name: GitOps Helm
+description: ArgoCD Application using Helm — custom values not applying.
+objective: Correct path to values file relative to chart root in git
+xp: 400
+difficulty: expert
+expected_time: 30m
+concepts:
+- ArgoCD Helm support
+- valueFiles
+- helm.parameters
+module: module-9-advanced
+level: level-9-argocd-helm

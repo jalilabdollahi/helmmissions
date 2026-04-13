@@ -1,0 +1,11 @@
+name: Time Machine
+description: Multiple upgrades; player must roll back 3 versions to find working state.
+objective: '`helm rollback <release> 1`'
+xp: 250
+difficulty: intermediate
+expected_time: 15m
+concepts:
+- helm history
+- specific revision rollback
+module: module-5-rollbacks
+level: level-3-specific-revision

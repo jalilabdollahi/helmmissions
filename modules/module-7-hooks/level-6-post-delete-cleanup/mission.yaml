@@ -1,0 +1,13 @@
+name: Leave No Trace
+description: Uninstalling the chart leaves orphaned PVCs — post-delete hook should
+  clean them.
+objective: Add post-delete hook Job that deletes PVCs
+xp: 300
+difficulty: advanced
+expected_time: 20m
+concepts:
+- post-delete hook
+- cleanup hooks
+- PVC management
+module: module-7-hooks
+level: level-6-post-delete-cleanup

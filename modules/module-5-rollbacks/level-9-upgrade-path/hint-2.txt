@@ -1,0 +1,1 @@
+The fix revolves around bisecting helm history, get values per revision. Compare the current state with the objective: Find the revision using `helm get values --revision N`, rollback If the level is stateful, inspect the existing release history before reinstalling anything.

@@ -1,0 +1,1 @@
+The fix revolves around nested subchart values, value inheritance limitations. Compare the current state with the objective: Understand Helm value scoping; use global or restructure If the level is stateful, inspect the existing release history before reinstalling anything.

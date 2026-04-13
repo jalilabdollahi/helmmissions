@@ -1,0 +1,11 @@
+name: Persistent Volume Problem
+description: Rollback succeeds but StatefulSet PVC binding prevents pod from starting.
+objective: Understand PVC immutability; restore data manually if needed
+xp: 350
+difficulty: advanced
+expected_time: 25m
+concepts:
+- PVC immutability
+- StatefulSet rollback limitations
+module: module-5-rollbacks
+level: level-12-pvc-rollback

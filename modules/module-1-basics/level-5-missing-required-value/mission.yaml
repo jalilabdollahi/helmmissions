@@ -1,0 +1,12 @@
+name: Required But Missing
+description: 'helm install fails with "required value missing: .Values.app.name".'
+objective: 'Add `app:\n  name: my-app` to values.yaml'
+xp: 150
+difficulty: beginner
+expected_time: 8m
+concepts:
+- required function
+- values structure
+- template errors
+module: module-1-basics
+level: level-5-missing-required-value

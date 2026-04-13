@@ -1,0 +1,1 @@
+The fix revolves around --wait flag, readiness probes, liveness probes. Compare the current state with the objective: Fix readiness probe port in values.yaml If the level is stateful, inspect the existing release history before reinstalling anything.

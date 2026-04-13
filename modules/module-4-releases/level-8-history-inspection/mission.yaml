@@ -1,0 +1,12 @@
+name: History Lesson
+description: App is broken — player must find which revision introduced the bug.
+objective: Use `helm history`, `helm get values --revision N`, identify bad revision
+xp: 200
+difficulty: intermediate
+expected_time: 10m
+concepts:
+- helm history
+- helm get --revision
+- audit trail
+module: module-4-releases
+level: level-8-history-inspection

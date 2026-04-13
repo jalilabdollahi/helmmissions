@@ -1,0 +1,12 @@
+name: Wrong Environment
+description: App deployed with production database URL in dev environment.
+objective: Create `values-dev.yaml` overriding database.url, apply with `-f values-dev.yaml`
+xp: 200
+difficulty: intermediate
+expected_time: 12m
+concepts:
+- environment-specific values files
+- values layering
+- -f precedence
+module: module-2-values
+level: level-10-env-specific-values
