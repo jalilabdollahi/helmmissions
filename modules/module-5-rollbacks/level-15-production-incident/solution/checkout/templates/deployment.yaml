@@ -1,0 +1,44 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Release.Name }}
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: checkout
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: checkout
+    spec:
+      terminationGracePeriodSeconds: 2
+      containers:
+        - name: checkout
+          image: busybox:1.36
+          imagePullPolicy: IfNotPresent
+          command: ["sh", "-c"]
+          args:
+            - |
+              mkdir -p /www
+              echo ok > /www/health
+              if [ "$PAYMENT_PROVIDER" != "stripe-v2" ]; then r="FAILING - payment provider $PAYMENT_PROVIDER has been retired"
+              elif [ "$PAYMENT_TIMEOUT_MS" -lt 1000 ]; then r="FAILING - payment timeout ${PAYMENT_TIMEOUT_MS}ms is too short"
+              elif [ -n "$FORCE_FALLBACK" ]; then r="DEGRADED - fallback queue mode is forced"
+              else r="checkout: ok"; fi
+              echo "$r" > /www/checkout.txt
+              exec httpd -f -p 8080 -h /www
+          env:
+            - name: PAYMENT_PROVIDER
+              value: {{ .Values.payment.provider | quote }}
+            - name: PAYMENT_TIMEOUT_MS
+              value: {{ .Values.payment.timeoutMs | quote }}
+          ports:
+            - name: http
+              containerPort: 8080
+          readinessProbe:
+            tcpSocket:
+              port: http
+          resources:
+            requests: {cpu: 10m, memory: 16Mi}
+            limits: {memory: 64Mi}

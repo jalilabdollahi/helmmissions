@@ -1,0 +1,2 @@
+# Production overrides for geo-lookup (used by ci/deploy.sh)
+replicaCount: 1

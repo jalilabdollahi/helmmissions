@@ -1,0 +1,3 @@
+Kubernetes restarts pods only when the pod template changes. Changing a ConfigMap that is consumed through
+`envFrom` does not change the template, so neither Helm nor the Deployment controller restarts anything.
+The chart needs a way to make the template depend on the ConfigMap's content.

@@ -1,0 +1,3 @@
+There are three separate problems: revision 2 (the "previous" revision) has the retired payment gateway, revision 3
+(current) has a timeout of 300 ms from values-prod.yaml, and someone left a manual `FORCE_FALLBACK` setting in the
+live Deployment that is in no revision - a rollback will not remove it. Only revision 1 is clean.

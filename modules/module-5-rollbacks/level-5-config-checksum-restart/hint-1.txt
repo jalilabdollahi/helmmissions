@@ -1,0 +1,4 @@
+The ConfigMap and the pods disagree. Look at both:
+  kubectl get configmap edge-throttle-config -n helmissions -o jsonpath='{.data}'
+  kubectl exec -n helmissions deploy/edge-throttle -- env | grep RATE
+A pod only reads envFrom values when its container starts.

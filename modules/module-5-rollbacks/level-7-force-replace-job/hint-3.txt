@@ -1,0 +1,3 @@
+Either delete the old Job and upgrade (Helm creates the missing Job from the new manifest):
+  kubectl delete job catalog-seed -n helmissions && helm upgrade catalog ./catalog-seed -n helmissions --wait
+or make the Job name depend on the seed version in templates/seed-job.yaml so each version is a new Job.

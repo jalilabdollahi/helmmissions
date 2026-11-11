@@ -1,0 +1,3 @@
+The release records are ConfigMaps named `sh.helm.release.v1.audit-gateway.vN`, not Secrets. Helm only
+looks in the storage backend selected by the `HELM_DRIVER` environment variable (default: secrets), which is
+why your `helm list` is empty.

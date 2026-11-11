@@ -1,0 +1,4 @@
+Add a pod-template annotation computed from the rendered ConfigMap, then upgrade:
+  annotations:
+    checksum/config: {{ include (print $.Template.BasePath "/configmap.yaml") . | sha256sum }}
+helm upgrade edge-throttle ./edge-throttle -n helmissions --wait

@@ -1,0 +1,4 @@
+Helm history does not say which revision was healthy, but it does store every revision's inputs:
+  helm get values freight-quote -n helmissions --revision 3
+  helm get manifest freight-quote -n helmissions --revision 3
+Compare them, or roll back and test each candidate with a request to /quote.

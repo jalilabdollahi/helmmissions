@@ -1,0 +1,2 @@
+# Production overrides for thumbnail-svc (used by ci/deploy.sh)
+buildId: b-218

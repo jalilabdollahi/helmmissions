@@ -1,0 +1,3 @@
+Update the CRD yourself, then re-run the release upgrade:
+  kubectl apply -f snapshot-scheduler/crds/
+  helm upgrade snapshots ./snapshot-scheduler -n helmissions --wait

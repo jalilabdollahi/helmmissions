@@ -1,0 +1,19 @@
+name: The Hotfix That Vanished
+description: |
+  Yesterday `order-sync` ran out of database connections and the on-call engineer fixed it live with
+  `kubectl set env deployment/order-sync DB_POOL_SIZE=40`. This morning the pipeline shipped an unrelated
+  log-level change (`ci/deploy.sh`) and the same outage is back: the service page says
+  `status=degraded - connection pool exhausted`. Nobody touched the pool size in Git.
+  The chart and the pipeline's values live in your workspace.
+objective: |
+  Release `order-sync` in namespace `helmissions` is deployed from the workspace chart with
+  `DB_POOL_SIZE=40` in the live pods, the service reports `status=ok`, and the setting comes from the
+  chart/values files the pipeline deploys with - so the next run of `ci/deploy.sh` keeps it.
+xp: 250
+difficulty: intermediate
+expected_time: 15m
+concepts:
+  - configuration drift
+  - kubectl vs helm ownership
+  - values files
+  - helm upgrade

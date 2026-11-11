@@ -1,0 +1,19 @@
+name: Somebody Deleted The Service
+description: |
+  Order notifications stopped at 09:40. The `order-service` logs are full of
+  `dial tcp: lookup sms-gateway.helmissions.svc: no such host`. The `sms-gateway` pods are Running and
+  Ready, `helm list -n helmissions` still shows the release as `deployed` - but
+  `kubectl get svc -n helmissions` is empty. Someone ran a "cleanup" with `kubectl delete` this morning.
+  The chart is in your workspace under `sms-gateway/`.
+objective: |
+  Service `sms-gateway` exists again in namespace `helmissions`, is owned by the Helm release
+  `sms-gateway` (Helm ownership metadata present), has ready endpoints and answers HTTP requests.
+  Helm must have recorded the recovery as a new revision.
+xp: 250
+difficulty: intermediate
+expected_time: 10m
+concepts:
+  - resource ownership
+  - self-healing releases
+  - helm upgrade
+  - helm rollback

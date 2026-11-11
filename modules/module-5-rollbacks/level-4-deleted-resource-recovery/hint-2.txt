@@ -1,0 +1,2 @@
+Helm has no controller that reconciles in the background, but every upgrade (and rollback) applies the
+full manifest again - and creates objects that the release owns but that are missing from the cluster.

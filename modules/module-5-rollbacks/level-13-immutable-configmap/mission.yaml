@@ -1,0 +1,19 @@
+name: Immutable ConfigMap
+description: |
+  Security asked for the `feature-flags` ConfigMap to be `immutable: true` so nobody can edit flags by hand.
+  It worked, until chart 1.1.0 turned on `checkoutV2` in the defaults. Now every upgrade fails:
+    UPGRADE FAILED: ... ConfigMap "flags-flags" is invalid: data: Forbidden: field is immutable when `immutable` is set
+  The release is stuck on the old flags (`helm history` shows revision 2 `failed`). Immutability must
+  stay - the chart in your workspace under `feature-flags/` has to cope with it.
+objective: |
+  Release `flags` in namespace `helmissions` is `deployed` from chart 1.1.0, the service serves
+  `"checkoutV2":true` at `/flags.json`, the ConfigMap stays `immutable: true`, and the chart can accept a
+  further change of flag data (a fresh install followed by an upgrade that changes a flag succeeds).
+xp: 300
+difficulty: advanced
+expected_time: 15m
+concepts:
+  - immutable ConfigMaps
+  - content-hashed names
+  - rollout on config change
+  - helm upgrade

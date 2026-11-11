@@ -1,0 +1,4 @@
+Read the failed revision's description, then see what the Job looked like in the first revision:
+  helm history catalog -n helmissions
+  kubectl get job -n helmissions -o yaml | grep -A3 SEED_VERSION
+A Job's pod template cannot be edited after the Job exists.

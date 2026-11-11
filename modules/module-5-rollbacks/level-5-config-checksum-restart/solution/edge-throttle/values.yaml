@@ -1,0 +1,3 @@
+replicaCount: 2
+rateLimit: 100
+burst: 20

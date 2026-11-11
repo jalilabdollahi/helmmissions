@@ -1,0 +1,3 @@
+Compare the schema the cluster knows with the schema in your chart:
+  kubectl get crd snapshotpolicies.helmissions.io -o yaml | grep -A6 properties
+  grep -A4 retentionDays snapshot-scheduler/crds/snapshotpolicy.yaml

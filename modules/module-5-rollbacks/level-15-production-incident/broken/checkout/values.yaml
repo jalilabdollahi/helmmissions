@@ -1,0 +1,4 @@
+replicaCount: 2
+payment:
+  provider: stripe-v2
+  timeoutMs: 3000

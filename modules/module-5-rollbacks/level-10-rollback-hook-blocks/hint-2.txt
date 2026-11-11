@@ -1,0 +1,3 @@
+The `pre-rollback` hook runs before Helm touches the Deployment and it must succeed first. The hook calls a
+service that no longer exists, so it fails every time and the rollback never starts. Hooks of that phase are
+not part of an upgrade, and `helm rollback` can be told to skip them.

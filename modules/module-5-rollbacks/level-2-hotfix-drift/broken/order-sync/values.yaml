@@ -1,0 +1,4 @@
+replicaCount: 2
+logLevel: info
+db:
+  poolSize: 5

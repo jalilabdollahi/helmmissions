@@ -1,0 +1,4 @@
+Read the failed revision and compare the objects:
+  helm history flags -n helmissions
+  kubectl get configmap -n helmissions -o yaml | grep -B2 -A6 immutable
+  helm template flags ./feature-flags | grep -A8 'kind: ConfigMap'

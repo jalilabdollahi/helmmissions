@@ -1,0 +1,3 @@
+# Production overrides for order-sync (used by ci/deploy.sh)
+replicaCount: 2
+logLevel: warn

@@ -1,0 +1,3 @@
+`values-prod.yaml` contains the leftovers of the botched migration (provider, ttl, trace). Remove or correct
+them so chart defaults / good values apply, then deploy the way the pipeline does:
+  bash ci/deploy.sh

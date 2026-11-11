@@ -1,0 +1,2 @@
+Helm installs the files in a chart's `crds/` directory on `helm install` only. It never upgrades or deletes
+them afterwards, so the cluster still has the 1.0.0 schema and rejects the new field.

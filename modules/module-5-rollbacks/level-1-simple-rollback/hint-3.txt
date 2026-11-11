@@ -1,0 +1,2 @@
+You do not need the chart source. Ask Helm to go back to the last good revision:
+  helm rollback quotes-api <revision> -n helmissions --wait

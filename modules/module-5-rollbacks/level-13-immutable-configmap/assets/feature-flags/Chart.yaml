@@ -1,0 +1,5 @@
+apiVersion: v2
+name: feature-flags
+description: Static feature flag service for the storefront
+version: 1.0.0
+appVersion: "1.0.0"

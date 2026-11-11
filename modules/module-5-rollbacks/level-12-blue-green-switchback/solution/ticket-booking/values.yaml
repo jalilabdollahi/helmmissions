@@ -1,0 +1,9 @@
+activeColor: blue
+blue:
+  replicas: 2
+  tag: v1.10
+  release: "6.0"
+green:
+  replicas: 0
+  tag: v1.10
+  release: "6.1"

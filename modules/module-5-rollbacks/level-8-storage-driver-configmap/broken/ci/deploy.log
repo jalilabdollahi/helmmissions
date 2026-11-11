@@ -1,0 +1,9 @@
+$ source ci/pipeline.env
+$ helm upgrade audit-gateway ./audit-gateway -n helmissions --set 'extraArgs={--retention-days=30}'
+Release "audit-gateway" has been upgraded. Happy Helming!
+NAME: audit-gateway
+LAST DEPLOYED: Thu Nov 12 08:12:41 2026
+NAMESPACE: helmissions
+STATUS: deployed
+REVISION: 2
+Job succeeded

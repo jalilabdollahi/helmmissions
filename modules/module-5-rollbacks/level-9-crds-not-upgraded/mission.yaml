@@ -1,0 +1,20 @@
+name: The CRD That Never Updated
+description: |
+  Chart `snapshot-scheduler` 2.0.0 adds a `retentionDays` field to the `SnapshotPolicy` CRD (it lives in the
+  chart's `crds/` folder) and the `nightly` policy in `templates/` now sets `retentionDays: 30`.
+  The upgrade from 1.0.0 fails:
+    UPGRADE FAILED: server-side apply failed for object helmissions/nightly helmissions.io/v1, Kind=SnapshotPolicy:
+    ... .spec.retentionDays: field not declared in schema
+  The CRD in your workspace clearly declares the field. The chart is under `snapshot-scheduler/`.
+objective: |
+  Release `snapshots` in namespace `helmissions` is `deployed` from chart snapshot-scheduler 2.0.0, the
+  cluster's `snapshotpolicies.helmissions.io` CRD declares `retentionDays`, and the live `nightly`
+  SnapshotPolicy has `retentionDays: 30`.
+xp: 350
+difficulty: advanced
+expected_time: 20m
+concepts:
+  - crds/ directory
+  - CRD lifecycle
+  - helm upgrade limitations
+  - kubectl apply

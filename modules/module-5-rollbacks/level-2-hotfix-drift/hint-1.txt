@@ -1,0 +1,4 @@
+Compare what Helm thinks is deployed with what is running:
+  helm get manifest order-sync -n helmissions | grep -A1 DB_POOL_SIZE
+  helm get values order-sync -n helmissions --all
+Then look at where the pipeline's values come from (ci/deploy.sh, values-prod.yaml).

@@ -1,0 +1,5 @@
+apiVersion: v2
+name: freight-quote
+description: Shipping rate quotes for the carrier marketplace
+version: 3.0.0
+appVersion: "3.0"

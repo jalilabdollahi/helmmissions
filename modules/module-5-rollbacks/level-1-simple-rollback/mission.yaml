@@ -1,0 +1,17 @@
+name: Roll It Back
+description: |
+  The marketing site's quote widget is blank. `quotes-api` was upgraded an hour ago and nobody has
+  looked at it since: `helm list -n helmissions` says `deployed`, yet `kubectl get pods -n helmissions`
+  shows the pod stuck in `ErrImagePull` / `ImagePullBackOff` and the Service has no endpoints.
+  The chart source lives in another team's repository - you only have cluster access.
+objective: |
+  Release `quotes-api` in namespace `helmissions` serves traffic again with a Ready pod running the image
+  that was in production before the bad upgrade, and the release history shows the recovery as a
+  rollback record (not a brand-new upgrade).
+xp: 200
+difficulty: intermediate
+expected_time: 5m
+concepts:
+  - helm history
+  - helm rollback
+  - revisions

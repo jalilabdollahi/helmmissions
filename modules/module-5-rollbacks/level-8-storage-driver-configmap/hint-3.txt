@@ -1,0 +1,4 @@
+Use the same driver as the pipeline for every command, including the rollback:
+  export HELM_DRIVER=configmap
+  helm history audit-gateway -n helmissions
+  helm rollback audit-gateway 1 -n helmissions --wait

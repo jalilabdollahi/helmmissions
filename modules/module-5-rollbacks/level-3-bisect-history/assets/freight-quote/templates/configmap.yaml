@@ -1,0 +1,21 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ .Release.Name }}-nginx
+data:
+  default.conf: |
+    server {
+      listen 80;
+      gzip {{ .Values.gzip }};
+      location /health {
+        default_type text/plain;
+        return 200 "ok\n";
+      }
+      location /ready {
+        return 404;
+      }
+      location /quote {
+        default_type application/json;
+        return 200 '{"rate":{{ .Values.rate }},"insurance":{{ .Values.insurance }},"currency":"{{ .Values.currency }}"}\n';
+      }
+    }

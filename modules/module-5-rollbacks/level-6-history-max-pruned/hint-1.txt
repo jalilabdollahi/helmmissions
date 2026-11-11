@@ -1,0 +1,4 @@
+See what Helm still remembers:
+  helm history geo-lookup -n helmissions
+  helm get values geo-lookup -n helmissions --revision 2
+The revision you want is not in the list - `--history-max 3` deleted it when revision 4 was created.

@@ -1,0 +1,2 @@
+The chart sets `spec.replicas` from `replicaCount` on every render, even though the HPA owns that number.
+Every upgrade tells Kubernetes "the replica count is 2" and the autoscaler's value is overwritten.

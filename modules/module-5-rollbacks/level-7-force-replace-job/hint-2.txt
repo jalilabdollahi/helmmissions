@@ -1,0 +1,3 @@
+Helm tries to patch the existing, finished Job with a different pod template and Kubernetes refuses.
+`--force-replace` will not rescue you here (try it and read the error): the Job object itself has to go
+away, or the chart must stop reusing the same Job name for different templates.
