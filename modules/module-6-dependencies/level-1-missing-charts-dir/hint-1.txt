@@ -1,0 +1,4 @@
+Read the error again: Helm says what Chart.yaml declares and what it found on disk.
+Look inside the chart directory:
+  ls storefront/
+  helm dependency list ./storefront

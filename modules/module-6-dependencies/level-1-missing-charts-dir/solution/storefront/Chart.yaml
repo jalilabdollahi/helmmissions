@@ -1,0 +1,10 @@
+apiVersion: v2
+name: storefront
+description: Web storefront that keeps customer sessions in a cache subchart
+type: application
+version: 0.2.0
+appVersion: "3.1.0"
+dependencies:
+  - name: session-cache
+    version: 0.3.0
+    repository: file://../session-cache

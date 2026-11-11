@@ -1,0 +1,21 @@
+name: OCI Reference Format
+description: |
+  The platform team now publishes `seat-cache` as an OCI artifact in the internal registry, and the booking chart was
+  switched to it. The registry only speaks plain HTTP, so you fetch with `--plain-http`, and still:
+    Error: could not download oci://localhost:5001/m6-oci-dependency-url/charts/seat-cache/seat-cache: failed to
+    perform "FetchReference" on source: localhost:5001/m6-oci-dependency-url/charts/seat-cache/seat-cache:2.0.1:
+    not found
+  The artifact definitely exists (see `README.txt` in your workspace). The `booking` chart is in your workspace.
+objective: |
+  `helm dependency update ./booking --plain-http` succeeds, `Chart.lock` records the dependency under the
+  registry path that really holds it, and the tarball is in `charts/`. Release `booking` is `deployed` in namespace
+  `helmissions` (chart 2.3.0) with Ready pods for `booking-api` and `booking-seat-cache`, the cache using the
+  `holdSeconds` of 120 from `values.yaml`.
+xp: 300
+difficulty: advanced
+expected_time: 15m
+concepts:
+  - OCI dependencies
+  - oci:// repository format
+  - --plain-http
+  - helm pull / helm show chart

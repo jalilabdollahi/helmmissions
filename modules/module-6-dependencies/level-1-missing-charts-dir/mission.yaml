@@ -1,0 +1,22 @@
+name: Storefront Without Its Cache
+description: |
+  The platform team split the session cache out of the `storefront` chart into its own `session-cache` chart
+  and the storefront now depends on it from disk. Nobody has been able to release since:
+    Error: INSTALLATION FAILED: an error occurred while checking for chart dependencies. You may need to run
+    'helm dependency build' to fetch missing dependencies: found in Chart.yaml, but missing in charts/
+    directory: session-cache
+  The charts live in your workspace: `storefront/` (the release) and `session-cache/` (the dependency).
+objective: |
+  Release `storefront` is `deployed` in namespace `helmissions` from the chart in your workspace
+  (chart version 0.2.0) and the release itself contains the session cache: Deployments `storefront` and
+  `storefront-session-cache` both have a Ready pod. `storefront/Chart.yaml` must still declare the
+  `session-cache` dependency.
+xp: 200
+difficulty: intermediate
+expected_time: 10m
+concepts:
+  - chart dependencies
+  - charts/ directory
+  - file:// repositories
+  - helm dependency build
+  - helm dependency update

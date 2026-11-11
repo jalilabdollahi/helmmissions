@@ -1,0 +1,6 @@
+apiVersion: v2
+name: log-shipper
+description: Ships container logs to the log platform
+type: application
+version: 0.3.0
+appVersion: "0.3"

@@ -1,0 +1,9 @@
+replicaCount: 1
+
+image:
+  repository: nginx
+  tag: 1.27-alpine
+
+# Search is expensive and not needed in this environment: keep it switched off.
+search:
+  enabled: false

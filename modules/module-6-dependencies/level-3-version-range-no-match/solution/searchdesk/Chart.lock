@@ -1,0 +1,6 @@
+dependencies:
+- name: redis-lite
+  repository: http://localhost:8879/m6-version-range-no-match
+  version: 1.2.4
+digest: sha256:5b5416d316fbe8840b7f28bc3cfa95bdec0b65d947f454c1da23da2440849d43
+generated: "2026-11-12T00:22:12.683742+01:00"

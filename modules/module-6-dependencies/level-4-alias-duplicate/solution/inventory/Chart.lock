@@ -1,0 +1,9 @@
+dependencies:
+- name: kvstore
+  repository: file://../kvstore
+  version: 0.2.0
+- name: kvstore
+  repository: file://../kvstore
+  version: 0.2.0
+digest: sha256:83eab38ca4fa3eaf84d91044dc2c4070c058e45539fba9f36e0ca01967cd0cdd
+generated: "2026-11-12T00:22:42.220392+01:00"

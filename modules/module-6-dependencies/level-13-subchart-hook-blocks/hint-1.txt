@@ -1,0 +1,3 @@
+Find out why the hook Job failed:
+  kubectl get job,pod -n helmissions
+  kubectl logs job/checkout-schema-migrator-migrate -n helmissions

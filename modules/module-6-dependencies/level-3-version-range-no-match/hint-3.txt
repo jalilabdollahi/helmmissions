@@ -1,0 +1,3 @@
+Edit the `version:` of the redis-lite dependency in searchdesk/Chart.yaml to a range or version the repository
+serves (for example `~1.2.0`), run `helm dependency update ./searchdesk`, check Chart.lock, then install the
+chart as `searchdesk` in namespace helmissions.

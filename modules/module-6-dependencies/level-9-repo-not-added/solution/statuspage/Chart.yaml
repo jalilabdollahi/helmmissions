@@ -1,0 +1,10 @@
+apiVersion: v2
+name: statuspage
+description: Public status page fed by an uptime-probe sidecar service
+type: application
+version: 1.1.0
+appVersion: "1.1.0"
+dependencies:
+  - name: uptime-probe
+    version: "~1.4.0"
+    repository: "@hm-stable"

@@ -1,0 +1,3 @@
+The gateway and both subcharts read `.Values.global.region`. A top-level `region:` in the parent is only visible to
+the parent as `.Values.region`, and subcharts never see the parent's top level. Only the `global:` map is handed down
+to every subchart, unchanged. `environment` works because it lives under `global:`.

@@ -1,0 +1,10 @@
+apiVersion: v2
+name: newsroom
+description: Newsroom web front end with an image-resizer service for article photos
+type: application
+version: 2.1.0
+appVersion: "2.1.0"
+dependencies:
+  - name: image-resizer
+    version: 1.0.0
+    repository: file://../image-resizer

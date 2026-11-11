@@ -1,0 +1,4 @@
+Find out which versions of redis-lite the repository actually serves:
+  helm repo add hm-platform http://localhost:8879/m6-version-range-no-match
+  helm search repo hm-platform/redis-lite --versions
+Then compare them with the constraint in searchdesk/Chart.yaml.

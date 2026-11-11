@@ -1,0 +1,3 @@
+Look at how Chart.yaml lists its dependencies and what the validation error calls them:
+  helm dependency list ./inventory
+Each dependency needs a unique identity inside the parent chart.

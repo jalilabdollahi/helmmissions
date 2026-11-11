@@ -1,0 +1,3 @@
+Ask Helm which repositories this machine knows about and compare with what Chart.yaml refers to:
+  helm repo list
+  grep -n repository statuspage/Chart.yaml

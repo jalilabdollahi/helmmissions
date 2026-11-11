@@ -1,0 +1,3 @@
+Add an `alias:` to each kvstore entry in inventory/Chart.yaml, using the keys that already exist in values.yaml
+(`primary` and `replica`). Then run `helm dependency update ./inventory` and install as `inventory`.
+Verify with: kubectl get deploy -n helmissions

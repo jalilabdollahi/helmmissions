@@ -1,0 +1,13 @@
+apiVersion: v2
+name: invoicing
+description: Invoice generation API that must follow the port of its pg-lite database subchart
+type: application
+version: 1.8.0
+appVersion: "1.8.0"
+dependencies:
+  - name: pg-lite
+    version: 0.9.0
+    repository: file://../pg-lite
+    import-values:
+      - child: service
+        parent: db

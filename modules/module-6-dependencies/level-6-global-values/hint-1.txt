@@ -1,0 +1,4 @@
+Check what the templates read and what the release really received:
+  helm get values telemetry -n helmissions --all
+  grep -rn "Values.global" telemetry/templates collector/templates exporter/templates
+Look at where `region` sits compared with `environment`, which works.

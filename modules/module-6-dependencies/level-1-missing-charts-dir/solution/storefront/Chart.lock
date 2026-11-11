@@ -1,0 +1,6 @@
+dependencies:
+- name: session-cache
+  repository: file://../session-cache
+  version: 0.3.0
+digest: sha256:ebadcbc3f8209c726ee69523fa6c18ef2be050f2093de54961e5900ea17b227f
+generated: "2026-11-12T00:18:20.174302+01:00"

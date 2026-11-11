@@ -1,0 +1,6 @@
+apiVersion: v2
+name: ledger-db
+description: Single-node ledger database (tiny stand-in)
+type: application
+version: 0.4.0
+appVersion: "16.4"

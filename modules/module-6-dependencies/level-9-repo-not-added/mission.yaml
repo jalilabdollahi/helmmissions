@@ -1,0 +1,20 @@
+name: No Repository Definition
+description: |
+  The status page chart pulls `uptime-probe` from the platform team's "stable" repository using the short form
+  `repository: "@hm-stable"` in `Chart.yaml`. On this machine, fetching the dependency stops immediately:
+    Error: no repository definition for @hm-stable. Please add them via 'helm repo add'
+  The platform repository is a normal classic chart repository (its address is in `README.txt` in your workspace).
+  The `statuspage` chart is in the workspace; nothing is deployed yet.
+objective: |
+  `helm dependency update ./statuspage` succeeds: `Chart.lock` pins `uptime-probe` from the 1.4 line, the tarball is
+  in `charts/`, and wherever `Chart.yaml` points (an `@alias` or the URL) resolves to the platform team's repository.
+  If it uses an `@alias`, a repository with exactly that name must exist on this machine. Release `statuspage` is
+  `deployed` in namespace `helmissions` (chart 1.1.0) with Ready pods for `statuspage` and `statuspage-uptime-probe`.
+xp: 250
+difficulty: intermediate
+expected_time: 10m
+concepts:
+  - helm repo add
+  - "@alias repositories"
+  - repositories.yaml
+  - helm dependency update

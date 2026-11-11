@@ -1,0 +1,3 @@
+`helm dependency list` shows the dependency with status "missing". A chart's dependencies are not read from
+their source location at install time; they must be present inside the parent chart's own `charts/` directory.
+Something has to put them there.

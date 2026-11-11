@@ -1,0 +1,6 @@
+dependencies:
+- name: pg-lite
+  repository: file://../pg-lite
+  version: 0.9.0
+digest: sha256:0588205fed26426c1f2015fc97197eaabbdcf78d42fec5a709d3befc19654ef3
+generated: "2026-11-12T00:34:37.666656+01:00"

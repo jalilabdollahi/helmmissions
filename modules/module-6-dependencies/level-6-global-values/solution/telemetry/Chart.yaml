@@ -1,0 +1,13 @@
+apiVersion: v2
+name: telemetry
+description: Telemetry stack - gateway plus collector and exporter subcharts, all tagged with the deployment region
+type: application
+version: 0.7.0
+appVersion: "0.7.0"
+dependencies:
+  - name: collector
+    version: 0.5.0
+    repository: file://../collector
+  - name: exporter
+    version: 0.5.0
+    repository: file://../exporter

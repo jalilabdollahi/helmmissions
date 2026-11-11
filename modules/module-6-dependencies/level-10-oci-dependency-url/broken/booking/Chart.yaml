@@ -1,0 +1,10 @@
+apiVersion: v2
+name: booking
+description: Seat booking API that holds seats in the seat-cache chart published to the internal OCI registry
+type: application
+version: 2.3.0
+appVersion: "2.3.0"
+dependencies:
+  - name: seat-cache
+    version: 2.0.1
+    repository: oci://localhost:5001/m6-oci-dependency-url/charts/seat-cache

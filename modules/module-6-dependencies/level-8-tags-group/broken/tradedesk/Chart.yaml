@@ -1,0 +1,22 @@
+apiVersion: v2
+name: tradedesk
+description: Order-routing API with an optional monitoring stack (metrics, logs, traces)
+type: application
+version: 5.0.0
+appVersion: "5.0.0"
+dependencies:
+  - name: metrics-agent
+    version: 0.3.0
+    repository: file://../metrics-agent
+    tags:
+      - monitoring
+  - name: log-shipper
+    version: 0.3.0
+    repository: file://../log-shipper
+    tags:
+      - monitorng
+  - name: trace-collector
+    version: 0.3.0
+    repository: file://../trace-collector
+    tags:
+      - monitoring

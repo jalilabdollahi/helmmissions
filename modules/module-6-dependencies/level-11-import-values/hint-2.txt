@@ -1,0 +1,3 @@
+`import-values` with child/parent pairs copies a *table* (a map of keys) out of the subchart's values into the
+parent's values. The path `service.port` points at a single number, not a table, so Helm warns and imports nothing.
+Whatever the parent imports ends up under the parent path you choose, and the parent template reads it from there.

@@ -1,0 +1,19 @@
+name: Toggle A Group
+description: |
+  The trading desk's developer sandbox must not run the monitoring stack (`metrics-agent`, `log-shipper`,
+  `trace-collector`), so `tags: {monitoring: false}` is set in `tradedesk/values.yaml`. After the last upgrade two of
+  the three monitoring Deployments are gone, but `tradedesk-log-shipper` keeps running and shipping logs.
+  The charts are in your workspace; release `tradedesk` is live. Helm printed no warning.
+objective: |
+  Release `tradedesk` in namespace `helmissions` has been upgraded so that none of the monitoring Deployments
+  (`tradedesk-metrics-agent`, `tradedesk-log-shipper`, `tradedesk-trace-collector`) is part of the release or
+  running, while `tradedesk-api` stays Ready. The chart must still declare all three components, and the group
+  must toggle as one: rendering with `--set tags.monitoring=true` has to produce all three Deployments.
+xp: 300
+difficulty: advanced
+expected_time: 15m
+concepts:
+  - dependency tags
+  - grouping subcharts
+  - tags vs condition
+  - helm template --set tags.*

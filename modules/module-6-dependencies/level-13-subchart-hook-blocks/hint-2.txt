@@ -1,0 +1,3 @@
+The migrator refuses to run without a database host. The parent chart already knows the host (it passes it to the API
+from `database.host`), but the subchart has its own `database.host` setting, which defaults to empty. Values reach a
+subchart only when they sit under the subchart's own name in the parent's values.

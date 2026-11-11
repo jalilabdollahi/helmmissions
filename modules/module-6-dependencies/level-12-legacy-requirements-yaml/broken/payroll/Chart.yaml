@@ -1,0 +1,13 @@
+apiVersion: v2
+name: payroll
+description: Payroll run API with tax tables and a pay calendar
+type: application
+version: 4.0.0
+appVersion: "4.0.0"
+dependencies:
+  - name: tax-tables
+    version: 2.1.0
+    repository: file://../tax-tables
+  - name: pay-calendar
+    version: 1.0.0
+    repository: file://../pay-calendar

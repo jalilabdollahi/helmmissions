@@ -1,0 +1,3 @@
+In booking/Chart.yaml remove the trailing `/seat-cache` from the repository
+(oci://localhost:5001/m6-oci-dependency-url/charts), rerun `helm dependency update ./booking --plain-http`
+so Chart.lock is regenerated, then install `booking` in namespace helmissions.

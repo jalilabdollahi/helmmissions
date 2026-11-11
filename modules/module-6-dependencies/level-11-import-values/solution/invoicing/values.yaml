@@ -1,0 +1,8 @@
+replicaCount: 1
+
+image:
+  repository: traefik/whoami
+  tag: v1.10
+
+# Connection details of the database. Deliberately empty: they are imported from the pg-lite subchart (see Chart.yaml).
+db: {}

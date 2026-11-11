@@ -1,0 +1,3 @@
+Register the platform repository under exactly the name used in Chart.yaml (hm-stable) with the URL from README.txt,
+then run `helm dependency update ./statuspage` and install the chart as `statuspage` in namespace helmissions.
+(Writing the full URL into Chart.yaml instead of the alias also works.)

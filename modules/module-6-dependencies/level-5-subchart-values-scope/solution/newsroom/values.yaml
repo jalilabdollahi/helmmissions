@@ -1,0 +1,11 @@
+replicaCount: 1
+
+image:
+  repository: nginx
+  tag: 1.27-alpine
+
+# Photo desk request: the resizer must keep up with election night traffic.
+image-resizer:
+  replicaCount: 3
+  maxWidth: 800
+  quality: 70

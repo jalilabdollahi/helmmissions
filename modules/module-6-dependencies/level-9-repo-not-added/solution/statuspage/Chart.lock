@@ -1,0 +1,6 @@
+dependencies:
+- name: uptime-probe
+  repository: http://localhost:8879/m6-repo-not-added
+  version: 1.4.0
+digest: sha256:ceda73b4980398eb2ce8c59993da62267e7f03df173b991e4d58409a2c97df76
+generated: "2026-11-12T00:32:18.133244+01:00"

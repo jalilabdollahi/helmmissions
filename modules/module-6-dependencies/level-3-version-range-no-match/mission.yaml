@@ -1,0 +1,21 @@
+name: No Matching Version
+description: |
+  The search team wants to ship `searchdesk`, which caches results in `redis-lite` from the platform team's chart
+  repository. Fetching the dependency fails:
+    Error: can't get a valid version for 1 subchart(s): "redis-lite" (repository
+    "http://localhost:8879/m6-version-range-no-match", version "^2.0.0"). Make sure a matching chart version
+    exists in the repo, or change the version constraint in Chart.yaml
+  The repository is reachable; the index loads fine. The chart is in your workspace under `searchdesk/`.
+objective: |
+  `helm dependency update ./searchdesk` succeeds against the platform repository and `Chart.lock` records a
+  redis-lite version the repository really serves. Release `searchdesk` is `deployed` in namespace `helmissions`
+  from the workspace chart (1.0.0) and includes the cache: Deployments `searchdesk` and `searchdesk-redis-lite`
+  have Ready pods, the cache using the `MAX_KEYS` of 5000 requested in `values.yaml`.
+xp: 250
+difficulty: intermediate
+expected_time: 15m
+concepts:
+  - dependency version constraints
+  - SemVer ranges
+  - helm repo add / search repo
+  - Chart.lock

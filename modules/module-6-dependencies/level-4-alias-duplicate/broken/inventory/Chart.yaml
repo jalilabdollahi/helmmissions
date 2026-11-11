@@ -1,0 +1,13 @@
+apiVersion: v2
+name: inventory
+description: Warehouse stock API with a read-write primary and a read-only replica key-value store
+type: application
+version: 1.4.0
+appVersion: "4.0.1"
+dependencies:
+  - name: kvstore
+    version: 0.2.0
+    repository: file://../kvstore
+  - name: kvstore
+    version: 0.2.0
+    repository: file://../kvstore

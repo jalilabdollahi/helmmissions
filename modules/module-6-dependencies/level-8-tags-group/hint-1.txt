@@ -1,0 +1,4 @@
+Compare what each monitoring dependency declares:
+  helm show chart ./tradedesk
+  helm template t ./tradedesk | grep -E 'log-shipper|metrics-agent|trace-collector'
+Look at the `tags:` lists, not only at values.yaml.

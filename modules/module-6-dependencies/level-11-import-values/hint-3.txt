@@ -1,0 +1,3 @@
+Import the table that contains the port: `child: service`, `parent: db` in the dependency's import-values.
+The template already reads `.Values.db.port`, so `db.port` then holds pg-lite's port. The chart changed, so run
+`helm dependency update ./invoicing` (the lock digest covers import-values) and install `invoicing`.

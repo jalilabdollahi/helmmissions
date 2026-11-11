@@ -1,0 +1,4 @@
+Ask Helm what the chart renders with the values you gave it:
+  helm template helpdesk ./helpdesk | grep ticket-search
+  helm show chart ./helpdesk
+Compare the dependency declaration with values.yaml, character by character.

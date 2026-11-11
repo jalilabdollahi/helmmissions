@@ -1,0 +1,4 @@
+Render the chart and read ALL of the output, not only the final error:
+  helm template r ./invoicing
+There is a warning from Helm about the import itself. Compare it with `import-values` in invoicing/Chart.yaml
+and with the structure of pg-lite/values.yaml.

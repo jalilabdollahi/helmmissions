@@ -1,0 +1,9 @@
+dependencies:
+- name: collector
+  repository: file://../collector
+  version: 0.5.0
+- name: exporter
+  repository: file://../exporter
+  version: 0.5.0
+digest: sha256:89cf426eb5f368767eee53698c8d27e7edbbc2daca4dfa983ca4fea594a266b8
+generated: "2026-11-12T00:26:06.036858+01:00"

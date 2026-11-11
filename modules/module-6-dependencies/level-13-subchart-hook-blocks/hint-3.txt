@@ -1,0 +1,3 @@
+Add a `schema-migrator:` block with `database.host` to checkout/values.yaml (same host as the API), then run
+`helm upgrade checkout ./checkout -n helmissions --wait` (or uninstall and install again).
+Do not use --no-hooks: the migrations must actually run.
