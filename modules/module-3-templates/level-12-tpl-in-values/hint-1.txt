@@ -1,0 +1,4 @@
+Look at what the pod was actually given:
+  kubectl logs deploy/orders-api -n helmissions
+  kubectl get deploy orders-api -n helmissions -o jsonpath='{.spec.template.spec.containers[0].env}'
+Then see how the host gets into the template: helm template orders ./orders-api | grep -A1 DB_HOST

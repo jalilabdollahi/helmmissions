@@ -1,0 +1,9 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ .Release.Name }}-features
+  labels:
+    {{- include "payments.labels" . | nindent 4 }}
+data:
+  THREE_D_SECURE: {{ .Values.features.threeDSecure | quote }}
+  CAPTURE_MODE: {{ .Values.features.captureMode | quote }}

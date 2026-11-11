@@ -1,0 +1,2 @@
+The error is a parse error: Helm never reaches the cluster. Reproduce it locally and note the line number:
+  helm template dispatch ./dispatch

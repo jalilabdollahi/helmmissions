@@ -1,0 +1,16 @@
+schedule: "30 2 * * *"
+
+image:
+  repository: busybox
+  tag: "1.36"
+  pullPolicy: IfNotPresent
+
+source: ledger-primary
+target: ledger-replica
+
+resources:
+  requests:
+    cpu: 10m
+    memory: 8Mi
+  limits:
+    memory: 32Mi

@@ -1,0 +1,3 @@
+Put a `---` line between the Deployment and the Service in templates/app.yaml (or split them into two files),
+check with  helm template status ./status-page | grep '^kind:'  and roll it out:
+  helm upgrade status ./status-page -n helmissions

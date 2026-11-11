@@ -1,0 +1,20 @@
+name: Misaligned Labels
+description: |
+  The finance platform team's nightly `ledger-recon` chart was refactored to use a shared label helper.
+  Since the change the CronJob cannot be installed:
+    Error: INSTALLATION FAILED: YAML parse error on ledger-recon/templates/cronjob.yaml: error converting YAML to JSON:
+    yaml: line 5: mapping values are not allowed in this context
+  The ConfigMap in the same chart, which uses the same helper, renders fine. The chart is in your workspace under
+  `ledger-recon/`.
+objective: |
+  Release `reconcile` is deployed in namespace `helmissions` from the chart in your workspace. The CronJob
+  `reconcile` exists, is not suspended, and carries all three standard labels from the helper (name, instance,
+  component) in its metadata, exactly like the ConfigMap `reconcile-config`.
+xp: 200
+difficulty: intermediate
+expected_time: 10m
+concepts:
+  - indent vs nindent
+  - include
+  - YAML structure
+  - CronJob

@@ -1,0 +1,4 @@
+.helmignore contains the line `*.conf`, which excludes files/site.conf from the chart. Remove that line (or make
+it specific to your local experiments, e.g. `local-*.conf`), confirm with
+  helm template site ./legacy-site -s templates/configmap.yaml
+and roll it out:  helm upgrade site ./legacy-site -n helmissions

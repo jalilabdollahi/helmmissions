@@ -1,0 +1,3 @@
+The Deployment is rejected by the API server, not by Helm's parser. Look at what Helm actually sends:
+  helm template geoip ./geoip
+and compare where `limits:` and `requests:` sit relative to the `resources:` key.

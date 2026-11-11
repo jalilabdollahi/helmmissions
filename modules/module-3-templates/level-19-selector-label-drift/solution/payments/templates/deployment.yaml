@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Release.Name }}
+  labels:
+    {{- include "payments.labels" . | nindent 4 }}
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      {{- include "payments.selectorLabels" . | nindent 6 }}
+  template:
+    metadata:
+      labels:
+        {{- include "payments.labels" . | nindent 8 }}
+    spec:
+      terminationGracePeriodSeconds: 2
+      containers:
+        - name: api
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          envFrom:
+            - configMapRef:
+                name: {{ .Release.Name }}-features
+          ports:
+            - name: https
+              containerPort: 80
+          readinessProbe:
+            httpGet:
+              path: /health
+              port: https
+          resources:
+            {{- toYaml .Values.resources | nindent 12 }}

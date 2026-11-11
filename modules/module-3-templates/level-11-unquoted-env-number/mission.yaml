@@ -1,0 +1,20 @@
+name: Number In An Env Var
+description: |
+  The mail team made the relay's listen port configurable through `listenPort` in values.yaml and passed it to
+  the container as an environment variable. The release has not deployed since:
+    Error: INSTALLATION FAILED: server-side apply failed for object helmissions/relay apps/v1, Kind=Deployment:
+    ... .env[name="WHOAMI_PORT_NUMBER"].value: expected string, got &value.valueUnstructured{Value:2525}
+  (Helm 3 words it as: json: cannot unmarshal number into Go struct field EnvVar.value of type string.)
+  The chart is in your workspace under `smtp-relay/`.
+objective: |
+  Release `relay` is deployed in namespace `helmissions` from the chart in your workspace. The container gets the
+  environment variable `WHOAMI_PORT_NUMBER` with the value of `listenPort` (as a string), and changing `listenPort`
+  changes the variable. The pod is Ready and the `relay` Service has an endpoint.
+xp: 200
+difficulty: intermediate
+expected_time: 10m
+concepts:
+  - quote
+  - YAML types
+  - environment variables
+  - helm template

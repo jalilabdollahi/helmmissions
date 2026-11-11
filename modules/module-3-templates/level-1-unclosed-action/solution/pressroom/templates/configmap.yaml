@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ .Release.Name }}-site
+  labels:
+    {{- include "pressroom.labels" . | nindent 4 }}
+data:
+  index.html: |
+    <!doctype html>
+    <html>
+      <head><title>{{ .Values.site.name }}</title></head>
+      <body>
+        <h1>{{ .Values.site.name }}</h1>
+        <p>{{ .Values.site.tagline }}</p>
+      </body>
+    </html>

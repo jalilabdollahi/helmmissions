@@ -1,0 +1,3 @@
+A YAML file can hold several documents, but they must be separated by a line containing only `---`. In
+templates/app.yaml the Deployment and the Service run straight into each other, so the YAML parser sees ONE document
+with repeated top-level keys (apiVersion, kind, metadata, spec) - and the last one of each key wins.

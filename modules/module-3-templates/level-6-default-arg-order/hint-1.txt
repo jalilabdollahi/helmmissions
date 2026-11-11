@@ -1,0 +1,4 @@
+Compare what the pods run with what values.yaml pins:
+  kubectl get deploy echo -n helmissions -o jsonpath='{.spec.template.spec.containers[0].image}'
+  helm get values echo -n helmissions --all | grep -A3 image
+Then find where the image string is built:  grep -rn "AppVersion" echo-api/templates

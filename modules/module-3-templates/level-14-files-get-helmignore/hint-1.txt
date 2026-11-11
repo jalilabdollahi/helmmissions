@@ -1,0 +1,4 @@
+Compare what the chart contains with what Helm renders from it:
+  ls -la legacy-site legacy-site/files
+  helm template site ./legacy-site -s templates/configmap.yaml
+The file exists, yet `.Files.Get` hands back an empty string. Helm does not warn about that.

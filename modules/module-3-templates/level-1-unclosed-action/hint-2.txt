@@ -1,0 +1,2 @@
+Look at pressroom/templates/configmap.yaml, line 13. Every {{ that opens a template action must be
+closed by a matching }}. One of the actions on that line ends with a single brace.

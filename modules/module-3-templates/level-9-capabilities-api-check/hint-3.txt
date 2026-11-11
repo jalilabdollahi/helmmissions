@@ -1,0 +1,4 @@
+`Has` is an exact, case-sensitive match, and the kind is written with a capital: "networking.k8s.io/v1/Ingress".
+The helper uses "networking.k8s.io/v1/ingress". Fix the spelling, check it with
+  helm template portal ./docs-portal --dry-run=server | grep -B1 'kind: Ingress'
+and install:  helm install portal ./docs-portal -n helmissions

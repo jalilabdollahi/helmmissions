@@ -1,0 +1,35 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Release.Name }}-api
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      app: orders-api
+      release: {{ .Release.Name }}
+  template:
+    metadata:
+      labels:
+        app: orders-api
+        release: {{ .Release.Name }}
+    spec:
+      terminationGracePeriodSeconds: 2
+      containers:
+        - name: api
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          command: ["sh", "-c", "echo orders-api talking to $DB_HOST:$DB_PORT; sleep 86400"]
+          env:
+            - name: DB_HOST
+              value: {{ tpl .Values.database.host . | quote }}
+            - name: DB_PORT
+              value: {{ .Values.database.port | quote }}
+            - name: DB_NAME
+              value: {{ .Values.database.name | quote }}
+          readinessProbe:
+            exec:
+              command: ["sh", "-c", "nc -z -w 1 \"$DB_HOST\" \"$DB_PORT\""]
+            periodSeconds: 3
+          resources:
+            {{- toYaml .Values.resources | nindent 12 }}

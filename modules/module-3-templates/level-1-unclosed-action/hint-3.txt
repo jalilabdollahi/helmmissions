@@ -1,0 +1,3 @@
+Line 13 reads  <h1>{{ .Values.site.name }</h1>  -- the closing delimiter is missing one brace.
+Make it  {{ .Values.site.name }}  (keep it a value reference, do not type the name in),
+run helm lint, then: helm install pressroom ./pressroom -n helmissions

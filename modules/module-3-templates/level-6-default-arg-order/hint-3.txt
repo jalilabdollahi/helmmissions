@@ -1,0 +1,4 @@
+The arguments are swapped: the fallback (.Chart.AppVersion) must come first, the candidate (.Values.image.tag)
+second - or use a pipeline:  {{ .Values.image.tag | default .Chart.AppVersion }}
+Verify with helm template (try --set image.tag=foo and --set image.tag=), then:
+  helm upgrade echo ./echo-api -n helmissions

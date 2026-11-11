@@ -1,0 +1,4 @@
+Render the chart and read the error from the bottom up - it names the helper, the line inside it, and the field
+that was nil:
+  helm template mailer ./mailer
+Then open templates/_helpers.tpl and read the comment above the definitions.

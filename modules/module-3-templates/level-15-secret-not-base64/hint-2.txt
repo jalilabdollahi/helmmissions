@@ -1,0 +1,3 @@
+Secret `data` values must be base64-encoded strings (Kubernetes decodes them when the pod reads the Secret).
+The template prints the plain-text key straight into `data`, so the API server fails to decode it.
+Helm has a function for encoding, and Secrets also have a second field that accepts plain text.

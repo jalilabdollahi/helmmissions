@@ -1,0 +1,20 @@
+name: illegal base64 data
+description: |
+  The payments team added a Secret for the provider API key to the `payments-gw` chart and the release `gateway`
+  can no longer be installed:
+    Error: INSTALLATION FAILED: server-side apply failed for object helmissions/gateway-provider /v1, Kind=Secret:
+    ... unable to convert unstructured object to /v1, Kind=Secret: error decoding from json: illegal base64 data at input byte 2
+  The sandbox key in the chart values is plain text, exactly as the provider issued it. The chart is in your workspace
+  under `payments-gw/`.
+objective: |
+  Release `gateway` is deployed in namespace `helmissions` from the chart in your workspace. The Secret
+  `gateway-provider` exposes the key under `api-key`, and its decoded value is exactly the `provider.apiKey` value
+  (values.yaml keeps the key in plain text; overriding the value must change the Secret). The gateway pod is Ready.
+xp: 200
+difficulty: intermediate
+expected_time: 10m
+concepts:
+  - Secret data vs stringData
+  - b64enc
+  - quote
+  - base64

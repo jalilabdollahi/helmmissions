@@ -1,0 +1,20 @@
+name: The Password Changes Every Deploy
+description: |
+  The `ledgerdb` release generates its database password in the chart with `randAlphaNum`. Every `helm upgrade`
+  (even one that only changes the replica count) produces a new password, restarts the pod through the checksum
+  annotation, and locks out clients that still hold the old one. `helm history ledgerdb -n helmissions` already shows
+  two revisions. The fingerprint (sha256) of the password the billing system registered is stored in the ConfigMap
+  `registered-credentials` in the same namespace. The chart is in your workspace under `ledger-db/`.
+objective: |
+  Release `ledgerdb` in namespace `helmissions` is upgraded from the fixed chart in your workspace. After the upgrade
+  the password in Secret `ledgerdb-credentials` is still the one whose fingerprint is stored in `registered-credentials`,
+  and a brand-new install of the chart followed by further upgrades keeps its generated password unchanged. The
+  database pod is Ready.
+xp: 350
+difficulty: advanced
+expected_time: 20m
+concepts:
+  - lookup function
+  - randAlphaNum
+  - idempotent upgrades
+  - generated secrets

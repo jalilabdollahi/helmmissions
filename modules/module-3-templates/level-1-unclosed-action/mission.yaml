@@ -1,0 +1,18 @@
+name: Unclosed Action
+description: |
+  The editorial team's newsletter site, chart `pressroom`, has never made it to the cluster. After a
+  late-night edit to the homepage template the install now dies before anything is created:
+    Error: INSTALLATION FAILED: parse error at (pressroom/templates/configmap.yaml:13): unexpected "}" in operand
+  The chart lives in your workspace under `pressroom/`.
+objective: |
+  Release `pressroom` is deployed in namespace `helmissions` from the chart in your workspace,
+  its pod is Ready, and the homepage served by the `pressroom` Service shows the site name taken
+  from `site.name` in the chart values (the name must follow the value, not be typed into the template).
+xp: 200
+difficulty: intermediate
+expected_time: 5m
+concepts:
+  - Go template syntax
+  - helm template
+  - helm lint
+  - parse errors

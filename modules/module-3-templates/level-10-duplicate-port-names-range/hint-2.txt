@@ -1,0 +1,3 @@
+Inside `{{- range .Values.ports }}` the dot is the current list item (`{name: ..., port: ...}`). The Deployment
+template uses `.name` for the container port names. Look at how the Service template sets `name:` - all three
+entries come out with the same text. Service port names must be unique within the Service.

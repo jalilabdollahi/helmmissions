@@ -1,0 +1,30 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: {{ .Release.Name }}
+  labels: {{ include "ledger-recon.labels" . | indent 4 }}
+spec:
+  schedule: {{ .Values.schedule | quote }}
+  concurrencyPolicy: Forbid
+  successfulJobsHistoryLimit: 1
+  failedJobsHistoryLimit: 1
+  jobTemplate:
+    spec:
+      backoffLimit: 0
+      template:
+        metadata:
+          labels:
+            {{- include "ledger-recon.labels" . | nindent 12 }}
+        spec:
+          restartPolicy: Never
+          terminationGracePeriodSeconds: 2
+          containers:
+            - name: reconcile
+              image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+              imagePullPolicy: {{ .Values.image.pullPolicy }}
+              command: ["sh", "-c", "echo reconciling $SOURCE -> $TARGET"]
+              envFrom:
+                - configMapRef:
+                    name: {{ .Release.Name }}-config
+              resources:
+                {{- toYaml .Values.resources | nindent 16 }}

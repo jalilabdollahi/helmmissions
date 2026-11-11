@@ -1,0 +1,19 @@
+name: Duplicate Port Names
+description: |
+  The `mesh-edge` chart drives its container ports and Service ports from one `ports` list in values.yaml.
+  Adding the admin and metrics entries last week broke the deploy:
+    Error: INSTALLATION FAILED: server-side apply failed for object helmissions/edge /v1, Kind=Service:
+    Service "edge" is invalid: spec.ports[1].name: Duplicate value: "http"
+  The chart is in your workspace under `mesh-edge/`.
+objective: |
+  Release `edge` is deployed in namespace `helmissions` from the chart in your workspace. Its Service exposes every
+  entry of the `ports` value (all three ports, each with its own unique name and the right port number), and the
+  pod is Ready and reachable through the Service.
+xp: 250
+difficulty: intermediate
+expected_time: 10m
+concepts:
+  - range
+  - dot scope in range
+  - Service ports
+  - server-side validation

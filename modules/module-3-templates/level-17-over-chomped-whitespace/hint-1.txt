@@ -1,0 +1,3 @@
+The YAML parser fails on the rendered text, so look at the rendered text, even though it is invalid:
+  helm template thumbs ./thumbnailer --debug
+Look at the lines around `replicas` in the printed manifest.

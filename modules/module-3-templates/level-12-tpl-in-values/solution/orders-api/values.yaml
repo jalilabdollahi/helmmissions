@@ -1,0 +1,23 @@
+replicaCount: 1
+
+image:
+  repository: busybox
+  tag: "1.36"
+  pullPolicy: IfNotPresent
+
+dbImage:
+  repository: traefik/whoami
+  tag: v1.10
+
+database:
+  # Written once in values so every environment gets its own database name per release.
+  host: "{{ .Release.Name }}-db"
+  port: 5432
+  name: orders
+
+resources:
+  requests:
+    cpu: 10m
+    memory: 8Mi
+  limits:
+    memory: 32Mi

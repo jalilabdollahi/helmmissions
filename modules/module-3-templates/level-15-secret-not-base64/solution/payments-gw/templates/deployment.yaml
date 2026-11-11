@@ -1,0 +1,36 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Release.Name }}
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      app: payments-gw
+      release: {{ .Release.Name }}
+  template:
+    metadata:
+      labels:
+        app: payments-gw
+        release: {{ .Release.Name }}
+    spec:
+      terminationGracePeriodSeconds: 2
+      containers:
+        - name: gateway
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          command: ["sh", "-c", "echo gateway for $PROVIDER_URL; sleep 86400"]
+          env:
+            - name: PROVIDER_URL
+              value: {{ .Values.provider.url | quote }}
+            - name: PROVIDER_API_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .Release.Name }}-provider
+                  key: api-key
+          readinessProbe:
+            exec:
+              command: ["sh", "-c", "case \"$PROVIDER_API_KEY\" in sk-*) exit 0;; *) exit 1;; esac"]
+            periodSeconds: 3
+          resources:
+            {{- toYaml .Values.resources | nindent 12 }}

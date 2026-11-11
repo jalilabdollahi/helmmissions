@@ -1,0 +1,3 @@
+Reproduce locally and read the whole error, not just the first line:
+  helm template shop ./storefront
+It names the template that failed and the name of the template it could not find.

@@ -1,0 +1,37 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Release.Name }}
+  labels:
+    app: smtp-relay
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      app: smtp-relay
+      release: {{ .Release.Name }}
+  template:
+    metadata:
+      labels:
+        app: smtp-relay
+        release: {{ .Release.Name }}
+    spec:
+      terminationGracePeriodSeconds: 2
+      containers:
+        - name: relay
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          env:
+            - name: WHOAMI_NAME
+              value: {{ .Values.relayName | quote }}
+            - name: WHOAMI_PORT_NUMBER
+              value: {{ .Values.listenPort }}
+          ports:
+            - name: smtp
+              containerPort: {{ .Values.listenPort }}
+          readinessProbe:
+            httpGet:
+              path: /health
+              port: smtp
+          resources:
+            {{- toYaml .Values.resources | nindent 12 }}

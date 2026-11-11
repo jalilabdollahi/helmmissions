@@ -134,6 +134,15 @@ _hm_http_once() {
   return $rc
 }
 
+# hm_pods_json SELECTOR [NS] → JSON array of pods matching SELECTOR that are not terminating
+hm_pods_json() {
+  kubectl get pods -n "${2:-$NS}" -l "$1" -o json 2>/dev/null | jq '[.items[] | select(.metadata.deletionTimestamp == null)]' 2>/dev/null || echo '[]'
+}
+# hm_sha256 FILE|- → hex sha256 (portable: uses python)
+hm_sha256() {
+  "$HM_PYTHON" -c 'import hashlib,sys; d=(sys.stdin.buffer if sys.argv[1]=="-" else open(sys.argv[1],"rb")).read(); print(hashlib.sha256(d).hexdigest())' "${1:--}"
+}
+
 # ── YAML helpers (PyYAML via $HM_PYTHON) ─────────────────────────────────────
 # hm_yaml_get FILE dotted.path → value as JSON (null if missing). Lists: a.b.0.c
 hm_yaml_get() {

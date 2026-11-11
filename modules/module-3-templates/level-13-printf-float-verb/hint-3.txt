@@ -1,0 +1,3 @@
+Either print the number with the generic verb:  {{ printf "%v" .Values.port }}
+or convert it first:  {{ printf "%d" (int .Values.port) }}  /  {{ .Values.port | int }}
+Check with helm template, then:  helm upgrade ingest ./ingest -n helmissions

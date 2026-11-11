@@ -1,0 +1,3 @@
+The chart builds the tag with Sprig's `default`. Its signature is `default <fallback> <value>`: it returns the
+SECOND argument unless that is empty, in which case it returns the first. Check which of .Values.image.tag and
+.Chart.AppVersion sits in which position in templates/_helpers.tpl.

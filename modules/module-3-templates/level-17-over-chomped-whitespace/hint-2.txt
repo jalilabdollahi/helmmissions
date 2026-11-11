@@ -1,0 +1,3 @@
+Two lines of the template have been merged into one (`replicas: 2revisionHistoryLimit: 2`). In Go templates a dash
+inside the delimiters (`{{-` and `-}}`) trims ALL whitespace on that side - spaces, tabs and newlines, including the
+indentation of the next line. Check which delimiters the replicas line uses.

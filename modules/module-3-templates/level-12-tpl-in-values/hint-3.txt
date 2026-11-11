@@ -1,0 +1,4 @@
+In templates/deployment.yaml use:  value: {{ tpl .Values.database.host . | quote }}
+(the second argument `.` hands the root context to the string, so `.Release.Name` resolves). Then:
+  helm upgrade orders ./orders-api -n helmissions
+Do not hard-code "orders-db" in values.yaml - the chart should work for any release name.

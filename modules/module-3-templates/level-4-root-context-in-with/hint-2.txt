@@ -1,0 +1,2 @@
+The failing expression sits inside a `{{- with .Values.podLabels }}` block. Inside `with`, the dot (.) no
+longer means "the whole chart context" - it is now the podLabels map, which has no `Release` key.

@@ -1,0 +1,44 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Release.Name }}-db
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: orders-db
+      release: {{ .Release.Name }}
+  template:
+    metadata:
+      labels:
+        app: orders-db
+        release: {{ .Release.Name }}
+    spec:
+      terminationGracePeriodSeconds: 2
+      containers:
+        - name: db
+          image: "{{ .Values.dbImage.repository }}:{{ .Values.dbImage.tag }}"
+          imagePullPolicy: IfNotPresent
+          env:
+            - name: WHOAMI_PORT_NUMBER
+              value: {{ .Values.database.port | quote }}
+          ports:
+            - name: db
+              containerPort: {{ .Values.database.port }}
+          resources:
+            requests:
+              cpu: 5m
+              memory: 8Mi
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ .Release.Name }}-db
+spec:
+  selector:
+    app: orders-db
+    release: {{ .Release.Name }}
+  ports:
+    - name: db
+      port: {{ .Values.database.port }}
+      targetPort: db

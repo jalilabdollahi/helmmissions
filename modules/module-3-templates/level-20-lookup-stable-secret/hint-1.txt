@@ -1,0 +1,4 @@
+Compare the Secret before and after an upgrade, and look at how the chart creates the value:
+  kubectl get secret ledgerdb-credentials -n helmissions -o jsonpath='{.data.password}'; echo
+  cat ledger-db/templates/secret.yaml
+Careful: another upgrade of the *unfixed* chart will rotate the password again.

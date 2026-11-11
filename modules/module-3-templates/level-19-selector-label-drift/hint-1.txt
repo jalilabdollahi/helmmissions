@@ -1,0 +1,3 @@
+A Service only sends traffic to pods whose labels match its selector. Compare the two sides:
+  kubectl get svc payments -n helmissions -o jsonpath='{.spec.selector}'
+  kubectl get pods -n helmissions --show-labels

@@ -1,0 +1,3 @@
+In cronjob.yaml the helper is written on the same line as `labels:` and piped to `indent 4`. `indent` adds
+spaces to every line but does NOT start with a newline, so the first label ends up on the `labels:` line
+(`labels:     app.kubernetes.io/name: ...`), which is not valid YAML. The ConfigMap uses a sibling function.

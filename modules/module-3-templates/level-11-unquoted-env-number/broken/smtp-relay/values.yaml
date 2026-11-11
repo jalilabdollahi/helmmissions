@@ -1,0 +1,21 @@
+replicaCount: 1
+
+image:
+  repository: traefik/whoami
+  tag: v1.10
+  pullPolicy: IfNotPresent
+
+relayName: outbound-relay-1
+
+# Port the relay process listens on inside the pod.
+listenPort: 2525
+
+service:
+  port: 25
+
+resources:
+  requests:
+    cpu: 10m
+    memory: 16Mi
+  limits:
+    memory: 48Mi

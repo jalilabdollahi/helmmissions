@@ -1,0 +1,4 @@
+Either encode in the template:  api-key: {{ .Values.provider.apiKey | b64enc | quote }}
+or switch the field to plain text:  stringData:  api-key: {{ .Values.provider.apiKey | quote }}
+Keep the key in plain text in values.yaml. A failed first install leaves a failed release behind, so use
+  helm upgrade --install gateway ./payments-gw -n helmissions

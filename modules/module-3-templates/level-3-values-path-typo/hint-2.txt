@@ -1,0 +1,3 @@
+The image comes out as ":1.27-alpine" - the repository part is empty. Helm does not complain when a
+.Values path does not exist, it just renders nothing. Compare the path used in templates/deployment.yaml
+with the keys in values.yaml, letter by letter.

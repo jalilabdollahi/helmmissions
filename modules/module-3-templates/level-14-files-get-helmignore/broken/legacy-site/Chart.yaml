@@ -1,0 +1,6 @@
+apiVersion: v2
+name: legacy-site
+description: Marketing site with a hand-tuned nginx server block
+type: application
+version: 1.6.0
+appVersion: "1.27"

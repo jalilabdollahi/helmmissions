@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "mailer.fullname" . }}
+spec:
+  replicas: {{ .Values.worker.replicaCount }}
+  selector:
+    matchLabels:
+      {{- include "mailer.selectorLabels" . | nindent 6 }}
+  template:
+    metadata:
+      labels:
+        {{- include "mailer.selectorLabels" . | nindent 8 }}
+    spec:
+      terminationGracePeriodSeconds: 2
+      containers:
+        - name: worker
+          image: "{{ .Values.worker.image.repository }}:{{ .Values.worker.image.tag }}"
+          imagePullPolicy: IfNotPresent
+          command: ["sh", "-c", "touch /tmp/ready; echo worker concurrency=$CONCURRENCY; sleep 86400"]
+          env:
+            - name: CONCURRENCY
+              value: {{ .Values.worker.concurrency | quote }}
+          readinessProbe:
+            exec:
+              command: ["cat", "/tmp/ready"]
+            periodSeconds: 2
+          resources:
+            {{- toYaml .Values.resources | nindent 12 }}

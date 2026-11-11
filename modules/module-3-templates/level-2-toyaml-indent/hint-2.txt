@@ -1,0 +1,3 @@
+In templates/deployment.yaml, the output of `toYaml .Values.resources` is pushed in by 10 spaces, which is
+exactly the indentation of the `resources:` key itself. The two child keys therefore become siblings of
+`resources:` (and `resources:` is left empty) instead of its children.

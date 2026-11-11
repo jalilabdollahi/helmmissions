@@ -1,0 +1,6 @@
+apiVersion: v2
+name: payments-gw
+description: Payment provider gateway client
+type: application
+version: 0.12.0
+appVersion: "1.36"

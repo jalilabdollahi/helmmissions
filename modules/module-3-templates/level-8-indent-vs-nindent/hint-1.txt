@@ -1,0 +1,3 @@
+The error points at the rendered YAML, not at the template, so look at the rendered text:
+  helm template reconcile ./ledger-recon --debug
+Check the first lines of the CronJob and compare with how the ConfigMap's labels come out.

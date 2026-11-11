@@ -1,0 +1,3 @@
+The Deployment builds its labels with the `payments.selectorLabels` helper (name + instance). The Service template
+has a hand-written selector (`app: payments`) that no pod carries. Two places describing the same thing independently
+will drift - the fix is to have ONE source for it.

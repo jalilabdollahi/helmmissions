@@ -1,0 +1,20 @@
+name: No Endpoints
+description: |
+  The `payments` release is up: `kubectl get pods` shows 2/2 Running and Ready, and `helm status payments` is deployed.
+  But nothing can reach the API. Calls to the `payments` Service time out, and
+    kubectl get endpoints payments -n helmissions
+  lists no addresses at all. The chart labels pods through the shared helpers in `_helpers.tpl`. The chart is in your
+  workspace under `payments/`.
+objective: |
+  Release `payments` in namespace `helmissions` is upgraded from the chart in your workspace (a new revision). The
+  Service `payments` has 2 ready endpoints, and the chart builds the Service selector from the same label helper that
+  builds the Deployment's selector, so they can never drift apart (rendering under another release name must keep them
+  identical and specific to that release).
+xp: 300
+difficulty: advanced
+expected_time: 15m
+concepts:
+  - label selectors
+  - selectorLabels helper
+  - Service endpoints
+  - DRY templates

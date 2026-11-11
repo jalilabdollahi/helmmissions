@@ -1,0 +1,6 @@
+apiVersion: v2
+name: orders-api
+description: Order service with a stand-in database for local environments
+type: application
+version: 2.3.0
+appVersion: "1.36"

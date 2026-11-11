@@ -1,0 +1,3 @@
+Helm only evaluates `{{ }}` actions in the TEMPLATE FILES. A string that merely contains braces inside values.yaml
+is data, and is printed exactly as written. To evaluate a string that lives in a value as if it were a template you
+need the `tpl` function, which takes the string and a context to evaluate it against.

@@ -1,0 +1,19 @@
+name: no template named "shop.labels"
+description: |
+  The shop chart was renamed to `storefront` last sprint and all helper definitions were renamed with it.
+  Now the release pipeline fails on every run:
+    Error: INSTALLATION FAILED: ... executing "storefront/templates/service.yaml" at <include "shop.labels" .>:
+    error calling include: template: no template "shop.labels" associated with template "gotpl"
+  The chart is in your workspace under `storefront/`.
+objective: |
+  Release `shop` is deployed in namespace `helmissions` from the `storefront` chart in your workspace. Its 2 pods
+  are Ready, and the Service carries the same standard labels (name, instance, version, managed-by) as the
+  Deployment, produced by the shared label helper.
+xp: 250
+difficulty: intermediate
+expected_time: 10m
+concepts:
+  - named templates
+  - define / include
+  - _helpers.tpl
+  - chart renaming

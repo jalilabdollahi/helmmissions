@@ -1,0 +1,7 @@
+apiVersion: v2
+name: echo-api
+description: Request echo service used by the QA and partner teams
+type: application
+version: 3.4.0
+# Set by the release script when a new build is cut; this build was never published.
+appVersion: "v1.11-rc1"

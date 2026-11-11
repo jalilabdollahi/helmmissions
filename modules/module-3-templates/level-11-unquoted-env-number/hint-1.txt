@@ -1,0 +1,2 @@
+Read the error to the end: the API server says which field wanted a string. Then look at what Helm renders for it:
+  helm template relay ./smtp-relay | grep -B1 -A1 WHOAMI_PORT_NUMBER

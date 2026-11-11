@@ -1,0 +1,18 @@
+name: The Vanishing Config File
+description: |
+  The `legacy-site` chart ships its nginx server block as `files/site.conf` and loads it into a ConfigMap with
+  `.Files.Get`. The release `site` installs without any error, but its pod never becomes Ready: the readiness probe
+  on /healthz keeps failing. `kubectl get configmap site-nginx -o yaml` shows a `default.conf` key with nothing in it,
+  although `files/site.conf` is right there in your workspace and is not empty. The chart is under `legacy-site/`.
+objective: |
+  Release `site` in namespace `helmissions` is upgraded from the chart in your workspace (a new revision). The
+  nginx configuration delivered to the pod is the server block from the chart (listening on 8080 with a /healthz
+  location), the pod is Ready, and the `site` Service answers /healthz.
+xp: 300
+difficulty: advanced
+expected_time: 15m
+concepts:
+  - .Files.Get
+  - .helmignore
+  - chart files
+  - ConfigMap from files

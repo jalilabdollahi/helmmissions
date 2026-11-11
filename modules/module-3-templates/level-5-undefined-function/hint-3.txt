@@ -1,0 +1,3 @@
+The Sprig function is called `upper`. In templates/deployment.yaml change `| uppercase |` to `| upper |`
+(keep the quote), check with  helm template dispatch ./dispatch | grep APP_ENV  and install:
+  helm install dispatch ./dispatch -n helmissions
