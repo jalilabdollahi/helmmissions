@@ -1,0 +1,19 @@
+name: Red Test Suite
+description: |
+  The `rating-service` release is live and answers requests, but the release's smoke test is red. The post-deploy
+  job runs `helm test rating-service -n helmissions` and fails every time:
+    Error: 1 error occurred:
+        * pod rating-service-test-connection failed
+  Developers have started ignoring the failure because "the service works". The chart, including its
+  test pod, is in your workspace under `rating-service/`.
+objective: |
+  A `helm test rating-service -n helmissions` run succeeds against the live release (the test hook is still
+  defined and still exercises the Service), and the release is `deployed` with 1 ready pod.
+xp: 250
+difficulty: intermediate
+expected_time: 10m
+concepts:
+  - helm test
+  - test hooks
+  - hooks are stored in the release
+  - service DNS names

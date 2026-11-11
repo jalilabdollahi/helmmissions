@@ -1,0 +1,5 @@
+apiVersion: v2
+name: notification-dispatcher
+description: Sends e-mail and push notifications to customers
+version: 0.7.0
+appVersion: "0.7"

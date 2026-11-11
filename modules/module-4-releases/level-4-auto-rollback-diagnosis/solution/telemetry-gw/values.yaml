@@ -1,0 +1,7 @@
+replicaCount: 3
+image:
+  repository: nginxinc/nginx-unprivileged
+  tag: 1.27-alpine
+sampleRate: "0.25"
+report:
+  schedule: "*/15 * * * *"

@@ -1,0 +1,20 @@
+name: Born Failed
+description: |
+  The billing team's first deploy of `invoice-api` blew up and they have gone home.
+  The pipeline log ends with:
+    Error: INSTALLATION FAILED: server-side apply failed for object helmissions/invoice-api /v1, Kind=Service:
+    Service "invoice-api" is invalid: spec.type: Unsupported value: "ClusterIp": supported values: ...
+  Re-running `helm install invoice-api ./invoice-api` now says the release name is still in use, and
+  `helm list` does not show it as a healthy release. The chart is in your workspace under `invoice-api/`.
+objective: |
+  Release `invoice-api` in namespace `helmissions` is in the `deployed` state with its latest revision
+  built from the chart in your workspace, the Deployment `invoice-api` has 2 ready pods and the
+  Service `invoice-api` has ready endpoints.
+xp: 200
+difficulty: intermediate
+expected_time: 10m
+concepts:
+  - release statuses
+  - failed first install
+  - helm history
+  - helm upgrade vs helm install

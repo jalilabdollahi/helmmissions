@@ -79,6 +79,17 @@ hm_user_values() {
 # hm_all_values REL [NS] → computed values as JSON
 hm_all_values() { helm get values "$1" -n "${2:-$NS}" --all -o json 2>/dev/null || echo '{}'; }
 
+# hm_release_description REL [NS] → description of the latest revision ("Rollback to 2", "Upgrade complete"...)
+hm_release_description() { hm_history_json "$1" "${2:-$NS}" | jq -r '.[-1].description // empty'; }
+# hm_assert_status REL STATUS [NS] → for setup.sh: exit 1 unless the release is in STATUS
+hm_assert_status() {
+  local st; st="$(hm_release_status "$1" "${3:-$NS}")"
+  [ "$st" = "$2" ] || { echo "setup: release $1 is '${st:-missing}', expected '$2' — scenario not reached"; exit 1; }
+}
+# Version-neutral flags: Helm 4 renamed --atomic and --force
+hm_flag_rollback_on_failure() { [ "$(hm_helm_major)" -ge 4 ] && echo "--rollback-on-failure" || echo "--atomic"; }
+hm_flag_force_replace() { [ "$(hm_helm_major)" -ge 4 ] && echo "--force-replace" || echo "--force"; }
+
 # ── kubernetes helpers ───────────────────────────────────────────────────────
 # hm_wait_rollout KIND/NAME [NS] [TIMEOUT]
 hm_wait_rollout() {

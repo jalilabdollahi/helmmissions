@@ -1,0 +1,4 @@
+Look at the release record and its revisions:
+  helm list -n helmissions --pending
+  helm history warehouse-stock -n helmissions
+Helm keeps a status per revision; one of them is not finished.

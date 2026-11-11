@@ -1,0 +1,4 @@
+Run the deploy step and read the error, then compare the verbs:
+  bash ci/deploy.sh
+  helm upgrade --help | head -30
+`helm upgrade` assumes something already exists. What does your pipeline need to work when it does not?

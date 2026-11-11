@@ -1,0 +1,2 @@
+Either define the value (an `ingress:` block with a `host:` in values.yaml) or make NOTES.txt tolerate its
+absence with `{{ if .Values.ingress }}...{{ end }}`. The notes should still show an http:// URL afterwards.

@@ -1,0 +1,5 @@
+apiVersion: v2
+name: storefront
+description: Web shop front end (renamed from "shop")
+version: 2.0.0
+appVersion: "2.0"

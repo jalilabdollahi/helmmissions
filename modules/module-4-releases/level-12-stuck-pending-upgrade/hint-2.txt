@@ -1,0 +1,4 @@
+Helm refuses to start an operation while the latest revision is `pending-install`, `pending-upgrade` or
+`pending-rollback`, because it cannot know whether another Helm process is still working. The process that owned
+revision 2 was killed, so nobody will ever finish it. You have to move the release to a settled state
+yourself, and then do the deploy that was interrupted.

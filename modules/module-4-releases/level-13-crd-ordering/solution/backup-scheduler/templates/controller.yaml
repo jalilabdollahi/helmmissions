@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Release.Name }}-controller
+  labels:
+    app.kubernetes.io/name: backup-scheduler
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: backup-scheduler
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: backup-scheduler
+    spec:
+      terminationGracePeriodSeconds: 2
+      containers:
+        - name: controller
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+          imagePullPolicy: IfNotPresent
+          command: ["sh", "-c", "echo watching BackupSchedule resources; sleep 86400"]
+          resources:
+            requests: {cpu: 10m, memory: 16Mi}
+            limits: {memory: 32Mi}

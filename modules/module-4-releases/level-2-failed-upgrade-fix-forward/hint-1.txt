@@ -1,0 +1,3 @@
+Look at the release history and at what the chart renders:
+  helm history ledger-sync -n helmissions
+  helm template ledger-sync ./ledger-sync | grep -n -B2 -A8 readinessProbe

@@ -1,0 +1,3 @@
+Render the chart with the real release name and measure the names:
+  helm template customer-notification-dispatcher-production-eu ./notification-dispatcher | grep -E '^  name:'
+Count the characters of the Service name.

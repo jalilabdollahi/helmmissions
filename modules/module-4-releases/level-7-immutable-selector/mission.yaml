@@ -1,0 +1,21 @@
+name: Field Is Immutable
+description: |
+  Release 1.1 of the `catalog-search` chart only "tidies up the labels" to the recommended
+  `app.kubernetes.io/*` set. The upgrade of the running 1.0 release fails:
+    Error: UPGRADE FAILED: server-side apply failed for object helmissions/catalog-search apps/v1,
+    Kind=Deployment: Deployment.apps "catalog-search" is invalid: spec.selector: Invalid value: ...: field is immutable
+  `helm status` shows `failed`, the 1.0 pods keep serving. The 1.1 chart is in your workspace under
+  `catalog-search/`. Search must not go down and the release history must survive.
+objective: |
+  Release `catalog-search` in namespace `helmissions` is `deployed` on chart 1.1.0 through an upgrade
+  (revision 1 is still in `helm history`), the Deployment's selector is still the one 1.0 created
+  (`app: catalog-search`), the running pods also carry the new `app.kubernetes.io/name=catalog-search`
+  label, 2 pods are Ready and the Service has endpoints.
+xp: 250
+difficulty: intermediate
+expected_time: 15m
+concepts:
+  - immutable fields
+  - selector labels
+  - helm upgrade
+  - chart label helpers

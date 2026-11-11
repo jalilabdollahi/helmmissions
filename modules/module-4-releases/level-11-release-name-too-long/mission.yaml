@@ -1,0 +1,18 @@
+name: Must Be No More Than 63 Characters
+description: |
+  Platform naming rules require the release name `customer-notification-dispatcher-production-eu` for the EU
+  production environment. Every other environment (short release names) deploys fine, but this one does not:
+    Error: INSTALLATION FAILED: ... Service "customer-notification-dispatcher-production-eu-notification-dispatcher"
+    is invalid: metadata.name: Invalid value: "...": must be no more than 63 characters
+  The release name itself cannot be changed. The chart is in your workspace under `notification-dispatcher/`.
+objective: |
+  Release `customer-notification-dispatcher-production-eu` (exactly that name) is `deployed` in namespace
+  `helmissions`, every Service it owns has a valid name (at most 63 characters) and its Deployment has a Ready pod.
+xp: 250
+difficulty: intermediate
+expected_time: 15m
+concepts:
+  - fullname helper
+  - 63 character limit
+  - trunc and trimSuffix
+  - release naming

@@ -1,0 +1,3 @@
+The failing file is named in the error. Render the chart to see the same failure without touching the cluster:
+  helm template status-page ./status-page --show-only templates/NOTES.txt
+  helm lint ./status-page

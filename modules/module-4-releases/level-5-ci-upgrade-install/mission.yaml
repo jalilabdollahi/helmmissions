@@ -1,0 +1,19 @@
+name: First Deploy Breaks CI
+description: |
+  The pipeline for the logistics portal's `shipment-tracker` has been green for months on the staging
+  environment, but the very first deploy to a brand-new environment fails in `ci/deploy.sh`:
+    Deploying shipment-tracker to namespace helmissions
+    Error: UPGRADE FAILED: "shipment-tracker" has no deployed releases
+  Nothing exists in the namespace yet. Whoever rolls this pipeline out to the next new environment will
+  hit the same wall. The chart and the script are in your workspace (`shipment-tracker/`, `ci/deploy.sh`).
+objective: |
+  Running `bash ci/deploy.sh` from the workspace deploys release `shipment-tracker` into namespace
+  `helmissions` (status `deployed`, pod Ready), and the same script also succeeds, twice in a row, in a
+  fresh namespace `helmissions-ci` that has no release yet.
+xp: 200
+difficulty: intermediate
+expected_time: 10m
+concepts:
+  - helm upgrade --install
+  - idempotent pipelines
+  - first deploy vs upgrade

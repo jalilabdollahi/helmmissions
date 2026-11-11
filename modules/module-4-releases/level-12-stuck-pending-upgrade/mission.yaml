@@ -1,0 +1,19 @@
+name: Another Operation In Progress
+description: |
+  The CI runner was OOM-killed halfway through the `warehouse-stock` 1.1 deploy. Every pipeline run since then
+  fails immediately:
+    Error: UPGRADE FAILED: another operation (install/upgrade/rollback) is in progress
+  Nobody is running Helm at the moment. `helm list -n helmissions` shows the release as `pending-upgrade`,
+  and `helm history` shows a revision whose description is stuck at "Preparing upgrade". The 1.1 chart that the
+  pipeline was deploying is in your workspace under `warehouse-stock/`.
+objective: |
+  Release `warehouse-stock` in namespace `helmissions` is `deployed` (not pending) on chart 1.1.0 from your
+  workspace: 2 ready replicas with `SYNC_INTERVAL_SECONDS=30`, and the newest revision is not the interrupted one.
+xp: 300
+difficulty: advanced
+expected_time: 15m
+concepts:
+  - pending-upgrade
+  - release locks
+  - helm rollback
+  - release secrets

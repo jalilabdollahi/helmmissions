@@ -1,0 +1,3 @@
+The CRD and a resource of that new kind are in the same `templates/` render. Helm must validate every object
+against the API server before creating any of them, and at that moment the kind `BackupSchedule` does not exist yet.
+Helm has a special directory for exactly this situation.

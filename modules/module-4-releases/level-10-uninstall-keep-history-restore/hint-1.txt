@@ -1,0 +1,3 @@
+The release record still exists; ask Helm for it:
+  helm list -n helmissions --uninstalled
+  helm history loyalty-points -n helmissions

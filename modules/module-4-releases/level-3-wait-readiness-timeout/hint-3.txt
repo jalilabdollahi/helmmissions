@@ -1,0 +1,3 @@
+Point the probe at something nginx really serves (the site root), then upgrade again with --wait:
+  readiness.path in docs-portal/values.yaml
+  helm upgrade docs-portal ./docs-portal -n helmissions --wait --timeout 90s

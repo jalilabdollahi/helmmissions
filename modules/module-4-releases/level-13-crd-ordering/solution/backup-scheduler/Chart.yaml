@@ -1,0 +1,5 @@
+apiVersion: v2
+name: backup-scheduler
+description: Schedules database backups through the BackupSchedule resource
+version: 0.1.0
+appVersion: "0.1"

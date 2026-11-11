@@ -1,0 +1,22 @@
+name: No Matches For Kind
+description: |
+  The platform team packaged a small operator-less "backup scheduler": a CustomResourceDefinition
+  (`BackupSchedule`), one `BackupSchedule` resource named `nightly` and a controller Deployment, all in the chart
+  `backup-scheduler`. On a clean cluster the install fails before anything is created:
+    Error: INSTALLATION FAILED: unable to build kubernetes objects from release manifest: resource mapping not
+    found for name: "nightly" namespace: "" from "": no matches for kind "BackupSchedule" in version
+    "helmissions.io/v1"
+    ensure CRDs are installed first
+  The chart is in your workspace under `backup-scheduler/`.
+objective: |
+  Release `backup-scheduler` is `deployed` in namespace `helmissions`; the CRD `backupschedules.helmissions.io`
+  exists in the cluster, the `BackupSchedule` named `nightly` exists and is part of the release, and the controller
+  Deployment is Ready.
+xp: 300
+difficulty: advanced
+expected_time: 15m
+concepts:
+  - CRDs
+  - crds/ directory
+  - install ordering
+  - custom resources

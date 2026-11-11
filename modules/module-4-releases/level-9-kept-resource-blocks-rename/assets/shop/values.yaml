@@ -1,0 +1,4 @@
+replicaCount: 1
+database:
+  user: shop
+  password: pr0d-s3cret

@@ -1,0 +1,5 @@
+apiVersion: v2
+name: support-desk
+description: Customer support ticket desk
+version: 0.2.0
+appVersion: "0.2"

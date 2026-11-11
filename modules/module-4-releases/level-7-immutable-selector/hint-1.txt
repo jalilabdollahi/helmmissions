@@ -1,0 +1,3 @@
+Compare what the live Deployment has with what the new chart renders:
+  kubectl get deploy catalog-search -n helmissions -o jsonpath='{.spec.selector}'
+  helm template catalog-search ./catalog-search | grep -n -A3 'selector:'

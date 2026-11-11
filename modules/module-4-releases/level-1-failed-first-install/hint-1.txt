@@ -1,0 +1,4 @@
+Ask Helm what state the release is in and why:
+  helm status invoice-api -n helmissions
+  helm history invoice-api -n helmissions
+The DESCRIPTION column of the history keeps the error the API server returned.

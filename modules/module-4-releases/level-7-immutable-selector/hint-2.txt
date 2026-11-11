@@ -1,0 +1,3 @@
+A Deployment's spec.selector can never be changed after creation. The 1.1 chart renamed the selector labels
+(`app` -> `app.kubernetes.io/name` + `instance`) because one helper is used both for the selector and for the
+pod labels. Uninstalling would drop the history and cause downtime.

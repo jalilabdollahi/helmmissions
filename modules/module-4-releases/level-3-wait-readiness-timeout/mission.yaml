@@ -1,0 +1,20 @@
+name: Timed Out Waiting
+description: |
+  The pipeline upgrades the documentation portal to chart 2.1 (2 replicas plus a readiness probe) with
+  `helm upgrade docs-portal ./docs-portal --wait --timeout 30s`. After half a minute it gives up:
+    Error: UPGRADE FAILED: resource Deployment/helmissions/docs-portal not ready. status: InProgress,
+    message: Updated: 1/2 ... context deadline exceeded
+  `helm status` says `failed`, and `kubectl get pods` shows the new pod running but `0/1` ready.
+  Nobody is sure whether to blame the cluster, the image or Helm. The chart is in `docs-portal/`.
+objective: |
+  Release `docs-portal` in namespace `helmissions` is `deployed` after a successful `--wait` upgrade
+  (not a rollback), chart 2.1.0 is live with 2 ready replicas, and the container still has a readiness
+  probe configured.
+xp: 250
+difficulty: intermediate
+expected_time: 15m
+concepts:
+  - helm upgrade --wait
+  - readiness probes
+  - failed release status
+  - helm history

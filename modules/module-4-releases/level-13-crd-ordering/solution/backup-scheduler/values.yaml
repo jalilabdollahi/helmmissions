@@ -1,0 +1,6 @@
+image:
+  repository: busybox
+  tag: "1.36"
+schedule:
+  cron: "0 2 * * *"
+  retentionDays: 14

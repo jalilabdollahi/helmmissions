@@ -1,0 +1,5 @@
+replicaCount: 2
+image:
+  repository: traefik/whoami
+  tag: v1.10
+syncIntervalSeconds: 30

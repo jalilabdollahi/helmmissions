@@ -1,0 +1,3 @@
+Fix the value in invoice-api/values.yaml. A release whose only revision is `failed` is still a release,
+so `helm install` refuses the name: either `helm upgrade` it (you may add --install) or uninstall it and
+install again.

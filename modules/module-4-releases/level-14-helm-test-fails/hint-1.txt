@@ -1,0 +1,4 @@
+Find out why the test pod fails:
+  helm test rating-service -n helmissions --logs
+  kubectl get pods,svc -n helmissions
+Compare the host and port the test calls with the Service that actually exists.

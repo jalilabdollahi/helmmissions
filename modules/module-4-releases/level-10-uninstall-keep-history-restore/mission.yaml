@@ -1,0 +1,18 @@
+name: Undo An Uninstall
+description: |
+  Before a maintenance window someone ran `helm uninstall loyalty-points -n helmissions --keep-history` to free the
+  namespace "for a minute". The window is over, the pods are gone and the loyalty page is down.
+  `helm list -n helmissions` shows nothing, although `helm list --uninstalled` knows the release. The chart
+  directory is not available on this machine, and nobody remembers the exact values the last deploy used.
+objective: |
+  Release `loyalty-points` in namespace `helmissions` is `deployed` again with its history continued (the old
+  revisions are still listed and the newest revision is a rollback), running exactly the configuration it had when it
+  was uninstalled: chart 1.1.0, 2 ready replicas and `TIER_GOLD_THRESHOLD=500`.
+xp: 200
+difficulty: intermediate
+expected_time: 10m
+concepts:
+  - helm uninstall --keep-history
+  - helm rollback
+  - uninstalled release status
+  - helm history

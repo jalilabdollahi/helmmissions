@@ -1,0 +1,3 @@
+Move the CRD manifest out of `templates/` into a `crds/` directory at the chart root (plain YAML, not templated):
+  backup-scheduler/crds/backupschedule-crd.yaml
+Helm installs everything in `crds/` first, waits for it to be established, then renders the templates.

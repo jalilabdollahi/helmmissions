@@ -1,0 +1,20 @@
+name: Bring Back Revision 2's Setting
+description: |
+  Customers report that product search returns nothing since "last Tuesday". The shop's `product-search`
+  release has been upgraded five times by three different people, always "just a quick config tweak".
+  `helm history product-search -n helmissions` lists five revisions that all say `Upgrade complete`.
+  Somebody remembers that search was working after the second revision, and that later revisions
+  contain changes the team still wants. The chart (unchanged by those tweaks) is in your workspace
+  under `product-search/`.
+objective: |
+  Release `product-search` in namespace `helmissions` is `deployed` on a NEW revision created by an upgrade
+  (not a rollback) in which `FEATURE_SEARCH` is `true` again, while the wanted later tweaks are still live:
+  `CACHE_TTL_SECONDS=600`, `LOG_LEVEL=warn`, 2 replicas and `FEATURE_RECOMMEND=false`.
+xp: 250
+difficulty: intermediate
+expected_time: 15m
+concepts:
+  - helm get values --revision
+  - helm get manifest --revision
+  - release history forensics
+  - --reuse-values

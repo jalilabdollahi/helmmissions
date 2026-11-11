@@ -1,0 +1,9 @@
+nameOverride: ""
+fullnameOverride: ""
+replicaCount: 1
+image:
+  repository: nginxinc/nginx-unprivileged
+  tag: 1.27-alpine
+channels:
+  email: "true"
+  push: "true"

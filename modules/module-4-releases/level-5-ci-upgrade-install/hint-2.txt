@@ -1,0 +1,2 @@
+`helm upgrade` on a release name that has never been installed fails with "has no deployed releases".
+The pipeline needs one command that installs when the release is missing and upgrades when it is there.

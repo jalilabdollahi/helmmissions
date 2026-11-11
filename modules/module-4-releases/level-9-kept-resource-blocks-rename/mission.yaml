@@ -1,0 +1,22 @@
+name: The Kept Secret
+description: |
+  The shop was renamed: release `shop` was uninstalled and the new chart `storefront` should replace it.
+  The database Secret `db-credentials` was deliberately left in place (it carries `helm.sh/resource-policy: keep`
+  so nobody loses credentials by accident), and the new chart ships a Secret with the same name.
+  Installing the new release fails:
+    Error: INSTALLATION FAILED: unable to continue with install: Secret "db-credentials" in namespace "helmissions"
+    exists and cannot be imported into the current release: invalid ownership metadata; annotation validation error:
+    key "meta.helm.sh/release-name" must equal "storefront": current value is "shop"
+  The `storefront` chart is in your workspace.
+objective: |
+  Release `storefront` is `deployed` in namespace `helmissions` and its pod is Ready. The Secret
+  `db-credentials` exists and belongs to release `storefront` (it appears in the release manifest and its Helm
+  ownership annotations name `storefront`). No release `shop` exists.
+xp: 300
+difficulty: advanced
+expected_time: 15m
+concepts:
+  - helm.sh/resource-policy keep
+  - release ownership annotations
+  - --take-ownership
+  - renaming releases

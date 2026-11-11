@@ -1,0 +1,3 @@
+The new pod is running but never Ready. Find out why the kubelet thinks so:
+  kubectl get pods -n helmissions
+  kubectl describe pod -n helmissions <the 0/1 pod>     # look at Events

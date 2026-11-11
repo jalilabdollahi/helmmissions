@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ .Release.Name }}-settings
+  labels:
+    app.kubernetes.io/name: invoice-api
+    app.kubernetes.io/instance: {{ .Release.Name }}
+data:
+  CURRENCY: {{ .Values.invoice.currency | quote }}
+  DUE_DAYS: {{ .Values.invoice.dueDays | quote }}

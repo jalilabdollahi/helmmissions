@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ .Release.Name }}-config
+  labels:
+    app.kubernetes.io/name: product-search
+data:
+  FEATURE_SEARCH: {{ .Values.features.search | quote }}
+  FEATURE_RECOMMEND: {{ .Values.features.recommend | quote }}
+  CACHE_TTL_SECONDS: {{ .Values.cache.ttlSeconds | quote }}
+  LOG_LEVEL: {{ .Values.logLevel | quote }}

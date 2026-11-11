@@ -1,0 +1,10 @@
+replicaCount: 1
+image:
+  repository: traefik/whoami
+  tag: v1.10
+features:
+  search: true
+  recommend: true
+cache:
+  ttlSeconds: 60
+logLevel: info
