@@ -1,1 +1,0 @@
-Concrete direction: Add credentials to push command. When you think you have it, verify the result the same way the mission describes: Chart appears in ChartMuseum, helm repo update shows it

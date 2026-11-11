@@ -1,1 +1,0 @@
-The fix revolves around YAML quoting, special characters, strings. Compare the current state with the objective: Quote the value: `db.password: "p@ss!word#1"` If the level is stateful, inspect the existing release history before reinstalling anything.

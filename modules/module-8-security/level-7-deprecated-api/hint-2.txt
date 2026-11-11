@@ -1,1 +1,0 @@
-The fix revolves around deprecated API versions, API group migration, version skew. Compare the current state with the objective: Change to `apiVersion: apps/v1`, add required selector field If the level is stateful, inspect the existing release history before reinstalling anything.

@@ -1,1 +1,0 @@
-The fix revolves around helm history, helm get --revision, audit trail. Compare the current state with the objective: Use `helm history`, `helm get values --revision N`, identify bad revision If the level is stateful, inspect the existing release history before reinstalling anything.

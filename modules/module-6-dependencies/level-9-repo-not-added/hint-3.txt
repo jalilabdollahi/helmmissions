@@ -1,1 +1,0 @@
-Concrete direction: `helm repo add bitnami https://charts.bitnami.com/bitnami`. When you think you have it, verify the result the same way the mission describes: helm dependency update succeeds

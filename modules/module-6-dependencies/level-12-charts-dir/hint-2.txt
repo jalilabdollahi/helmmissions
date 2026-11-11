@@ -1,1 +1,0 @@
-The fix revolves around file:// dependencies, local chart development, path resolution. Compare the current state with the objective: Correct relative path for local chart dependency If the level is stateful, inspect the existing release history before reinstalling anything.

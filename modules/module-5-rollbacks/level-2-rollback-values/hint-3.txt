@@ -1,1 +1,0 @@
-Concrete direction: Rollback restores replicaCount to 3. When you think you have it, verify the result the same way the mission describes: Deployment has 3 replicas after rollback

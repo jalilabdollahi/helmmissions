@@ -1,6 +1,0 @@
-apiVersion: v2
-name: lint-errors
-description: Broken chart for Lint Police
-type: application
-version: 0.1.0
-appVersion: 1.0.0

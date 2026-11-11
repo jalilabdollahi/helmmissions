@@ -1,1 +1,0 @@
-The fix revolves around test hook, helm.sh/hook: test, validation tests. Compare the current state with the objective: Fix URL path in test template If the level is stateful, inspect the existing release history before reinstalling anything.

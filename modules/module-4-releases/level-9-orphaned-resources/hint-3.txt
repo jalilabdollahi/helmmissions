@@ -1,1 +1,0 @@
-Concrete direction: Delete orphaned resource, then helm install. When you think you have it, verify the result the same way the mission describes: Clean install, no conflicts

@@ -1,6 +1,0 @@
-apiVersion: v2
-name: tpl-function
-description: Broken chart for Template in Template
-type: application
-version: 0.1.0
-appVersion: 1.0.0

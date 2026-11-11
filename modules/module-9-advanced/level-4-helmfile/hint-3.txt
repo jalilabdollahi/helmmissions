@@ -1,1 +1,0 @@
-Concrete direction: Correct the path in helmfile.yaml. When you think you have it, verify the result the same way the mission describes: `helmfile apply` deploys all 3 releases

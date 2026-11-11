@@ -1,1 +1,0 @@
-The fix revolves around DRY principle, _helpers.tpl, template reuse. Compare the current state with the objective: Move labels to `_helpers.tpl`, use `{{ include "myapp.labels" . }}` in all templates If the level is stateful, inspect the existing release history before reinstalling anything.

@@ -1,1 +1,0 @@
-Concrete direction: `helm uninstall` then reinstall (or use `helm upgrade --force` to recreate). When you think you have it, verify the result the same way the mission describes: Updated release running with new selector

@@ -1,1 +1,0 @@
-The fix revolves around YAML types, int conversion, toYaml. Compare the current state with the objective: Remove quotes OR add `| int` in template If the level is stateful, inspect the existing release history before reinstalling anything.

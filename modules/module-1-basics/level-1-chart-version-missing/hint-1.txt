@@ -1,0 +1,3 @@
+Read the error carefully, then lint the chart before installing it:
+  helm lint ./webapp
+Lint checks the chart's metadata file, not just the templates.

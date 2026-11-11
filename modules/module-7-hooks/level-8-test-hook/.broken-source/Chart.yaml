@@ -1,6 +1,0 @@
-apiVersion: v2
-name: test-hook
-description: Broken chart for Test Your Work
-type: application
-version: 0.1.0
-appVersion: 1.0.0

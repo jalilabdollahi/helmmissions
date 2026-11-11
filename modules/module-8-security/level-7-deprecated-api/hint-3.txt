@@ -1,1 +1,0 @@
-Concrete direction: Change to `apiVersion: apps/v1`, add required selector field. When you think you have it, verify the result the same way the mission describes: Deployment created with correct apiVersion

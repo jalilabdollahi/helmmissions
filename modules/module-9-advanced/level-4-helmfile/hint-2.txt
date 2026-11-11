@@ -1,1 +1,0 @@
-The fix revolves around helmfile, multi-release management, environment files. Compare the current state with the objective: Correct the path in helmfile.yaml If the level is stateful, inspect the existing release history before reinstalling anything.

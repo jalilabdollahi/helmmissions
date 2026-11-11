@@ -1,1 +1,0 @@
-Look at live release state first: `helm list`, `helm status`, and `helm history` tell you more than the files alone. The broken state says: CI pipeline fails on first deploy (no release exists) with plain `helm upgrade`.

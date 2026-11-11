@@ -1,1 +1,0 @@
-These patterns rely on surrounding tooling. Read the chart plus the extra config files in the level directory. The broken state says: ArgoCD Application using Helm — custom values not applying.

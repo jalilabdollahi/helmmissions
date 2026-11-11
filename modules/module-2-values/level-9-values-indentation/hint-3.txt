@@ -1,1 +1,0 @@
-Concrete direction: Replace all tabs with spaces (2-space indent). When you think you have it, verify the result the same way the mission describes: `helm lint` passes, values parse correctly

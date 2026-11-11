@@ -1,0 +1,19 @@
+name: The Nameless Chart
+description: |
+  The web team handed over their first Helm chart, `webapp`, and went on holiday.
+  Every attempt to install it dies immediately:
+    Error: INSTALLATION FAILED: validation: chart.metadata.version is required
+  Nothing reaches the cluster. The chart lives in your workspace under `webapp/`.
+objective: |
+  Release `webapp` is deployed in namespace `helmissions` from the chart in your
+  workspace (chart version 0.1.0), its 2 nginx pods are Ready, and `helm lint`
+  passes for the chart.
+xp: 100
+difficulty: beginner
+expected_time: 5m
+concepts:
+  - Chart.yaml
+  - chart version vs appVersion
+  - SemVer
+  - helm install
+  - helm lint

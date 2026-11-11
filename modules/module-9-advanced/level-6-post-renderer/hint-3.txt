@@ -1,1 +1,0 @@
-Concrete direction: Create kustomization.yaml with required patches. When you think you have it, verify the result the same way the mission describes: Rendered manifests include kustomize patches

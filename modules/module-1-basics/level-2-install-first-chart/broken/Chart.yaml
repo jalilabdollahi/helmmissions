@@ -1,6 +1,0 @@
-apiVersion: v2
-name: install-first-chart
-description: Broken chart for The First Deploy
-type: application
-version: 0.1.0
-appVersion: 1.0.0

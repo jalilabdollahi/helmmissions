@@ -1,1 +1,0 @@
-Concrete direction: Add post-delete hook Job that deletes PVCs. When you think you have it, verify the result the same way the mission describes: helm uninstall results in clean namespace

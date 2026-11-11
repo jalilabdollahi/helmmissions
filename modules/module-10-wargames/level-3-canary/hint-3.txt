@@ -1,1 +1,0 @@
-Concrete direction: Adjust replica counts to achieve ~10% canary split. When you think you have it, verify the result the same way the mission describes: Canary gets ~10% of replicas

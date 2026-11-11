@@ -1,1 +1,0 @@
-Concrete direction: Move labels to `_helpers.tpl`, use `{{ include "myapp.labels" . }}` in all templates. When you think you have it, verify the result the same way the mission describes: All resources have consistent labels, Service endpoints populated

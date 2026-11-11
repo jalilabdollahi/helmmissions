@@ -1,6 +1,0 @@
-apiVersion: v2
-name: chart-version-mismatch
-description: Broken chart for Wrong Version
-type: application
-version: 0.1.0
-appVersion: 1.0.0

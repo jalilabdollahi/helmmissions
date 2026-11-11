@@ -1,1 +1,0 @@
-Concrete direction: Fix the hook script, or disable subchart hooks with --no-hooks. When you think you have it, verify the result the same way the mission describes: Full chart installs including subchart

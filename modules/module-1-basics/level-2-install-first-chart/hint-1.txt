@@ -1,1 +1,0 @@
-Start with `helm lint`, `helm template`, or a fresh `helm install` against the broken chart. The broken state says: A simple nginx chart exists but `helm install` fails with "release name not valid".

@@ -1,1 +1,0 @@
-Concrete direction: Understand PVC immutability; restore data manually if needed. When you think you have it, verify the result the same way the mission describes: StatefulSet running with correct storage

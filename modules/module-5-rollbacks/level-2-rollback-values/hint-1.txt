@@ -1,1 +1,0 @@
-This level is about revision history. Start with `helm history` and identify the good revision before changing anything. The broken state says: Player expects rollback to restore previous values — confirm this behavior.

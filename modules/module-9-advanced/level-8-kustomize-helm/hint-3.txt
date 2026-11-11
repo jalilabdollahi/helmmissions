@@ -1,1 +1,0 @@
-Concrete direction: Correct path, ensure kustomize can locate values. When you think you have it, verify the result the same way the mission describes: `kustomize build` produces valid manifests

@@ -1,6 +1,0 @@
-apiVersion: v2
-name: rollback-configmap
-description: Broken chart for Config Restored
-type: application
-version: 0.1.0
-appVersion: 1.0.0

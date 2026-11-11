@@ -1,1 +1,0 @@
-The fix revolves around with block context, $ root object, scope. Compare the current state with the objective: Use `{{ with .Values.config }}{{ $.Release.Name }}{{ end }}` (dollar sign for root) If the level is stateful, inspect the existing release history before reinstalling anything.

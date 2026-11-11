@@ -1,1 +1,0 @@
-Concrete direction: Use `helm upgrade --install webapp` instead of `helm install webapp`. When you think you have it, verify the result the same way the mission describes: Release upgraded successfully, only one release exists

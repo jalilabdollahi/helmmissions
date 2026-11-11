@@ -1,1 +1,0 @@
-Concrete direction: Find the revision using `helm get values --revision N`, rollback. When you think you have it, verify the result the same way the mission describes: Memory limit restored to 512Mi

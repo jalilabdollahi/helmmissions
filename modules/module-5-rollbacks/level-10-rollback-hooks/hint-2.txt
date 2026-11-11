@@ -1,1 +1,0 @@
-The fix revolves around post-rollback hooks, idempotency, hook failure handling. Compare the current state with the objective: Make hook idempotent (IF NOT EXISTS pattern) If the level is stateful, inspect the existing release history before reinstalling anything.

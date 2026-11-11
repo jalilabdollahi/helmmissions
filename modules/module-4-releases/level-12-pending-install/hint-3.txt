@@ -1,1 +1,0 @@
-Concrete direction: `helm uninstall <release>` to clear state (even for pending). When you think you have it, verify the result the same way the mission describes: Clean state, successful reinstall

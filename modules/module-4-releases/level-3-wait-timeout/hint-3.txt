@@ -1,1 +1,0 @@
-Concrete direction: Fix readiness probe port in values.yaml. When you think you have it, verify the result the same way the mission describes: install --wait completes within 5m

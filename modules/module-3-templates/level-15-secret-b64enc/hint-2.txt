@@ -1,1 +1,0 @@
-The fix revolves around Secret data vs stringData, b64enc, base64 in Kubernetes. Compare the current state with the objective: Change to `password: {{ .Values.db.password | b64enc | quote }}` If the level is stateful, inspect the existing release history before reinstalling anything.

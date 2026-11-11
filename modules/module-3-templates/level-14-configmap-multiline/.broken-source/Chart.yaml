@@ -1,6 +1,0 @@
-apiVersion: v2
-name: configmap-multiline
-description: Broken chart for Multiline Madness
-type: application
-version: 0.1.0
-appVersion: 1.0.0

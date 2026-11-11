@@ -1,1 +1,0 @@
-The fix revolves around before-hook-creation, stale hooks, manual cleanup. Compare the current state with the objective: Manually delete the old hook Job, or change delete policy If the level is stateful, inspect the existing release history before reinstalling anything.

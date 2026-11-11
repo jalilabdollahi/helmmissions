@@ -1,1 +1,0 @@
-The fix revolves around umbrella charts, chart composition, partial failure handling. Compare the current state with the objective: Fix subchart template error; understand umbrella chart failure modes If the level is stateful, inspect the existing release history before reinstalling anything.

@@ -1,1 +1,0 @@
-Concrete direction: Run `helm dependency update` to generate Chart.lock and download charts/. When you think you have it, verify the result the same way the mission describes: helm install succeeds with all dependencies

@@ -1,4 +1,0 @@
-releases:
-  - name: helmissions-app
-    namespace: helmissions
-    chart: ./broken

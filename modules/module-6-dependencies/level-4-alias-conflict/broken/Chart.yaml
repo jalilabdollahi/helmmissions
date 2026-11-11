@@ -1,6 +1,0 @@
-apiVersion: v2
-name: alias-conflict
-description: Broken chart for Name Collision
-type: application
-version: 0.1.0
-appVersion: 1.0.0

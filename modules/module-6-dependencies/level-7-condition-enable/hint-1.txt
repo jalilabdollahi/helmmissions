@@ -1,1 +1,0 @@
-Check dependency metadata before editing manifests: `Chart.yaml`, `Chart.lock`, and `charts/` are the main suspects. The broken state says: Redis subchart deploys even when caching is disabled.

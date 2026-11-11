@@ -1,1 +1,0 @@
-Concrete direction: Change to `{{ .Values.resources | toYaml | indent 12 }}`. When you think you have it, verify the result the same way the mission describes: Deployment YAML valid, kubectl apply succeeds

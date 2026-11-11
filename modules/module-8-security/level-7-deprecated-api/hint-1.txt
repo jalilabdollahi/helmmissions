@@ -1,1 +1,0 @@
-Use `helm lint` and then verify the rendered security-related resources or pod settings with kubectl. The broken state says: Chart uses `extensions/v1beta1` Deployment — removed in Kubernetes 1.16+.

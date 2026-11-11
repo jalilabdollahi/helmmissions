@@ -1,1 +1,0 @@
-Hook levels usually fail before or after the main workload. Inspect annotations, Jobs, and hook ordering. The broken state says: App upgrade requires DB schema migration — it must run before new pods start.

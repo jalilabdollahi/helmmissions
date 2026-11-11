@@ -1,1 +1,0 @@
-Concrete direction: Change to `password: {{ .Values.db.password | b64enc | quote }}`. When you think you have it, verify the result the same way the mission describes: Secret decodes correctly: `kubectl get secret ... -o jsonpath=...| base64 -d`

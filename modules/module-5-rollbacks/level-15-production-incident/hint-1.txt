@@ -1,1 +1,0 @@
-This level is about revision history. Start with `helm history` and identify the good revision before changing anything. The broken state says: Full production incident simulation — identify broken revision, rollback, verify recovery.

@@ -1,1 +1,0 @@
-Concrete direction: Use `|` block scalar or `{{ .Values.config | nindent 4 }}`. When you think you have it, verify the result the same way the mission describes: ConfigMap mounts correctly, nginx starts

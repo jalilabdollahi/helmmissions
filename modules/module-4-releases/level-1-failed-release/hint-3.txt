@@ -1,1 +1,0 @@
-Concrete direction: `helm uninstall <release>` then reinstall, OR fix the chart and `helm upgrade`. When you think you have it, verify the result the same way the mission describes: Release in deployed state

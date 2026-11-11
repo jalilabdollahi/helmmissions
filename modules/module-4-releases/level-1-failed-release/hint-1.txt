@@ -1,1 +1,0 @@
-Look at live release state first: `helm list`, `helm status`, and `helm history` tell you more than the files alone. The broken state says: Previous install left release in `failed` state — new install rejected.

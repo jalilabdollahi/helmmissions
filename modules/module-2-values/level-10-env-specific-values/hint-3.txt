@@ -1,1 +1,0 @@
-Concrete direction: Create `values-dev.yaml` overriding database.url, apply with `-f values-dev.yaml`. When you think you have it, verify the result the same way the mission describes: Dev-specific value used in deployment

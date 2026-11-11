@@ -1,1 +1,0 @@
-The fix revolves around secret management, values.yaml in git, --set for secrets. Compare the current state with the objective: Remove from values.yaml; use `--set` for secrets or external-secrets If the level is stateful, inspect the existing release history before reinstalling anything.

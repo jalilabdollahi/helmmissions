@@ -1,1 +1,0 @@
-Concrete direction: Fix the template, helm upgrade to create successful revision. When you think you have it, verify the result the same way the mission describes: Latest revision deployed, history shows recovery

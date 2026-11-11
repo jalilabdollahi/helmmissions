@@ -1,1 +1,0 @@
-The fix revolves around debugging multiple failures, dependency order, systematic approach. Compare the current state with the objective: Fix in dependency order: database hook → backend env → frontend config If the level is stateful, inspect the existing release history before reinstalling anything.

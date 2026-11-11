@@ -1,1 +1,0 @@
-Concrete direction: Fix in dependency order: database hook → backend env → frontend config. When you think you have it, verify the result the same way the mission describes: All 3 tiers healthy

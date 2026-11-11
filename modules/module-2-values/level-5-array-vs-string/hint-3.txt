@@ -1,1 +1,0 @@
-Concrete direction: Change to `ingress.hosts:\n  - "example.com"` (YAML list). When you think you have it, verify the result the same way the mission describes: Ingress resource created with correct host

@@ -1,1 +1,0 @@
-Look at live release state first: `helm list`, `helm status`, and `helm history` tell you more than the files alone. The broken state says: Release stuck in `pending-install` state — process was killed mid-install.

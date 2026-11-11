@@ -1,1 +1,0 @@
-Start with `helm lint`, `helm template`, or a fresh `helm install` against the broken chart. The broken state says: Second `helm install` fails with "cannot re-use a name that is still in use".

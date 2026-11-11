@@ -1,1 +1,0 @@
-The fix revolves around global values, .Values.global, cross-subchart sharing. Compare the current state with the objective: Use `global.clusterName` — accessible in all subcharts via `.Values.global` If the level is stateful, inspect the existing release history before reinstalling anything.

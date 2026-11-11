@@ -1,6 +1,0 @@
-apiVersion: v2
-name: values-indentation
-description: Broken chart for YAML Indent Hell
-type: application
-version: 0.1.0
-appVersion: 1.0.0

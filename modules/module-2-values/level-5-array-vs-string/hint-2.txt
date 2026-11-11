@@ -1,1 +1,0 @@
-The fix revolves around YAML arrays, range, list vs scalar. Compare the current state with the objective: Change to `ingress.hosts:\n  - "example.com"` (YAML list) If the level is stateful, inspect the existing release history before reinstalling anything.
