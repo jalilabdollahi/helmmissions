@@ -1,0 +1,2 @@
+Helm does not create the target namespace on its own: `-n <ns>` only says where to put the release.
+Either create the namespace yourself or ask Helm to do it as part of the install.

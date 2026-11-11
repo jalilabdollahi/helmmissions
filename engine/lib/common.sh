@@ -98,8 +98,17 @@ hm_endpoints_count() {
   kubectl get endpointslices -n "${2:-$NS}" -l "kubernetes.io/service-name=$1" -o json 2>/dev/null \
     | jq '[.items[].endpoints[]? | select(.conditions.ready != false)] | length' 2>/dev/null || echo 0
 }
-# hm_http_check URL [NS] → runs a one-shot curl pod inside the namespace, prints body; non-zero on failure
+# hm_http_check URL [NS] [TRIES] → curl URL from a one-shot pod inside the namespace, prints the body;
+#   retries (default 5 tries, 3s apart) because new Services/endpoints take a moment to become reachable
 hm_http_check() {
+  local tries="${3:-5}" n
+  for n in $(seq 1 "$tries"); do
+    _hm_http_once "$1" "${2:-$NS}" && return 0
+    [ "$n" -lt "$tries" ] && sleep 3
+  done
+  return 1
+}
+_hm_http_once() {
   local name="hm-probe-$RANDOM" ns="${2:-$NS}" phase="" i
   kubectl run "$name" -n "$ns" --image=curlimages/curl:8.10.1 --image-pull-policy=IfNotPresent --restart=Never \
     --labels=helmissions.io/probe=true --command -- curl -fsS --max-time 5 "$1" >/dev/null 2>&1 || return 1

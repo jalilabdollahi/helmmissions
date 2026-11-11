@@ -1,0 +1,4 @@
+Create values-staging.yaml next to the chart:
+  ingressHost: docs.staging.helmissions.local
+then install with it:
+  helm install docs-site ./docs-site -n helmissions -f values-staging.yaml

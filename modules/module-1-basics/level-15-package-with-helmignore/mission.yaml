@@ -1,0 +1,18 @@
+name: Ship A Clean Package
+description: |
+  The `reports` chart (version 1.1.0) must be released through the artifact repository, which picks up
+  `dist/*.tgz`. See `RELEASE-NOTES.txt`. The working copy of the chart contains files that only exist on
+  a developer's machine, and `helm package` bundles everything it finds in the chart directory. A security
+  review already bounced an earlier archive.
+objective: |
+  `dist/reports-1.1.0.tgz` exists in your workspace and contains only chart files - no `secrets.local.env`,
+  no `*.bak` files and no `tmp/` directory. Release `reports` is deployed in namespace `helmissions` from
+  that package (chart version 1.1.0) and its pod is Ready.
+xp: 150
+difficulty: beginner
+expected_time: 15m
+concepts:
+  - helm package
+  - .helmignore
+  - installing from a .tgz
+  - supply chain hygiene

@@ -1,0 +1,6 @@
+apiVersion: v2
+name: storefront
+description: Customer-facing shop frontend
+type: application
+version: 0.3.0
+appVersion: "2.8.1"

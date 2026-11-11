@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ .Release.Name }}-site
+data:
+  index.html: |
+    <html><body><h1>{{ .Values.report.title }}</h1><p>Period: {{ .Values.report.period }}</p></body></html>

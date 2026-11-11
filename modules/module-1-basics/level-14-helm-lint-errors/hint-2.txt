@@ -1,0 +1,3 @@
+All the problems are in newsletter/Chart.yaml (appVersion type, source URL, chart version, chart name).
+The chart name also ends up inside Kubernetes object names - read what the warnings say about those
+names and which rules they must follow (lowercase). Remember: chart `version` must be SemVer.

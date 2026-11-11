@@ -1,0 +1,18 @@
+name: Pull Backoff
+description: |
+  The `ledger-api` release was installed from the chart in your workspace and Helm reports it as
+  `deployed`, yet nobody can reach the API. `kubectl get pods -n helmissions` shows the pods stuck in
+  `ErrImagePull` / `ImagePullBackOff`, and `kubectl describe pod` ends with
+    Failed to pull image "nginx:1.27-alpien": ... manifest unknown
+objective: |
+  Release `ledger-api` in namespace `helmissions` runs 2 Ready pods using image
+  `nginx:1.27-alpine`. The chart in your workspace (`ledger-api/values.yaml`) carries the correct
+  tag, and the release recorded by Helm uses it - a patch on the live Deployment alone is not enough.
+xp: 100
+difficulty: beginner
+expected_time: 10m
+concepts:
+  - ImagePullBackOff
+  - values.yaml
+  - helm upgrade
+  - kubectl describe

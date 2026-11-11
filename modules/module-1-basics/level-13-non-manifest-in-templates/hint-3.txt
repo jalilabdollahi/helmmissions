@@ -1,0 +1,3 @@
+Helm has a special place for text shown to the operator after an install: templates/NOTES.txt.
+  mv helpdesk/templates/usage-notes.yaml helpdesk/templates/NOTES.txt
+(or move the file out of templates/ entirely), then:  helm install helpdesk ./helpdesk -n helmissions

@@ -1,0 +1,6 @@
+apiVersion: v2
+name: weather-widget
+description: Embeddable weather widget for the customer portal
+type: application
+version: 1.3.0
+appVersion: "1.3"

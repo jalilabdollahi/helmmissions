@@ -1,0 +1,4 @@
+Support ticket #8841
+  "The weather widget on the portal shows 'Could not reach weather service' for every customer
+   since yesterday's deploy. The chart in git has not changed in weeks. Please investigate -
+   do not just change the chart, find out what is different about what is running."

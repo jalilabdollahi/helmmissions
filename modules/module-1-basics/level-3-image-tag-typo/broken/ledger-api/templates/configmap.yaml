@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ .Release.Name }}-settings
+data:
+  LEDGER_CURRENCY: {{ .Values.ledger.currency | quote }}
+  LEDGER_REGION: {{ .Values.ledger.region | quote }}

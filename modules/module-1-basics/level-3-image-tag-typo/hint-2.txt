@@ -1,0 +1,3 @@
+The event names the exact image that cannot be pulled. Compare it with the image the
+service is meant to run (nginx 1.27, alpine variant) and with image.tag in ledger-api/values.yaml.
+Helm renders the image from that value, so the typo lives in your chart.

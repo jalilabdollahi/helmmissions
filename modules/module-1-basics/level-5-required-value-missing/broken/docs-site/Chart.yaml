@@ -1,0 +1,6 @@
+apiVersion: v2
+name: docs-site
+description: Static documentation portal with an Ingress
+type: application
+version: 1.0.0
+appVersion: "4.2"

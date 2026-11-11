@@ -1,0 +1,18 @@
+name: Name Rejected
+description: |
+  The shop team's pipeline script `deploy.sh` stopped the Friday release cold. It runs
+  `helm install Shop_Frontend ./storefront` and Helm answers:
+    Error: INSTALLATION FAILED: release name check failed: release name "Shop_Frontend":
+    invalid release name, must match regex ^[a-z0-9]([-a-z0-9]*[a-z0-9])?(\.[a-z0-9]...
+  The storefront chart itself is fine; nothing is deployed.
+objective: |
+  `deploy.sh` in your workspace runs successfully and leaves release `shop-frontend` deployed
+  in namespace `helmissions` from the storefront chart, with its 2 pods Ready. The script itself
+  must use a release name that Helm accepts, so the next pipeline run works too.
+xp: 100
+difficulty: beginner
+expected_time: 5m
+concepts:
+  - release names
+  - DNS-1123
+  - helm install

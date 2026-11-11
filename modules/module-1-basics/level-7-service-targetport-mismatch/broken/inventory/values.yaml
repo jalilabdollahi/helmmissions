@@ -1,0 +1,12 @@
+replicaCount: 2
+
+image:
+  repository: nginx
+  tag: 1.27-alpine
+
+# The application listens on containerPort below; the Service exposes `port` to callers.
+containerPort: 80
+
+service:
+  port: 80
+  targetPort: 8080

@@ -1,0 +1,3 @@
+Check whether the namespace in the error exists:
+  kubectl get namespaces
+The error comes from the Kubernetes API, not from the chart.

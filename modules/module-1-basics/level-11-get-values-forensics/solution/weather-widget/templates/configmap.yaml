@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ .Release.Name }}-config
+data:
+  config.json: |
+    {
+      "apiUrl": {{ .Values.config.apiUrl | quote }},
+      "units": {{ .Values.config.units | quote }},
+      "refreshSeconds": {{ .Values.config.refreshSeconds }}
+    }

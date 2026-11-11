@@ -1,0 +1,3 @@
+A plain `helm upgrade` with no new values quietly keeps the previous user values - including the bad
+override. Tell Helm to forget them:
+  helm upgrade weather-widget ./weather-widget -n helmissions --reset-values

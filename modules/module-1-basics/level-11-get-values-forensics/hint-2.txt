@@ -1,0 +1,3 @@
+`helm get values` (without --all) shows only what the deployer supplied on top of the chart defaults.
+Somebody passed `--set config.apiUrl=...` pointing at a local mock, and Helm stored it with the release.
+Careful: when you upgrade without giving any new values, Helm re-applies the stored ones.

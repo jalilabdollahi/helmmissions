@@ -1,0 +1,19 @@
+# The public host name of the portal. Every environment must set its own.
+ingressHost: ""
+
+replicaCount: 1
+
+image:
+  repository: nginx
+  tag: 1.27-alpine
+  pullPolicy: IfNotPresent
+
+ingress:
+  className: nginx
+
+resources:
+  requests:
+    cpu: 10m
+    memory: 16Mi
+  limits:
+    memory: 64Mi

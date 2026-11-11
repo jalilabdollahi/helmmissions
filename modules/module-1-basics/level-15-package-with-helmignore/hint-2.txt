@@ -1,0 +1,3 @@
+`helm package` includes every file in the chart directory unless a `.helmignore` file in that directory says
+otherwise (it works like .gitignore). The chart has none yet, so local-only files such as secrets.local.env,
+*.bak and tmp/ end up in the archive.

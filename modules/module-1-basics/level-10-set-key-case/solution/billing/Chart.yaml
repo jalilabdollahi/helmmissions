@@ -1,0 +1,6 @@
+apiVersion: v2
+name: billing
+description: Invoice generation workers
+type: application
+version: 3.4.0
+appVersion: "3.4"

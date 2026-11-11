@@ -1,0 +1,2 @@
+Helm identifies a chart by a file with one exact name: `Chart.yaml` - capital C, extension .yaml.
+The contractor used the short `.yml` extension, which Helm does not accept for this file.

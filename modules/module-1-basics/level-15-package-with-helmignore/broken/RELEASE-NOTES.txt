@@ -1,0 +1,6 @@
+reports 1.1.0 - release checklist
+---------------------------------
+1. Package the chart into ./dist (the artifact repository picks up dist/*.tgz).
+2. Install the PACKAGE, not the directory:  release `reports` in namespace helmissions.
+3. The package is uploaded to a shared repository: it must contain only what the chart needs.
+   (Our working copy has local-only files in it - look before you package.)

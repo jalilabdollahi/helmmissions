@@ -1,0 +1,3 @@
+Helm treats every file in `templates/` as a template that must render to Kubernetes YAML. The file in
+question is plain prose written for humans - it is not a manifest, so parsing it as YAML fails.
+Decide where documentation belongs instead.

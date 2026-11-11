@@ -1,0 +1,6 @@
+apiVersion: v2
+name: inventory
+description: Warehouse stock lookup service
+type: application
+version: 2.0.1
+appVersion: "2.0"

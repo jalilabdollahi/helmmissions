@@ -1,0 +1,18 @@
+name: Cannot Re-use a Name
+description: |
+  Release `orders` (chart 0.1.0) has been serving the shop since last month. The workspace now holds
+  the new chart, `orders` 0.2.0, and the rollout command fails:
+    Error: INSTALLATION FAILED: release name check failed: cannot reuse a name that is still in use
+  (Helm 3 spells it "cannot re-use a name that is still in use".) Last time somebody "solved" this
+  by deleting the release, and nobody could roll back when the deploy went wrong.
+objective: |
+  Release `orders` in namespace `helmissions` runs chart `orders-0.2.0` from your workspace with 2 Ready
+  pods and the new `orders-config` ConfigMap. Its revision history still contains the original 0.1.0
+  revision - the release must not have been deleted and recreated.
+xp: 150
+difficulty: beginner
+expected_time: 10m
+concepts:
+  - release names
+  - helm install vs helm upgrade
+  - helm history

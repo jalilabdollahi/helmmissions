@@ -1,0 +1,3 @@
+Compare what was set with what the chart reads:
+  helm get values billing -n helmissions
+  grep -rn replica billing/values.yaml billing/templates

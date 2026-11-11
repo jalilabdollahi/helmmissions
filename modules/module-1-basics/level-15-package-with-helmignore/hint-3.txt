@@ -1,0 +1,7 @@
+Create reports/.helmignore:
+  secrets.local.env
+  *.bak
+  tmp/
+then re-package and install the PACKAGE (not the directory):
+  helm package ./reports -d dist
+  helm install reports dist/reports-1.1.0.tgz -n helmissions

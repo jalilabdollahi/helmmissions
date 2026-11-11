@@ -1,0 +1,3 @@
+One command does both:
+  helm install metrics-proxy ./metrics-proxy -n helmissions-staging --create-namespace
+Do not move the release into `helmissions` to avoid the error - the ticket names the namespace.

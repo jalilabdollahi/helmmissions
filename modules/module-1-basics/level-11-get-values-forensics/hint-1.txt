@@ -1,0 +1,3 @@
+The chart is correct, so ask the RELEASE what it was deployed with:
+  helm get values weather-widget -n helmissions
+  helm get values weather-widget -n helmissions --all

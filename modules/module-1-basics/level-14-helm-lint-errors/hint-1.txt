@@ -1,0 +1,3 @@
+Run the gate yourself and read every line, noting the level of each message:
+  ./ci/lint.sh
+[ERROR] lines fail any lint run; [WARNING] lines only fail it because of --strict; [INFO] never fails.

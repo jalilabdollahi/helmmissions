@@ -1,0 +1,3 @@
+Rename parcel-tracker/template to parcel-tracker/templates, then update the existing release:
+  helm upgrade parcel-tracker ./parcel-tracker -n helmissions
+Applying the YAML with kubectl would create objects Helm does not know about.

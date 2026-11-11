@@ -1,0 +1,2 @@
+Start with Kubernetes, not Helm: kubectl get pods -n helmissions, then
+kubectl describe pod <name> -n helmissions and read the Events at the bottom.

@@ -1,0 +1,6 @@
+Usage notes for operators
+=========================
+
+* Scale the portal with replicaCount in values.yaml.
+* The greeting shown on the landing page is portal.greeting.
+* Page the on-call engineer: see the runbook, section 4.

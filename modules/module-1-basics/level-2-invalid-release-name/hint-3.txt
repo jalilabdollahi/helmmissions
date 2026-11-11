@@ -1,0 +1,2 @@
+Edit deploy.sh and use a lowercase, dash-separated name: shop-frontend.
+Then run the script itself (not a hand-typed copy of the command):  ./deploy.sh

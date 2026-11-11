@@ -1,0 +1,18 @@
+name: The Mystery Override
+description: |
+  Since yesterday's deploy the weather widget on the portal shows "Could not reach weather service".
+  The chart in your workspace has not changed in weeks and its defaults are correct, and the release
+  is `deployed` with a Ready pod. Something about the way `weather-widget` was deployed is different
+  from what is in git (see `NOTE-from-support.txt`).
+objective: |
+  Release `weather-widget` in namespace `helmissions` has no user-supplied `config.apiUrl`, and its
+  ConfigMap `weather-widget-config` carries the chart's default API URL. The fix must be recorded in the
+  Helm release itself - editing the live ConfigMap does not count. Do not change the chart files.
+xp: 150
+difficulty: beginner
+expected_time: 10m
+concepts:
+  - helm get values
+  - user-supplied values
+  - --reuse-values
+  - --reset-values

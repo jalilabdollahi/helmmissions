@@ -1,0 +1,3 @@
+Roll the new chart out on top of the running release:
+  helm upgrade orders ./orders -n helmissions
+(`helm upgrade --install` is the idempotent variant used in pipelines.)

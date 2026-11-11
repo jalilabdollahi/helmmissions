@@ -1,0 +1,20 @@
+replicaCount: 2
+
+image:
+  repository: nginx
+  tag: 1.27-alpien
+  pullPolicy: IfNotPresent
+
+ledger:
+  currency: EUR
+  region: eu-west
+
+service:
+  port: 80
+
+resources:
+  requests:
+    cpu: 10m
+    memory: 16Mi
+  limits:
+    memory: 64Mi

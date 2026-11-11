@@ -1,0 +1,3 @@
+Correct image.tag in ledger-api/values.yaml (1.27-alpine) and roll the fix out through Helm:
+  helm upgrade ledger-api ./ledger-api -n helmissions
+Patching the Deployment with kubectl would leave the release (and the file) wrong.

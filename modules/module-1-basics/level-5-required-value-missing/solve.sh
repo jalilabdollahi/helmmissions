@@ -1,0 +1,6 @@
+#!/bin/bash
+set -euo pipefail
+source "$HM_LIB"
+
+cp -R "$LEVEL_DIR/solution/." "$SANDBOX/"
+helm install docs-site ./docs-site -n "$NS" -f values-staging.yaml --wait --timeout 120s

@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ .Release.Name }}-landing
+data:
+  index.html: |
+    <html><body><h1>{{ .Values.portal.greeting }}</h1></body></html>

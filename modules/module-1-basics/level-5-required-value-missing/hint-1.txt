@@ -1,0 +1,3 @@
+The error message names the template and the value that is missing. Read the template to see
+how it is used, and read README.txt for the value you must provide.
+  helm show values ./docs-site

@@ -1,0 +1,6 @@
+OPS-2217  Roll out metrics-proxy to staging
+-------------------------------------------
+Release name : metrics-proxy
+Chart        : ./metrics-proxy
+Namespace    : helmissions-staging   (platform team: "it is not there yet - it's a new environment")
+Everything else is already configured in the chart.

@@ -1,0 +1,5 @@
+Create probe-values.yaml:
+  telemetry:
+    servicePort: 9100
+and install the archive with it:
+  helm install node-probe vendor/node-probe-0.4.2.tgz -n helmissions -f probe-values.yaml

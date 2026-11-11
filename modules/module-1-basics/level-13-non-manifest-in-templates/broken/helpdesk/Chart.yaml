@@ -1,0 +1,6 @@
+apiVersion: v2
+name: helpdesk
+description: Internal helpdesk portal
+type: application
+version: 1.0.0
+appVersion: "5.2"

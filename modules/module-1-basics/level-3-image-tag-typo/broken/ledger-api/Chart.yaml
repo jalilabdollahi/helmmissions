@@ -1,0 +1,6 @@
+apiVersion: v2
+name: ledger-api
+description: Double-entry ledger HTTP API (nginx stand-in)
+type: application
+version: 1.2.0
+appVersion: "1.27"
