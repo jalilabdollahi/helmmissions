@@ -1,0 +1,15 @@
+replicaCount: 1
+
+image:
+  repository: nginxinc/nginx-unprivileged
+  tag: 1.27-alpine
+
+service:
+  port: 80
+
+# The shop sits behind the corporate API gateway in this environment,
+# so no Ingress object should exist.
+ingress:
+  enabled: "false"
+  className: nginx
+  host: shop.example.com

@@ -1,0 +1,19 @@
+name: '"false" Is True'
+description: |
+  The platform team says the storefront must not be exposed through an Ingress: traffic
+  arrives via the API gateway. `storefront/values.yaml` even says `ingress.enabled: "false"`.
+  Yet release `storefront` keeps creating an Ingress, and `kubectl get ingress -n helmissions`
+  shows `storefront` with host `shop.example.com`. Deleting it by hand only works until the
+  next deploy.
+objective: |
+  Release `storefront` in namespace `helmissions` is deployed with 1 ready pod and its
+  manifest contains no Ingress, and no Ingress exists in the namespace. The computed value
+  `ingress.enabled` must be a real boolean `false`, and the fix must come through Helm
+  (an Ingress removed with kubectl does not count).
+xp: 150
+difficulty: beginner
+expected_time: 10m
+concepts:
+  - YAML types
+  - template conditionals
+  - truthiness of strings

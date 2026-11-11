@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ .Release.Name }}-config
+  labels:
+    app.kubernetes.io/name: {{ .Chart.Name }}
+data:
+  audit.conf: |
+    retention_days={{ .Values.audit.retentionDays }}
+    sink_host={{ .Values.audit.sink.host }}
+    sink_port={{ .Values.audit.sink.port }}
+    sink_tls={{ .Values.audit.sink.tls }}

@@ -1,0 +1,19 @@
+name: Last One Wins
+description: |
+  Production checkout is running with 1 replica and `LOG_LEVEL=debug`, even though
+  `values-prod.yaml` clearly asks for 3 replicas and `warn` logging. Everyone agrees the
+  values files are right; the release is deployed by `./deploy.sh` into namespace
+  `helmissions-prod`. Black Friday is next week.
+objective: |
+  Release `checkout` in namespace `helmissions-prod` runs 3 ready replicas with
+  `LOG_LEVEL=warn`, while the shared setting `REGION=eu-west-1` from `values-base.yaml` is still
+  applied. `deploy.sh` itself must be fixed (and still deploy `checkout` into `helmissions-prod`
+  with both values files) so the next pipeline run keeps the result; editing the values files to
+  hide the problem is not the fix.
+xp: 150
+difficulty: beginner
+expected_time: 10m
+concepts:
+  - values file precedence
+  - multiple -f flags
+  - deploy scripts

@@ -1,0 +1,4 @@
+Compare what the running release remembers with what the new chart defines:
+  helm get values notifier -n helmissions --all
+  helm show values ./notifier
+Which file does `metrics` come from, and is it in the first output?

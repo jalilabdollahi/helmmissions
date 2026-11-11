@@ -1,0 +1,4 @@
+Compare what the release really uses with what the files say:
+  helm get values checkout -n helmissions-prod --all
+  cat values-prod.yaml values-base.yaml
+Then read deploy.sh carefully, flag by flag.

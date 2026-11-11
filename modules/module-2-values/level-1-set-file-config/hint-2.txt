@@ -1,0 +1,3 @@
+`--set key=value` stores the text after the = sign as a string. It never opens files, so the
+ConfigMap holds the characters "./site.conf" instead of the nginx server block.
+Helm has a different flag that reads a file's contents into a value.

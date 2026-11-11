@@ -1,0 +1,7 @@
+replicaCount: 1
+logLevel: info
+region: unset
+
+image:
+  repository: traefik/whoami
+  tag: v1.10

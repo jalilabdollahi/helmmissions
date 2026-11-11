@@ -1,0 +1,18 @@
+name: 1.048576e+06
+description: |
+  The `upload-proxy` release is deployed with `maxUploadBytes: 1048576` (exactly 1 MiB) in
+  `values.yaml`, but the pod crash-loops: `proxy: MAX_UPLOAD_BYTES must be an integer number of bytes,
+  got '1.048576e+06'`. Looking at the ConfigMap, the number really was rewritten into scientific
+  notation. A colleague notes that other environments override the value in their own values
+  files, e.g. 5242880 for the media cluster.
+objective: |
+  Release `upload-proxy` in namespace `helmissions` is deployed with its pod Ready and the ConfigMap
+  `upload-proxy-limits` holding `MAX_UPLOAD_BYTES: "1048576"`. The chart itself must render plain
+  integers for any whole-number value, including 5242880 supplied through a values file.
+xp: 200
+difficulty: intermediate
+expected_time: 15m
+concepts:
+  - float64 in values
+  - int / int64
+  - number formatting

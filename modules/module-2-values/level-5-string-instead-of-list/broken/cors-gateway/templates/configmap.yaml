@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ .Release.Name }}-origins
+  labels:
+    app.kubernetes.io/name: {{ .Chart.Name }}
+data:
+  origins.txt: |
+    {{- range .Values.allowedOrigins }}
+    {{ . }}
+    {{- end }}

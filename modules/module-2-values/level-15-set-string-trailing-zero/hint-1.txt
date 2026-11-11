@@ -1,0 +1,3 @@
+Compare the value you wrote with the value Helm stored and rendered:
+  helm get values status-page -n helmissions
+  helm template status-page ./status-page -f status-page/values.yaml | grep app.version

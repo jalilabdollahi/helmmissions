@@ -1,0 +1,3 @@
+`range` walks lists and maps. A quoted YAML scalar is a string, and a string is not iterable, so
+Helm cannot loop over `allowedOrigins: "https://shop.example"`. The template expects a list;
+the values file provides a single string.

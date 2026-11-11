@@ -1,0 +1,4 @@
+Helm has a mode that merges the three layers properly: new chart defaults, then the previous release's
+user-supplied values, then your --set flags:
+  helm upgrade notifier ./notifier -n helmissions --reset-then-reuse-values --set image.tag=1.36
+(or re-supply the overrides explicitly with --set replicaCount=2).

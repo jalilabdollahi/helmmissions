@@ -1,0 +1,53 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Release.Name }}
+  labels:
+    app.kubernetes.io/name: {{ .Chart.Name }}
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: {{ .Chart.Name }}
+      app.kubernetes.io/instance: {{ .Release.Name }}
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: {{ .Chart.Name }}
+        app.kubernetes.io/instance: {{ .Release.Name }}
+      annotations:
+        checksum/secret: {{ include (print $.Template.BasePath "/secret.yaml") . | sha256sum }}
+    spec:
+      terminationGracePeriodSeconds: 2
+      initContainers:
+        # Stand-in for the database handshake: the credential must be exactly the one the DB was rotated to.
+        - name: auth-check
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+          imagePullPolicy: IfNotPresent
+          envFrom:
+            - secretRef:
+                name: {{ .Release.Name }}-db
+          command: ["/bin/sh", "-c"]
+          args:
+            - |
+              got=$(printf %s "$DB_PASSWORD" | sha256sum | cut -d' ' -f1)
+              if [ "$got" != "214809c517eb106e0fa6bb5af7c74e3db0bfdfcf9a9d906fe21dcc337efb75af" ]; then
+                echo "auth-check: database rejected the credentials for user $DB_USER" >&2
+                exit 1
+              fi
+              echo "auth-check: credentials accepted for $DB_USER"
+      containers:
+        - name: ledger
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+          imagePullPolicy: IfNotPresent
+          command: ["sleep", "3600"]
+          readinessProbe:
+            exec:
+              command: ["true"]
+            periodSeconds: 2
+          resources:
+            requests:
+              cpu: 10m
+              memory: 16Mi
+            limits:
+              memory: 32Mi

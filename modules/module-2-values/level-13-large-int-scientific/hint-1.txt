@@ -1,0 +1,4 @@
+Compare the value you wrote with what the cluster received:
+  grep maxUploadBytes upload-proxy/values.yaml
+  kubectl get configmap upload-proxy-limits -n helmissions -o yaml
+  helm template upload-proxy ./upload-proxy | grep MAX_UPLOAD

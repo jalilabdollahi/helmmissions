@@ -1,0 +1,7 @@
+# production: redis cache in front of the profile database
+replicaCount: 2
+logLevel: warn
+cache:
+  redis:
+    host: redis-master.cache.svc.cluster.local
+    port: 6379

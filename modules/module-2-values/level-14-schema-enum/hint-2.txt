@@ -1,0 +1,3 @@
+The schema is the rule, the values are the thing being checked: `logLevel` must be one of the listed lower-case
+names and `replicas` must be at least 1. `WARN` and `0` break those rules. The schema belongs to another team,
+so you change the values, never the schema (and `--skip-schema-validation` only hides the violation).

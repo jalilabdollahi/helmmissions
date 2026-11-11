@@ -1,0 +1,6 @@
+apiVersion: v2
+name: storefront
+description: Public web shop front-end
+type: application
+version: 1.2.0
+appVersion: "2024.11"

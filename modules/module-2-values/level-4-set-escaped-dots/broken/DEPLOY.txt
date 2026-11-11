@@ -1,0 +1,7 @@
+telemetry-agent - how it was deployed (by a colleague, from shell history)
+
+  helm install telemetry-agent ./telemetry-agent -n helmissions \
+    --set podAnnotations.prometheus.io/scrape=true \
+    --set podAnnotations.prometheus.io/port=9100
+
+Prometheus is not discovering the pods.

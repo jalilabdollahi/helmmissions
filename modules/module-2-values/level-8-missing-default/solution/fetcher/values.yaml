@@ -1,0 +1,7 @@
+replicaCount: 1
+
+feed:
+  url: http://partner-feed.example.com/prices.json
+
+http:
+  retries: 3

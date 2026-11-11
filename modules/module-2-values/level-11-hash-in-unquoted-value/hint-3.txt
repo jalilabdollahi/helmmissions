@@ -1,0 +1,4 @@
+Quote the value in ledger-api/values.yaml:
+  password: "Harbor Light #2024"
+then helm upgrade ledger-api ./ledger-api -n helmissions
+(--set-string 'db.password=...' is an alternative; don't patch the Secret with kubectl.)

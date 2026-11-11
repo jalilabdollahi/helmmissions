@@ -1,0 +1,3 @@
+Render locally and read the template line mentioned in the error:
+  helm template cors-gateway ./cors-gateway
+  cat cors-gateway/templates/configmap.yaml

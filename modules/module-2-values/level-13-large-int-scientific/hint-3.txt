@@ -1,0 +1,4 @@
+Convert in the template, in upload-proxy/templates/configmap.yaml:
+  MAX_UPLOAD_BYTES: {{ .Values.maxUploadBytes | int64 | quote }}
+then helm upgrade upload-proxy ./upload-proxy -n helmissions
+Quoting the number inside values.yaml only fixes the default, not overrides.

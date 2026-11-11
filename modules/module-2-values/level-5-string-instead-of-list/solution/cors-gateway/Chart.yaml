@@ -1,0 +1,6 @@
+apiVersion: v2
+name: cors-gateway
+description: Publishes the list of origins allowed to call the public API
+type: application
+version: 1.0.3
+appVersion: "1.27"

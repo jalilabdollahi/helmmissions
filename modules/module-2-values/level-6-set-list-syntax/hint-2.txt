@@ -1,0 +1,3 @@
+In `--set`, a comma separates *different* key=value pairs, so `b.svc` was parsed as a new key with no
+value. A list needs its own syntax: curly braces around the elements, or numeric indexes.
+Note that zsh/bash may need quotes around braces.

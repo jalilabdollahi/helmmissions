@@ -1,0 +1,18 @@
+name: The Hash That Ate My Password
+description: |
+  After the quarterly credential rotation, finance updated `ledger-api/values.yaml` with the new
+  database password, `Harbor Light #2024`, and redeployed release `ledger-api`. The pod now hangs in
+  `Init:Error` / `Init:CrashLoopBackOff`; the `auth-check` init container logs
+  `database rejected the credentials for user ledger`. The DB team swears the new password works.
+  The password in the values file looks right.
+objective: |
+  Release `ledger-api` in namespace `helmissions` is deployed and its pod is Ready (the credential
+  check passes). The Secret `ledger-api-db` must hold the full password `Harbor Light #2024`, both in
+  the cluster and in what Helm manages (patching the Secret with kubectl is not enough).
+xp: 200
+difficulty: intermediate
+expected_time: 10m
+concepts:
+  - YAML comments
+  - quoting strings
+  - secrets from values

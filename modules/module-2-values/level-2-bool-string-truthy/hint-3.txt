@@ -1,0 +1,4 @@
+Write the value as a real boolean (no quotes) in storefront/values.yaml:
+  ingress:
+    enabled: false
+then run: helm upgrade storefront ./storefront -n helmissions

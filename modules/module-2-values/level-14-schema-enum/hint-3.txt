@@ -1,0 +1,4 @@
+Edit search-api/values.yaml:
+  replicas: 2          # any value >= 1
+  logLevel: warn       # one of debug|info|warn|error
+then: helm lint ./search-api && helm install search-api ./search-api -n helmissions

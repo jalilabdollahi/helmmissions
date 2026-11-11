@@ -1,0 +1,8 @@
+replicaCount: 1
+
+image:
+  repository: traefik/whoami
+  tag: v1.10
+
+# Extra DNS search domains added to every pod (resolv.conf "search" line)
+dnsSearch: []

@@ -1,0 +1,19 @@
+name: A Path Is Not A File
+description: |
+  A colleague deployed the marketing site as release `landing` with
+  `helm install landing ./landing --set siteConfig=./site.conf`, expecting Helm to read
+  the file. The release says `deployed`, but the nginx pod never becomes Ready and keeps
+  restarting. `kubectl logs` shows an nginx configuration error, and the ConfigMap that
+  should hold the server block looks suspiciously short.
+objective: |
+  Release `landing` in namespace `helmissions` is deployed and its nginx pod is Ready.
+  The ConfigMap `landing-nginx` (key `default.conf`) must contain exactly the contents
+  of `site.conf` from your workspace, delivered through Helm (not patched by hand), and
+  the site must answer on the `landing` Service with the page text from `site.conf`.
+xp: 150
+difficulty: beginner
+expected_time: 10m
+concepts:
+  - helm --set vs --set-file
+  - values from files
+  - ConfigMap data

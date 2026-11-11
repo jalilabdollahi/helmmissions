@@ -1,0 +1,3 @@
+`{{ .Values.http.timeout }}` prints nothing when the key does not exist: Helm does not complain about
+missing values, it renders them as an empty string. The template needs a fallback for when the operator
+does not set the value.

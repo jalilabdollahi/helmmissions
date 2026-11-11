@@ -1,0 +1,7 @@
+Replace every leading tab in the `audit:` block of audit-log/values.yaml with spaces, keeping the same
+nesting (2 spaces per level):
+  audit:
+    retentionDays: 90
+    sink:
+      host: ...
+Then: helm lint ./audit-log && helm install audit-log ./audit-log -n helmissions

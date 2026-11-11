@@ -1,0 +1,3 @@
+The decoded password is shorter than the one in values.yaml: everything from the `#` on is missing.
+In YAML an unquoted `#` that follows whitespace starts a comment, and the rest of the line is thrown away
+before Helm ever sees it.

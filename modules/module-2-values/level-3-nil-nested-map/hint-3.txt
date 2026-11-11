@@ -1,0 +1,4 @@
+Make the template guard the optional block, e.g. wrap the cache keys in
+  {{- with .Values.cache }}{{- with .redis }} ... {{- end }}{{- end }}
+(or use `dig "cache" "redis" "host" "" .Values.AsMap`), then install:
+  helm install profile-svc ./profile-svc -n helmissions -f values-staging.yaml

@@ -1,0 +1,22 @@
+name: Nil Pointer In The Cache Block
+description: |
+  `profile-svc` deploys fine to production, where the values file carries a `cache.redis`
+  block. The staging deploy (`./deploy-staging.sh`, which uses `values-staging.yaml`) has no
+  cache layer, and Helm refuses to render:
+    Error: INSTALLATION FAILED: profile-svc/templates/configmap.yaml:...
+      executing "profile-svc/templates/configmap.yaml" at <.Values.cache.redis.host>:
+        nil pointer evaluating interface {}.redis
+  Nothing is installed in staging.
+objective: |
+  The chart renders both without a `cache` block anywhere in the values and with one
+  (`--set cache.redis.host=...` puts that host into the rendered ConfigMap). Release
+  `profile-svc` is deployed in namespace `helmissions` from the staging values and its pod is Ready.
+  Fixing it by adding a dummy cache block only to the staging file is not enough; the chart
+  itself must cope with the block being absent.
+xp: 200
+difficulty: intermediate
+expected_time: 15m
+concepts:
+  - nil pointer evaluating
+  - optional values
+  - with / default / dig

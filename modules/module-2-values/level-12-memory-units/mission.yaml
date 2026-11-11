@@ -1,0 +1,21 @@
+name: 256 Bytes Of RAM
+description: |
+  The thumbnail workers (`image-resizer`) need a bit more memory, so someone set
+  `resources.limits.memory: 256` in `image-resizer/values.yaml`, meaning "256 megabytes". The release
+  fails to install and ends up `failed`:
+    Error: INSTALLATION FAILED: server-side apply failed for object helmissions/image-resizer
+    apps/v1, Kind=Deployment: Deployment.apps "image-resizer" is invalid:
+    spec.template.spec.containers[0].resources.requests: Invalid value: "128Mi":
+    must be less than or equal to memory limit of 256
+  No worker pods exist.
+objective: |
+  Release `image-resizer` in namespace `helmissions` is deployed with 2 ready pods and a memory
+  limit of 256Mi (a quarter of a gibibyte) coming from the Helm values, while the 128Mi request is
+  kept. Patching the Deployment with kubectl does not count.
+xp: 150
+difficulty: beginner
+expected_time: 10m
+concepts:
+  - Kubernetes quantities
+  - resource limits
+  - values typing

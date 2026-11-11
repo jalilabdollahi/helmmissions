@@ -1,0 +1,3 @@
+Look at what Helm rendered and at what the container complains about:
+  helm get manifest fetcher -n helmissions | grep -B2 -A4 FETCH_
+  kubectl logs deploy/fetcher -n helmissions

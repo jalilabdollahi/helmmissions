@@ -1,0 +1,3 @@
+Ask Helm what it believes the value is, and how the template uses it:
+  helm get values storefront -n helmissions --all | grep -A2 ingress
+  cat storefront/templates/ingress.yaml

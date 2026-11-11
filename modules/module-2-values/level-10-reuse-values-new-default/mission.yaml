@@ -1,0 +1,21 @@
+name: --reuse-values Ate My Default
+description: |
+  Chart `notifier` 2.0.0 adds a Prometheus metrics endpoint (`metrics.port`, default 9102 in
+  `values.yaml`). The CI job (`ci-upgrade.sh`) upgrades the running release with `--reuse-values --set image.tag=1.36`
+  to keep the settings the team tuned by hand - the release was installed with `--set replicaCount=2`.
+  The pipeline now fails:
+    Error: UPGRADE FAILED: ... executing "notifier/templates/deployment.yaml" at <.Values.metrics.port>:
+      nil pointer evaluating interface {}.port
+  Dropping `--reuse-values` from the job makes the upgrade work, but then the replica count falls back to 1.
+objective: |
+  Release `notifier` in namespace `helmissions` runs chart `notifier-2.0.0` and is deployed with
+  2 ready replicas (the earlier `replicaCount: 2` override is preserved), and the pods expose the
+  metrics port defined by the new chart's defaults (9102).
+xp: 250
+difficulty: intermediate
+expected_time: 15m
+concepts:
+  - --reuse-values
+  - --reset-then-reuse-values
+  - chart upgrades
+  - new default values

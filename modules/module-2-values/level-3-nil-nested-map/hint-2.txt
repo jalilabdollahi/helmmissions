@@ -1,0 +1,3 @@
+The template walks .Values.cache.redis.host. When `cache` is missing, `.Values.cache` is nil and Go
+refuses to read `.redis` from nil. Production works only because its values file happens to define the block.
+The chart should not depend on every environment defining optional blocks.

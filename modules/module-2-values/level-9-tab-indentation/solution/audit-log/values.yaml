@@ -1,0 +1,13 @@
+replicaCount: 2
+
+image:
+  repository: nginx
+  tag: 1.27-alpine
+
+# Pasted from the compliance wiki
+audit:
+  retentionDays: 90
+  sink:
+    host: siem.corp.example
+    port: 6514
+    tls: true
