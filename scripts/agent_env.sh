@@ -7,7 +7,8 @@
 # dirs and sandbox, so several authors can run scripts/test_levels.py at the same time.
 # The local OCI registry (localhost:5001) and chart repo (localhost:8879) are shared.
 _slot="${1:?usage: source scripts/agent_env.sh <slot>}"
-_root="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
+if [ -n "${ZSH_VERSION:-}" ]; then eval '_src="${(%):-%x}"'; else _src="${BASH_SOURCE[0]}"; fi
+_root="$(cd "$(dirname "$_src")/.." && pwd)"
 _state="$_root/.hm-shared/agents/w${_slot}"
 mkdir -p "$_state"/{helm-config,helm-cache,helm-data,sandbox}
 export HELMISSIONS_CONTEXT="kind-hm-w${_slot}"
@@ -23,4 +24,4 @@ fi
 [ -s "$KUBECONFIG" ] || kind get kubeconfig --name "hm-w${_slot}" >"$KUBECONFIG"
 kubectl config use-context "kind-hm-w${_slot}" >/dev/null
 cd "$_root" || return 1
-unset _slot _root _state
+unset _slot _root _state _src
