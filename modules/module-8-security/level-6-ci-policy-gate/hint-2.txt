@@ -1,0 +1,4 @@
+Three rule families fail, and the gate checks EVERY container in the pod, sidecars included:
+floating image tags, missing cpu/memory limits, missing readiness/liveness probes.
+Tag and resources come from values.yaml; the probes live in templates/deployment.yaml.
+Editing ci/policy.sh is not an option — it is owned by the security team and the validator knows.

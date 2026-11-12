@@ -1,0 +1,9 @@
+image:
+  repository: curlimages/curl
+  tag: "8.10.1"
+  pullPolicy: IfNotPresent
+
+serviceAccount:
+  name: flag-sync
+
+pollSeconds: 3

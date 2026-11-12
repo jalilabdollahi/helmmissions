@@ -1,0 +1,21 @@
+name: Restricted Pod Security
+description: |
+  The security team labelled the `helmissions` namespace with Pod Security Admission level `restricted`
+  (`pod-security.kubernetes.io/enforce=restricted`). The `audit-gateway` release is `deployed`, but its
+  Deployment has no pods. The ReplicaSet events read:
+    Error creating: pods "audit-gateway-..." is forbidden: violates PodSecurity "restricted:latest":
+    allowPrivilegeEscalation != false (...), unrestricted capabilities (...), runAsNonRoot != true (...),
+    seccompProfile (pod or containers ... must set securityContext.seccompProfile.type to "RuntimeDefault" or "Localhost")
+  The namespace policy is not up for debate.
+objective: |
+  Release `audit-gateway` in namespace `helmissions` has a Ready pod, and the namespace still enforces the
+  `restricted` Pod Security level. Every container of the pod, init containers included, runs without privilege
+  escalation, with all Linux capabilities dropped, as non-root, under the RuntimeDefault seccomp profile.
+xp: 350
+difficulty: advanced
+expected_time: 20m
+concepts:
+  - Pod Security Admission
+  - restricted profile
+  - securityContext
+  - seccomp

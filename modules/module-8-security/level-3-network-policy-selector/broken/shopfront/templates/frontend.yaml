@@ -1,0 +1,51 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Release.Name }}-frontend
+  labels:
+    app.kubernetes.io/name: shopfront-frontend
+    app.kubernetes.io/instance: {{ .Release.Name }}
+    app.kubernetes.io/component: frontend
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: shopfront-frontend
+      app.kubernetes.io/instance: {{ .Release.Name }}
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: shopfront-frontend
+        app.kubernetes.io/instance: {{ .Release.Name }}
+        app.kubernetes.io/component: frontend
+    spec:
+      terminationGracePeriodSeconds: 2
+      containers:
+        - name: web
+          image: "{{ .Values.frontend.image.repository }}:{{ .Values.frontend.image.tag }}"
+          imagePullPolicy: {{ .Values.pullPolicy }}
+          env:
+            - name: CATALOG_URL
+              value: http://{{ .Release.Name }}-backend
+          command:
+            - sh
+            - -c
+            - |
+              while true; do
+                if curl -fsS --max-time 2 "$CATALOG_URL/" >/dev/null 2>&1; then
+                  echo "catalog reachable"; touch /tmp/ready
+                else
+                  echo "catalog unreachable (timeout)"; rm -f /tmp/ready
+                fi
+                sleep 3
+              done
+          readinessProbe:
+            exec:
+              command: ["test", "-f", "/tmp/ready"]
+            periodSeconds: 3
+          resources:
+            requests:
+              cpu: 10m
+              memory: 16Mi
+            limits:
+              memory: 64Mi

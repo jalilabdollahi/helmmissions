@@ -1,0 +1,4 @@
+Make the selector in the allow rule and the labels in the frontend pod template agree. The simplest
+edit is in the policy (use the frontend's real component label). Do NOT delete the default-deny policy
+and do not use an empty `podSelector: {}` in `from` — that admits every pod.
+Then: helm upgrade shopfront ./shopfront -n helmissions --wait

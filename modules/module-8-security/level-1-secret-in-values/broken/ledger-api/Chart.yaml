@@ -1,0 +1,6 @@
+apiVersion: v2
+name: ledger-api
+description: Ledger posting API for the finance platform
+type: application
+version: 0.3.0
+appVersion: "2.8.1"

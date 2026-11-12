@@ -1,0 +1,6 @@
+apiVersion: v2
+name: partner-portal
+description: Partner self-service portal, image hosted in the private registry
+type: application
+version: 0.7.0
+appVersion: "1.0"

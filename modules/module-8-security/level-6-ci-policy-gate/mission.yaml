@@ -1,0 +1,23 @@
+name: The Policy Gate
+description: |
+  Every chart change must pass the company's CI policy gate before it may be deployed. The new `report-worker`
+  chart fails it:
+    $ bash ci/policy.sh
+    POLICY VIOLATION: gate/worker: image nginx:latest uses a floating tag (pin a version)
+    POLICY VIOLATION: gate/worker: resources.limits.cpu and resources.limits.memory are required
+    ...
+    policy gate FAILED: 5 violation(s)
+  The gate script belongs to the security team. The chart has not been deployed yet.
+objective: |
+  `bash ci/policy.sh` exits 0 for the chart in your workspace (without any change to the gate script itself), and
+  release `report-worker` is deployed in namespace `helmissions` from that chart with its pod Ready. The live
+  release satisfies the same rules: pinned image tags, cpu and memory limits on every container, readiness and
+  liveness probes on every container.
+xp: 300
+difficulty: advanced
+expected_time: 15m
+concepts:
+  - policy as code
+  - image tag pinning
+  - resource limits
+  - liveness and readiness probes

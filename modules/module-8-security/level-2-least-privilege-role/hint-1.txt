@@ -1,0 +1,4 @@
+The pod log shows which call fails:
+  kubectl logs deploy/flag-sync -n helmissions
+Ask the API server what the ServiceAccount may do:
+  kubectl auth can-i list configmaps -n helmissions --as=system:serviceaccount:helmissions:flag-sync

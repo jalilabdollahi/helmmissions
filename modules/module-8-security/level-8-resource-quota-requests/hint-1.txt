@@ -1,0 +1,5 @@
+The Deployment is fine; its ReplicaSet is the one complaining:
+  kubectl get events -n helmissions --sort-by=.lastTimestamp
+  kubectl describe rs -n helmissions
+Then read the quota the namespace enforces:
+  kubectl describe resourcequota -n helmissions

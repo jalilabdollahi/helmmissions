@@ -1,0 +1,4 @@
+Set requests AND limits for cpu and memory under `resources:` in values.yaml. Two replicas must fit in the
+quota (look at `kubectl describe resourcequota`: requests.cpu 200m, requests.memory 256Mi, limits.cpu 400m,
+limits.memory 512Mi), so keep each pod modest, e.g. requests 50m/64Mi and limits 100m/128Mi.
+Then: helm upgrade search-indexer ./search-indexer -n helmissions --wait

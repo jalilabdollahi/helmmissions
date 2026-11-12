@@ -1,0 +1,4 @@
+Add a second rule to the Role in the chart: apiGroup "" (the core group), resource configmaps, and only
+the read verbs the syncer needs. Do not use "*" anywhere and do not widen the binding.
+Then helm upgrade flag-sync ./flag-sync -n helmissions and re-run `kubectl auth can-i ...`
+(also try `kubectl auth can-i list secrets` — it must still say no).

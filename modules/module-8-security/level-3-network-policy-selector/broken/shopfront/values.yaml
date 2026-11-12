@@ -1,0 +1,12 @@
+backend:
+  image:
+    repository: traefik/whoami
+    tag: v1.10
+  port: 80
+
+frontend:
+  image:
+    repository: curlimages/curl
+    tag: 8.10.1
+
+pullPolicy: IfNotPresent

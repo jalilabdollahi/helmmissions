@@ -1,0 +1,6 @@
+apiVersion: v2
+name: inventory-service
+description: Warehouse inventory API with autoscaling and a disruption budget
+type: application
+version: 2.1.0
+appVersion: "1.27"

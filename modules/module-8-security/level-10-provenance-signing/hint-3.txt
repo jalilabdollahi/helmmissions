@@ -1,0 +1,4 @@
+  helm package payments-gateway -d dist --sign --key 'HelmMissions Release Signer' --keyring keys/signer-secring.gpg
+  helm verify dist/payments-gateway-1.0.0.tgz --keyring keys/signer-pubring.gpg
+  helm upgrade --install payments-gateway dist/payments-gateway-1.0.0.tgz -n helmissions --verify --keyring keys/signer-pubring.gpg --wait
+(Putting the --sign flags into deploy.sh and running it does all three steps in the right order.)

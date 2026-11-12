@@ -1,0 +1,8 @@
+OPS-4412  Deploy partner-portal 1.0 from the private registry
+
+Registry:   localhost:5002   (basic auth, htpasswd)
+Image:      localhost:5002/m8-portal/portal:1.0
+Pull user:  depot            (read-only service account)
+Password:   Ship-It-2026     (shared once through the ticket, do not commit it)
+
+  helm upgrade --install portal ./partner-portal -n helmissions

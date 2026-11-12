@@ -1,0 +1,5 @@
+- values.yaml: podSecurityContext -> runAsNonRoot: true, runAsUser: 101, seccompProfile.type: RuntimeDefault;
+  containerSecurityContext -> allowPrivilegeEscalation: false, capabilities.drop: ["ALL"].
+- templates/deployment.yaml: give the `wait-config` init container its own securityContext
+  (allowPrivilegeEscalation: false, capabilities drop ALL) — pod-level runAsNonRoot/seccomp already cover it.
+Leave the namespace label alone. Then helm upgrade audit-gateway ./audit-gateway -n helmissions --wait

@@ -1,0 +1,4 @@
+See what the release exposes to anyone with read access:
+  helm get values ledger-api -n helmissions
+  kubectl get deploy ledger-api -n helmissions -o yaml | grep -A2 DB_PASSWORD
+Then read ledger-api/templates/deployment.yaml to see which values change how DB_PASSWORD is built.

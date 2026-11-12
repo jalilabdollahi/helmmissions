@@ -1,0 +1,4 @@
+Read the deploy script and the error together:
+  cat deploy.sh
+  helm package --help | grep -i -E 'sign|key|keyring'
+`helm install --verify` looks for a `.prov` file next to the package. Who is supposed to create it?

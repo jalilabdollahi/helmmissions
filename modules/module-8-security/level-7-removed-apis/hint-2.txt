@@ -1,0 +1,3 @@
+`policy/v1beta1` (PodDisruptionBudget) and `autoscaling/v2beta2` (HorizontalPodAutoscaler) were removed from
+the API server. The resources themselves still exist under newer API versions, with the same purpose.
+`kubectl explain poddisruptionbudget` and `kubectl explain hpa` show the version your cluster serves.

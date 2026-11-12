@@ -1,0 +1,3 @@
+The chart already knows two ways to get the password: a literal from `db.password`, or a reference
+to a Secret that lives in the cluster (`db.existingSecret`). The Secret has to exist before the pod starts,
+and it must not be created from a file or flag that ends up in git or in `helm get values`.

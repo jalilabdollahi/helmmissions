@@ -1,0 +1,4 @@
+1. Create the Secret out of band (pick a NEW password, the old one is burnt):
+     kubectl create secret generic ledger-db-credentials -n helmissions --from-literal=password='<new>'
+2. In values.yaml empty `db.password` and set `db.existingSecret` to the Secret's name.
+3. helm upgrade ledger-api ./ledger-api -n helmissions -f ledger-api/values.yaml --wait

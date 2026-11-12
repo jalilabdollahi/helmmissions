@@ -1,0 +1,21 @@
+name: Quota Says No
+description: |
+  The `helmissions` namespace carries a ResourceQuota called `search-team-quota`. `helm install` of the
+  `search-indexer` chart reports success, but the Deployment never gets its pods:
+    kubectl get deploy search-indexer   ->   READY 0/2
+    kubectl get events   ->   Error creating: pods "search-indexer-..." is forbidden: failed quota:
+    search-team-quota: must specify limits.cpu for: indexer; limits.memory for: indexer; requests.cpu for:
+    indexer; requests.memory for: indexer
+  The quota is set by the platform team and is not negotiable.
+objective: |
+  Release `search-indexer` in namespace `helmissions` has 2 Ready pods. The ResourceQuota `search-team-quota`
+  still exists with exactly its original limits, and every container of the release declares cpu and memory
+  requests and limits.
+xp: 300
+difficulty: advanced
+expected_time: 15m
+concepts:
+  - ResourceQuota
+  - requests and limits
+  - ReplicaSet events
+  - admission control
