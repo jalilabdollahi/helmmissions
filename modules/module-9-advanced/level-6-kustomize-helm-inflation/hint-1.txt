@@ -1,0 +1,4 @@
+Build the folder yourself and read the error, then compare what the kustomization says with the real layout:
+  kubectl kustomize --enable-helm platform
+  ls platform platform/charts
+There may be more than one wrong path; fix them one error at a time.

@@ -1,0 +1,3 @@
+Set `helmGlobals.chartHome` to the folder that really contains `catalog-api/` and `valuesFile` to the real prod values path
+(or rename things on disk). Check that the output shows 2 replicas and CACHE_TTL_SECONDS "600", then:
+  kubectl kustomize --enable-helm platform | kubectl apply -f -

@@ -1,0 +1,4 @@
+Give pricing real defaults for `resources.limits` (in its values.yaml or under `pricing:` in the umbrella), and change cart's image helper
+to read `.Values.global.imageRegistry` like the other four subcharts. Verify the policy with
+  helm template marketplace ./marketplace --set global.imageRegistry=mirror.example.test | grep image:
+every image must now start with mirror.example.test/. Then install.

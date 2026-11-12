@@ -1,0 +1,6 @@
+# Production overrides for queue-worker
+replicaCount: 3
+concurrency: 16
+probes:
+  readiness:
+    periodSeconds: 5

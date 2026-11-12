@@ -1,0 +1,3 @@
+A classic chart repository is only a folder plus an `index.yaml` that Helm builds with `helm repo index`. Dropping a
+tarball into the folder does not update the index, and `helm repo update` only downloads whatever index is served.
+Be careful: `helm repo index` scans just the top level of the folder.

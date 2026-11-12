@@ -1,0 +1,3 @@
+In a `helmCharts` entry the chart is looked up as <chartHome>/<name> and `valuesFile` is a path too. Both are resolved
+relative to the directory that holds kustomization.yaml (not relative to the chart). The first error is about the
+chart location, the next one about the values file.

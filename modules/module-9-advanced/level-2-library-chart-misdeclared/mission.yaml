@@ -1,0 +1,23 @@
+name: Not A Library After All
+description: |
+  The messaging team shares broker settings through a chart called `mqlib`, consumed by the
+  `invoice-mailer` and `receipt-mailer` charts. `invoice-mailer` installed fine, but installing
+  `receipt-mailer` in the same namespace now dies with:
+    Error: INSTALLATION FAILED: Unable to continue with install: ConfigMap "mq-defaults" in namespace
+    "helmissions" exists and cannot be imported into the current release: invalid ownership metadata;
+    annotation validation error: key "meta.helm.sh/release-name" must equal "receipt-mailer": current value is "invoice-mailer"
+  Nobody wrote a ConfigMap called `mq-defaults` in either consumer chart. Both charts are in your workspace.
+objective: |
+  `mqlib` is a proper Helm library chart: it declares `type: library`, helm refuses to install it on its own,
+  and it contributes no objects to the releases that use it. Releases `invoice-mailer` and `receipt-mailer` in
+  namespace `helmissions` are both `deployed` (invoice-mailer upgraded to revision 2 or later), each with
+  its own `<release>-mq` ConfigMap holding the broker address from its values.yaml, Ready pods, and no
+  `mq-defaults` ConfigMap anywhere in the namespace or in either release.
+xp: 300
+difficulty: advanced
+expected_time: 15m
+concepts:
+  - library vs application charts
+  - chart type
+  - underscore partials
+  - release ownership of objects

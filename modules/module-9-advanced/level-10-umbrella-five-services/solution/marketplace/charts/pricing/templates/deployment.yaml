@@ -1,0 +1,37 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Release.Name }}-pricing
+  labels:
+    {{- include "pricing.selector" . | nindent 4 }}
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      {{- include "pricing.selector" . | nindent 6 }}
+  template:
+    metadata:
+      labels:
+        {{- include "pricing.selector" . | nindent 8 }}
+    spec:
+      terminationGracePeriodSeconds: 2
+      containers:
+        - name: pricing
+          image: {{ include "pricing.image" . | quote }}
+          imagePullPolicy: IfNotPresent
+          env:
+            - name: CURRENCY
+              value: {{ .Values.currency | quote }}
+          ports:
+            - containerPort: 80
+          readinessProbe:
+            httpGet: {path: /health, port: 80}
+            initialDelaySeconds: 1
+            periodSeconds: 2
+          resources:
+            requests:
+              cpu: {{ .Values.resources.requests.cpu }}
+              memory: {{ .Values.resources.requests.memory }}
+            limits:
+              cpu: {{ .Values.resources.limits.cpu }}
+              memory: {{ .Values.resources.limits.memory | default "64Mi" }}

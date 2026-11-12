@@ -1,0 +1,8 @@
+apiVersion: v1
+name: hm-cost-labeler
+type: postrenderer/v1
+runtime: subprocess
+version: 0.1.0
+runtimeConfig:
+  platformCommand:
+    - command: "${HELM_PLUGIN_DIR}/render.sh"

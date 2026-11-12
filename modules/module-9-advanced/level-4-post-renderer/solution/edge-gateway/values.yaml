@@ -1,0 +1,7 @@
+replicaCount: 2
+image:
+  repository: traefik/whoami
+  tag: v1.10
+routes:
+  /api: http://api.internal:8080
+  /static: http://static.internal:8080

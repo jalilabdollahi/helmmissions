@@ -1,0 +1,8 @@
+replicaCount: 1
+image:
+  repository: nginxinc/nginx-unprivileged
+  tag: 1.27-alpine
+pageSize: 20
+resources:
+  requests: {cpu: 10m, memory: 16Mi}
+  limits: {cpu: 50m, memory: 64Mi}

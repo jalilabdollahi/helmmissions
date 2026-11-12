@@ -1,0 +1,24 @@
+name: Umbrella Down
+description: |
+  The marketplace platform ships as one umbrella chart, `marketplace`, with five vendored subcharts: gateway, catalog, cart,
+  pricing and notifier. Nothing is deployed yet and the release does not even render:
+    Error: marketplace/charts/pricing/templates/deployment.yaml:36:29
+      executing "marketplace/charts/pricing/templates/deployment.yaml" at <.Values.resources.limits.cpu>:
+        nil pointer evaluating interface {}.cpu
+  The security rule is that every image reference goes through the umbrella's single setting `global.imageRegistry`
+  (so the registry can be switched for all five services in one place). The chart is in `marketplace/` in your workspace.
+objective: |
+  Release `marketplace` is `deployed` in namespace `helmissions` with Ready Deployments for all five services
+  (`marketplace-gateway`, `-catalog`, `-cart`, `-pricing`, `-notifier`). Every container image of all five starts with the
+  registry from `global.imageRegistry` (currently `docker.io`), and that is true because the subcharts honour the global:
+  rendering the umbrella with `--set global.imageRegistry=mirror.example.test` moves every image to that registry. The five
+  subcharts stay separate charts inside `marketplace/charts/`.
+xp: 450
+difficulty: expert
+expected_time: 30m
+concepts:
+  - umbrella charts
+  - subchart templates
+  - global values
+  - helm template --debug
+  - nil pointer errors

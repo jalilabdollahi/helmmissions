@@ -1,0 +1,5 @@
+apiVersion: v2
+name: checkout
+description: Checkout service with a metrics exporter
+version: 1.0.0
+appVersion: "1.10"

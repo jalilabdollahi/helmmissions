@@ -1,0 +1,3 @@
+plugin.yaml names two programs: the command behind `helm hm-audit` and an install hook. Neither path exists in
+the plugin directory — compare them with where the scripts really are. Also remember the hook runs only while
+the plugin is being installed.

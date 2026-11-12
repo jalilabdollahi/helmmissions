@@ -1,0 +1,22 @@
+name: Ship Via OCI
+description: |
+  Payments publishes `payments-gateway` as an OCI chart in the internal registry (plain HTTP, so every
+  helm call needs `--plain-http`). Release 0.2.0 went out last week. Today the release job packaged 0.3.0 and
+  `./release.sh` printed `Pushed: ...` without complaint, yet the rollout step fails:
+    Error: UPGRADE FAILED: failed to perform "FetchReference" on source: localhost:5001/.../charts/payments-gateway:0.3.0: not found
+  The registry is up and 0.2.0 still pulls fine. `release.sh`, `deploy.sh` and the chart are in your workspace;
+  `README.txt` has the registry convention.
+objective: |
+  Chart `payments-gateway` 0.3.0 from the workspace is published at the platform's registry reference (the
+  `oci://` location in `README.txt` and `deploy.sh`, tag 0.3.0) with exactly the content of the workspace chart,
+  and release `payments-gateway` in namespace `helmissions` is upgraded to chart 0.3.0 from that reference:
+  deployed, revision 2 or later, 2 Ready pods.
+xp: 350
+difficulty: advanced
+expected_time: 15m
+concepts:
+  - helm package
+  - helm push
+  - OCI references
+  - helm upgrade oci://
+  - --plain-http

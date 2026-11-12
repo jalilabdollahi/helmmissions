@@ -1,0 +1,2 @@
+Give `helm push` only the parent path (`oci://localhost:5001/<base>/charts`), not the full chart reference,
+then re-run ./release.sh and ./deploy.sh. The earlier push stays in the registry; it is simply in the wrong place.

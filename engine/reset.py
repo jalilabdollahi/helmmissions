@@ -134,6 +134,18 @@ def _cleanup_local_helm_state() -> None:
         name = line.split()[0] if line.split() else ""
         if name.startswith(LOCAL_PREFIX):
             _run(["helm", "plugin", "uninstall", name], timeout=20)
+    # A plugin whose plugin.yaml fails to load is invisible to `helm plugin list/uninstall`
+    # but still occupies its directory (often a symlink to the source). Remove leftovers directly.
+    plugin_dir = _run(["helm", "env", "HELM_PLUGINS"], timeout=10).stdout.strip()
+    for root in filter(None, plugin_dir.split(os.pathsep)):
+        base = Path(root)
+        if not base.is_dir():
+            continue
+        for entry in base.glob(f"{LOCAL_PREFIX}*"):
+            if entry.is_symlink() or entry.is_file():
+                entry.unlink(missing_ok=True)
+            elif entry.is_dir():
+                shutil.rmtree(entry, ignore_errors=True)
 
 
 def cleanup_cluster() -> None:

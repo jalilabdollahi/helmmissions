@@ -1,0 +1,4 @@
+replicaCount: 1
+mq:
+  broker: "mq.invoices.svc:5672"
+  retries: 5

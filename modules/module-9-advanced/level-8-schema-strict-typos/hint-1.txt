@@ -1,0 +1,4 @@
+Compare what you asked for with what Helm kept:
+  helm get values queue-worker -n helmissions
+  helm get values queue-worker -n helmissions --all
+Keys that the chart never reads are stored and ignored without any warning. Then look at the files in queue-worker/ — what could make Helm refuse them?

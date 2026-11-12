@@ -1,0 +1,21 @@
+name: Stale Index
+description: |
+  The harbour team publishes `tide-tracker` through a classic chart repository that is just a folder served over HTTP
+  (workspace link `repo/`, served at the URL in `README.txt`, added on this machine as `hm-tides`). The release job copied
+  `tide-tracker-1.3.0.tgz` into the folder this morning and went home. Operators try to roll it out:
+    Error: UPGRADE FAILED: chart "tide-tracker" matching 1.3.0 not found in hm-tides index. (try 'helm repo update'). no chart version found for tide-tracker-1.3.0
+  Running `helm repo update` changes nothing. Version 1.2.0 is deployed as release `tide-tracker`; an older 1.1.0
+  is still pinned by a regional cluster and must keep being downloadable from the same repository.
+objective: |
+  The repository index that is served at the repository URL lists `tide-tracker` versions 1.1.0, 1.2.0 and 1.3.0,
+  each with a digest that matches its tarball, and every listed version can be downloaded (`helm pull hm-tides/tide-tracker
+  --version X`). Release `tide-tracker` in namespace `helmissions` is upgraded from the `hm-tides` repository to chart 1.3.0
+  (forecast window of 48 hours running in its pod). `index.yaml` is produced by Helm, not typed by hand.
+xp: 350
+difficulty: advanced
+expected_time: 15m
+concepts:
+  - helm repo index
+  - --merge
+  - index.yaml digests and URLs
+  - helm repo update

@@ -1,0 +1,5 @@
+Render the umbrella and read the first error:
+  helm template marketplace ./marketplace --debug 2>&1 | tail -20
+The path in the error names the subchart and the template line. Fix it, render again, and then compare the
+image of every Deployment in the output:
+  helm template marketplace ./marketplace | grep -E '^# Source|image:'

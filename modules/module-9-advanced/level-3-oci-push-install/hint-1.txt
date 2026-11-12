@@ -1,0 +1,3 @@
+See what actually landed in the registry (the repositories list shows every chart path):
+  curl -s http://localhost:5001/v2/_catalog | jq
+Compare it with the reference deploy.sh uses. `helm pull oci://... --plain-http` works on both.

@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Release.Name }}-notifier
+  labels:
+    {{- include "notifier.selector" . | nindent 4 }}
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      {{- include "notifier.selector" . | nindent 6 }}
+  template:
+    metadata:
+      labels:
+        {{- include "notifier.selector" . | nindent 8 }}
+    spec:
+      terminationGracePeriodSeconds: 2
+      containers:
+        - name: notifier
+          image: {{ include "notifier.image" . | quote }}
+          imagePullPolicy: IfNotPresent
+          command: ["sh", "-c", "echo channel=$CHANNEL; while true; do sleep 3600; done"]
+          env:
+            - name: CHANNEL
+              value: {{ .Values.channel | quote }}
+          resources:
+            {{- toYaml .Values.resources | nindent 12 }}

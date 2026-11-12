@@ -1,0 +1,22 @@
+name: GitOps Render Lost The ServiceMonitor
+description: |
+  The checkout service is deployed GitOps-style: CI runs `./render.sh`, which renders the chart with `helm template`
+  into `rendered/prod.yaml`, and the pipeline applies that file with `kubectl apply`. The cluster has the
+  `ServiceMonitor` CRD (group `monitoring.helmissions.io`) and the chart's `templates/servicemonitor.yaml` is meant to
+  create a monitor for it. Yet there is no ServiceMonitor in the cluster, the metrics dashboard is empty, and neither
+  render nor apply printed a single error. `helm install` of the same chart directly on the cluster does create it.
+  Chart, values, `render.sh` and the rendered output are in your workspace.
+objective: |
+  `./render.sh` (still based on `helm template`, no cluster needed in CI) produces `rendered/prod.yaml` that contains the ServiceMonitor
+  `checkout` with the 15s scrape interval from `env/prod.yaml`, and `rendered/prod.yaml` is exactly what the script emits now.
+  That file is applied: in namespace `helmissions` the ServiceMonitor `checkout` exists next to the Ready Deployment and Service.
+  The chart keeps its capability guard (rendering without the CRD's API still leaves the monitor out).
+xp: 400
+difficulty: expert
+expected_time: 20m
+concepts:
+  - .Capabilities.APIVersions
+  - helm template vs install
+  - --api-versions
+  - --kube-version
+  - GitOps rendering

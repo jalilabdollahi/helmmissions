@@ -1,0 +1,9 @@
+apiVersion: v2
+name: receipt-mailer
+description: Sends receipts by e-mail
+version: 1.0.0
+appVersion: "1.10"
+dependencies:
+  - name: mqlib
+    version: 0.1.0
+    repository: file://../mqlib

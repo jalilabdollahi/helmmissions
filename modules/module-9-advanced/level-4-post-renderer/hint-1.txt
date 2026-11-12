@@ -1,0 +1,3 @@
+Helm only reports "exited with error". Reproduce the plugin by hand and read kubectl's own message:
+  helm template edge-gateway ./edge-gateway > /tmp/rendered.yaml
+  HELM_PLUGIN_DIR=$PWD/plugins/hm-cost-labeler ./plugins/hm-cost-labeler/render.sh < /tmp/rendered.yaml
