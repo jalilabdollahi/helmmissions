@@ -1,22 +1,25 @@
 #!/bin/bash
 # HelmMissions launcher
-clear
-cd "$(dirname "$0")"
+cd "$(dirname "$0")" || exit 1
 
-if [ -x "./bin/helm" ]; then
-  export PATH="$(pwd)/bin:$PATH"
-fi
-
-# ─── Reset option ──────────────────────────────────────────────────────────────
-if [[ "$1" == "--reset" ]]; then
+if [[ "${1:-}" == "--reset" ]]; then
   if [ ! -f "progress.json" ]; then
     echo "ℹ️  No progress file found — nothing to reset."
     exit 0
   fi
   read -r -p "⚠️  Reset all progress? This cannot be undone. [y/N] " confirm
   if [[ "$confirm" =~ ^[Yy]$ ]]; then
-    PLAYER=$(python3 -c "import json; d=json.load(open('progress.json')); print(d.get('player_name',''))" 2>/dev/null || echo "")
-    echo "{\"player_name\":\"$PLAYER\",\"total_xp\":0,\"completed_levels\":[],\"current_module\":\"\",\"current_level\":\"\",\"module_certificates\":[]}" > progress.json
+    python3 - <<'PY'
+import json
+try:
+    name = json.load(open("progress.json")).get("player_name", "")
+except Exception:
+    name = ""
+json.dump({"player_name": name, "total_xp": 0, "completed_levels": [], "skipped_levels": [],
+           "current_module": "", "current_level": "", "module_certificates": [],
+           "time_per_level": {}, "level_start_time": None, "hint_progress": {}},
+          open("progress.json", "w"), indent=2)
+PY
     echo "✅ Progress reset. Starting from Module 1 Level 1."
   else
     echo "Cancelled."
@@ -24,35 +27,14 @@ if [[ "$1" == "--reset" ]]; then
   fi
 fi
 
-# ─── venv guard ────────────────────────────────────────────────────────────────
-if [ ! -d "venv" ]; then
+if [ ! -x "venv/bin/python3" ]; then
   echo "❌ Virtual environment not found. Run ./install.sh first."
   exit 1
 fi
+for tool in helm kubectl jq docker; do
+  command -v "$tool" >/dev/null 2>&1 || { echo "❌ '$tool' not found on PATH. Run ./install.sh for details."; exit 1; }
+done
 
-# ─── jq guard (needed by some validate.sh scripts) ────────────────────────────
-if ! command -v jq &>/dev/null; then
-  echo "📦 jq not found — installing..."
-  if [[ "$OSTYPE" == "darwin"* ]]; then
-    brew install jq || { echo "❌ Install jq manually: brew install jq"; exit 1; }
-  elif [[ "$OSTYPE" == "linux-gnu"* ]]; then
-    sudo apt-get update && sudo apt-get install -y jq || { echo "❌ Install jq manually: sudo apt-get install jq"; exit 1; }
-  elif [[ "$OSTYPE" == "msys" || "$OSTYPE" == "cygwin" ]]; then
-    echo "💡 Windows: choco install jq  OR  scoop install jq"; exit 1
-  else
-    echo "❌ Unsupported OS — install jq from https://stedolan.github.io/jq/download/"; exit 1
-  fi
-  echo "✅ jq installed"
-fi
-
-# ─── Launch ────────────────────────────────────────────────────────────────────
-export PYTHONPATH="$(pwd):$PYTHONPATH"
-
-if [ -f "venv/bin/python3" ]; then
-  venv/bin/python3 -m engine.engine
-elif [ -f "venv/Scripts/python.exe" ]; then
-  venv/Scripts/python.exe -m engine.engine
-else
-  echo "❌ Python interpreter not found inside venv"
-  exit 1
-fi
+clear
+export PYTHONPATH="$(pwd)${PYTHONPATH:+:$PYTHONPATH}"
+exec venv/bin/python3 -m engine.engine

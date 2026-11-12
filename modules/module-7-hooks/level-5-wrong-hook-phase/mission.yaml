@@ -1,0 +1,23 @@
+name: The Migration Ran Too Late
+description: |
+  Deploying `shipment-tracker` 1.1 to the `shipments` release fails. The CI job runs `helm upgrade --wait --timeout 45s` and
+  reports:
+    Error: UPGRADE FAILED: resource Deployment/helmissions/shipments not ready. status: InProgress,
+    message: Pending termination: 1
+    context deadline exceeded
+  The new pod never gets past its init container (`Init:Error` / `Init:CrashLoopBackOff`), which logs
+  `[init] FATAL: schema v2 marker not found, the carrier-events tables are missing`. The chart does ship a migration Job that
+  creates that schema, but `kubectl get jobs -n helmissions` shows it never ran. The chart (1.1.0) is in your workspace
+  under `shipment-tracker/`; revision 1 (1.0.0) is what is still serving traffic.
+objective: |
+  Release `shipments` in namespace `helmissions` is `deployed` on chart 1.1.0 with all pods ready on the new version, and the
+  schema migration ran as part of the deploy. Upgrading a fresh 1.0.0 release to the workspace chart with `--wait` succeeds
+  as well, without anyone creating the schema marker by hand.
+xp: 300
+difficulty: advanced
+expected_time: 15m
+concepts:
+  - hook phases
+  - pre-upgrade vs post-upgrade
+  - helm upgrade --wait
+  - hooks and rollout ordering

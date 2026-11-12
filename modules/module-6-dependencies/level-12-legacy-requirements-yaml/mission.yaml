@@ -1,0 +1,21 @@
+name: The Competing Dependency List
+description: |
+  The payroll chart was migrated to `apiVersion: v2` last quarter. Last week `pay-calendar` was added to the
+  `dependencies:` block of `Chart.yaml`, `helm dependency update` ran without a single error and the release went out.
+  But the payroll API cannot reach its calendar service: `kubectl get deploy -n helmissions` shows `payroll-tax-tables`
+  and `payroll-api`, no `payroll-pay-calendar`, and `Chart.lock` mentions only one subchart. Helm printed just an
+  INFO line: `Warning: Dependencies are handled in Chart.yaml since apiVersion "v2"`.
+  The charts are in your workspace; release `payroll` is live.
+objective: |
+  `payroll/Chart.yaml` is the only place the chart declares dependencies (no `requirements.yaml` is left in the
+  chart), `Chart.lock` locks both `tax-tables` and `pay-calendar`, and `helm dependency build ./payroll` succeeds.
+  Release `payroll` in namespace `helmissions` has been upgraded and now contains Deployments `payroll-tax-tables`
+  and `payroll-pay-calendar` next to `payroll-api`, all with Ready pods.
+xp: 300
+difficulty: advanced
+expected_time: 15m
+concepts:
+  - requirements.yaml (legacy)
+  - Chart.yaml dependencies (apiVersion v2)
+  - helm dependency list
+  - silent dependency override

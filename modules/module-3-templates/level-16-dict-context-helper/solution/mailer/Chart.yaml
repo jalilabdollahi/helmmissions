@@ -1,0 +1,6 @@
+apiVersion: v2
+name: mailer
+description: Transactional mail platform - HTTP API plus queue worker
+type: application
+version: 1.8.0
+appVersion: "v1.10"

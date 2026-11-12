@@ -1,0 +1,3 @@
+Check `helm install --help` for `--take-ownership`. On Helm 4 the install uses server-side apply, so kubectl's
+earlier field ownership may raise a conflict; `--force-conflicts` lets Helm win it. Alternatively:
+  kubectl delete configmap desk-settings -n helmissions   (then install normally)

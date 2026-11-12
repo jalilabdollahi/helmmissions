@@ -1,0 +1,20 @@
+name: Helper Needs A Dict
+description: |
+  The mail platform team moved naming and labels of the `mailer` chart's two components (the HTTP `api` and the queue
+  `worker`) into shared helpers. The helpers' comment says they take a dictionary; the templates that call them were
+  updated in a hurry and now nothing renders:
+    Error: ... mailer/templates/worker.yaml:4:11 executing "mailer/templates/worker.yaml" at <include "mailer.fullname" .>:
+    error calling include: ... executing "mailer.fullname" at <.ctx.Release.Name>: nil pointer evaluating interface {}.Release
+  The chart is in your workspace under `mailer/`.
+objective: |
+  Release `mailer` is deployed in namespace `helmissions` from the chart in your workspace. It has two Deployments with
+  distinct names, `mailer-api` and `mailer-worker`, each labelled with its own `app.kubernetes.io/component`, both pods
+  are Ready, and the `mailer-api` Service routes to the api pod.
+xp: 300
+difficulty: advanced
+expected_time: 15m
+concepts:
+  - dict
+  - helper arguments
+  - include context
+  - multi-component charts

@@ -1,0 +1,18 @@
+replicaCount: 1
+
+image:
+  repository: traefik/whoami
+  tag: v1.10
+  pullPolicy: IfNotPresent
+
+service:
+  port: 8080
+
+# Container resources, copied from the capacity-planning sheet.
+resources:
+  requests:
+    cpu: 10m
+    memory: 16Mi
+  limits:
+    cpu: 100m
+    memory: 48Mi

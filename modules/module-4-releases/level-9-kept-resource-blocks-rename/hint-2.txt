@@ -1,0 +1,4 @@
+`helm uninstall` skips objects with `helm.sh/resource-policy: keep`, so the Secret outlived `shop` and still
+carries `meta.helm.sh/release-name: shop`. Helm refuses to let `storefront` import an object that names another
+owner. You can transfer ownership or remove the leftover; either way the chart's Secret has to become part of the
+`storefront` release.

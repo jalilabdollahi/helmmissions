@@ -1,0 +1,5 @@
+Watch the replica count across a deploy:
+  kubectl scale deployment/thumbnail-svc -n helmissions --replicas=5
+  bash ci/deploy.sh
+  kubectl get deployment thumbnail-svc -n helmissions
+Then read what the chart renders: helm template thumbnail-svc ./thumbnail-svc | grep -n replicas

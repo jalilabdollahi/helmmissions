@@ -1,0 +1,4 @@
+Change `apiVersion: policy/v1beta1` to `policy/v1` in templates/pdb.yaml, and
+`apiVersion: autoscaling/v2beta2` to `autoscaling/v2` in templates/hpa.yaml (the fields stay compatible).
+Do not delete the two resources — production needs both. Then:
+  helm upgrade --install inventory ./inventory-service -n helmissions --wait

@@ -1,0 +1,4 @@
+Tell the offline render which extra APIs the target cluster has: add
+  --api-versions monitoring.helmissions.io/v1
+to the `helm template` line in render.sh (a `--kube-version` flag exists for version checks too), run ./render.sh,
+and apply the regenerated rendered/prod.yaml. Do not edit the rendered file or the chart's guard.

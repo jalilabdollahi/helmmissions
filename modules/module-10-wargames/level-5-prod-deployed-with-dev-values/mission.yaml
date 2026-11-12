@@ -1,0 +1,20 @@
+name: "Dev Values In Prod"
+description: |
+  Finance reports test invoices landing in the real ledger. The prod release `invoice` in namespace `helmissions` was
+  deployed by the pipeline script `deploy.sh prod` yesterday, and the config page (`http://invoice/config.txt`, from inside
+  the cluster) looks like the development environment: sandbox payments, debug logging and debug endpoints are on. A
+  first attempt at "just fixing the script" last night did not clear everything. The runbook in `RUNBOOK.md` says how prod and
+  dev are supposed to differ. Dev (`invoice-dev` in `helmissions-dev`) must keep working as it is.
+objective: |
+  Running `bash deploy.sh prod` from the workspace leaves release `invoice` in namespace `helmissions` `deployed`, with 2 ready
+  pods and a config page reporting `environment=prod`, `payments=live`, `log_level=warn`, `debug_endpoints=false` and
+  `database=invoice-db.helmissions`. Running it again keeps it that way (the pipeline is idempotent). Release `invoice-dev`
+  in `helmissions-dev` is untouched: still `environment=dev` with sandbox payments and debug logging.
+xp: 450
+difficulty: expert
+expected_time: 25m
+concepts:
+  - environment promotion
+  - values layering
+  - reuse-values
+  - pipeline scripts

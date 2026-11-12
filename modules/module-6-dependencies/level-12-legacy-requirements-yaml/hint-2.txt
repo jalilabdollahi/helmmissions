@@ -1,0 +1,3 @@
+The chart has two files that can declare dependencies. Helm reads `Chart.yaml` first and then, if a
+`requirements.yaml` exists next to it, lets that file's dependency list replace what Chart.yaml said, even for
+apiVersion v2. The legacy file only lists tax-tables, so pay-calendar is dropped before anything is resolved.

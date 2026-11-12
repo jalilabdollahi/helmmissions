@@ -1,0 +1,20 @@
+name: Range Over A String
+description: |
+  The `cors-gateway` chart publishes the browser origins allowed to call the public API. The
+  partner integration team wants to add more origins next week, and the template already loops
+  over `allowedOrigins`. But right now the release does not even install:
+    Error: INSTALLATION FAILED: cors-gateway/templates/configmap.yaml:...
+      executing "cors-gateway/templates/configmap.yaml" at <.Values.allowedOrigins>:
+        range can't iterate over https://shop.example
+objective: |
+  Release `cors-gateway` is deployed in namespace `helmissions` with its pod Ready, and its
+  ConfigMap `cors-gateway-origins` lists `https://shop.example` as a line in `origins.txt`.
+  The chart must keep accepting several origins: when a list of origins is supplied, every one
+  of them appears, one per line.
+xp: 150
+difficulty: beginner
+expected_time: 10m
+concepts:
+  - YAML lists vs strings
+  - range
+  - values types

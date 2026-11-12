@@ -1,0 +1,2 @@
+Look closely at the quotes in values.yaml. In YAML, "false" with quotes is a string, and Go templates
+treat every non-empty string as true in an `if`. The template is fine; the value has the wrong type.

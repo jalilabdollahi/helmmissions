@@ -1,0 +1,5 @@
+apiVersion: v2
+name: payroll-api
+description: Payroll API that bootstraps its database role in a pre-install hook
+version: 1.0.0
+appVersion: "1.0"

@@ -1,0 +1,4 @@
+Ask Kubernetes why the container cannot be created:
+  kubectl describe pod -n helmissions -l app.kubernetes.io/instance=status-page
+Then check which user the image wants to run as:
+  docker image inspect nginx:1.27-alpine --format '{{.Config.User}}'   (empty means root)

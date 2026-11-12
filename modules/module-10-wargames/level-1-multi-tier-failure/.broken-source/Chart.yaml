@@ -1,6 +1,0 @@
-apiVersion: v2
-name: multi-tier-failure
-description: Broken chart for Full Stack Down
-type: application
-version: 0.1.0
-appVersion: 1.0.0

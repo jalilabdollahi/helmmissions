@@ -1,1 +1,0 @@
-Concrete direction: Add missing `}` → `{{ .Values.app.name }}`. When you think you have it, verify the result the same way the mission describes: helm template renders without error

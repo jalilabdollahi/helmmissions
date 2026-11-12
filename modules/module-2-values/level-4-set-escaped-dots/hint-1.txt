@@ -1,0 +1,3 @@
+Look at the annotations that really landed on the pod template and at the values Helm stored:
+  kubectl get deploy telemetry-agent -n helmissions -o jsonpath='{.spec.template.metadata.annotations}'
+  helm get values telemetry-agent -n helmissions

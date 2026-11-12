@@ -1,0 +1,4 @@
+openOrders: 42
+service:
+  port: 80
+  targetPort: 8081

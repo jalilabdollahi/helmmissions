@@ -1,0 +1,3 @@
+# staging: single replica, no cache layer deployed here
+replicaCount: 1
+logLevel: debug

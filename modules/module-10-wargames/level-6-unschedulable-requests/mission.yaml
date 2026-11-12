@@ -1,0 +1,19 @@
+name: "Pending Forever"
+description: |
+  Last night's release of the telemetry platform (`bash release.sh`) ended with "timed out waiting for the condition". Three
+  releases (`telemetry-ingest`, `telemetry-rollup`, `telemetry-alerts`) are in state `failed`, the services still answer with
+  version 1.0, and `kubectl get pods -n helmissions` shows new pods stuck in `Pending` while the old ones keep running.
+  The scheduler's reasons differ from pod to pod. `CAPACITY.md` holds the capacity plan and the pod budgets.
+objective: |
+  Releases `telemetry-ingest`, `telemetry-rollup` and `telemetry-alerts` are `deployed` in namespace `helmissions` on version
+  2.0 (`http://telemetry-<service>/` reports `version=2.0`): ingest and rollup run 1 ready pod each, alerts runs 2 ready pods,
+  no pod is Pending. Every pod keeps a CPU and a memory request within the per-pod budget in `CAPACITY.md`, and the
+  workspace's values files describe exactly what is running so the next `release.sh` stays green.
+xp: 450
+difficulty: expert
+expected_time: 25m
+concepts:
+  - scheduling
+  - resource requests
+  - node selectors and affinity
+  - failed upgrades

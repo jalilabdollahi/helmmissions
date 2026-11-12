@@ -1,0 +1,3 @@
+mqlib is meant to export helpers, but Helm treats it as an ordinary application chart, so everything in
+its templates/ folder that produces YAML becomes part of every consumer's release. Two things make a chart
+a library: a field in Chart.yaml, and the file naming rule for partials (names starting with `_`).

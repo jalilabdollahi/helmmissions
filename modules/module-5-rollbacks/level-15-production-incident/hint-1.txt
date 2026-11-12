@@ -1,1 +1,6 @@
-This level is about revision history. Start with `helm history` and identify the good revision before changing anything. The broken state says: Full production incident simulation — identify broken revision, rollback, verify recovery.
+Start with facts, not guesses:
+  helm history checkout -n helmissions
+  helm get values checkout -n helmissions --revision 1   # and 2, 3
+Then see what actually differs between the release and the live Deployment:
+  helm get manifest checkout -n helmissions | grep -A1 'name: PAYMENT'
+  kubectl get deploy checkout -n helmissions -o jsonpath='{.spec.template.spec.containers[0].env}'

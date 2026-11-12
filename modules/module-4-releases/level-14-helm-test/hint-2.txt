@@ -1,1 +1,0 @@
-The fix revolves around helm test, test hooks, release verification. Compare the current state with the objective: Fix the service name in the test template If the level is stateful, inspect the existing release history before reinstalling anything.

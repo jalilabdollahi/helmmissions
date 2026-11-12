@@ -1,1 +1,0 @@
-The fix revolves around if/else, not, boolean logic in templates. Compare the current state with the objective: Swap the if/else: `{{ if .Values.ingress.enabled }}ClusterIP{{ else }}NodePort{{ end }}` If the level is stateful, inspect the existing release history before reinstalling anything.

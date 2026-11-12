@@ -1,0 +1,6 @@
+apiVersion: v2
+name: uptime-probe
+description: Pings endpoints and records their availability
+type: application
+version: 1.4.0
+appVersion: "1.4"

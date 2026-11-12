@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Release.Name }}-catalog
+  labels:
+    {{- include "catalog.selector" . | nindent 4 }}
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      {{- include "catalog.selector" . | nindent 6 }}
+  template:
+    metadata:
+      labels:
+        {{- include "catalog.selector" . | nindent 8 }}
+    spec:
+      terminationGracePeriodSeconds: 2
+      containers:
+        - name: catalog
+          image: {{ include "catalog.image" . | quote }}
+          imagePullPolicy: IfNotPresent
+          envFrom:
+            - configMapRef:
+                name: {{ .Release.Name }}-catalog
+          ports:
+            - containerPort: 8080
+          readinessProbe:
+            httpGet: {path: /, port: 8080}
+            initialDelaySeconds: 1
+            periodSeconds: 2
+          resources:
+            {{- toYaml .Values.resources | nindent 12 }}

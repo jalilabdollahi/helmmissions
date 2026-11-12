@@ -1,1 +1,0 @@
-The fix revolves around resource exhaustion, limits vs requests, cluster stability. Compare the current state with the objective: Add appropriate resource limits to chart, upgrade all affected releases If the level is stateful, inspect the existing release history before reinstalling anything.

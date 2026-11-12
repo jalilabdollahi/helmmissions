@@ -1,0 +1,10 @@
+environment: prod
+replicaCount: 2
+minCacheVersion: "1.2.0"
+database:
+  host: tideline-db.helmissions
+schema:
+  current: 12
+  target: 13
+migration:
+  settleSeconds: 3

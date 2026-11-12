@@ -1,0 +1,9 @@
+replicaCount: 1
+
+image:
+  repository: busybox
+  tag: "1.36"
+
+# New in 2.0.0: Prometheus metrics endpoint
+metrics:
+  port: 9102

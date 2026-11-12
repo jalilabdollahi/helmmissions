@@ -1,0 +1,4 @@
+Put the pool size where the pipeline will read it (values-prod.yaml, or the chart's default), then deploy
+the way the pipeline does:
+  bash ci/deploy.sh
+Re-running `kubectl set env` would only repeat the problem.

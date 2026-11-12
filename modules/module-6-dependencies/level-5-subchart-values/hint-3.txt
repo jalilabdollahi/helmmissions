@@ -1,1 +1,0 @@
-Concrete direction: Scope values under the subchart name: `postgresql:\n  auth:\n    password: mypass`. When you think you have it, verify the result the same way the mission describes: postgresql pod starts with correct credentials

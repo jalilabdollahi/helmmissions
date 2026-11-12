@@ -1,0 +1,4 @@
+Ask Helm what it believes this release contains:
+  helm get hooks search -n helmissions
+  helm status search -n helmissions
+Then read the annotation on the test pod template, letter by letter, against the Helm documentation.

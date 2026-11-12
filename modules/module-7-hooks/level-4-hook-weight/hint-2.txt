@@ -1,1 +1,0 @@
-The fix revolves around hook weight, execution ordering, negative weights. Compare the current state with the objective: Set weights: DB creation hook weight -1, migration weight 0 If the level is stateful, inspect the existing release history before reinstalling anything.

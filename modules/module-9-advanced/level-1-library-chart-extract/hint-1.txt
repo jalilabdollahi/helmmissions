@@ -1,0 +1,4 @@
+Compare the two helper files and the live labels:
+  diff ledger-api/templates/_helpers.tpl ledger-worker/templates/_helpers.tpl
+  kubectl get deploy -n helmissions --show-labels
+Then read about library charts: `helm create --help` has no scaffold for them, but Chart.yaml has a `type` field.

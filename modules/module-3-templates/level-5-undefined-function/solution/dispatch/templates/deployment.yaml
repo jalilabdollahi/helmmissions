@@ -1,0 +1,36 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Release.Name }}-worker
+  labels:
+    app: dispatch
+    release: {{ .Release.Name }}
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      app: dispatch
+      release: {{ .Release.Name }}
+  template:
+    metadata:
+      labels:
+        app: dispatch
+        release: {{ .Release.Name }}
+    spec:
+      terminationGracePeriodSeconds: 2
+      containers:
+        - name: worker
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          command: ["sh", "-c", "touch /tmp/ready; echo dispatcher up in $APP_ENV; sleep 86400"]
+          env:
+            - name: APP_ENV
+              value: {{ .Values.environment | upper | quote }}
+            - name: POLL_SECONDS
+              value: {{ .Values.pollSeconds | quote }}
+          readinessProbe:
+            exec:
+              command: ["cat", "/tmp/ready"]
+            periodSeconds: 2
+          resources:
+            {{- toYaml .Values.resources | nindent 12 }}

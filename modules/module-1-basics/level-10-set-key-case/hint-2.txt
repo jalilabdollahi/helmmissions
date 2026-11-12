@@ -1,0 +1,3 @@
+Helm accepts any key you pass with --set - it cannot know whether the chart reads it. Value names are
+case-sensitive: the chart reads `.Values.replicaCount`, but the upgrade stored `replicacount`.
+Beware: that stray key stays in the release's stored values unless the next upgrade replaces them.

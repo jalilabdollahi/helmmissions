@@ -1,0 +1,5 @@
+Only render `replicas` when autoscaling is off:
+  {{- if not .Values.autoscaling.enabled }}
+  replicas: {{ .Values.replicaCount }}
+  {{- end }}
+Then deploy once with bash ci/deploy.sh.

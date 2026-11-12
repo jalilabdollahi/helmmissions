@@ -1,1 +1,3 @@
-Check dependency metadata before editing manifests: `Chart.yaml`, `Chart.lock`, and `charts/` are the main suspects. The broken state says: `helm dependency update` fails — repository not added.
+Ask Helm which repositories this machine knows about and compare with what Chart.yaml refers to:
+  helm repo list
+  grep -n repository statuspage/Chart.yaml

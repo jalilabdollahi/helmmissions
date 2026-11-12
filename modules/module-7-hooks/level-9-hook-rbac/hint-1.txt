@@ -1,1 +1,4 @@
-Hook levels usually fail before or after the main workload. Inspect annotations, Jobs, and hook ordering. The broken state says: Hook Job fails with RBAC error — needs permission to list Pods.
+Read what the preflight Job reported and which identity it runs as:
+  kubectl logs job/tenants-preflight -n helmissions
+  kubectl get job tenants-preflight -n helmissions -o jsonpath='{.spec.template.spec.serviceAccountName}'
+The API server's answer names the user and the verb it refused.

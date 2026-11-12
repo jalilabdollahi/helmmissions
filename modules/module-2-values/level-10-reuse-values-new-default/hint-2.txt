@@ -1,0 +1,3 @@
+`--reuse-values` takes the previous release's computed values as the base and ignores the defaults of
+the new chart version. The old release never had `metrics`, so the template finds nothing to read.
+Dropping the flag fixes the error, but then your earlier override (replicaCount=2) is lost too.

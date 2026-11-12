@@ -1,0 +1,3 @@
+Correct the tag on the log-shipper dependency in tradedesk/Chart.yaml so all three share `monitoring`, run
+`helm dependency update ./tradedesk` (the declaration changed) and `helm upgrade tradedesk ./tradedesk -n helmissions`.
+Check with `helm template t ./tradedesk --set tags.monitoring=true`: all three must show up.

@@ -1,27 +1,38 @@
-# One Step Back
+# Roll It Back
 
-## Situation
-Bad upgrade broke the app — perform a simple rollback. In this mission the broken state is intentional, and the point is not just to make Helm stop complaining. The real lesson is learning how Helm reports failure, where chart defects surface, and how release state and rendered manifests can drift apart when a deployment goes wrong.
+## What broke
+`quotes-api` revision 2 referenced an image tag that was never published. Helm applied the manifest
+without complaint, so the release is `deployed` - but the new pod can never pull its image, and because
+the Deployment uses the `Recreate` strategy the old, working pod was already gone.
 
-## The Fix
-Primary action: `helm rollback <release> 1`
+## Why Helm behaves this way
+Helm stores every revision of a release as a Secret (`sh.helm.release.v1.<name>.v<N>`) containing the
+rendered manifest, the chart, and the user-supplied values. Without `--wait` (or `--rollback-on-failure`)
+Helm only checks that the API server accepted the objects - not that pods become Ready. `helm rollback`
+does not "undo" anything: it takes the manifest and values of an older revision and installs them as a
+brand-new revision (3, "Rollback to 1"). History only ever grows.
 
-A strong solution should leave both the chart and the cluster in a healthy state. In Helm that usually means checking the source of truth first, fixing the right file or release action, and then confirming that the next install, upgrade, rollback, or hook execution behaves the way you intended.
+## The fix
+`helm rollback quotes-api 1 -n helmissions --wait` - no chart source needed, because revision 1's manifest
+is already stored in the cluster. Use `helm history` first to pick the right revision.
 
-## What To Validate
-App running, revision 1 values restored
+## In real life
+Rollback is the fastest mitigation for a bad deploy: seconds, no CI pipeline, no code review. Teams
+usually roll back first and diagnose afterwards. The catch is that a rollback is a normal change - it
+needs the same `--wait --timeout` discipline, and the next pipeline run will happily redeploy the bad
+version unless the source of the problem is fixed or the pipeline is paused.
 
-Helpful checks for this level:
-- `helm status helmissions-app -n helmissions`
-- `helm history helmissions-app -n helmissions`
-- `kubectl get all -n helmissions`
+## Commands worth remembering
+- `helm history <rel> -n <ns>` - list revisions, statuses and descriptions
+- `helm get values <rel> --revision N` / `helm get manifest <rel> --revision N` - inspect an old revision
+- `helm rollback <rel> [N] --wait --timeout 2m` - go back (omit N for "the previous revision")
+- `helm status <rel>` - current state
 
-## Why It Matters
-Review how the fix changed the Helm release for "One Step Back".
+## Common mistakes
+- Trusting `STATUS: deployed` as proof the app works; deploy with `--wait` so failures are visible.
+- Running `helm rollback` without a revision number when the previous revision is also bad.
+- Fixing forward with a hurried upgrade when a known-good revision is one command away.
 
-This matters in rollbacks & recovery work because Helm failures are rarely just syntax errors. In real teams they show up during CI/CD runs, emergency rollbacks, environment promotion, or cluster changes that expose assumptions hidden in a chart. If you only patch the symptom in-cluster, the same bug usually comes back on the next deployment.
-
-A good operator learns the habit behind the fix: inspect the rendered output, understand the release history, and then make the smallest durable change that restores the expected behavior. That habit scales from a single broken values file all the way up to multi-service incident response.
-
-## Concepts
-helm rollback, revision numbers
+## Helm 3 vs Helm 4
+Identical for this level. Helm 4 can also roll back automatically on a failed upgrade with
+`--rollback-on-failure` (Helm 3: `--atomic`).

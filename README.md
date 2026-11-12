@@ -2,29 +2,29 @@
 
 ![platform](https://img.shields.io/badge/platform-Linux%20%7C%20macOS%20-blue)
 ![shell](https://img.shields.io/badge/shell-bash-brightgreen)
-![helm](https://img.shields.io/badge/helm-learning-0f1689)
+![helm](https://img.shields.io/badge/helm-3.14%2B%20%7C%204.x-0f1689)
 
 > **Learn Helm by breaking it, then fixing it.**
 
-HelmMissions is a fully local, game-based Helm troubleshooting platform with a rich terminal interface. Each mission drops a deliberately broken chart, release, or upgrade path in front of you. Your job is to diagnose and fix it using real `helm` and `kubectl` commands.
+HelmMissions is a fully local, game-based Helm troubleshooting platform with a rich terminal interface.
+Each mission drops a deliberately broken chart, release, or upgrade path in front of you. Your job is to
+diagnose and fix it using real `helm` and `kubectl` commands against a local kind cluster.
 
-**133 progressive challenges across 10 modules — beginner to production war games.**  
-No cloud. No AWS. No costs.
+**133 hand-crafted missions across 10 modules — from your first install to production war games.**
+Every mission breaks something different. No cloud. No costs.
 
 ---
 
 ## ✨ Features
 
-- ⛵ **133 missions** across 10 modules — from first installs to rollback incidents
-- 🏆 **XP & progression system** — earn points, track completions, move through modules
-- 💡 **Progressive hints** — reveal only as much help as you need
-- 📖 **Post-mission debriefs** — learn why the fix worked and what it means in practice
-- 🧪 **Dry-run validation** — test your fix before committing XP
-- 👁️ **Watch mode** — auto-runs validators until your level passes
-- 🏅 **Module certificates** — complete a module and earn a terminal certificate
-- 🔒 **Safety guards** — risky `kubectl` and local-state-changing Helm commands are gated
-- 💾 **Auto-save** — progress is stored in `progress.json`
-- 🛠️ **Generated content pipeline** — rebuild all levels directly from `PLAN.md`
+- ⛵ **133 unique missions** — each one a different real-world Helm failure
+- 🧪 **Behaviour-based validation** — any correct fix passes; hotfixes that Helm would undo don't
+- 💡 **Progressive hints** and a full walkthrough when you're stuck
+- 📖 **Debriefs** — why Helm behaves that way, how it bites teams in production, commands to remember
+- 👁️ **Watch mode** — re-validates every 5 seconds until you pass
+- 🏅 **Module certificates** — earned only when every level of a module is solved (skips don't count)
+- 🔒 **Safety guards** — the game only ever touches the `kind-helmissions` cluster
+- 🧭 **Helm 4 ready** — written and tested on Helm 4, compatible with Helm 3.14+; debriefs call out the differences
 
 ---
 
@@ -32,17 +32,9 @@ No cloud. No AWS. No costs.
 
 ```bash
 cd helmissions
-python3 scripts/build_levels.py
-./install.sh
+./install.sh     # checks tools, creates the venv, the kind cluster and a local OCI registry
 ./play.sh
 ```
-
-> Want to regenerate only the registry?
-> ```bash
-> python3 scripts/generate_registry.py
-> ```
-
----
 
 ## 📋 Prerequisites
 
@@ -51,68 +43,66 @@ python3 scripts/build_levels.py
 | [Docker Desktop](https://www.docker.com/products/docker-desktop/) | *(must be running)* |
 | [kind](https://kind.sigs.k8s.io/) | `brew install kind` |
 | [kubectl](https://kubernetes.io/docs/tasks/tools/) | `brew install kubectl` |
-| [Helm 3+](https://helm.sh/docs/intro/install/) | `brew install helm` |
-| Python **3.9+** | `brew install python@3.11` |
+| [Helm 3.14+ or 4.x](https://helm.sh/docs/intro/install/) | `brew install helm` |
+| Python **3.9+** | `brew install python` |
 | [jq](https://jqlang.github.io/jq/) | `brew install jq` |
+| gpg *(only for the chart-signing mission)* | `brew install gnupg` |
+
+`install.sh` creates:
+- kind cluster **`helmissions`** (context `kind-helmissions`)
+- a local OCI registry at **`localhost:5001`** (also pullable from inside the cluster)
+- a local classic chart repository at **`http://localhost:8879`**
 
 ---
 
 ## 🎮 How to Play
 
-1. **Run** `./play.sh` — the game loop runs here, keep this terminal open
-2. **Open a second terminal** — use `helm` and `kubectl` to investigate the scenario
-3. **Read the mission briefing** — understand what is broken and what success looks like
-4. **Fix it** — repair the chart, release state, values, or workflow for the level
-5. **Validate** — run `check` (or press `1`) to test your solution
-6. **Earn XP** and move to the next mission
+1. **Run** `./play.sh` — keep this terminal open for the game
+2. **Open a second terminal** in `sandbox/current/` — that's your workspace for the active level
+3. **Read the briefing** — the situation (symptoms and error text) and the objective (what must be true)
+4. **Investigate and fix** with `helm` and `kubectl` — edit files in the workspace, run upgrades, rollbacks…
+5. **Validate** with `check` (or `1`) and earn XP
 
----
+The workspace is rebuilt for every level and on `reset`. The game refuses to run if your current kubectl
+context isn't `kind-helmissions`, because resetting a level deletes namespaces.
 
 ## 🎯 Commands
 
 | Command | Shortcut | Description |
 |---------|----------|-------------|
 | `check` | `1` | Validate your solution |
-| `check-dry` | `d` | Dry-run validator without awarding XP |
+| `check-dry` | `d` | Run the validator without awarding XP |
 | `watch` | `w` | Auto-validate every 5 seconds until pass |
-| `hint` | `2` | Reveal the next progressive hint |
-| `guide` | `3` | Show the reference `solution/` files |
+| `hint` | `2` | Reveal the next of 3 progressive hints |
+| `guide` | `3` | Full walkthrough + reference files |
 | `debrief` | `4` | Re-read the lesson for the current level |
-| `helm <cmd>` | `5` | Run Helm commands through HelmMissions safety |
-| `kubectl <cmd>` | `5k` | Run kubectl verification commands safely |
-| `reset` | `6` | Reset the current level back to broken state |
-| `status` | `7` | Show current module progress and XP |
-| `skip` | `8` | Skip the level with no XP awarded |
+| `helm <args>` | `5 <args>` | Run Helm (from the workspace) through the safety guard |
+| `kubectl <args>` | `5k <args>` | Run kubectl through the safety guard |
+| `edit <kind> <name>` | `e` | Edit a live object in `$EDITOR` |
+| `reset` | `6` | Rebuild the current level from scratch |
+| `status` | `7` | Module progress and XP |
+| `skip` | `8` | Skip the level (no XP, no certificate) |
+| `goto <M>.<L>` | | Jump to any level, e.g. `goto 5.3` |
+| `briefing` | | Show the mission briefing again |
 | `quit` | `9` | Save and exit |
-| `reset-progress` | `0` | Wipe all XP and restart from level 1 |
+| `reset-progress` | `0` | Wipe all progress |
 
 ---
 
-## 🛡️ Safety First
+## 🗺️ Learning Path
 
-HelmMissions includes built-in command safety guards:
-
-- 🔐 The game is built around the `helmissions` namespace
-- 🚫 Destructive `kubectl` operations against critical namespaces are blocked
-- ⚠️ Risky Helm commands like `helm repo remove` and `helm plugin remove` are warned
-- 🧸 Safe for practice — hard to accidentally blast the wrong thing
-
----
-
-## 🗺️ Learning Path — 10 Modules · 133 Levels · 34,350 XP
-
-| # | Module | Levels | XP | Difficulty | Key Topics |
-|---|--------|--------|----|------------|------------|
-| 1 | 🟢 Helm Basics | 15 | 1,900 | Beginner | Chart structure, installs, values, lint |
-| 2 | 🟢 Values & Overrides | 15 | 2,700 | Beginner | Type issues, nested keys, `--set`, schema |
-| 3 | 🟡 Template Debugging | 20 | 4,900 | Intermediate | Go templates, context, indentation, helpers |
-| 4 | 🟡 Release Management | 15 | 3,600 | Intermediate | Failed releases, upgrades, ownership, notes |
-| 5 | 🟡 Rollbacks & Recovery | 15 | 4,150 | Intermediate | History, rollback behavior, recovery workflows |
-| 6 | 🔴 Chart Dependencies | 13 | 3,450 | Advanced | Locks, subcharts, aliases, dependency updates |
-| 7 | 🔴 Helm Hooks | 10 | 2,900 | Advanced | Pre/post hooks, cleanup, ordering, test hooks |
-| 8 | 🔴 Security & Linting | 10 | 2,850 | Advanced | RBAC, secrets, deprecated APIs, quotas |
-| 9 | ⚫ Advanced Patterns | 10 | 3,600 | Expert | Library charts, OCI, helmfile, post-renderers |
-| 10 | ⚫ Production War Games | 10 | 4,300 | Expert | Multi-chart failures, canaries, incidents |
+| # | Module | Levels | Difficulty | Key Topics |
+|---|--------|--------|------------|------------|
+| 1 | 🟢 Helm Basics | 15 | Beginner | Chart metadata, installs, upgrades, get/show, lint, package |
+| 2 | 🟢 Values & Overrides | 15 | Beginner → Intermediate | Types, `--set` syntax, `--set-file`, file order, schema, `--reuse-values` |
+| 3 | 🟡 Template Debugging | 20 | Intermediate → Advanced | Go templates, context, whitespace, helpers, `tpl`, `lookup`, Capabilities |
+| 4 | 🟡 Release Management | 15 | Intermediate → Advanced | Release states, ownership, immutable fields, stuck releases, CRDs, tests |
+| 5 | 🟡 Rollbacks & Recovery | 15 | Intermediate → Advanced | History, drift, pruning, storage drivers, forced replacement, incidents |
+| 6 | 🔴 Chart Dependencies | 13 | Advanced | Locks, version ranges, aliases, globals, conditions, tags, OCI, import-values |
+| 7 | 🔴 Helm Hooks | 10 | Advanced | Phases, weights, delete policies, test hooks, hook RBAC |
+| 8 | 🔴 Security & Linting | 10 | Advanced | Secrets, RBAC, NetworkPolicy, PSA, quotas, removed APIs, provenance |
+| 9 | ⚫ Advanced Patterns | 10 | Expert | Library charts, OCI, post-renderers, plugins, kustomize, repo indexes |
+| 10 | ⚫ Production War Games | 10 | Expert | Multi-failure incidents across releases and namespaces |
 
 ---
 
@@ -120,71 +110,45 @@ HelmMissions includes built-in command safety guards:
 
 ```text
 helmissions/
-├── play.sh                     ← Launch the game
-├── install.sh                  ← One-time setup
-├── requirements.txt            ← Python dependencies
+├── play.sh / install.sh
 ├── engine/
-│   ├── engine.py               ← Core game loop
-│   ├── ui.py                   ← Rich terminal UI
-│   ├── certificate.py          ← Module completion certificates
-│   ├── player.py               ← Player state helpers
-│   ├── reset.py                ← Level reset logic
-│   └── safety.py               ← Helm and kubectl safety guards
+│   ├── engine.py          ← game loop and commands
+│   ├── reset.py           ← cluster cleanup, workspace refresh, running level scripts
+│   ├── safety.py          ← helm/kubectl guards
+│   ├── ui.py, certificate.py, player.py
+│   └── lib/common.sh      ← bash helpers for level scripts
 ├── scripts/
-│   ├── build_levels.py         ← Rebuild all levels from PLAN.md
-│   └── generate_registry.py    ← Regenerate levels.json registry
-├── levels.json                 ← Pre-built level registry
-└── modules/
-    ├── module-1-basics/
-    │   └── level-N-*/
-    │       ├── mission.yaml    ← Briefing metadata
-    │       ├── broken/         ← Broken chart the player fixes
-    │       ├── solution/       ← Reference chart shown by guide
-    │       ├── validate.sh     ← Level validator
-    │       ├── setup.sh        ← Scenario setup
-    │       ├── hint-*.txt      ← Progressive hints
-    │       ├── debrief.md      ← Post-level lesson
-    │       └── common-mistakes.md
-    ├── module-2-values/
-    └── ...                     ← modules 3–10
+│   ├── cluster.sh         ← kind cluster + local registry / chart repo
+│   ├── test_levels.py     ← end-to-end level tester
+│   ├── agent_env.sh       ← isolated cluster/helm env for parallel level authoring
+│   └── generate_registry.py ← writes levels.json (index of all missions)
+├── docs/
+│   ├── LEVEL_SPEC.md      ← how a level is built
+│   └── CURRICULUM.md      ← what every level teaches and breaks
+└── modules/module-N-*/level-N-*/
+    ├── mission.yaml       ← briefing
+    ├── broken/            ← starting workspace (copied to sandbox/current/)
+    ├── solution/          ← fixed workspace (shown by `guide`)
+    ├── setup.sh validate.sh solve.sh tests/
+    ├── hint-1..3.txt  solution-guide.md  debrief.md
 ```
 
----
+## 🛠️ Authoring & testing levels
+
+Read [docs/LEVEL_SPEC.md](docs/LEVEL_SPEC.md). Every level ships a reference `solve.sh` and tests for
+tempting wrong fixes, and the harness proves the validator fails on the broken state, passes after the
+reference fix, and rejects the wrong ones:
+
+```bash
+export KUBECONFIG=$PWD/.hm-shared/main/kubeconfig   # optional: don't touch your global context
+kind get kubeconfig --name helmissions > "$KUBECONFIG"
+venv/bin/python scripts/test_levels.py --module module-3-templates
+venv/bin/python scripts/test_levels.py --all
+```
 
 ## 🔄 Resetting Progress
 
-Reset your saved progress from the launcher:
-
-```bash
-./play.sh --reset
-```
-
-Reset the current level from inside the game with `reset` or shortcut `6`.
-
----
-
-## 🎓 Post-Mission Debriefs
-
-After every completed mission you unlock a debrief that covers:
-
-- 🔎 What actually broke and why
-- 🧠 The Helm concept behind the fix
-- 🚨 Where this kind of bug appears in real delivery pipelines
-- 🔧 The `helm` and `kubectl` checks that prove the fix worked
-
----
-
-## 🏗️ Content Generation
-
-HelmMissions is generated from the project plan:
-
-- `PLAN.md` is the source specification for modules and levels
-- `scripts/build_levels.py` rebuilds all level folders and `levels.json`
-- `scripts/generate_registry.py` refreshes only the registry
-
-This makes it easy to evolve the curriculum without hand-editing 133 level trees.
-
----
+`./play.sh --reset` or `reset-progress` in the game. `reset` rebuilds only the current level.
 
 ## 📄 License
 

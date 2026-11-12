@@ -1,0 +1,36 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: {{ .Release.Name }}-scratch-init
+  labels:
+    app.kubernetes.io/name: export-batch
+    app.kubernetes.io/component: scratch-init
+  annotations:
+    "helm.sh/hook": post-install
+    "helm.sh/hook-delete-policy": before-hook-creation,hook-succeeded
+spec:
+  backoffLimit: 0
+  activeDeadlineSeconds: 60
+  template:
+    spec:
+      serviceAccountName: {{ .Release.Name }}-volumes
+      restartPolicy: Never
+      terminationGracePeriodSeconds: 2
+      containers:
+        - name: scratch-init
+          image: curlimages/curl:8.10.1
+          imagePullPolicy: IfNotPresent
+          command:
+            - sh
+            - -c
+            - |
+              SA=/var/run/secrets/kubernetes.io/serviceaccount
+              API="https://kubernetes.default.svc/api/v1/namespaces/$(cat $SA/namespace)/persistentvolumeclaims"
+              echo "[scratch-init] creating staging volume {{ .Release.Name }}-scratch ({{ .Values.scratch.size }})"
+              body='{"apiVersion":"v1","kind":"PersistentVolumeClaim","metadata":{"name":"{{ .Release.Name }}-scratch","labels":{"app.kubernetes.io/name":"export-batch","app.kubernetes.io/instance":"{{ .Release.Name }}"}},"spec":{"accessModes":["ReadWriteOnce"],"resources":{"requests":{"storage":"{{ .Values.scratch.size }}"}}}}'
+              code=$(curl -sS -o /dev/null -w '%{http_code}' --cacert $SA/ca.crt -H "Authorization: Bearer $(cat $SA/token)" -H 'Content-Type: application/json' -X POST "$API" -d "$body")
+              if [ "$code" != 201 ] && [ "$code" != 409 ]; then echo "[scratch-init] FATAL: could not create the volume (HTTP $code)" >&2; exit 1; fi
+              echo "[scratch-init] staging volume ready (HTTP $code)"
+          resources:
+            requests: {cpu: 10m, memory: 16Mi}
+            limits: {memory: 32Mi}

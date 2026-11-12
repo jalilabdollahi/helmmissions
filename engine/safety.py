@@ -28,8 +28,13 @@ DANGEROUS_PATTERNS = [
         "critical",
     ),
     (
-        r"kubectl\s+delete\s+.*\s+--all-namespaces",
+        r"kubectl\s+delete\s+.*(\s--all-namespaces|\s-a(\s|$)|\s-[a-z]*a[a-z]*\s)",
         "BLOCKED: cluster-wide deletions are not allowed.",
+        "critical",
+    ),
+    (
+        r"kubectl\s+.*(--context|--kubeconfig|--cluster)(=|\s)",
+        "BLOCKED: HelmMissions commands must run against the HelmMissions cluster only.",
         "critical",
     ),
     (
@@ -56,6 +61,11 @@ RISKY_PATTERNS = [
 ]
 
 ALLOWED_NAMESPACES = {"helmissions", "default", "kube-system"}
+NAMESPACE_RE = re.compile(r"(?:\s-n|\s--namespace)(?:=|\s+)([^\s]+)")
+
+
+def _namespace_allowed(namespace: str) -> bool:
+    return namespace in ALLOWED_NAMESPACES or namespace.startswith("helmissions-")
 
 
 def _check(command: str) -> tuple[bool, str, str]:
@@ -64,10 +74,10 @@ def _check(command: str) -> tuple[bool, str, str]:
         if re.search(pattern, lowered, re.IGNORECASE):
             return False, message, severity
 
-    namespace_match = re.search(r"(?:-n|--namespace)\s+([^\s]+)", lowered)
+    namespace_match = NAMESPACE_RE.search(" " + lowered)
     if namespace_match:
         namespace = namespace_match.group(1)
-        if namespace not in ALLOWED_NAMESPACES:
+        if not _namespace_allowed(namespace):
             return False, f"Warning: this game expects namespace 'helmissions', not '{namespace}'.", "warning"
 
     return True, "", "safe"
@@ -109,7 +119,7 @@ def validate_kubectl_command(command: str, interactive: bool = True) -> bool:
 def print_safety_info() -> None:
     console.print(
         Panel(
-            "Blocked: deleting system namespaces, nodes, CRDs, or cluster-wide deletes.\n"
+            "Blocked: deleting system namespaces, nodes, CRDs, cluster-wide deletes, and switching clusters.\n"
             "Warned: deleting the helmissions namespace, --all deletes, PV deletes, and risky helm removals.",
             title="[bold bright_cyan]HelmMissions Safety[/bold bright_cyan]",
             border_style="bright_cyan",
@@ -119,10 +129,22 @@ def print_safety_info() -> None:
 
 def validate_helm_command(command: str, interactive: bool = True) -> bool:
     lowered = command.lower().strip()
-    if re.search(r"helm\s+uninstall\s+--all(?:\s|$)", lowered):
-        namespace_match = re.search(r"(?:-n|--namespace)\s+([^\s]+)", lowered)
+    if re.search(r"\s--(kube-context|kubeconfig)(=|\s)", lowered):
+        console.print(
+            Panel(
+                "[bold red]BLOCKED: HelmMissions commands must run against the HelmMissions cluster only.[/bold red]",
+                title="[bold red]Safety Guard[/bold red]",
+                border_style="red",
+            )
+        )
+        return False
+    namespace_match = NAMESPACE_RE.search(" " + lowered)
+    if namespace_match and not _namespace_allowed(namespace_match.group(1)) and interactive:
+        if not Confirm.ask(f"This game expects namespace 'helmissions' (or helmissions-*), not '{namespace_match.group(1)}'. Continue?", default=False):
+            return False
+    if re.search(r"helm\s+uninstall\s+.*(--all|-a)(?:\s|$)", lowered):
         namespace = namespace_match.group(1) if namespace_match else "default"
-        if namespace != "helmissions":
+        if not namespace.startswith("helmissions"):
             console.print(
                 Panel(
                     "[bold red]BLOCKED: helm uninstall --all is only allowed in the helmissions namespace.[/bold red]",

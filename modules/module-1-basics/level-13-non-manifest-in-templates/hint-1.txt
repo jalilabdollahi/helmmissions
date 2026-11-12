@@ -1,0 +1,3 @@
+The error names a file. Open it, and also see what Helm makes of the whole chart:
+  helm template helpdesk ./helpdesk --debug
+  cat helpdesk/templates/usage-notes.yaml

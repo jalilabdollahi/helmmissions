@@ -1,0 +1,3 @@
+# Schema migrations that ship with this release: v1, v2, v3
+migrations:
+  target: v4

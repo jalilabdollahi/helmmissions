@@ -1,6 +1,0 @@
-apiVersion: v2
-name: full-incident
-description: Broken chart for Zero-to-Hero Incident Response
-type: application
-version: 0.1.0
-appVersion: 1.0.0

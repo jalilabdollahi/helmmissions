@@ -1,0 +1,3 @@
+templates/service.yaml still includes "shop.labels", the pre-rename name. The helper that exists is
+"storefront.labels". Update the include (or deliberately add an alias definition), lint, then:
+  helm install shop ./storefront -n helmissions

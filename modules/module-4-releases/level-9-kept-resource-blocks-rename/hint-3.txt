@@ -1,0 +1,3 @@
+Options: `helm install storefront ./storefront -n helmissions --take-ownership`, or re-annotate the Secret
+(meta.helm.sh/release-name=storefront), or delete it and let the chart recreate it (its values already
+contain the credentials).

@@ -1,1 +1,0 @@
-This level is about revision history. Start with `helm history` and identify the good revision before changing anything. The broken state says: helm history shows gaps (1, 2, 5) — player confused about what happened.

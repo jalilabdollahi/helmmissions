@@ -1,1 +1,0 @@
-Concrete direction: Use `helm install --dry-run` to catch the error, then add `default` function. When you think you have it, verify the result the same way the mission describes: Dry-run passes, real install succeeds

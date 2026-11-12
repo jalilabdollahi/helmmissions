@@ -1,0 +1,22 @@
+replicaCount: 1
+
+image:
+  repository: traefik/whoami
+  tag: v1.10
+  pullPolicy: IfNotPresent
+
+# Every entry becomes a container port and a Service port.
+ports:
+  - name: http
+    port: 80
+  - name: admin
+    port: 9901
+  - name: metrics
+    port: 9102
+
+resources:
+  requests:
+    cpu: 10m
+    memory: 16Mi
+  limits:
+    memory: 48Mi

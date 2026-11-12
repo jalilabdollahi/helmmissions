@@ -1,0 +1,10 @@
+apiVersion: v2
+name: ledger-api
+description: HTTP API in front of the ledger
+type: application
+version: 0.2.0
+appVersion: "1.10"
+dependencies:
+  - name: platformlib
+    version: 0.1.0
+    repository: file://../platformlib

@@ -1,4 +1,0 @@
-apiVersion: v2
-name: subchart
-version: 9.9.9
-type: application

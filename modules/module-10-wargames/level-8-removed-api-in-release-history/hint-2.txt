@@ -1,0 +1,3 @@
+Three layers, each hiding behind the previous one: the stored release record (Secret `sh.helm.release.v1.edge-gateway.v<N>`)
+names policy/v1beta1 and autoscaling/v2beta1 objects the API server no longer serves; the 1.4.0 chart in the workspace still renders
+those removed versions (and the old HPA metrics layout is not valid in the new API); and its autoscaling values have min greater than max.

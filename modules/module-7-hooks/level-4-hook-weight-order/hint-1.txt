@@ -1,0 +1,5 @@
+Compare the two hook Jobs and see which one actually ran:
+  kubectl get jobs -n helmissions
+  kubectl logs job/orders-db-migrate -n helmissions
+  helm get hooks orders -n helmissions | grep -E 'name:|hook-weight'
+The migration needs something the init Job creates.

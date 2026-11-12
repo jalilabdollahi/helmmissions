@@ -1,0 +1,3 @@
+In templates/_helpers.tpl truncate the generated name the way `helm create` does:
+  ... | trunc 63 | trimSuffix "-"
+Apply it to both branches of the fullname helper, then install or upgrade with the long release name.

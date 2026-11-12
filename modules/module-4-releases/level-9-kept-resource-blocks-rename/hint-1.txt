@@ -1,0 +1,3 @@
+Look at who the leftover Secret thinks it belongs to:
+  kubectl get secret db-credentials -n helmissions -o yaml
+Check the annotations, and `helm list -n helmissions`.

@@ -1,0 +1,2 @@
+Reproduce the failures (`helm upgrade`, `helm rollback`) and read each error word by word: one of them talks about the *current release manifest*, not your chart.
+Then look at what Helm stored: `helm get manifest edge-gateway -n helmissions` and `helm history edge-gateway -n helmissions`.

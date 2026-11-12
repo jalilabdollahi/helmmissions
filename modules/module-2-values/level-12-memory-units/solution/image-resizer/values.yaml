@@ -1,0 +1,13 @@
+replicaCount: 2
+
+image:
+  repository: busybox
+  tag: "1.36"
+
+# Thumbnails are generated in memory, so give the worker headroom.
+resources:
+  requests:
+    cpu: 10m
+    memory: 128Mi
+  limits:
+    memory: 256Mi

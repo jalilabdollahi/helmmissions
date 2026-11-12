@@ -1,0 +1,2 @@
+The hotfix lived only in the cluster. The chart's default `db.poolSize` is 5 and nothing in Git says 40, so
+the next `helm upgrade` applied what Git said and overwrote the live edit.

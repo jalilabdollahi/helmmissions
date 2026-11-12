@@ -1,0 +1,19 @@
+name: Lines Glued Together
+description: |
+  Someone "tidied up" the whitespace in the `thumbnailer` Deployment template. Since then the release can't be installed,
+  and the error mentions neither Kubernetes nor values:
+    Error: INSTALLATION FAILED: YAML parse error on thumbnailer/templates/deployment.yaml: error converting YAML to JSON:
+    yaml: line 6: mapping values are not allowed in this context
+  The chart is in your workspace under `thumbnailer/`.
+objective: |
+  Release `thumbs` is deployed in namespace `helmissions` from the chart in your workspace with 2 ready replicas.
+  The Deployment keeps all its settings (replicas from `replicaCount`, `revisionHistoryLimit: 2`) and the `thumbs`
+  Service has 2 ready endpoints.
+xp: 250
+difficulty: intermediate
+expected_time: 10m
+concepts:
+  - whitespace control
+  - "{{- and -}}"
+  - helm template --debug
+  - YAML

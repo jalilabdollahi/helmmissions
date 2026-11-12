@@ -1,0 +1,24 @@
+# Before a rollback, ask the queue admin service to stop handing out new batches.
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: {{ .Release.Name }}-drain
+  annotations:
+    helm.sh/hook: pre-rollback
+    helm.sh/hook-delete-policy: before-hook-creation
+spec:
+  backoffLimit: 0
+  template:
+    spec:
+      restartPolicy: Never
+      terminationGracePeriodSeconds: 2
+      containers:
+        - name: drain
+          image: busybox:1.36
+          imagePullPolicy: IfNotPresent
+          command:
+            - sh
+            - -c
+            - |
+              echo "draining settlement queue via queue-admin"
+              wget -q -T 3 -O- http://queue-admin.helmissions.svc/drain || { echo "queue-admin unreachable"; exit 1; }

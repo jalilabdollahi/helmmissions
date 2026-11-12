@@ -1,0 +1,3 @@
+Make the Secret available earlier: turn it into a hook of the same phase with a lower `hook-weight` than the Job.
+Be careful with the delete policy: the application uses the Secret too, so it must not be removed once the hook
+has succeeded. The failed first install left a release behind; reinstall it (the Job is a pre-install hook).

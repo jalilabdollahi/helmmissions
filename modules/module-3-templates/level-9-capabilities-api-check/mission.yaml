@@ -1,0 +1,20 @@
+name: Wrong Ingress API
+description: |
+  The `docs-portal` chart supports old and new clusters by picking the Ingress apiVersion from the cluster's
+  capabilities. On our current cluster it picks the wrong one and the install is rejected:
+    Error: INSTALLATION FAILED: unable to build kubernetes objects from release manifest: resource mapping not found
+    for name: "portal" namespace: "" from "": no matches for kind "Ingress" in version "networking.k8s.io/v1beta1"
+  The cluster certainly serves Ingress - `kubectl api-resources | grep ingresses` lists it. The chart is in your
+  workspace under `docs-portal/`.
+objective: |
+  Release `portal` is deployed in namespace `helmissions` from the chart in your workspace, with the Ingress object
+  `portal` created under `networking.k8s.io/v1` (the chart's `ingress.enabled` stays true) and the Deployment's
+  pod Ready. Rendering the chart against this cluster's real API capabilities must produce the v1 Ingress.
+xp: 300
+difficulty: advanced
+expected_time: 15m
+concepts:
+  - .Capabilities.APIVersions
+  - API discovery
+  - helm template --dry-run=server
+  - Ingress

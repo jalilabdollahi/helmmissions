@@ -1,0 +1,21 @@
+name: Fix Forward
+description: |
+  `ledger-sync` 1.0 has been running happily. Today the team shipped chart 1.1, which switches the worker
+  to incremental reconciliation (`RECONCILE_MODE=incremental`, `BATCH_SIZE=500`) and scales it to 2 replicas.
+  The upgrade failed:
+    Error: UPGRADE FAILED: server-side apply failed for object helmissions/ledger-sync apps/v1, Kind=Deployment:
+    Deployment.apps "ledger-sync" is invalid: ... readinessProbe ... may not specify more than 1 handler type
+  `helm status` now reports the release as `failed`, and the old pod is still serving traffic.
+  The 1.1 chart is in your workspace under `ledger-sync/`.
+objective: |
+  Release `ledger-sync` in namespace `helmissions` is `deployed` on a new revision created by an upgrade
+  (history keeps the failed revision), runs chart 1.1.0 with the incremental mode and batch size
+  settings live on the Deployment, and has 2 ready pods. A rollback to 1.0 does not count.
+xp: 250
+difficulty: intermediate
+expected_time: 10m
+concepts:
+  - failed upgrade
+  - fix forward vs rollback
+  - helm history
+  - probes

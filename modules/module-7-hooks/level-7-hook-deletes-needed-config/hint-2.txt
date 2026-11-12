@@ -1,0 +1,3 @@
+templates/routes-configmap.yaml carries helm.sh/hook annotations, so Helm treats it as a hook: it is created in the
+pre-install/pre-upgrade phase, kept out of the release manifest, and (with the `hook-succeeded` policy) deleted
+as soon as that phase has "succeeded". The Deployment needs the ConfigMap for its whole life, not just for the hook phase.

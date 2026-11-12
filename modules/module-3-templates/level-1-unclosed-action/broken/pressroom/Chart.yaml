@@ -1,0 +1,6 @@
+apiVersion: v2
+name: pressroom
+description: Static newsletter site for the editorial team
+type: application
+version: 0.3.0
+appVersion: "1.27"

@@ -1,0 +1,19 @@
+name: "Wrong Namespace DNS"
+description: |
+  After the tenancy project moved the orders back end to its own namespace, the customer dashboard shows no orders:
+  `curl http://orders-web/cgi-bin/dashboard` (from inside `helmissions-web`) ends in a name-resolution or connection
+  error instead of the open order count. Both releases say `deployed`, both pods are Running and Ready. Fixing the first
+  obvious thing does not bring the dashboard back. The two tiers and their namespaces are described in `TEAMS.md`.
+objective: |
+  Release `orders-api` is `deployed` in namespace `helmissions-api` and release `orders-web` is `deployed` in namespace
+  `helmissions-web`. `http://orders-web/cgi-bin/dashboard` called from `helmissions-web` shows the open orders served by
+  the back end that runs in namespace `helmissions-api` (not a copy in another namespace). The charts and values in the
+  workspace must describe the working setup (a new `deploy.sh` run keeps it healthy).
+xp: 400
+difficulty: expert
+expected_time: 20m
+concepts:
+  - cluster DNS
+  - cross-namespace service discovery
+  - dnsPolicy
+  - Service ports

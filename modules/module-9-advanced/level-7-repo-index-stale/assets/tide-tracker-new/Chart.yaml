@@ -1,0 +1,6 @@
+apiVersion: v2
+name: tide-tracker
+description: Harbour tide forecasts
+type: application
+version: 1.3.0
+appVersion: "1.10"

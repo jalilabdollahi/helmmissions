@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Release.Name }}-gateway
+  labels:
+    {{- include "gateway.labels" . | nindent 4 }}
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      {{- include "gateway.labels" . | nindent 6 }}
+  template:
+    metadata:
+      labels:
+        {{- include "gateway.labels" . | nindent 8 }}
+    spec:
+      terminationGracePeriodSeconds: 2
+      containers:
+        - name: gateway
+          image: {{ include "gateway.image" . | quote }}
+          imagePullPolicy: IfNotPresent
+          env:
+            - name: UPSTREAMS
+              value: {{ .Values.upstreams | quote }}
+          ports:
+            - containerPort: 80
+          readinessProbe:
+            httpGet: {path: /health, port: 80}
+            initialDelaySeconds: 1
+            periodSeconds: 2
+          resources:
+            {{- toYaml .Values.resources | nindent 12 }}

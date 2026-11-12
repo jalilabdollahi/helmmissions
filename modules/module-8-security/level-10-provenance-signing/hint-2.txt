@@ -1,0 +1,3 @@
+`helm package` only produces a .prov file when you ask it to sign: `--sign --key <name of the key> --keyring <secret keyring>`.
+Signing uses the SECRET keyring (keys/signer-secring.gpg); verifying uses the PUBLIC keyring (keys/signer-pubring.gpg).
+The key name is the user id in the key (see keys/README.txt). Never remove --verify from the install.

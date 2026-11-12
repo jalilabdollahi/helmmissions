@@ -1,0 +1,4 @@
+replicaCount: 1
+provider: maps-v2
+ttl: 300
+trace: false

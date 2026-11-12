@@ -1,0 +1,3 @@
+Check what really exists in the registry, with the same scheme Helm uses for OCI chart references:
+  helm show chart oci://localhost:5001/m6-oci-dependency-url/charts/seat-cache --version 2.0.1 --plain-http
+Then compare the reference Helm tried (it is in the error message) with the `repository:` in Chart.yaml.

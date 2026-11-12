@@ -1,0 +1,3 @@
+Build the names from `.Release.Namespace` and `.Release.Name` (a small `_helpers.tpl` helper keeps them consistent) for all three objects and the
+priorityClassName reference, and use `.Release.Namespace` as the binding subject namespace. Then upgrade team-a (its old objects are replaced)
+and install team-b. Do not edit ownership annotations.

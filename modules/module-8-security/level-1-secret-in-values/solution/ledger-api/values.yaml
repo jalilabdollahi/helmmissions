@@ -1,0 +1,18 @@
+replicaCount: 1
+
+image:
+  repository: busybox
+  tag: "1.36"
+  pullPolicy: IfNotPresent
+
+service:
+  port: 8080
+
+db:
+  host: ledger-db.finance.internal
+  user: ledger_app
+  password: ""
+  # Name of a pre-existing Secret that holds the password. When set, the chart
+  # reads the password from there instead of from `db.password`.
+  existingSecret: ledger-db-credentials
+  existingSecretKey: password

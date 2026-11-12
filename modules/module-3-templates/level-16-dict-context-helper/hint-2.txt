@@ -1,0 +1,4 @@
+The helpers read `.ctx` (the root context) and `.component` - they expect to be called with a dict:
+  (dict "ctx" . "component" "api")
+The templates call `include "mailer.fullname" .` instead, so `.ctx` does not exist and `.ctx.Release` is nil. The
+helper receives exactly one value, so everything it needs must be packed into that one argument.

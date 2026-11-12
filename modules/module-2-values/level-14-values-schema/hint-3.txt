@@ -1,1 +1,0 @@
-Concrete direction: Set replicaCount to at least 1. When you think you have it, verify the result the same way the mission describes: Schema validation passes, release deploys

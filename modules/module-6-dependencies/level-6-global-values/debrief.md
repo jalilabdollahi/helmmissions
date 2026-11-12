@@ -1,27 +1,40 @@
-# Share With Everyone
+# One Setting For All Subcharts
 
-## Situation
-Multiple subcharts need same cluster name — must use global values. In this mission the broken state is intentional, and the point is not just to make Helm stop complaining. The real lesson is learning how Helm reports failure, where chart defects surface, and how release state and rendered manifests can drift apart when a deployment goes wrong.
+## What broke
+`region: eu-west-1` was written at the top level of the parent's `values.yaml`. The gateway template and both
+subcharts read `.Values.global.region`, which was never set, so each fell back to "unset". The upgrade succeeded
+and nothing in Helm output hinted at a problem.
 
-## The Fix
-Primary action: Use `global.clusterName` — accessible in all subcharts via `.Values.global`
+## Why Helm behaves this way
+A subchart sees its own values: its defaults merged with the parent's block named after it (`collector:`). The parent's
+other top-level keys are invisible to it. There is one deliberate exception: the reserved `global:` key. Whatever is
+under `global` in the parent is copied into every subchart (and sub-subchart) as `.Values.global`, so a single setting
+such as region, image registry or environment reaches every component. Globals flow only downward: a subchart cannot
+set a global for its siblings, and a value placed under `collector.global` is overridden by the parent's own global.
+The parent's own templates read it the same way, as `.Values.global.region`, and the subchart authors agreed to
+that convention.
 
-A strong solution should leave both the chart and the cluster in a healthy state. In Helm that usually means checking the source of truth first, fixing the right file or release action, and then confirming that the next install, upgrade, rollback, or hook execution behaves the way you intended.
+## The fix
+Move `region` under `global:` and upgrade. `helm get values telemetry --all` now shows `global.region`, and `helm template`
+renders the same value into every Deployment.
 
-## What To Validate
-All subcharts render with same clusterName
+## In real life
+Umbrella charts rely on globals for image registry mirrors, cluster name, tenant id and storage class.
+Typical failures: the value placed one level too high (this level), set under a subchart name where it is not read, or a
+subchart author using `.Values.region` instead of `.Values.global.region`, in which case the parent has to set
+`collector.region` explicitly. When a platform team documents "use global.X", anything else is a silent default.
+Make subcharts fail loudly (`required "global.region is required" .Values.global.region`) to turn silent defaults into errors.
 
-Helpful checks for this level:
-- `helm status helmissions-app -n helmissions`
-- `helm lint ./broken`
-- `kubectl get all -n helmissions`
+## Commands worth remembering
+- `helm get values <rel> --all` — shows the merged `global` map and per-subchart blocks
+- `helm template <rel> ./chart --set global.region=x | grep -n REGION` — try a value without upgrading
+- `grep -rn "Values.global" <chart>/` — find which keys components expect
+- `helm show values ./chart/charts/<sub>.tgz` — see whether a subchart documents a global
 
-## Why It Matters
-Review how the fix changed the Helm release for "Share With Everyone".
+## Common mistakes
+- Scoping `--set collector.region=...` for each subchart: they read `global.region`, so nothing changes.
+- Hand-editing the vendored subchart templates to read a different key, which breaks on the next `helm dependency update`.
+- Patching live Deployments with `kubectl set env`; the release still holds the old values.
 
-This matters in chart dependencies work because Helm failures are rarely just syntax errors. In real teams they show up during CI/CD runs, emergency rollbacks, environment promotion, or cluster changes that expose assumptions hidden in a chart. If you only patch the symptom in-cluster, the same bug usually comes back on the next deployment.
-
-A good operator learns the habit behind the fix: inspect the rendered output, understand the release history, and then make the smallest durable change that restores the expected behavior. That habit scales from a single broken values file all the way up to multi-service incident response.
-
-## Concepts
-global values, .Values.global, cross-subchart sharing
+## Helm 3 vs Helm 4
+No difference: `global` is handled identically.

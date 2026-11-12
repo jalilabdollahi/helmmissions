@@ -1,0 +1,11 @@
+apiVersion: v2
+name: helpdesk
+description: Customer help desk portal with an optional full-text ticket search
+type: application
+version: 3.2.0
+appVersion: "3.2.0"
+dependencies:
+  - name: ticket-search
+    version: 0.6.0
+    repository: file://../ticket-search
+    condition: search.enable

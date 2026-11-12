@@ -1,0 +1,3 @@
+Reproduce the render error without touching the cluster:
+  helm template profile-svc ./profile-svc -f values-staging.yaml
+Compare values-staging.yaml with values-prod.yaml and with chart/templates/configmap.yaml.

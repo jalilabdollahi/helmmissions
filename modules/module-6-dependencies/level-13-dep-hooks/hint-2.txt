@@ -1,1 +1,0 @@
-The fix revolves around subchart hooks, hook propagation, --no-hooks flag. Compare the current state with the objective: Fix the hook script, or disable subchart hooks with --no-hooks If the level is stateful, inspect the existing release history before reinstalling anything.

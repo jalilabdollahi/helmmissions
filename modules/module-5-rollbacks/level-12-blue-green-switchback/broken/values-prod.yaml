@@ -1,0 +1,5 @@
+# Release 6.1 goes live on green.
+activeColor: green
+green:
+  replicas: 2
+  tag: v1.99.0

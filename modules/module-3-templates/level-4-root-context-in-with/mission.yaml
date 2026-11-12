@@ -1,0 +1,20 @@
+name: Lost In with
+description: |
+  The platform team asked every chart to stamp pods with ownership labels and with the name of the release
+  that created them. After the change to the `tileserver` chart, the geo team can no longer deploy:
+    Error: INSTALLATION FAILED: tileserver/templates/deployment.yaml:18:51
+      executing "tileserver/templates/deployment.yaml" at <.Release.Name>:
+        nil pointer evaluating interface {}.Name
+  The chart is in your workspace under `tileserver/`.
+objective: |
+  Release `tiles` is deployed in namespace `helmissions` from the chart in your workspace. Its pod is Ready
+  and carries the labels from the `podLabels` value plus a `tileserver.example.com/release` label whose
+  value is the name of the release (whatever the release is called).
+xp: 250
+difficulty: intermediate
+expected_time: 10m
+concepts:
+  - with scope
+  - root context ($)
+  - .Release
+  - range and with

@@ -1,0 +1,8 @@
+global:
+  imageRegistry: ""
+replicaCount: 1
+image:
+  repository: app
+  tag: latest
+indexer:
+  enabled: true

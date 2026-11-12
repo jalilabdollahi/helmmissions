@@ -1,0 +1,6 @@
+apiVersion: v2
+name: notifier
+description: Push notification dispatcher
+type: application
+version: 1.0.0
+appVersion: "3.4.0"

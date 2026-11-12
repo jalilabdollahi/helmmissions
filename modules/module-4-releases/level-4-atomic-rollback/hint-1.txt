@@ -1,1 +1,0 @@
-Look at live release state first: `helm list`, `helm status`, and `helm history` tell you more than the files alone. The broken state says: `helm upgrade --atomic` fails and auto-rolls back — player must diagnose original error.

@@ -1,1 +1,3 @@
-This level is about revision history. Start with `helm history` and identify the good revision before changing anything. The broken state says: Bad upgrade broke the app — perform a simple rollback.
+The upgrade "succeeded" from Helm's point of view, so start with what Helm remembers:
+  helm history quotes-api -n helmissions
+Then look at what the pod is actually trying to run (kubectl describe pod).

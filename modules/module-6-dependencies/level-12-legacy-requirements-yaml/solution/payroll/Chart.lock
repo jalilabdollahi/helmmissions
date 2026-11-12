@@ -1,0 +1,9 @@
+dependencies:
+- name: tax-tables
+  repository: file://../tax-tables
+  version: 2.1.0
+- name: pay-calendar
+  repository: file://../pay-calendar
+  version: 1.0.0
+digest: sha256:62a2a9d4ebda43a39ccb4ab03cc8ea31a23187ff69b72820b0fd517596a9bb0b
+generated: "2026-11-12T00:37:19.950166+01:00"

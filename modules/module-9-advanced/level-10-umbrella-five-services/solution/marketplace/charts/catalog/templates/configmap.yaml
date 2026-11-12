@@ -1,0 +1,8 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ .Release.Name }}-catalog
+  labels:
+    {{- include "catalog.selector" . | nindent 4 }}
+data:
+  PAGE_SIZE: {{ .Values.pageSize | quote }}

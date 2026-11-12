@@ -1,1 +1,0 @@
-The fix revolves around case sensitivity, typos in template paths. Compare the current state with the objective: Correct to `{{ .Values.image.repository }}` If the level is stateful, inspect the existing release history before reinstalling anything.

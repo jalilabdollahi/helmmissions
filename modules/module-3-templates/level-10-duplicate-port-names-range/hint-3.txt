@@ -1,0 +1,3 @@
+In templates/service.yaml, replace the hard-coded `name: http` with the item's own name: `name: {{ .name }}`.
+Keep `targetPort: {{ .name }}` as it is. Then:  helm install edge ./mesh-edge -n helmissions
+(If you already tried and a failed release exists:  helm upgrade --install edge ./mesh-edge -n helmissions)

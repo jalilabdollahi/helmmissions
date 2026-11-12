@@ -1,0 +1,3 @@
+Revision 2 failed on the CronJob: the Kubernetes API rejected spec.schedule. Revision 3 is Helm's automatic
+rollback to revision 1, which is why everything looks fine but still runs 0.4. Render the chart with
+`helm template telemetry-gw ./telemetry-gw` and look at the CronJob.

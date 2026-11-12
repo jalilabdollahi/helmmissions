@@ -1,27 +1,37 @@
-# Hook Needs Permission
+# Forbidden Inside The Hook
 
-## Situation
-Hook Job fails with RBAC error — needs permission to list Pods. In this mission the broken state is intentional, and the point is not just to make Helm stop complaining. The real lesson is learning how Helm reports failure, where chart defects surface, and how release state and rendered manifests can drift apart when a deployment goes wrong.
+## What broke
+`tenant-onboarding` has a pre-install Job that lists ConfigMaps to make sure no maintenance window is active. The Job pod ran as the
+namespace's `default` ServiceAccount, which Kubernetes RBAC gives no permissions, so the API answered `403 Forbidden` and the Job exited
+non-zero. Helm treats a failed pre-install hook as a failed install, so nothing else, including the Deployment, was created.
 
-## The Fix
-Primary action: Create ServiceAccount + Role + RoleBinding for hook, assign to Job
+## Why Helm behaves this way
+Hooks are ordinary Kubernetes objects with ordinary identities. A Job that talks to the API needs a ServiceAccount, a Role and a
+RoleBinding **that already exist when its pod starts**. Helm creates regular templates only after the `pre-install` hooks have finished, so RBAC
+declared as normal resources arrives too late. The classic solution is to ship the ServiceAccount, Role and RoleBinding as hooks of the same
+phase, with a lower `hook-weight` than the Job (weights are ascending, negative values are fine), and `before-hook-creation` as delete policy so upgrades can
+recreate them. Helm waits for each hook, in weight order, before starting the next.
 
-A strong solution should leave both the chart and the cluster in a healthy state. In Helm that usually means checking the source of truth first, fixing the right file or release action, and then confirming that the next install, upgrade, rollback, or hook execution behaves the way you intended.
+## The fix
+Create `<release>-preflight` ServiceAccount, Role (`list` on `configmaps`) and RoleBinding as `pre-install,pre-upgrade` hooks with weight
+`-10`, and set `serviceAccountName` on the Job. Granting only the verbs the hook uses is the point: do not bind `cluster-admin` to make errors
+disappear. A hook ServiceAccount is not removed by uninstall unless its delete policy says so; decide whether that is what you want.
 
-## What To Validate
-Hook runs successfully with correct permissions
+## In real life
+Pre-install checks, DB bootstrap Jobs and cleanup Jobs often need API access (listing secrets, patching ConfigMaps, creating namespaces). These
+failures only show up on the first install in a new cluster or namespace, because the hand-made RoleBinding that made it work in the
+test environment is not in the chart. Always test hooks in an empty namespace.
 
-Helpful checks for this level:
-- `helm status helmissions-app -n helmissions`
-- `helm lint ./broken`
-- `kubectl get all -n helmissions`
+## Commands worth remembering
+- `kubectl logs job/<hook-job>` — the API's `forbidden` message names the user, verb and resource
+- `kubectl auth can-i list configmaps --as system:serviceaccount:<ns>:<sa> -n <ns>` — test permissions quickly
+- `helm get hooks <rel>` — check phases and weights of the RBAC objects and the Job
 
-## Why It Matters
-Review how the fix changed the Helm release for "Hook Needs Permission".
+## Common mistakes
+- Declaring the Role and RoleBinding as normal templates: they exist only after the hook has already failed.
+- Creating the RoleBinding with `kubectl`: green here, red in every fresh environment.
+- Giving the hook far more permissions than it needs.
 
-This matters in helm hooks work because Helm failures are rarely just syntax errors. In real teams they show up during CI/CD runs, emergency rollbacks, environment promotion, or cluster changes that expose assumptions hidden in a chart. If you only patch the symptom in-cluster, the same bug usually comes back on the next deployment.
-
-A good operator learns the habit behind the fix: inspect the rendered output, understand the release history, and then make the smallest durable change that restores the expected behavior. That habit scales from a single broken values file all the way up to multi-service incident response.
-
-## Concepts
-hook RBAC, ServiceAccount for Jobs, least privilege
+## Helm 3 vs Helm 4
+No difference in behaviour: weights decide the order in both and each hook is waited for before the next starts. Helm 4's error text for the failing
+hook is `failed pre-install: resource Job/<ns>/<name> not ready. status: Failed`.

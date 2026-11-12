@@ -1,0 +1,2 @@
+NOTES.txt reads `.Values.ingress.host`, but values.yaml has no `ingress` section at all, so `.Values.ingress` is
+nil and asking a nil for `.host` is an error. NOTES.txt is a template like any other and must render.

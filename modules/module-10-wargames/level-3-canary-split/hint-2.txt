@@ -1,0 +1,3 @@
+Three faults in the values: the stable track has too few replicas for a 10% canary,
+the canary's pods carry a different `app.kubernetes.io/name` than the one the Service selects,
+and the canary readiness probe asks for a path the container does not serve (which also left the canary release `failed`).

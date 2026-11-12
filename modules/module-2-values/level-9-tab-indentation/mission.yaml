@@ -1,0 +1,18 @@
+name: Invisible Tabs
+description: |
+  The compliance team pasted the audit settings from their wiki into `audit-log/values.yaml`
+  and the chart no longer installs:
+    Error: INSTALLATION FAILED: cannot load values.yaml: cannot unmarshal yaml document:
+    error converting YAML to JSON: yaml: line 9: found character that cannot start any token
+  The file looks perfectly aligned in the editor. Line 9 is the first line under `audit:`.
+objective: |
+  Release `audit-log` is deployed in namespace `helmissions` with 2 ready pods. `audit-log/values.yaml`
+  parses as YAML, contains no tab characters, and keeps the intended settings: retention 90 days,
+  sink `siem.corp.example` on port 6514 with TLS enabled (all served in `audit.conf`).
+xp: 150
+difficulty: beginner
+expected_time: 10m
+concepts:
+  - YAML indentation
+  - tabs vs spaces
+  - helm lint

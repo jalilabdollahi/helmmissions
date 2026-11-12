@@ -1,0 +1,18 @@
+name: Connection Refused
+description: |
+  Callers of the `inventory` service get errors. The release is deployed, both pods are Ready and
+  `kubectl get endpoints inventory -n helmissions` lists two addresses - the Service looks perfectly healthy.
+  Yet a request from another pod fails:
+    curl: (7) Failed to connect to inventory.helmissions.svc port 80: Connection refused
+objective: |
+  A request to `http://inventory.helmissions.svc/` from inside the cluster returns HTTP 200.
+  The fix must be part of the Helm release (revision recorded by Helm) and of the chart in your
+  workspace, so a later `helm upgrade` does not break it again.
+xp: 150
+difficulty: beginner
+expected_time: 10m
+concepts:
+  - Service
+  - port vs targetPort
+  - endpoints
+  - helm upgrade

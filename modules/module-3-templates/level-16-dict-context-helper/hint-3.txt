@@ -1,0 +1,4 @@
+In templates/api.yaml AND templates/worker.yaml, change every call to pass a dict with the matching component:
+  {{ include "mailer.fullname" (dict "ctx" . "component" "worker") }}
+  {{- include "mailer.selectorLabels" (dict "ctx" . "component" "worker") | nindent 6 }}
+(api.yaml uses "api"). Then: helm install mailer ./mailer -n helmissions

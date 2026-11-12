@@ -1,0 +1,6 @@
+dependencies:
+- name: seat-cache
+  repository: oci://localhost:5001/m6-oci-dependency-url/charts
+  version: 2.0.1
+digest: sha256:87b63318efa4ae0c24fd26d4f1395247e0c41b5797f419d198672d5666f41ea5
+generated: "2026-11-12T00:33:06.888731+01:00"

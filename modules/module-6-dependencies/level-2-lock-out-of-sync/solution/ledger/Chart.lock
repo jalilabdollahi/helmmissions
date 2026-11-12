@@ -1,0 +1,6 @@
+dependencies:
+- name: ledger-db
+  repository: file://../ledger-db
+  version: 0.4.0
+digest: sha256:5f362a570d2ad1f6fc3c6478ac9642d68b1625436a22cc640179e15021bd33f5
+generated: "2026-11-12T00:19:43.101205+01:00"

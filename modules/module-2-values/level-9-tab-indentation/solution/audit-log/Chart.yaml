@@ -1,0 +1,6 @@
+apiVersion: v2
+name: audit-log
+description: Audit log forwarder configuration published as a static endpoint
+type: application
+version: 1.1.0
+appVersion: "1.27"

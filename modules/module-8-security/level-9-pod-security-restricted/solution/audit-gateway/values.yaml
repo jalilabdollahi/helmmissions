@@ -1,0 +1,19 @@
+replicaCount: 1
+
+image:
+  repository: nginxinc/nginx-unprivileged
+  tag: 1.27-alpine
+  pullPolicy: IfNotPresent
+
+containerPort: 8080
+
+# Pod-level and container-level security settings applied to the gateway container.
+podSecurityContext:
+  runAsNonRoot: true
+  runAsUser: 101
+  seccompProfile:
+    type: RuntimeDefault
+containerSecurityContext:
+  allowPrivilegeEscalation: false
+  capabilities:
+    drop: ["ALL"]

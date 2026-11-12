@@ -1,0 +1,3 @@
+Chart.yaml says `condition: search.enable`; values.yaml sets `search.enabled`. Make the two agree (the values key
+is the one the rest of the chart already uses), re-run `helm template` to confirm the search objects are gone,
+then `helm upgrade helpdesk ./helpdesk -n helmissions`. Deleting live objects with kubectl will not stick.

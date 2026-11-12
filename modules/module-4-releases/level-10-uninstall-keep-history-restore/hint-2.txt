@@ -1,0 +1,3 @@
+An uninstall with --keep-history marks the latest revision `uninstalled` instead of adding a new one, so the
+history is intact. `helm rollback` can bring a revision back to life. Be careful which revision you choose:
+the default (no revision number) is not necessarily the one that was live.

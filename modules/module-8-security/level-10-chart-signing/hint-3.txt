@@ -1,1 +1,0 @@
-Concrete direction: Generate keypair, sign chart, verify with --verify flag. When you think you have it, verify the result the same way the mission describes: `helm verify` succeeds with valid signature

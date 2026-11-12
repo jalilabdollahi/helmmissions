@@ -1,0 +1,3 @@
+Revision 3 set `features.search=false`; revisions 4 and 5 added `cache.ttlSeconds` and `logLevel` on top, and
+revision 2 set `replicaCount=2`. `helm rollback` to revision 2 would restore search but erase 4 and 5.
+Also remember: `helm upgrade` without --reuse-values or -f forgets previously supplied --set values.

@@ -1,0 +1,7 @@
+track: canary
+version: "2.0"
+replicaCount: 1
+probe:
+  path: /healthz
+service:
+  enabled: false

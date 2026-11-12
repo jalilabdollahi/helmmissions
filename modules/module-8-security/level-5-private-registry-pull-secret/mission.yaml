@@ -1,0 +1,21 @@
+name: Unauthorized Pull
+description: |
+  The partner portal image lives in the company's private registry at `localhost:5002`. The release installs,
+  but its pods never start:
+    STATUS: ImagePullBackOff
+    Failed to pull image "localhost:5002/m8-portal/portal:1.0": ... pull access denied, repository does not exist
+    or may require authorization: authorization failed: no basic auth credentials
+  The image is there — `DEPLOY-TICKET.txt` in your workspace has the read-only pull account for the registry.
+objective: |
+  Release `portal` in namespace `helmissions` is deployed with 2 Ready pods that still pull
+  `localhost:5002/m8-portal/portal:1.0` from the private registry (which must keep requiring authentication).
+  The pods authenticate through a `kubernetes.io/dockerconfigjson` Secret for `localhost:5002` holding working
+  credentials, and the registry password does not appear in the release's values.
+xp: 300
+difficulty: advanced
+expected_time: 15m
+concepts:
+  - private registries
+  - imagePullSecrets
+  - docker-registry secret
+  - kubelet image pull

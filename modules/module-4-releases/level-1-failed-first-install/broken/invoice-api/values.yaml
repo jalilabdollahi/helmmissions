@@ -1,0 +1,14 @@
+replicaCount: 2
+
+image:
+  repository: traefik/whoami
+  tag: v1.10
+  pullPolicy: IfNotPresent
+
+service:
+  type: ClusterIp
+  port: 80
+
+invoice:
+  currency: EUR
+  dueDays: 30

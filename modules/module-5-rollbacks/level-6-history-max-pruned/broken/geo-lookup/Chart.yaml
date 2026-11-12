@@ -1,0 +1,5 @@
+apiVersion: v2
+name: geo-lookup
+description: Address geocoding facade for the delivery apps
+version: 2.1.0
+appVersion: "2.1"

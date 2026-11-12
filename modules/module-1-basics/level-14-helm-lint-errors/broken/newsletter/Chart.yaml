@@ -1,0 +1,13 @@
+apiVersion: v2
+name: Newsletter
+description: Signup page and settings for the weekly newsletter
+type: application
+version: "1.0"
+appVersion: 2.3
+home: https://newsletter.helmissions.example
+sources:
+  - github.com/helmissions-demo/newsletter
+maintainers:
+  - name: Growth Platform Team
+    email: growth@helmissions.example
+    url: https://growth.helmissions.example

@@ -1,0 +1,4 @@
+The registry at localhost:5002 requires basic auth and the pod presents no credentials. Kubernetes passes registry
+credentials to the kubelet through `imagePullSecrets`: a Secret of type kubernetes.io/dockerconfigjson in the SAME
+namespace as the pod, created for the exact registry host (`localhost:5002`). The chart already renders
+`.Values.imagePullSecrets` into the pod spec.

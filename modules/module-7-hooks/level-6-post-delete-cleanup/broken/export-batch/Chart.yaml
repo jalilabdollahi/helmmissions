@@ -1,0 +1,5 @@
+apiVersion: v2
+name: export-batch
+description: Nightly data-export service that stages files on a scratch volume
+version: 0.9.0
+appVersion: "0.9"

@@ -1,1 +1,0 @@
-The fix revolves around release states, failed vs deployed, cleanup. Compare the current state with the objective: `helm uninstall <release>` then reinstall, OR fix the chart and `helm upgrade` If the level is stateful, inspect the existing release history before reinstalling anything.

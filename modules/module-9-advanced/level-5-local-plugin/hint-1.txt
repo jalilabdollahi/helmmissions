@@ -1,0 +1,5 @@
+Look at what Helm thinks is installed and what the plugin definition asks it to run:
+  helm plugin list
+  cat hm-audit/plugin.yaml
+  ls -R hm-audit
+Both errors are "no such file or directory" for a path built from ${HELM_PLUGIN_DIR}.

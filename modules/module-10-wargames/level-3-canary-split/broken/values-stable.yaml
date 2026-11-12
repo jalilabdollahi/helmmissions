@@ -1,0 +1,5 @@
+track: stable
+version: "1.9"
+replicaCount: 1
+service:
+  enabled: true

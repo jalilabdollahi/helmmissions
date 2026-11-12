@@ -1,0 +1,18 @@
+replicaCount: 1
+
+image:
+  repository: busybox
+  tag: "1.36"
+  pullPolicy: IfNotPresent
+
+provider:
+  url: https://sandbox.payments.example
+  # Sandbox key used by the staging environment (plain text, as issued by the provider).
+  apiKey: sk-test-9f41c7a2d8
+
+resources:
+  requests:
+    cpu: 10m
+    memory: 8Mi
+  limits:
+    memory: 32Mi

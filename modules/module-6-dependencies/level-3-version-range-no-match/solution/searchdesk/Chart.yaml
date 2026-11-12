@@ -1,0 +1,10 @@
+apiVersion: v2
+name: searchdesk
+description: Product search API with a Redis-compatible result cache
+type: application
+version: 1.0.0
+appVersion: "5.4.2"
+dependencies:
+  - name: redis-lite
+    version: "~1.2.0"
+    repository: http://localhost:8879/m6-version-range-no-match

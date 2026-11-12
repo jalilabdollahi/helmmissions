@@ -1,0 +1,4 @@
+Pod Security Admission checks the pod spec against the `restricted` profile and lists what is missing, naming the
+containers. Four settings are required: no privilege escalation, drop ALL capabilities, run as non-root, seccomp
+profile RuntimeDefault. The message covers *every* container, including init containers. In this chart the main
+container takes its settings from values.yaml; the init container is hard-coded in the template.

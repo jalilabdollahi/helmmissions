@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ .Release.Name }}-env
+data:
+  TILE_ZOOM: {{ .Values.tileZoom | quote }}
+  WHOAMI_PORT_NUMBER: {{ .Values.port | quote }}

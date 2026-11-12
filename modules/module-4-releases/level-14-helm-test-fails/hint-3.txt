@@ -1,0 +1,4 @@
+Point the test at `http://{{ .Release.Name }}:{{ .Values.service.port }}/health` in
+rating-service/templates/tests/test-connection.yaml, run
+  helm upgrade rating-service ./rating-service -n helmissions
+and then `helm test rating-service -n helmissions`.

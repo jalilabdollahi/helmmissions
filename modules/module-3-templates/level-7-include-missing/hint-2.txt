@@ -1,1 +1,0 @@
-The fix revolves around named templates, _helpers.tpl, include vs template. Compare the current state with the objective: Either rename the helper or fix the include call to match If the level is stateful, inspect the existing release history before reinstalling anything.

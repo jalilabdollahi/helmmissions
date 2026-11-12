@@ -1,1 +1,0 @@
-The fix revolves around history gaps, failed revision cleanup, --keep-history. Compare the current state with the objective: Understand gaps are from failed/cleaned revisions; rollback to 2 If the level is stateful, inspect the existing release history before reinstalling anything.

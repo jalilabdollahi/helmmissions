@@ -1,12 +1,19 @@
-name: Share With Everyone
-description: Multiple subcharts need same cluster name — must use global values.
-objective: Use `global.clusterName` — accessible in all subcharts via `.Values.global`
+name: One Setting For All Subcharts
+description: |
+  The telemetry stack (gateway, `collector`, `exporter`) is supposed to stamp every span and metric with the region
+  it runs in. The platform team set `region: eu-west-1` in `telemetry/values.yaml` and upgraded, yet the dashboards
+  group everything under "unset". `kubectl describe` on the pods shows `REGION: unset` for the gateway and for both
+  subcharts. The charts are in your workspace and release `telemetry` is live.
+objective: |
+  Release `telemetry` in namespace `helmissions` has been upgraded from the workspace chart and its manifest sets
+  REGION=eu-west-1 (and ENVIRONMENT=production) on all three Deployments: `telemetry-gateway`,
+  `telemetry-collector` and `telemetry-exporter`. The running pods are Ready and report the same values.
+  The settings must come from the release (values), not from live `kubectl` edits.
 xp: 300
 difficulty: advanced
-expected_time: 20m
+expected_time: 15m
 concepts:
-- global values
-- .Values.global
-- cross-subchart sharing
-module: module-6-dependencies
-level: level-6-global-values
+  - global values
+  - subchart values scoping
+  - .Values.global
+  - helm get values --all

@@ -1,0 +1,44 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: {{ .Release.Name }}-smoke
+  labels:
+    app.kubernetes.io/name: payments-gateway
+    app.kubernetes.io/component: smoke-test
+  annotations:
+    "helm.sh/hook": post-install,post-upgrade
+    "helm.sh/hook-delete-policy": before-hook-creation
+spec:
+  backoffLimit: 0
+  activeDeadlineSeconds: 90
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/component: smoke-test
+    spec:
+      restartPolicy: Never
+      terminationGracePeriodSeconds: 2
+      containers:
+        - name: smoke
+          image: curlimages/curl:8.10.1
+          imagePullPolicy: IfNotPresent
+          command:
+            - sh
+            - -c
+            - |
+              URL="http://{{ .Release.Name }}:{{ .Values.service.port }}/"
+              echo "[smoke] probing $URL (the gateway may still be warming up)"
+              for attempt in $(seq 1 30); do
+                if curl -fsS --max-time 3 "$URL"; then
+                  echo
+                  echo "[smoke] gateway answered on attempt $attempt, smoke test passed"
+                  exit 0
+                fi
+                echo "[smoke] attempt $attempt: not ready yet, retrying in 2s"
+                sleep 2
+              done
+              echo "[smoke] gateway never answered" >&2
+              exit 1
+          resources:
+            requests: {cpu: 10m, memory: 16Mi}
+            limits: {memory: 32Mi}

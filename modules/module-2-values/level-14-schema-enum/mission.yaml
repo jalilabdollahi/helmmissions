@@ -1,0 +1,21 @@
+name: The Schema Says No
+description: |
+  Release `search-api` will not install. The chart ships a `values.schema.json`, and Helm
+  validates the values against it before rendering anything:
+    Error: INSTALLATION FAILED: values don't meet the specifications of the schema(s) in the following chart(s):
+    search-api:
+    - at '/replicas': minimum: got 0, want 1
+    - at '/logLevel': value must be one of 'debug', 'info', 'warn', 'error'
+  The platform team owns that schema (it is the contract with the log pipeline and the SLO
+  policy), and it must stay exactly as it is.
+objective: |
+  Release `search-api` is deployed in namespace `helmissions` with its pods Ready, using a valid
+  `logLevel` and at least one replica. `search-api/values.schema.json` must be byte-for-byte unchanged,
+  and the release must not have been installed around the validation.
+xp: 200
+difficulty: intermediate
+expected_time: 10m
+concepts:
+  - values.schema.json
+  - JSON Schema validation
+  - schema as policy

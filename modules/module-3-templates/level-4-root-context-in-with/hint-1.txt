@@ -1,0 +1,3 @@
+The error carries a file and line number. Reproduce it without a cluster:
+  helm template tiles ./tileserver
+and read the template around the line named in the error.

@@ -1,0 +1,3 @@
+`^I` in `cat -A` output means a TAB character. YAML forbids tabs for indentation - only spaces are allowed -
+and the parser reports it as "found character that cannot start any token". The settings are fine; the
+whitespace is not.

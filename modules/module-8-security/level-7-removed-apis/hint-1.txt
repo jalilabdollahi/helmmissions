@@ -1,0 +1,4 @@
+The error names the kinds and versions. Ask the cluster what it serves:
+  kubectl api-versions | grep -E 'policy|autoscaling'
+  kubectl api-resources | grep -E 'poddisruptionbudgets|horizontalpodautoscalers'
+Then look for those apiVersion lines in the chart: grep -rn apiVersion inventory-service/templates

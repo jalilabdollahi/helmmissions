@@ -1,0 +1,6 @@
+- values.yaml: image tag 1.27-alpine (a pinned tag that exists locally); add `limits` for cpu and memory to
+  both `resources` and `shipper.resources`.
+- templates/deployment.yaml: add a livenessProbe to `worker`, and a readinessProbe + livenessProbe to
+  `log-shipper` (an exec probe such as `test -f /tmp/alive` works for a shell loop).
+- Re-run `bash ci/policy.sh` until it prints "policy gate passed", then
+  helm upgrade --install report-worker ./report-worker -n helmissions --wait

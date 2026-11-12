@@ -1,0 +1,9 @@
+replicaCount: 1
+
+image:
+  repository: busybox
+  tag: "1.36"
+
+report:
+  title: "Monthly Finance Report"
+  period: "2026-10"

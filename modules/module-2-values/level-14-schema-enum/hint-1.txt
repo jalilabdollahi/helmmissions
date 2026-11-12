@@ -1,0 +1,4 @@
+Read the two validation messages, then look at the schema they come from:
+  cat search-api/values.schema.json
+  cat search-api/values.yaml
+Each message points at a path (for example /replicas) in your values.

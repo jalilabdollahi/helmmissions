@@ -1,0 +1,3 @@
+The chart switches traffic with a single value, `activeColor`, which feeds the Service selector. Blue is still
+healthy. Both colours are separate Deployments of the same release, so moving traffic does not require touching
+the green Deployment at all.

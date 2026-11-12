@@ -1,0 +1,4 @@
+The error names a file and a line. Ask Helm to render just that chart without touching the cluster:
+  helm template pressroom ./pressroom
+or lint it:  helm lint ./pressroom
+Then open the file at the line the error points to.

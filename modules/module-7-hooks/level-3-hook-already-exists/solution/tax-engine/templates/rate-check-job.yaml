@@ -1,0 +1,42 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: {{ .Release.Name }}-rate-check
+  labels:
+    app.kubernetes.io/name: tax-engine
+    app.kubernetes.io/component: rate-check
+  annotations:
+    "helm.sh/hook": pre-install,pre-upgrade
+    # Auditors want to read the logs of every successful rate-table check,
+    # so finished Jobs are only cleaned up when they fail.
+    "helm.sh/hook-delete-policy": before-hook-creation,hook-failed
+spec:
+  backoffLimit: 0
+  activeDeadlineSeconds: 60
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/component: rate-check
+    spec:
+      restartPolicy: Never
+      terminationGracePeriodSeconds: 2
+      containers:
+        - name: rate-check
+          image: busybox:1.36
+          imagePullPolicy: IfNotPresent
+          env:
+            - name: RELEASE_REVISION
+              value: {{ .Release.Revision | quote }}
+            - name: RATE_TABLE
+              value: {{ .Values.rates.table | quote }}
+          command:
+            - sh
+            - -c
+            - |
+              echo "[rate-check] release revision $RELEASE_REVISION, validating rate table $RATE_TABLE"
+              sleep 1
+              echo "[rate-check] 14 regions, 0 overlaps, 0 gaps"
+              echo "[rate-check] rate table is consistent"
+          resources:
+            requests: {cpu: 10m, memory: 16Mi}
+            limits: {memory: 32Mi}

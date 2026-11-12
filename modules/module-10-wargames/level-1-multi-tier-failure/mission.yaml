@@ -1,13 +1,20 @@
-name: Full Stack Down
-description: 3-tier app (frontend/backend/database) fails on install. Database hook
-  fails, backend CrashLoops, frontend has wrong backend URL.
-objective: 'Fix in dependency order: database hook → backend env → frontend config'
-xp: 400
+name: "Three Tiers Down"
+description: |
+  Page, 02:14: "ledger front end is returning errors". The ledger service is three Helm releases
+  (`ledger-db`, `ledger-api`, `ledger-web`) deployed by `deploy.sh` in your workspace. Last night's pipeline run
+  was never checked. `http://ledger-web/cgi-bin/balance` (from inside the cluster) does not give the healthy
+  answer, `helm list` shows more than one problem, and `kubectl get pods` shows pods that are not ready.
+  `ONCALL.md` has the architecture notes. Nobody knows which tier broke first.
+objective: |
+  All three releases (`ledger-db`, `ledger-api`, `ledger-web`) are `deployed` in namespace `helmissions`, the
+  database schema migration hook has completed successfully for `ledger-db`, and
+  `http://ledger-web/cgi-bin/balance` answers `web ok -> api ok -> db pong schema=v3`. The charts and values in your
+  workspace are the source of truth: they must match what is running, so re-running `deploy.sh` keeps it healthy.
+xp: 450
 difficulty: expert
 expected_time: 30m
 concepts:
-- debugging multiple failures
-- dependency order
-- systematic approach
-module: module-10-wargames
-level: level-1-multi-tier-failure
+  - incident triage
+  - dependency order
+  - helm hooks
+  - service discovery

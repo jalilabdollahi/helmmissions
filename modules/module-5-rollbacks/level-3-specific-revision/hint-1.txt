@@ -1,1 +1,0 @@
-This level is about revision history. Start with `helm history` and identify the good revision before changing anything. The broken state says: Multiple upgrades; player must roll back 3 versions to find working state.

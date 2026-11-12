@@ -1,0 +1,12 @@
+dependencies:
+- name: metrics-agent
+  repository: file://../metrics-agent
+  version: 0.3.0
+- name: log-shipper
+  repository: file://../log-shipper
+  version: 0.3.0
+- name: trace-collector
+  repository: file://../trace-collector
+  version: 0.3.0
+digest: sha256:f13b4a491f43e5e51f7ec2f65dd6e7fc1f4ba18556c6bd9def441d6f60d253b1
+generated: "2026-11-12T00:29:30.268061+01:00"

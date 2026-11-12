@@ -1,0 +1,3 @@
+Each revision broke differently: a bad image tag, an invalid nginx setting, a wrong readiness probe path,
+a zeroed rate - and the first revision predates the insurance feature. Exactly one of the six is healthy
+AND has insurance quotes, and only the newest such one is the right target.

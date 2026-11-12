@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Release.Name }}-cart
+  labels:
+    {{- include "cart.selector" . | nindent 4 }}
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      {{- include "cart.selector" . | nindent 6 }}
+  template:
+    metadata:
+      labels:
+        {{- include "cart.selector" . | nindent 8 }}
+    spec:
+      terminationGracePeriodSeconds: 2
+      containers:
+        - name: cart
+          image: {{ include "cart.image" . | quote }}
+          imagePullPolicy: IfNotPresent
+          env:
+            - name: CART_TTL_MINUTES
+              value: {{ .Values.ttlMinutes | quote }}
+          ports:
+            - containerPort: 80
+          readinessProbe:
+            httpGet: {path: /health, port: 80}
+            initialDelaySeconds: 1
+            periodSeconds: 2
+          resources:
+            {{- toYaml .Values.resources | nindent 12 }}

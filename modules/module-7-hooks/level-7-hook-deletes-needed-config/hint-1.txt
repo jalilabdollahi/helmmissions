@@ -1,0 +1,5 @@
+The release says deployed but the pod cannot start. Ask Kubernetes and Helm what exists:
+  kubectl describe pod -l app.kubernetes.io/name=route-gateway -n helmissions
+  helm get manifest gateway -n helmissions | grep -c ConfigMap
+  helm get hooks gateway -n helmissions
+Compare what the chart defines with what the release actually contains.

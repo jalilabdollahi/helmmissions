@@ -1,0 +1,3 @@
+See which colour the Service points at and which pods exist:
+  kubectl get svc ticket-booking -n helmissions -o jsonpath='{.spec.selector}'
+  kubectl get pods -n helmissions --show-labels

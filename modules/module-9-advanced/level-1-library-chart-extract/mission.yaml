@@ -1,0 +1,23 @@
+name: DRY With A Library
+description: |
+  The ledger platform ships two charts, `ledger-api` and `ledger-worker`, and each one carries its own copy
+  of the label helper in `templates/_helpers.tpl`. The copies drifted: the api forgot the `part-of` label,
+  the worker spells it `ledger-platform`, only one of them records the chart name, and the dashboards that
+  group workloads by label now show them as unrelated systems.
+  The label standard is written down in `README.txt` in your workspace. Both releases are already
+  installed with the drifted labels.
+objective: |
+  Both charts take their labels from one shared Helm library chart that lives in the workspace
+  (its Chart.yaml has `type: library`) and is declared as a dependency of `ledger-api` and `ledger-worker`.
+  Every object both charts render (and every pod template) carries exactly the label keys listed in
+  `README.txt`, with `part-of: ledger`. Releases `ledger-api` and `ledger-worker` in namespace `helmissions`
+  are upgraded (revision 2 or later), deployed, with Ready pods and the standard labels on the live
+  Deployments. Pod selectors must keep working, so the upgrade must not fail.
+xp: 350
+difficulty: advanced
+expected_time: 20m
+concepts:
+  - library charts
+  - named templates
+  - file:// dependencies
+  - helm dependency update

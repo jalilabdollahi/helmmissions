@@ -1,0 +1,3 @@
+Ask Helm what it actually deployed:
+  helm get manifest parcel-tracker -n helmissions
+If that prints nothing, Helm rendered nothing - look at the layout of the chart folder.

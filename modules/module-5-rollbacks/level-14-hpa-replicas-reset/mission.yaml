@@ -1,0 +1,18 @@
+name: Every Deploy Scales To 2
+description: |
+  `thumbnail-svc` runs behind a HorizontalPodAutoscaler (2 to 8 replicas). The autoscaler has scaled it up to 5
+  for the evening traffic. Every time the pipeline deploys (`ci/deploy.sh`), the Deployment drops straight back to
+  2 replicas and latency spikes until the HPA catches up. SRE has already confirmed the HPA itself is configured
+  correctly. The chart and the pipeline are in your workspace.
+objective: |
+  Release `thumbnail-svc` in namespace `helmissions` is deployed from the workspace chart. When the autoscaler
+  has scaled the Deployment (the validator scales it to 5 itself), running the pipeline's deploy leaves the
+  replica count alone. With autoscaling disabled the chart must still set `replicas` from `replicaCount`.
+xp: 300
+difficulty: advanced
+expected_time: 15m
+concepts:
+  - HPA
+  - replicas field ownership
+  - conditional templating
+  - helm upgrade

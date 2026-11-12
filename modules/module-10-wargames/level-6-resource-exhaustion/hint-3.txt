@@ -1,1 +1,0 @@
-Concrete direction: Add appropriate resource limits to chart, upgrade all affected releases. When you think you have it, verify the result the same way the mission describes: Pods have limits, no other pod evictions

@@ -1,1 +1,0 @@
-Concrete direction: Fix indentation — values.yaml structure must match chart expectations. When you think you have it, verify the result the same way the mission describes: `helm get values` shows correct merged values

@@ -1,0 +1,8 @@
+replicaCount: 1
+image:
+  repository: traefik/whoami
+  tag: v1.10
+service:
+  port: 80
+database:
+  dsn: "postgres://ledger:s3cret@ledger-db.finance.svc:5432/ledger"

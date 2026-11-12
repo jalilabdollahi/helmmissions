@@ -1,0 +1,21 @@
+name: "Forbidden: StatefulSet Spec"
+description: |
+  Release `tsdb` (chart `timeseries-db`) holds six months of station telemetry on a PersistentVolumeClaim.
+  Chart 1.1.0 raises the retention to 14 days and, while they were at it, doubles the storage request from
+  1Gi to 2Gi. The upgrade fails:
+    UPGRADE FAILED: server-side apply failed for object helmissions/tsdb apps/v1, Kind=StatefulSet:
+    StatefulSet.apps "tsdb" is invalid: spec.volumeClaimTemplates: Invalid value: [...]: field is immutable
+  `helm history tsdb -n helmissions` shows revision 2 as `failed`. The chart is in your workspace under
+  `timeseries-db/`. The data on the volume must survive.
+objective: |
+  Release `tsdb` in namespace `helmissions` is `deployed` from the 1.1.0 chart with `RETENTION=14d` live in the
+  StatefulSet, the StatefulSet's volumeClaimTemplate request still `1Gi` as in revision 1, and the data on
+  the existing volume untouched (the file `/data/marker` is still there).
+xp: 350
+difficulty: advanced
+expected_time: 20m
+concepts:
+  - StatefulSet immutability
+  - volumeClaimTemplates
+  - persistent data
+  - helm upgrade

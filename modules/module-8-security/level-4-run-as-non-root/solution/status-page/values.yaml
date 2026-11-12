@@ -1,0 +1,16 @@
+replicaCount: 2
+
+image:
+  repository: nginxinc/nginx-unprivileged
+  tag: 1.27-alpine
+  pullPolicy: IfNotPresent
+
+# Port the web server listens on inside the container.
+containerPort: 8080
+
+service:
+  port: 80
+
+# Pod hardening required by the platform baseline.
+podSecurityContext:
+  runAsNonRoot: true

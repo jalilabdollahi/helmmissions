@@ -1,0 +1,19 @@
+name: Literal Braces
+description: |
+  The `orders` release (chart `orders-api`) is deployed, but the API pod never becomes Ready. Its readiness check
+  cannot connect to the database, and the logs say it is talking to a host with curly braces in its name:
+    orders-api talking to {{ .Release.Name }}-db:5432
+  The chart's values.yaml defines the database host as `"{{ .Release.Name }}-db"` so that each release talks to its
+  own database Service. The chart is in your workspace under `orders-api/`.
+objective: |
+  Release `orders` in namespace `helmissions` is upgraded from the chart in your workspace (a new revision). The API
+  pod is Ready and `DB_HOST` is the real service name `<release name>-db`, derived from the release name (rendering
+  the chart under another release name must give that release's own `<name>-db`).
+xp: 300
+difficulty: advanced
+expected_time: 15m
+concepts:
+  - tpl function
+  - templates in values
+  - .Release.Name
+  - helm upgrade

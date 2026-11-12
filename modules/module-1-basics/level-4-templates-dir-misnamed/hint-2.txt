@@ -1,0 +1,2 @@
+Helm only renders files that live in a directory with one exact name: `templates/`. List the chart
+(ls parcel-tracker) and compare the name of the folder that holds the manifests with that.

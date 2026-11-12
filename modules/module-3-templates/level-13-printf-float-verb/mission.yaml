@@ -1,0 +1,19 @@
+name: "%!d(float64=8080)"
+description: |
+  The telemetry team's `ingest` release shows `deployed`, but its pod restarts in a loop (CrashLoopBackOff).
+  The container logs a flag-parsing complaint, and the startup arguments contain something that looks like
+  Go's formatting error:
+    --port=%!d(float64=8080)
+  The chart is in your workspace under `ingest/`; the port comes from `port: 8080` in its values.
+objective: |
+  Release `ingest` in namespace `helmissions` is upgraded from the chart in your workspace (a new revision). The
+  pod is Ready, starts with a valid `--port=<port>` argument built from the `port` value, and the `ingest` Service
+  has an endpoint. Any numeric port set in a values file must work, not only 8080.
+xp: 250
+difficulty: intermediate
+expected_time: 10m
+concepts:
+  - printf
+  - format verbs
+  - number types in values
+  - int function

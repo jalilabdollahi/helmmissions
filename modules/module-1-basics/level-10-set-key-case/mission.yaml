@@ -1,0 +1,18 @@
+name: The Silent --set
+description: |
+  Before the month-end run a colleague scaled `billing` with
+    helm upgrade billing ./billing --set replicacount=4 -n helmissions
+  Helm answered `Release "billing" has been upgraded. Happy Helming!` and revision 2 is deployed,
+  yet `kubectl get pods` still shows a single worker. No error, no warning.
+objective: |
+  Release `billing` in namespace `helmissions` runs 4 Ready worker pods because its user-supplied values
+  contain `replicaCount: 4`. The wrongly-cased `replicacount` key must no longer be part of the release's
+  values. Scaling the Deployment by hand does not count.
+xp: 150
+difficulty: beginner
+expected_time: 10m
+concepts:
+  - helm get values
+  - --set
+  - case-sensitive keys
+  - --reuse-values

@@ -1,0 +1,4 @@
+Quote it in status-page/values.yaml:
+  appVersionLabel: "1.10"
+and redeploy with ./deploy.sh (or helm upgrade ...). `--set-string appVersionLabel=1.10` works too;
+relabelling pods with kubectl does not survive a rollout.

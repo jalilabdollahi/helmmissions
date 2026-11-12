@@ -1,0 +1,2 @@
+`helm push` builds the final reference itself: it appends the chart name taken from the package to the
+location you give it. Look at the oci:// location that release.sh passes and compare it with the one in README.txt.

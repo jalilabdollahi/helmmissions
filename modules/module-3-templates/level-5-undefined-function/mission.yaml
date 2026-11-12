@@ -1,0 +1,18 @@
+name: function "uppercase" not defined
+description: |
+  The logistics team wants the `dispatch` worker to receive its environment name in capitals. Someone added
+  a pipe to the Deployment template and since then nothing installs:
+    Error: INSTALLATION FAILED: parse error at (dispatch/templates/deployment.yaml:28): function "uppercase" not defined
+  The chart is in your workspace under `dispatch/`.
+objective: |
+  Release `dispatch` is deployed in namespace `helmissions` from the chart in your workspace. Its worker pod is
+  Ready and receives `APP_ENV=PRODUCTION`, derived from the `environment` value (changing the value, for example
+  to `staging`, must change the variable to `STAGING`).
+xp: 200
+difficulty: intermediate
+expected_time: 5m
+concepts:
+  - template functions
+  - Sprig
+  - upper / lower
+  - parse errors

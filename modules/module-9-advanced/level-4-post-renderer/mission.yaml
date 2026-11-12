@@ -1,0 +1,22 @@
+name: Patch After Render
+description: |
+  FinOps now requires the label `cost-center: edge-platform` on every Kubernetes object the edge team deploys, and
+  security wants a `log-shipper` sidecar next to the gateway container. `edge-gateway` is a vendored upstream
+  chart: it has no values for either, and the policy is that vendored charts are never edited by hand.
+  A teammate started a Helm post-renderer plugin, `hm-cost-labeler` (it runs `kubectl kustomize`), but upgrading with it fails:
+    Error: error while running post render on files: failed to invoke post-renderer plugin "hm-cost-labeler": plugin "hm-cost-labeler" exited with error
+  Release `edge-gateway` is running without the label and the sidecar. Chart and plugin sources are in your workspace.
+objective: |
+  The chart in `edge-gateway/` is left untouched. Release `edge-gateway` in namespace `helmissions` is upgraded
+  (revision 2 or later) so that its stored manifest — what `helm get manifest` shows — has the label
+  `cost-center: edge-platform` on every object and on the pod template, and the Deployment runs a second container
+  named `log-shipper`. Pod selectors are unchanged. The release is `deployed` with 2 Ready pods (both containers ready),
+  and an installed post-renderer plugin produces the same result when rendering the chart with `helm template`.
+xp: 400
+difficulty: expert
+expected_time: 25m
+concepts:
+  - post-renderers
+  - Helm 4 plugin types
+  - kubectl kustomize
+  - vendored charts

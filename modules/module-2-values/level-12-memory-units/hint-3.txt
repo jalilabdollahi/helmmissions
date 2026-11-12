@@ -1,0 +1,4 @@
+Set the limit with a unit in image-resizer/values.yaml:
+  limits:
+    memory: 256Mi
+then: helm upgrade image-resizer ./image-resizer -n helmissions

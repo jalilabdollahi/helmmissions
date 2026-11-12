@@ -1,0 +1,14 @@
+replicaCount: 1
+
+image:
+  repository: traefik/whoami
+  tag: v1.10
+
+# Settings of the two key-value store instances the stock API talks to.
+primary:
+  mode: readwrite
+  maxMemoryMB: 64
+
+replica:
+  mode: readonly
+  maxMemoryMB: 32

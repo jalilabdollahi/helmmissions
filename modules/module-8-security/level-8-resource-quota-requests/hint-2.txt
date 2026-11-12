@@ -1,0 +1,3 @@
+When a ResourceQuota covers cpu/memory requests and limits, the admission controller rejects any pod that
+does not declare them (it cannot count what is not declared). `resources` in values.yaml is `{}`, so the
+pod spec has no resources section at all. Do not touch the quota.

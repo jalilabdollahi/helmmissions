@@ -1,0 +1,7 @@
+apiVersion: v2
+name: webapp
+description: Company landing page served by nginx
+type: application
+version: 0.1.0
+# release 1.27 of the landing page
+appVersion: "1.27"

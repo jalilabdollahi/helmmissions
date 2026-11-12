@@ -1,0 +1,3 @@
+A Kubernetes memory quantity without a unit is a number of BYTES. `256` means 256 bytes, which is smaller
+than the 128Mi (about 134 million bytes) request, so the API server refuses the Deployment.
+Units like Mi/Gi (binary) or M/G (decimal) must be written out.

@@ -1,13 +1,7 @@
 #!/bin/bash
 set -euo pipefail
+source "$HM_LIB"
 
-NS="helmissions"
-RELEASE="helmissions-app"
-ROOT="$(cd "$(dirname "$0")" && pwd)"
-
-kubectl create namespace "$NS" --dry-run=client -o yaml | kubectl apply -f - >/dev/null
-helm uninstall "$RELEASE" -n "$NS" >/dev/null 2>&1 || true
-kubectl delete all --all -n "$NS" >/dev/null 2>&1 || true
-
-helm uninstall "$RELEASE" -n "$NS" >/dev/null 2>&1 || true
-helm install "$RELEASE" "$ROOT/broken" -n "$NS" --create-namespace >/tmp/helmissions-setup.log 2>&1 || true
+helm install backup-scheduler "$SANDBOX/backup-scheduler" -n "$NS" >"$HM_TMP/install.txt" 2>&1 && { echo "setup: install succeeded"; exit 1; }
+grep -q "no matches for kind" "$HM_TMP/install.txt" || { cat "$HM_TMP/install.txt"; exit 1; }
+[ -z "$(kubectl get crd backupschedules.helmissions.io -o name 2>/dev/null)" ] || { echo "setup: CRD already exists"; exit 1; }

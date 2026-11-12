@@ -1,0 +1,17 @@
+name: 1.10 Became 1.1
+description: |
+  The status page belongs to release train 1.10, and dashboards group pods by the label
+  `app.version`. After the last deploy (`./deploy.sh`) the pods are labelled `app.version=1.1`:
+  the 1.10 train and the (much older) 1.1 train now share a panel. `status-page/values.yaml`
+  says `appVersionLabel: 1.10`, and `helm get values status-page` shows `appVersionLabel: 1.1`.
+objective: |
+  Release `status-page` in namespace `helmissions` is deployed with its pod Ready, and the Deployment
+  and its running pods carry the label `app.version` with the exact string value `1.10`
+  (not `1.1`). The change must come through Helm; relabelling pods with kubectl does not count.
+xp: 200
+difficulty: intermediate
+expected_time: 10m
+concepts:
+  - YAML number parsing
+  - --set-string
+  - version strings

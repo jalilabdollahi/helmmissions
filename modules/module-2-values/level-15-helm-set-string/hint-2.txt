@@ -1,1 +1,0 @@
-The fix revolves around --set-string, type forcing, --set vs --set-string. Compare the current state with the objective: Use `--set-string image.tag=1.0` to force string If the level is stateful, inspect the existing release history before reinstalling anything.

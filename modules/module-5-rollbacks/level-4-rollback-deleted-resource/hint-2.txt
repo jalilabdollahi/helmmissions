@@ -1,1 +1,0 @@
-The fix revolves around rollback limitations, manual changes vs helm managed. Compare the current state with the objective: Recreate the ConfigMap manually, then retry rollback If the level is stateful, inspect the existing release history before reinstalling anything.

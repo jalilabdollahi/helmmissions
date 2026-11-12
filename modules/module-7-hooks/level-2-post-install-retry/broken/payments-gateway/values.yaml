@@ -1,0 +1,8 @@
+replicaCount: 1
+image:
+  repository: traefik/whoami
+  tag: v1.10
+service:
+  port: 80
+# the gateway loads its card-scheme tables on boot; readiness is reported only once they are loaded
+warmupSeconds: 10

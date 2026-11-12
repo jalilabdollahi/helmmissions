@@ -1,0 +1,6 @@
+replicas: 2
+logLevel: warn
+
+image:
+  repository: traefik/whoami
+  tag: v1.10

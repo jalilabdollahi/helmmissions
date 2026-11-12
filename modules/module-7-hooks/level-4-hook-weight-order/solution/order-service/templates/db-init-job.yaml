@@ -1,0 +1,38 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: {{ .Release.Name }}-db-init
+  labels:
+    app.kubernetes.io/name: order-service
+    app.kubernetes.io/component: db-init
+  annotations:
+    "helm.sh/hook": pre-install,pre-upgrade
+    "helm.sh/hook-weight": "-5"
+    "helm.sh/hook-delete-policy": before-hook-creation
+spec:
+  backoffLimit: 0
+  activeDeadlineSeconds: 60
+  template:
+    spec:
+      serviceAccountName: {{ .Release.Name }}-db-hooks
+      restartPolicy: Never
+      terminationGracePeriodSeconds: 2
+      containers:
+        - name: init
+          image: curlimages/curl:8.10.1
+          imagePullPolicy: IfNotPresent
+          command:
+            - sh
+            - -c
+            - |
+              SA=/var/run/secrets/kubernetes.io/serviceaccount
+              API="https://kubernetes.default.svc/api/v1/namespaces/$(cat $SA/namespace)/configmaps"
+              AUTH="Authorization: Bearer $(cat $SA/token)"
+              echo "[db-init] creating database schema 'orders'"
+              body="{\"apiVersion\":\"v1\",\"kind\":\"ConfigMap\",\"metadata\":{\"name\":\"orders-schema-state\"},\"data\":{\"schema\":\"orders\",\"initialized-at\":\"$(date -u +%Y-%m-%dT%H:%M:%SZ)\"}}"
+              code=$(curl -sS -o /dev/null -w '%{http_code}' --cacert $SA/ca.crt -H "$AUTH" -H 'Content-Type: application/json' -X POST "$API" -d "$body")
+              if [ "$code" != 201 ] && [ "$code" != 409 ]; then echo "[db-init] FATAL: could not record schema state (HTTP $code)" >&2; exit 1; fi
+              echo "[db-init] schema 'orders' created and recorded in ConfigMap orders-schema-state"
+          resources:
+            requests: {cpu: 10m, memory: 16Mi}
+            limits: {memory: 32Mi}

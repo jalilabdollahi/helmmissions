@@ -1,1 +1,0 @@
-Concrete direction: Add resources.requests.cpu and resources.requests.memory to values. When you think you have it, verify the result the same way the mission describes: Resources created within quota

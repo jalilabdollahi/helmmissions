@@ -1,0 +1,20 @@
+name: Parent Needs Child's Value
+description: |
+  The invoicing API has to talk to its `pg-lite` database on whatever port the database subchart listens on, so the
+  platform team wired the port through `import-values` in `Chart.yaml` instead of copying the number. The chart
+  was packaged on the build machine and installing it fails:
+    Error: INSTALLATION FAILED: execution error at (invoicing/templates/deployment.yaml:29:24): db.port is empty:
+    it should be imported from the pg-lite subchart
+  Helm also prints a warning about the import. Both charts are in your workspace.
+objective: |
+  Release `invoicing` is `deployed` in namespace `helmissions` (chart 1.8.0) with Ready pods for `invoicing-api` and
+  `invoicing-pg-lite`. The API's DB_PORT comes from the database subchart rather than from a copy of the number:
+  if the port in `pg-lite`'s `values.yaml` changed, rebuilding the chart would change DB_PORT with it.
+xp: 350
+difficulty: advanced
+expected_time: 20m
+concepts:
+  - import-values
+  - child/parent mapping
+  - values must be tables
+  - helm template warnings

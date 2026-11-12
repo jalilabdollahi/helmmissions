@@ -1,27 +1,36 @@
-# Where Am I?
+# Nowhere To Land
 
-## Situation
-`helm install` fails with "namespace not found". In this mission the broken state is intentional, and the point is not just to make Helm stop complaining. The real lesson is learning how Helm reports failure, where chart defects surface, and how release state and rendered manifests can drift apart when a deployment goes wrong.
+## What broke
+`helm install -n helmissions-staging` targeted a namespace that did not exist. Helm needs the
+namespace for two things: the Secret that stores the release record, and the namespaced objects in the
+chart. The Kubernetes API answered `namespaces "helmissions-staging" not found` and the install aborted.
 
-## The Fix
-Primary action: Add `--create-namespace` flag or pre-create the namespace
+## Why Helm behaves this way
+By default Helm treats the namespace as something that belongs to the cluster operator: it will not
+silently create namespaces, because namespaces carry policy (quotas, network policies, pod security
+labels, RBAC). Creating one implicitly could land workloads in an unprotected namespace after a typo.
+`--create-namespace` is the explicit opt-in - and it creates a bare namespace, with no labels or quotas.
 
-A strong solution should leave both the chart and the cluster in a healthy state. In Helm that usually means checking the source of truth first, fixing the right file or release action, and then confirming that the next install, upgrade, rollback, or hook execution behaves the way you intended.
+## The fix
+Add `--create-namespace` to the install (or create the namespace first with `kubectl`/GitOps and install into
+it). Keep the namespace the ticket asks for; installing into `helmissions` would "work" and put the
+service in the wrong place.
 
-## What To Validate
-Release deployed in target namespace
+## In real life
+Typos in `-n` are the most common cause: with `--create-namespace` in a pipeline, a misspelt namespace is
+created quietly and the release lands there. Many teams therefore create namespaces through Terraform or
+GitOps (with labels and quotas) and keep `--create-namespace` for dev and demo clusters. Remember that
+`helm uninstall` does not delete a namespace that Helm created.
 
-Helpful checks for this level:
-- `helm status helmissions-app -n helmissions`
-- `helm lint ./broken`
-- `kubectl get all -n helmissions`
+## Commands worth remembering
+- `kubectl get namespaces` - what exists
+- `helm install ... -n <ns> --create-namespace`
+- `helm list -A` / `helm list -n <ns>` - which namespace holds a release
 
-## Why It Matters
-Namespace lifecycle, --create-namespace vs pre-creating.
+## Common mistakes
+- Installing into another existing namespace "just to make it work".
+- Forgetting `-n` on later commands: `helm list` shows only the current namespace by default.
+- Expecting `helm uninstall` to remove a namespace it created.
 
-This matters in helm basics work because Helm failures are rarely just syntax errors. In real teams they show up during CI/CD runs, emergency rollbacks, environment promotion, or cluster changes that expose assumptions hidden in a chart. If you only patch the symptom in-cluster, the same bug usually comes back on the next deployment.
-
-A good operator learns the habit behind the fix: inspect the rendered output, understand the release history, and then make the smallest durable change that restores the expected behavior. That habit scales from a single broken values file all the way up to multi-service incident response.
-
-## Concepts
-namespaces, --create-namespace, helm install flags
+## Helm 3 vs Helm 4
+Same behaviour and error. `--create-namespace` exists in both (Helm 3.2+).

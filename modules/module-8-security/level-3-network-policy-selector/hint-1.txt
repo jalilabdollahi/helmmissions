@@ -1,0 +1,4 @@
+Compare what the policy expects with what the frontend pod actually carries:
+  kubectl get networkpolicy -n helmissions -o yaml
+  kubectl get pods -n helmissions --show-labels
+Also: kubectl describe networkpolicy -n helmissions

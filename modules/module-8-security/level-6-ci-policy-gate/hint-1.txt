@@ -1,0 +1,4 @@
+Run the gate yourself and read every line it prints:
+  bash ci/policy.sh
+Then render the chart the same way the gate does and look at the containers:
+  helm template gate ./report-worker | less

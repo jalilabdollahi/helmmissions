@@ -1,1 +1,0 @@
-The fix revolves around blue/green with Helm, selector-based routing. Compare the current state with the objective: Helm upgrade to switch Service selector back to blue If the level is stateful, inspect the existing release history before reinstalling anything.

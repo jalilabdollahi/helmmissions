@@ -1,0 +1,4 @@
+Compare the apiVersion Helm picks offline with the one it picks when it can ask the cluster:
+  helm template portal ./docs-portal | grep -B1 'kind: Ingress'
+  helm template portal ./docs-portal --dry-run=server | grep -B1 'kind: Ingress'
+(Plain `helm template` only knows a built-in default list of APIs - use --dry-run=server (Helm 3: --validate).)

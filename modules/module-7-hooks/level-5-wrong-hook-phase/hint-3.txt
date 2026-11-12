@@ -1,0 +1,3 @@
+A migration that new pods depend on must run before the new pods are rolled out. Change the hook phase in
+`templates/migrate-job.yaml` to the one that runs before the upgrade is applied, then upgrade again with --wait.
+Do not create the schema marker by hand.

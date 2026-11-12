@@ -1,0 +1,21 @@
+api:
+  replicaCount: 1
+  image:
+    repository: traefik/whoami
+    tag: v1.10
+  service:
+    port: 80
+
+worker:
+  replicaCount: 1
+  image:
+    repository: busybox
+    tag: "1.36"
+  concurrency: 4
+
+resources:
+  requests:
+    cpu: 10m
+    memory: 8Mi
+  limits:
+    memory: 48Mi

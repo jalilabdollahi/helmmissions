@@ -1,0 +1,19 @@
+name: Find The Last Good Revision
+description: |
+  `freight-quote` had a rough week: six deploys, three different people, no changelog. Carriers are now
+  complaining that every shipment is quoted at a rate of 0, and the integration team says insurance
+  quotes were working on Wednesday. `helm history freight-quote -n helmissions` shows a tidy column of
+  `superseded` revisions and one `deployed` one - Helm can't tell you which of them was healthy.
+  Only the cluster remembers: the chart source is not available to you.
+objective: |
+  Release `freight-quote` in namespace `helmissions` is deployed with all pods Ready, and
+  `GET /quote` on the Service answers with `"rate":42` and `"insurance":true`. The newest revision must
+  be the rollback to the newest revision that behaved correctly.
+xp: 300
+difficulty: advanced
+expected_time: 15m
+concepts:
+  - revision forensics
+  - helm get values --revision
+  - helm rollback
+  - bisecting

@@ -1,1 +1,2 @@
-The fix revolves around helm rollback, revision numbers. Compare the current state with the objective: `helm rollback <release> 1` If the level is stateful, inspect the existing release history before reinstalling anything.
+Revision 2 pulled an image tag that does not exist in the registry. Revision 1 is the last revision
+that worked, and Helm keeps the complete manifest of every revision it has stored.

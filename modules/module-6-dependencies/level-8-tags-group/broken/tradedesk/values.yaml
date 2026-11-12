@@ -1,0 +1,9 @@
+replicaCount: 1
+
+image:
+  repository: traefik/whoami
+  tag: v1.10
+
+# This is the developer sandbox: the whole monitoring stack stays off here.
+tags:
+  monitoring: false

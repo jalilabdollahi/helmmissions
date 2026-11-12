@@ -1,1 +1,0 @@
-Concrete direction: Fix all lint errors per helm lint output. When you think you have it, verify the result the same way the mission describes: `helm lint` returns 0 errors

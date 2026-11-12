@@ -1,0 +1,3 @@
+templates/deployment.yaml uses .Values.image.respository (one "i" missing). Fix the spelling in the template
+(values.yaml is right), then roll it out with:  helm upgrade receipts ./receipts -n helmissions
+Do not add a "respository" key to values.yaml - that hides the typo instead of removing it.

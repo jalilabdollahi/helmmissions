@@ -1,1 +1,0 @@
-Concrete direction: Assign weights -2, -1, 1, 2 to enforce correct order. When you think you have it, verify the result the same way the mission describes: Hooks run in correct sequence, all succeed

@@ -1,0 +1,3 @@
+`randAlphaNum` runs on every render, and every `helm upgrade` renders the chart again. The chart needs to ask the
+cluster whether the Secret already exists and reuse its value instead of generating a new one. Helm has a function
+that reads live objects during install/upgrade: `lookup apiVersion kind namespace name`.

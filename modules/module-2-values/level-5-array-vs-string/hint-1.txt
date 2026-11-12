@@ -1,1 +1,0 @@
-Inspect `values.yaml` closely and compare the key path with the template fields consuming it. The broken state says: Template expects a list for `ingress.hosts` but values has a single string.

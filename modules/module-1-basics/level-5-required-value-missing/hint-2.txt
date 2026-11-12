@@ -1,0 +1,3 @@
+The chart author used the `required` function: rendering stops until the value is non-empty. The
+chart's default is an empty string on purpose. Environment-specific values belong in a values file,
+not in the chart and not only on the command line.

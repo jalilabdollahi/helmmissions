@@ -1,0 +1,7 @@
+replicaCount: 1
+image:
+  repository: traefik/whoami
+  tag: v1.10
+settings:
+  maxOpenTickets: "200"
+  slaHours: "8"

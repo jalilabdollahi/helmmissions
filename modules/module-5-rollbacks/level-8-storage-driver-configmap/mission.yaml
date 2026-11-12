@@ -1,0 +1,19 @@
+name: The Invisible Release
+description: |
+  `audit-gateway` has been down since the 08:12 deploy: the pod is in `CrashLoopBackOff`. The pipeline log
+  (`ci/deploy.log` in your workspace) says `Release "audit-gateway" has been upgraded`, revision 2 -
+  but on your terminal `helm list -n helmissions` prints nothing and
+  `helm history audit-gateway -n helmissions` says the release is not found. The Deployment is clearly
+  there and carries Helm's ownership labels.
+objective: |
+  The Helm release `audit-gateway` that the pipeline manages (the one with the history the deploy log
+  talks about) is `deployed` with a newest revision that is a rollback to its first revision, and the
+  gateway pod is Ready. Do not create a second release.
+xp: 300
+difficulty: advanced
+expected_time: 15m
+concepts:
+  - HELM_DRIVER
+  - release storage
+  - helm rollback
+  - helm list

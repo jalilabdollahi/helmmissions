@@ -1,0 +1,3 @@
+Helm identifies a subchart by its name, and by its `alias` if one is set. Two entries with the same name collide.
+Values for a subchart are also looked up under that identity, so compare the identities you choose with the
+top-level keys in inventory/values.yaml (and with the host names the API template expects).

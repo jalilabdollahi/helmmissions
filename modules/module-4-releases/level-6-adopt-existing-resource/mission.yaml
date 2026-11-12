@@ -1,0 +1,20 @@
+name: Invalid Ownership Metadata
+description: |
+  An engineer created the ConfigMap `desk-settings` by hand last year (`kubectl create configmap`) to tune the
+  ticket desk. The new `support-desk` chart now manages that same ConfigMap, and the first install fails:
+    Error: INSTALLATION FAILED: unable to continue with install: ConfigMap "desk-settings" in namespace
+    "helmissions" exists and cannot be imported into the current release: invalid ownership metadata; ...
+  Nothing was created. The chart is in your workspace under `support-desk/`; the chart's settings are the
+  ones the team wants in production, not the hand-made ones.
+objective: |
+  Release `support-desk` is `deployed` in namespace `helmissions`. The ConfigMap `desk-settings` is part of
+  the release (Helm ownership metadata for `support-desk`) and every key the chart defines carries the chart's
+  value (MAX_OPEN_TICKETS=200, SLA_HOURS=8). The Deployment `support-desk` has a Ready pod.
+xp: 300
+difficulty: advanced
+expected_time: 15m
+concepts:
+  - release ownership metadata
+  - adopting existing resources
+  - --take-ownership
+  - server-side apply conflicts

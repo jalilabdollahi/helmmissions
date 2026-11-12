@@ -1,0 +1,13 @@
+replicaCount: 1
+
+image:
+  repository: nginx
+  tag: 1.27-alpine
+  pullPolicy: IfNotPresent
+
+service:
+  port: 80
+
+# Full nginx server block, mounted as /etc/nginx/conf.d/default.conf.
+# Supplied at deploy time from the marketing team's site.conf.
+siteConfig: ""

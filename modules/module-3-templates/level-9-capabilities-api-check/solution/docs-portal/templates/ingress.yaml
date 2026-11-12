@@ -1,0 +1,31 @@
+{{- if .Values.ingress.enabled }}
+{{- $api := include "docs-portal.ingressApiVersion" . }}
+apiVersion: {{ $api }}
+kind: Ingress
+metadata:
+  name: {{ .Release.Name }}
+spec:
+  {{- if eq $api "networking.k8s.io/v1" }}
+  ingressClassName: {{ .Values.ingress.className }}
+  rules:
+    - host: {{ .Values.ingress.host | quote }}
+      http:
+        paths:
+          - path: {{ .Values.ingress.path }}
+            pathType: Prefix
+            backend:
+              service:
+                name: {{ .Release.Name }}
+                port:
+                  number: {{ .Values.service.port }}
+  {{- else }}
+  rules:
+    - host: {{ .Values.ingress.host | quote }}
+      http:
+        paths:
+          - path: {{ .Values.ingress.path }}
+            backend:
+              serviceName: {{ .Release.Name }}
+              servicePort: {{ .Values.service.port }}
+  {{- end }}
+{{- end }}

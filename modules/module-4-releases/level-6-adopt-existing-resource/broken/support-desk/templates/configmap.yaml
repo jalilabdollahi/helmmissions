@@ -1,0 +1,9 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: desk-settings
+  labels:
+    app.kubernetes.io/name: support-desk
+data:
+  MAX_OPEN_TICKETS: {{ .Values.settings.maxOpenTickets | quote }}
+  SLA_HOURS: {{ .Values.settings.slaHours | quote }}

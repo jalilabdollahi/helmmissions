@@ -1,0 +1,8 @@
+replicaCount: 1
+
+image:
+  repository: busybox
+  tag: "1.36"
+
+# Largest request body the proxy accepts, in bytes (1 MiB).
+maxUploadBytes: 1048576

@@ -1,0 +1,6 @@
+apiVersion: v2
+name: metrics-proxy
+description: Forwards scrape requests to internal exporters
+type: application
+version: 0.9.0
+appVersion: "0.9"

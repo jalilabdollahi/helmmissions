@@ -1,0 +1,23 @@
+name: Plugin Won't Load
+description: |
+  The SRE team wrote a small Helm plugin, `hm-audit`, that lists containers running without resource limits in a
+  release. It lives in `hm-audit/` in your workspace and the README says to install it with
+  `helm plugin install ./hm-audit`. On this machine that ends with an error like
+    Error: fork/exec .../plugins/hm-audit/hooks/install-rules.sh: no such file or directory
+  and trying the command afterwards is no better:
+    Error: fork/exec .../plugins/hm-audit/bin/audit.sh: no such file or directory
+  Release `checkout` is deployed in namespace `helmissions` and is the first thing the team wants audited.
+objective: |
+  Plugin `hm-audit` is installed (`helm plugin list` shows it as a `cli/v1` plugin) and
+  `helm hm-audit checkout -n helmissions` runs successfully, reporting `containers=2 missing_limits=1` and naming
+  the container without limits. The plugin directory also installs cleanly from scratch, with its install hook
+  succeeding, so a colleague who runs `helm plugin install ./hm-audit` gets a working plugin.
+xp: 300
+difficulty: advanced
+expected_time: 15m
+concepts:
+  - Helm plugins
+  - plugin.yaml
+  - platformCommand and hooks
+  - HELM_PLUGIN_DIR
+  - helm plugin install/uninstall

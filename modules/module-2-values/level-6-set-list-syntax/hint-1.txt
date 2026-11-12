@@ -1,0 +1,3 @@
+Run the exact command from install.sh and read the error, then try the same flags on a dry render:
+  helm template mesh-client ./mesh-client --set dnsSearch=a.svc,b.svc
+`helm --help` and `helm install --help` describe the --set syntax.

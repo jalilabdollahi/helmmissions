@@ -1,0 +1,15 @@
+# Prod overlay for the storefront catalog: Helm chart inflated by kustomize, then labelled.
+helmGlobals:
+  chartHome: helm-charts
+
+helmCharts:
+  - name: catalog-api
+    releaseName: catalog
+    namespace: helmissions
+    valuesFile: values-prod.yaml
+
+labels:
+  - pairs:
+      env: prod
+    includeSelectors: false
+    includeTemplates: true

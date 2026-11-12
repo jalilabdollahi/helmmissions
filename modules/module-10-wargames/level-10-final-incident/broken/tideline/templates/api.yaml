@@ -1,0 +1,73 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Release.Name }}
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: tideline-api
+      app.kubernetes.io/instance: {{ .Release.Name }}
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: tideline-api
+        app.kubernetes.io/instance: {{ .Release.Name }}
+    spec:
+      terminationGracePeriodSeconds: 2
+      containers:
+        - name: api
+          image: busybox:1.36
+          imagePullPolicy: IfNotPresent
+          env:
+            - {name: ENVIRONMENT, value: {{ .Values.environment | quote }}}
+            - {name: CACHE_HOST, value: "{{ .Release.Name }}-cache"}
+            - {name: MIN_CACHE, value: {{ .Values.minCacheVersion | quote }}}
+            - {name: SCHEMA, value: {{ .Values.schema.target | quote }}}
+            - {name: DB_HOST, value: {{ .Values.database.host | quote }}}
+            - name: POD_NAMESPACE
+              valueFrom:
+                fieldRef: {fieldPath: metadata.namespace}
+          command: ["sh", "-c"]
+          args:
+            - |
+              mkdir -p /www/cgi-bin
+              cat > /www/cgi-bin/status <<'CGI'
+              #!/bin/sh
+              echo "Content-Type: text/plain"; echo
+              CV=$(wget -qO- -T 2 "http://$CACHE_HOST:8080/version" 2>/dev/null || echo unreachable)
+              st=ok; why=""
+              fit=$(awk -v a="$CV" -v b="$MIN_CACHE" 'BEGIN{split(a,x,".");split(b,y,".");for(i=1;i<=3;i++){if(x[i]+0>y[i]+0){print "ok";exit}if(x[i]+0<y[i]+0){print "old";exit}}print "ok"}')
+              [ "$fit" = ok ] || { st=degraded; why="$why cache-older-than-$MIN_CACHE"; }
+              case "$DB_HOST" in *".$POD_NAMESPACE") ;; *) st=degraded; why="$why database-belongs-to-another-environment";; esac
+              echo "env=$ENVIRONMENT"
+              echo "cache=$CV"
+              echo "schema=$SCHEMA"
+              echo "db=$DB_HOST"
+              echo "status=$st"
+              echo "reason=${why:-none}"
+              CGI
+              chmod +x /www/cgi-bin/status
+              exec httpd -f -p 8080 -h /www
+          ports:
+            - name: http
+              containerPort: 8080
+          readinessProbe:
+            tcpSocket:
+              port: http
+          resources:
+            requests: {cpu: 5m, memory: 8Mi}
+            limits: {memory: 64Mi}
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ .Release.Name }}
+spec:
+  selector:
+    app.kubernetes.io/name: tideline-api
+    app.kubernetes.io/instance: {{ .Release.Name }}
+  ports:
+    - name: http
+      port: 80
+      targetPort: http

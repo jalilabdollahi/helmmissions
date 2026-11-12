@@ -1,0 +1,4 @@
+Escape the dots with a backslash (single-quote the argument so the shell keeps it):
+  --set 'podAnnotations.prometheus\.io/scrape=true'
+or write the annotations in a values file and pass it with -f.
+Remember that a plain `helm upgrade` replaces the old values; --reuse-values would keep the junk key.

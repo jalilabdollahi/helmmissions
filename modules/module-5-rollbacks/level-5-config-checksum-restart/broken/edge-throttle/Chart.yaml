@@ -1,0 +1,5 @@
+apiVersion: v2
+name: edge-throttle
+description: Rate limiting sidecar for the public API edge
+version: 0.8.0
+appVersion: "0.8"

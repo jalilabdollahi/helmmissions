@@ -1,0 +1,4 @@
+Compare what Helm believes with what exists:
+  helm get manifest sms-gateway -n helmissions | grep -B2 -A8 'kind: Service'
+  kubectl get svc,deploy,pods -n helmissions
+Helm still lists the Service in the release - it just isn't in the cluster any more.

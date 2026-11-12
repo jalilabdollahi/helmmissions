@@ -1,0 +1,5 @@
+Look at what the kubelet reports when it tries to pull:
+  kubectl get pods -n helmissions
+  kubectl describe pod -n helmissions -l app.kubernetes.io/instance=portal
+The Events end with the registry's answer. Then check how the chart can hand credentials to the pod:
+  grep -n -i pullsecret partner-portal/values.yaml partner-portal/templates/*.yaml

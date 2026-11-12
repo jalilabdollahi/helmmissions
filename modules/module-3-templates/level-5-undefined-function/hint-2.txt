@@ -1,0 +1,3 @@
+The template calls a function named `uppercase`. Go templates only know the built-in functions plus the Sprig
+library that Helm bundles, and neither contains a function with that name. Look up how Sprig spells
+"convert to upper case" (the string functions: trim, lower, ...).

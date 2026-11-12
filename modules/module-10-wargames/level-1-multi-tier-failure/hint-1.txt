@@ -1,1 +1,3 @@
-Treat this like an incident. Establish what is broken first, then fix the highest-dependency problem before the rest. The broken state says: 3-tier app (frontend/backend/database) fails on install. Database hook fails, backend CrashLoops, frontend has wrong backend URL.
+Triage from the bottom of the stack up, not from the symptom down.
+Start with `helm list` and `helm status` for every release, then `kubectl get pods,jobs -n helmissions`.
+Whatever the dependency chain says should start first is where the first real failure lives.

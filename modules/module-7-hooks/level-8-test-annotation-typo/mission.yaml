@@ -1,0 +1,19 @@
+name: "\"No Tests Found\""
+description: |
+  The `inventory-search` release has a test pod in its chart (`templates/tests/search-test.yaml`), and the pipeline's
+  "post-deploy checks" stage runs `helm test search -n helmissions`. The stage is always green, but it finishes instantly, and
+  `helm status search` ends with `TEST SUITE: None`. Somebody notices that the search endpoint was broken for a whole day while the
+  tests stayed green. `kubectl get pods -n helmissions` has no test pod, and `helm get hooks search` is empty. The chart is in your
+  workspace under `inventory-search/`.
+objective: |
+  Release `inventory-search` is installed as `search` in namespace `helmissions` and is `deployed` with 1 ready pod. `helm test search -n helmissions`
+  now actually runs the chart's test pod against the live search endpoint and succeeds (the test pod is a real hook of the release and the
+  last test suite run in `helm status` shows phase Succeeded).
+xp: 250
+difficulty: intermediate
+expected_time: 10m
+concepts:
+  - helm test
+  - test hook annotation
+  - helm get hooks
+  - hooks are stored in the release

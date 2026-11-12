@@ -1,0 +1,6 @@
+dependencies:
+- name: schema-migrator
+  repository: file://../schema-migrator
+  version: 1.1.0
+digest: sha256:cbb00582709adc9b884548f2b88596ec5309bbb3f3d4caadab1a11abf5b6d329
+generated: "2026-11-12T00:40:11.475094+01:00"

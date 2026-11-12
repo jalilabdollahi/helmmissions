@@ -1,0 +1,5 @@
+1. kubectl create secret docker-registry regcred -n helmissions \
+     --docker-server=localhost:5002 --docker-username=<user from the ticket> --docker-password=<password from the ticket>
+2. values.yaml:  imagePullSecrets: [{name: regcred}]     (the password itself must not go into values)
+3. helm upgrade portal ./partner-portal -n helmissions --wait
+Do not copy the image to another registry and do not make the private registry anonymous.

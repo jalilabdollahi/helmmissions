@@ -1,0 +1,3 @@
+The readiness probe asks nginx for a path that nginx does not serve ("Readiness probe failed: HTTP probe
+failed with statuscode: 404"). `helm upgrade --wait` waits for every replica to be Ready, so the 404 turns
+into a Helm timeout. Rolling back would make the error vanish but would also drop everything 2.1 added.

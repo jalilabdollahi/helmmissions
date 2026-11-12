@@ -1,0 +1,3 @@
+Rename it (do not keep a copy):
+  mv status-page/Chart.yml status-page/Chart.yaml
+then:  helm install status-page ./status-page -n helmissions

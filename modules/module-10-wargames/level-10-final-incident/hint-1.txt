@@ -1,0 +1,3 @@
+Triage order for a release incident: (1) what state is each release in - `helm history tideline -n helmissions`, `helm list -A`;
+(2) can the pipeline even run - read the exact error of `bash deploy.sh prod`; (3) are the inputs sane - `helm dependency list ./tideline` and the values for each environment;
+(4) only then look at the application pages. Fix in that order: each layer hides the next.

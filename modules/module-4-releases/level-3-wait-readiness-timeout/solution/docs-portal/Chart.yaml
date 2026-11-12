@@ -1,0 +1,5 @@
+apiVersion: v2
+name: docs-portal
+description: Internal documentation portal
+version: 2.1.0
+appVersion: "2.1"

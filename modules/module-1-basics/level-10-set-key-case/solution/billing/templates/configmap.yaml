@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ .Release.Name }}-invoice
+data:
+  INVOICE_PREFIX: {{ .Values.invoice.prefix | quote }}
+  INVOICE_CURRENCY: {{ .Values.invoice.currency | quote }}

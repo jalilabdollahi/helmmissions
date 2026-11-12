@@ -1,0 +1,2 @@
+`kubectl get pods -n helmissions` then `kubectl describe pod` on each Pending pod: the Events at the bottom give the scheduler's
+exact reason, and the reason is different for each release. `kubectl get nodes -o jsonpath` shows what the node can offer.

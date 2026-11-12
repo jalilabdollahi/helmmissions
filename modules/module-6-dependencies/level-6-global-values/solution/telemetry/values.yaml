@@ -1,0 +1,9 @@
+global:
+  environment: production
+  region: eu-west-1
+
+# Region this stack runs in: see global.region above.
+
+image:
+  repository: traefik/whoami
+  tag: v1.10

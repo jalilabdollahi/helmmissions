@@ -1,0 +1,3 @@
+Read the whole error, then look at what the live ConfigMap carries compared with what Helm expects:
+  kubectl get configmap desk-settings -n helmissions -o yaml
+Helm only touches objects that carry its ownership metadata (a label and two annotations).

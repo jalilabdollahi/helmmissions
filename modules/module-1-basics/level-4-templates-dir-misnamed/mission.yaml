@@ -1,0 +1,19 @@
+name: The Empty Release
+description: |
+  The logistics team installed `parcel-tracker` and Helm printed a cheerful
+    STATUS: deployed
+    DESCRIPTION: Install complete
+  but the tracking page is unreachable. `helm list` shows the release, `kubectl get all -n helmissions`
+  shows nothing at all - no pods, no Deployment, no Service. There was no error anywhere.
+objective: |
+  Release `parcel-tracker` in namespace `helmissions` is deployed from the chart in your workspace and
+  its Helm manifest contains a Deployment and a Service. The pod is Ready and the Service has an
+  endpoint. The resources must be owned by the Helm release (not applied by hand).
+xp: 100
+difficulty: beginner
+expected_time: 5m
+concepts:
+  - chart structure
+  - templates directory
+  - helm get manifest
+  - helm upgrade

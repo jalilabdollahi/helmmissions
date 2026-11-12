@@ -1,1 +1,0 @@
-Inspect `values.yaml` closely and compare the key path with the template fields consuming it. The broken state says: helm template crashes with nil pointer dereference.

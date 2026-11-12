@@ -1,0 +1,3 @@
+A Kubernetes probe takes exactly one handler type (httpGet, tcpSocket, exec or grpc). The readinessProbe in
+templates/deployment.yaml declares two of them. Remember that revision 1 is still `deployed` underneath
+the failed revision 2, and that rolling back would also throw away what 1.1 was meant to deliver.

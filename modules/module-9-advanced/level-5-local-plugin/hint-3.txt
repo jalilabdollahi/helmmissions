@@ -1,0 +1,4 @@
+Point `command` and the `install` hook at the files under scripts/ (or move the scripts to the paths in
+plugin.yaml). The half-installed plugin must be removed and installed again so the hook runs:
+  helm plugin uninstall hm-audit && helm plugin install ./hm-audit
+Then try: helm hm-audit checkout -n helmissions

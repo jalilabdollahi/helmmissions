@@ -1,1 +1,0 @@
-Concrete direction: Correct the image tag, upgrade again. When you think you have it, verify the result the same way the mission describes: Release on correct revision with working image

@@ -1,12 +1,20 @@
-name: Secret's Not a Secret
-description: Plaintext password in values.yaml committed to git.
-objective: Remove from values.yaml; use `--set` for secrets or external-secrets
+name: Password In Git
+description: |
+  The nightly secret scanner flagged the `ledger-api` repository: the production database password sits in
+  plain text in `ledger-api/values.yaml`. Worse, it is visible to anyone who can read the release:
+    helm get values ledger-api -n helmissions   # db.password: Tr0ub4dor&3-ledger-prod
+    kubectl get deploy ledger-api -n helmissions -o yaml   # env DB_PASSWORD with a literal value
+  Security wants it out of git and out of the Helm release, and the exposed password must be treated as compromised.
+objective: |
+  Release `ledger-api` in namespace `helmissions` is `deployed` and its pod is Ready. No file in your workspace
+  contains a plaintext password, the release's user-supplied values contain no password, and the pod's
+  `DB_PASSWORD` comes from a Kubernetes Secret reference. That Secret exists in the namespace, is not managed
+  by the Helm release, and holds a new password (not the leaked `Tr0ub4dor&3-ledger-prod`).
 xp: 250
 difficulty: intermediate
 expected_time: 15m
 concepts:
-- secret management
-- values.yaml in git
-- --set for secrets
-module: module-8-security
-level: level-1-secret-in-values
+  - secrets in values
+  - existingSecret pattern
+  - secretKeyRef
+  - credential rotation

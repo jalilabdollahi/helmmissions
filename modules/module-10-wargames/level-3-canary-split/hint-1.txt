@@ -1,0 +1,3 @@
+Compare the two releases: `helm status` for each, then `kubectl get pods --show-labels` and
+`kubectl get endpointslices -l kubernetes.io/service-name=catalog`. Which pods does the Service actually select?
+Read `kubectl describe pod` on the canary pod for the readiness events.

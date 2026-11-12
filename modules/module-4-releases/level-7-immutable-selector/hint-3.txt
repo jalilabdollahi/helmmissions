@@ -1,0 +1,3 @@
+Split the two jobs in templates/_helpers.tpl: the selector helper must keep producing `app: catalog-search`,
+while the labels helper (pod template, metadata) may include the selector labels PLUS the new
+app.kubernetes.io/* ones. Then `helm upgrade catalog-search ./catalog-search -n helmissions --wait`.

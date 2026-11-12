@@ -1,0 +1,3 @@
+The Kubernetes API rejected one field of the Service the chart renders. Look at what the template
+produces with `helm template invoice-api ./invoice-api` and compare the spec.type value with the
+values Kubernetes accepts (they are case sensitive).

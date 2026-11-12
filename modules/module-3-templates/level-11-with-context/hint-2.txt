@@ -1,1 +1,0 @@
-The fix revolves around with context, $ root, nested with blocks. Compare the current state with the objective: Use `{{ $.Values.app.name }}` (root context) If the level is stateful, inspect the existing release history before reinstalling anything.

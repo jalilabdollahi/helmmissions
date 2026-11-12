@@ -1,0 +1,22 @@
+name: Kustomize Inflates Helm
+description: |
+  The storefront team deploys the catalog API through a GitOps folder: `platform/kustomization.yaml` inflates the
+  vendored `catalog-api` chart with a `helmCharts` entry and then adds an `env: prod` label with a kustomize
+  transformer. Nobody has built this folder on a fresh checkout before. `kubectl kustomize --enable-helm platform` stops with:
+    error: no repo specified for pull, no chart found at ''
+  The chart sits in `platform/charts/catalog-api/` and the prod values in `platform/values/prod.yaml`;
+  `README.txt` shows how the folder is meant to be deployed (kustomize renders, kubectl applies, no Helm release).
+objective: |
+  `kubectl kustomize --enable-helm platform` renders the `catalog-api` chart with the prod values, straight from
+  the `helmCharts` entry of `platform/kustomization.yaml` (it must stay a kustomize-inflated chart, not pasted YAML),
+  including the `env: prod` label on the objects and the pod template. The result is applied: in namespace
+  `helmissions` a Deployment `catalog-api` runs 2 Ready pods with `CACHE_TTL_SECONDS=600` and the `env=prod` label,
+  with a Service `catalog-api` in front. No Helm release is involved.
+xp: 400
+difficulty: expert
+expected_time: 20m
+concepts:
+  - kustomize helmCharts
+  - chartHome and valuesFile
+  - kubectl kustomize --enable-helm
+  - Helm without releases

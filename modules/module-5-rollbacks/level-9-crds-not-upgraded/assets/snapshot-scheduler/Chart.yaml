@@ -1,0 +1,5 @@
+apiVersion: v2
+name: snapshot-scheduler
+description: Scheduled volume snapshots for the data platform
+version: 1.0.0
+appVersion: "1.0.0"

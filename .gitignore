@@ -19,10 +19,10 @@ env/
 progress.json
 sandbox/
 
-# Helm / Kubernetes generated files
-*.lock
-charts/*.tgz
-**/charts/*.tgz
+# Local game state
+certificates/
+.hm-shared/
+*.json.tmp
 
 # Editor & OS
 .vscode/
@@ -44,3 +44,7 @@ kubeconfig
 *.pem
 *.key
 *.crt
+
+# Level content is always tracked, even files like *.key, *.log, dist/
+!modules/**
+modules/**/__pycache__/

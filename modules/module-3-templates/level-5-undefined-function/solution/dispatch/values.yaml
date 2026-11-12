@@ -1,0 +1,18 @@
+replicaCount: 1
+
+image:
+  repository: busybox
+  tag: "1.36"
+  pullPolicy: IfNotPresent
+
+# Name of the environment; the dispatcher expects it in capitals (PRODUCTION, STAGING...).
+environment: production
+
+pollSeconds: 30
+
+resources:
+  requests:
+    cpu: 10m
+    memory: 8Mi
+  limits:
+    memory: 32Mi

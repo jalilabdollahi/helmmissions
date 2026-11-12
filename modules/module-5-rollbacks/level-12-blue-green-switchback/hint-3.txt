@@ -1,0 +1,4 @@
+Set `activeColor: blue` in the values the pipeline deploys with (values-prod.yaml) - leave the green block alone -
+and upgrade:
+  bash ci/deploy.sh
+Do not add --wait: green is intentionally still failing.

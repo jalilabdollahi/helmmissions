@@ -1,0 +1,9 @@
+replicaCount: 2
+
+image:
+  repository: nginx
+  tag: 1.27-alpine
+  pullPolicy: IfNotPresent
+
+# Container resources. The team has never needed to tune them.
+resources: {}

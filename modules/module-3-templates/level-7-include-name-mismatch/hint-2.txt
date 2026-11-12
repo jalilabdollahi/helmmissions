@@ -1,0 +1,3 @@
+`include "x" .` looks a named template up by its exact string. List the names that are really defined:
+  grep -rn "define" storefront/templates
+and compare with every `include` in the chart (grep -rn include storefront/templates).

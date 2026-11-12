@@ -1,0 +1,10 @@
+apiVersion: v2
+name: ledger
+description: Double-entry ledger API backed by the ledger-db subchart
+type: application
+version: 0.2.0
+appVersion: "2.7.0"
+dependencies:
+  - name: ledger-db
+    version: 0.3.0
+    repository: file://../ledger-db

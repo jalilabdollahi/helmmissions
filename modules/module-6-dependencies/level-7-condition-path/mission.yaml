@@ -1,0 +1,19 @@
+name: Disabled But Still Deployed
+description: |
+  To save money the support team switched the expensive `ticket-search` subchart off for this environment:
+  `search.enabled: false` is right there in `helpdesk/values.yaml`. Yet release `helpdesk` still runs the
+  `helpdesk-ticket-search` Deployment and Service, and `helm get manifest helpdesk` lists them. Helm raised no error.
+  The help desk chart and the search subchart are in your workspace.
+objective: |
+  Release `helpdesk` in namespace `helmissions` has been upgraded so that it no longer contains any `ticket-search`
+  objects (the Deployment and Service are gone from the release and the cluster), while `helpdesk-web` stays Ready.
+  The chart must keep a working on/off switch: rendering with the switch turned on has to bring the subchart back,
+  and rendering with the default values must not.
+xp: 250
+difficulty: intermediate
+expected_time: 10m
+concepts:
+  - dependency condition
+  - condition path
+  - values toggles
+  - helm template

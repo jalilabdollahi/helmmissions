@@ -1,0 +1,8 @@
+replicaCount: 1
+image:
+  repository: traefik/whoami
+  tag: v1.10
+ttlMinutes: 30
+resources:
+  requests: {cpu: 10m, memory: 16Mi}
+  limits: {cpu: 50m, memory: 64Mi}

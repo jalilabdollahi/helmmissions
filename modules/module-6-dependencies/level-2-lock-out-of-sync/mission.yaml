@@ -1,0 +1,21 @@
+name: Chart.lock Out Of Sync
+description: |
+  `ledger` is released through a pipeline that starts with `helm dependency build ./ledger`. Since the
+  platform team shipped `ledger-db` 0.4.0 and `ledger/Chart.yaml` was bumped to require it, the pipeline stops at
+  the first step:
+    Error: the lock file (Chart.lock) is out of sync with the dependencies file (Chart.yaml). Please update the
+    dependencies with 'helm dependency update'
+  Release `ledger` is still running the previous chart revision. Both charts are in your workspace.
+objective: |
+  `helm dependency build ./ledger` succeeds and `Chart.lock` pins `ledger-db` 0.4.0. Release `ledger` in namespace
+  `helmissions` is `deployed` from the workspace chart (ledger 0.3.0, upgraded from the existing revision),
+  its database Deployment `ledger-ledger-db` is built from the ledger-db 0.4.0 subchart and the pods are Ready
+  with the WAL retention requested in `ledger/values.yaml`.
+xp: 250
+difficulty: intermediate
+expected_time: 10m
+concepts:
+  - Chart.lock
+  - helm dependency update vs build
+  - lock digest
+  - stale charts/ tarballs

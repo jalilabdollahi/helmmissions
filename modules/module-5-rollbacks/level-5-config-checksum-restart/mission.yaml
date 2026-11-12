@@ -1,0 +1,19 @@
+name: Rolled Back But Still Broken
+description: |
+  Someone pushed `rateLimit: 1` to `edge-throttle` and the API started rejecting almost every request.
+  They noticed, restarted the pods to "make sure", and then ran `helm rollback edge-throttle 1`. Helm says
+  `Rollback was a success`, `kubectl get configmap edge-throttle-config -o yaml` shows `RATE_LIMIT: "100"`,
+  yet the service still answers `rate_limit=1` and customers are still being throttled.
+  The chart is in your workspace under `edge-throttle/`.
+objective: |
+  Release `edge-throttle` in namespace `helmissions` is deployed from the workspace chart and the running
+  pods answer `rate_limit=100`. The chart itself must make pods restart whenever its configuration
+  changes, so the next config change or rollback cannot leave pods on stale settings.
+xp: 300
+difficulty: advanced
+expected_time: 15m
+concepts:
+  - config checksum annotation
+  - rollout triggers
+  - envFrom
+  - helm rollback

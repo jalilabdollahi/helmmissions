@@ -1,0 +1,19 @@
+name: Commas In --set
+description: |
+  The network team wants pods of `mesh-client` to resolve short names through two extra DNS
+  search domains: `payments.svc.cluster.local` and `corp.internal`. The runbook
+  (`install.sh`) passes them with a single `--set`, and Helm refuses:
+    Error: failed parsing --set data: key "internal" has no value
+  The values must be passed on the command line (no editing the chart's defaults).
+objective: |
+  Release `mesh-client` is deployed in namespace `helmissions` and its pod is Ready. The pod's
+  `dnsConfig.searches` contains exactly the two domains `payments.svc.cluster.local` and
+  `corp.internal`, delivered through Helm values (the chart template is unchanged in spirit:
+  `dnsSearch` stays a list).
+xp: 200
+difficulty: intermediate
+expected_time: 10m
+concepts:
+  - --set list syntax
+  - commas in --set
+  - index syntax

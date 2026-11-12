@@ -1,1 +1,0 @@
-The fix revolves around upgrade --install, idempotency, CI patterns. Compare the current state with the objective: Change to `helm upgrade --install myapp ./chart` If the level is stateful, inspect the existing release history before reinstalling anything.

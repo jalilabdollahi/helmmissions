@@ -1,1 +1,0 @@
-Concrete direction: Configure --history-max larger, or accept limitation and fix forward. When you think you have it, verify the result the same way the mission describes: Understanding of history limits

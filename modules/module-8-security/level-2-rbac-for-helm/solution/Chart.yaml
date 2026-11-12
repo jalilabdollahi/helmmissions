@@ -1,6 +1,0 @@
-apiVersion: v2
-name: rbac-for-helm
-description: Broken chart for Helm Needs RBAC
-type: application
-version: 0.1.0
-appVersion: 1.0.0

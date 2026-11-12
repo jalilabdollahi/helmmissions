@@ -1,0 +1,3 @@
+An immutable ConfigMap can never be edited, only replaced by another one. The chart always renders the same name,
+so Helm tries to update the existing object. Think about what would let a changed configuration become a *new*
+object, and what then has to point at it.

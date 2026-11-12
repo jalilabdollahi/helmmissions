@@ -1,1 +1,0 @@
-Concrete direction: Change --set to `--set database.host=db` (remove extra `config.` prefix). When you think you have it, verify the result the same way the mission describes: Correct value rendered in ConfigMap

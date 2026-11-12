@@ -1,1 +1,0 @@
-Concrete direction: Add `extraEnv: []` to values.yaml as default, OR guard with `{{ if .Values.extraEnv }}`. When you think you have it, verify the result the same way the mission describes: Template renders with empty or populated env list

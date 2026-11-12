@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ .Release.Name }}-config
+  labels:
+    app.kubernetes.io/name: {{ .Chart.Name }}
+data:
+  LOG_LEVEL: {{ .Values.logLevel | quote }}
+  {{- with .Values.cache }}
+  {{- with .redis }}
+  CACHE_HOST: {{ .host | quote }}
+  CACHE_PORT: {{ .port | default 6379 | quote }}
+  {{- end }}
+  {{- end }}

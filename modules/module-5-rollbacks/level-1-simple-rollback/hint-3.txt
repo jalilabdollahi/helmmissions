@@ -1,1 +1,2 @@
-Concrete direction: `helm rollback <release> 1`. When you think you have it, verify the result the same way the mission describes: App running, revision 1 values restored
+You do not need the chart source. Ask Helm to go back to the last good revision:
+  helm rollback quotes-api <revision> -n helmissions --wait

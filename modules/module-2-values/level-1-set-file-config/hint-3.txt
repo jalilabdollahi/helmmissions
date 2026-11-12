@@ -1,0 +1,3 @@
+Use --set-file (or put the config in a values file as a literal block under siteConfig: |):
+  helm upgrade landing ./landing -n helmissions --set-file siteConfig=./site.conf
+Then check the pod and `helm get values landing`.

@@ -1,0 +1,18 @@
+name: Empty Image
+description: |
+  The checkout team's `receipts` release was installed last night and has been "deploying" ever since.
+  `helm status receipts` says deployed, but the pods never start:
+    receipts-api-...   0/1   InvalidImageName
+  `kubectl describe pod` complains about the image reference. The chart is in your workspace under `receipts/`.
+objective: |
+  Release `receipts` in namespace `helmissions` is upgraded from the chart in your workspace (a new
+  revision), both `receipts-api` pods are Ready on the `nginx:1.27-alpine` image, and the chart builds its
+  image reference from the `image.repository` and `image.tag` values (overriding them must change the image).
+xp: 200
+difficulty: intermediate
+expected_time: 10m
+concepts:
+  - .Values paths
+  - helm template
+  - helm upgrade
+  - nil values

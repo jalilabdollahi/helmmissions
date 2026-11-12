@@ -1,0 +1,3 @@
+The pod runs as the `flag-sync` ServiceAccount, bound by a RoleBinding to a Role defined in
+flag-sync/templates/role.yaml. That Role has rules for pods only. RBAC is purely additive: a request is
+allowed only if some rule explicitly grants that verb on that resource.

@@ -1,0 +1,3 @@
+`.Files` only sees files that are part of the chart *as Helm loads it*. Files matching a pattern in the chart's
+`.helmignore` are dropped at load time - for `helm template`, `install` and `package` alike. Look at the hidden file
+in the chart root (`ls -a legacy-site`) and see whether a pattern matches files/site.conf.

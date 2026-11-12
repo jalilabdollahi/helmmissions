@@ -1,1 +1,4 @@
-Hook levels usually fail before or after the main workload. Inspect annotations, Jobs, and hook ordering. The broken state says: Uninstalling the chart leaves orphaned PVCs — post-delete hook should clean them.
+Find out where the leaked volume comes from and whether Helm knows about it:
+  kubectl get pvc exports-scratch -n helmissions -o yaml     # labels, owner references?
+  helm template exports ./export-batch | grep -c PersistentVolumeClaim
+  grep -rn "persistentvolumeclaims" export-batch/templates

@@ -1,0 +1,4 @@
+Compare what Chart.yaml requires with what Chart.lock recorded:
+  helm dependency list ./ledger
+  cat ledger/Chart.lock
+  ls ledger/charts

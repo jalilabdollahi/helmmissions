@@ -1,1 +1,0 @@
-The fix revolves around NetworkPolicy in charts, pod selector, ingress rules. Compare the current state with the objective: Add ingress rule for health check probe source If the level is stateful, inspect the existing release history before reinstalling anything.

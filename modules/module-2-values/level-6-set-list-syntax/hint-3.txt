@@ -1,0 +1,4 @@
+Either of these works:
+  --set 'dnsSearch={payments.svc.cluster.local,corp.internal}'
+  --set 'dnsSearch[0]=payments.svc.cluster.local' --set 'dnsSearch[1]=corp.internal'
+Escaping the comma (\,) gives ONE string, not two entries - check the rendered Deployment.

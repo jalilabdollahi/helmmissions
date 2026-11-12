@@ -1,0 +1,3 @@
+Two independent problems. (1) pricing's template dereferences `.Values.resources.limits.cpu`, but the values that reach the subchart
+(its own values.yaml merged with `pricing:` in the umbrella values) contain no `limits`. (2) After that renders, look at which services get
+`docker.io/` in front of their image: one subchart's image helper reads a different value than `.Values.global.imageRegistry`.

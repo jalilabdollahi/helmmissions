@@ -1,0 +1,6 @@
+version: "2.0"
+replicaCount: 1
+resources:
+  requests:
+    cpu: 100m
+    memory: 2048Gi

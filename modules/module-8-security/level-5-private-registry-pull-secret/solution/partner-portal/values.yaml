@@ -1,0 +1,13 @@
+replicaCount: 2
+
+image:
+  repository: localhost:5002/m8-portal/portal
+  tag: "1.0"
+  pullPolicy: IfNotPresent
+
+# Secrets (type kubernetes.io/dockerconfigjson) the kubelet uses to authenticate to the registry.
+imagePullSecrets:
+  - name: regcred
+
+service:
+  port: 80

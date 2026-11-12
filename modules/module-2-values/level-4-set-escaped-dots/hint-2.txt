@@ -1,0 +1,3 @@
+In `--set a.b.c=v` every dot separates one nesting level, so `podAnnotations.prometheus.io/scrape`
+became podAnnotations -> prometheus -> "io/scrape". A literal dot inside a key must be escaped.
+Alternatively, keep the keys in a YAML values file where dots are just characters.

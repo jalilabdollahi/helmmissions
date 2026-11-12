@@ -1,0 +1,3 @@
+A StatefulSet's volumeClaimTemplates cannot be changed after creation (only replicas, template, updateStrategy,
+ordinals and a few more can). The storage bump from 1Gi to 2Gi is what blocks the whole upgrade; the retention
+change next to it is perfectly legal. Do not delete the StatefulSet or the PVC to get around it.

@@ -1,1 +1,0 @@
-Concrete direction: Use `helm upgrade` with corrected image.repository in values.yaml. When you think you have it, verify the result the same way the mission describes: Pod pulls image successfully and runs

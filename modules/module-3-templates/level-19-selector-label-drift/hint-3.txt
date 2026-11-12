@@ -1,0 +1,4 @@
+In templates/service.yaml replace the hand-written selector with the helper the Deployment uses:
+  selector:
+    {{- include "payments.selectorLabels" . | nindent 4 }}
+Do not add `app: payments` to the pods. Then: helm upgrade payments ./payments -n helmissions

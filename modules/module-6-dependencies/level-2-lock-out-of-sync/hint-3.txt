@@ -1,0 +1,3 @@
+`helm dependency update ./ledger` re-resolves Chart.yaml, replaces the tarball in charts/ and rewrites Chart.lock.
+Confirm `helm dependency build ./ledger` is happy, then `helm upgrade ledger ./ledger -n helmissions`
+and check that the database Deployment carries the label helm.sh/chart=ledger-db-0.4.0.

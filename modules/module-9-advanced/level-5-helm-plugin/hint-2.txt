@@ -1,1 +1,0 @@
-The fix revolves around helm plugins, helm-diff, plugin management. Compare the current state with the objective: `helm plugin install https://github.com/databus23/helm-diff` If the level is stateful, inspect the existing release history before reinstalling anything.

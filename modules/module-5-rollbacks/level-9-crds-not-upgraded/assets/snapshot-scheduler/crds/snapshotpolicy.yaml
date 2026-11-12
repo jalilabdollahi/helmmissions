@@ -1,0 +1,29 @@
+apiVersion: apiextensions.k8s.io/v1
+kind: CustomResourceDefinition
+metadata:
+  name: snapshotpolicies.helmissions.io
+  labels:
+    helmissions.io/cleanup: "true"
+spec:
+  group: helmissions.io
+  scope: Namespaced
+  names:
+    kind: SnapshotPolicy
+    plural: snapshotpolicies
+    singular: snapshotpolicy
+  versions:
+    - name: v1
+      served: true
+      storage: true
+      schema:
+        openAPIV3Schema:
+          type: object
+          properties:
+            spec:
+              type: object
+              properties:
+                schedule:
+                  type: string
+                volume:
+                  type: string
+

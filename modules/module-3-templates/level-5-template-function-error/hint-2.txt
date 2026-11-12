@@ -1,1 +1,0 @@
-The fix revolves around Sprig functions, upper vs uppercase, function names. Compare the current state with the objective: Change to `{{ .Values.app.name | upper }}` If the level is stateful, inspect the existing release history before reinstalling anything.

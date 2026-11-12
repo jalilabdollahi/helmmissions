@@ -1,0 +1,4 @@
+Find out what already exists under that name:
+  helm list -n helmissions
+  helm history orders -n helmissions
+Then think about which Helm command is meant for an existing release.

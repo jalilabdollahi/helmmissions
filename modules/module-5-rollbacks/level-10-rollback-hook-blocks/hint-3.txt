@@ -1,0 +1,3 @@
+Skip the hooks for this rollback:
+  helm rollback settlement-batch 1 -n helmissions --no-hooks --wait
+(A plain `helm upgrade` is refused while the failed rollback has left the release in `pending-rollback`.)

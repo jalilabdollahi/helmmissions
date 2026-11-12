@@ -1,0 +1,4 @@
+Package it once and look inside before you trust it:
+  helm package ./reports -d dist
+  tar tzf dist/reports-1.1.0.tgz
+(Delete the archive again if what you see is not acceptable.)

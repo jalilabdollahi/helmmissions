@@ -1,0 +1,4 @@
+apiVersion: v2
+name: mqlib
+description: Shared message-broker helpers
+version: 0.1.0

@@ -1,0 +1,3 @@
+Read the very end of the error message: the API server complains about the encoding of a Secret field.
+Print what the chart renders for the Secret:
+  helm template gateway ./payments-gw -s templates/secret.yaml

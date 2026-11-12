@@ -1,0 +1,19 @@
+name: Switch Back To Blue
+description: |
+  The 6.1 release of `ticket-booking` went live by flipping `activeColor` from blue to green. Since then
+  every booking request fails: `kubectl get endpointslices -n helmissions` shows the `ticket-booking` Service
+  without a single ready endpoint, and the green pods are in `ImagePullBackOff`. Blue (release 6.0) is
+  still running happily next to it. The engineers want to debug green in place, so it must stay deployed.
+  Chart and pipeline files are in your workspace.
+objective: |
+  Release `ticket-booking` in namespace `helmissions` is deployed and its Service sends traffic to the
+  blue colour (release manifest and live Service agree), the Service has ready endpoints and answers HTTP
+  requests, and the green Deployment still exists with its replicas, untouched, for debugging.
+xp: 250
+difficulty: intermediate
+expected_time: 10m
+concepts:
+  - blue/green with Helm
+  - service selectors
+  - values-driven traffic switch
+  - helm upgrade

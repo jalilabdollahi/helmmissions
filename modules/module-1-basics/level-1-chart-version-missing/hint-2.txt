@@ -1,0 +1,3 @@
+Look at webapp/Chart.yaml. It has an apiVersion, a name and an appVersion — but appVersion
+describes the APPLICATION (nginx 1.27). Helm also needs the version of the CHART itself, and that
+field is missing.

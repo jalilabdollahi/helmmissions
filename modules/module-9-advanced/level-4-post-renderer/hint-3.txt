@@ -1,0 +1,4 @@
+Make the two names agree (edit either kustomization.yaml or render.sh), check with
+  helm template edge-gateway ./edge-gateway --post-renderer hm-cost-labeler | grep -E 'cost-center|log-shipper'
+and then run `helm upgrade edge-gateway ./edge-gateway -n helmissions --post-renderer hm-cost-labeler`.
+Do not touch the chart and do not use kubectl label/patch: the release manifest is what counts.

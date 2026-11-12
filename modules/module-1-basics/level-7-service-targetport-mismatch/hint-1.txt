@@ -1,0 +1,4 @@
+The Service has endpoints, so the selector is fine. Compare what the Service sends traffic to with what
+the container actually listens on:
+  kubectl get svc inventory -n helmissions -o yaml
+  kubectl get pod -n helmissions -l app.kubernetes.io/name=inventory -o jsonpath='{.items[0].spec.containers[0].ports}'

@@ -1,0 +1,5 @@
+# Production overrides for geo-lookup (used by ci/deploy.sh)
+# Edited several times during the migration to the new maps provider.
+provider: maps-v1-eu
+ttl: 0
+trace: true

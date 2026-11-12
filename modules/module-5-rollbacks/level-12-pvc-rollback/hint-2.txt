@@ -1,1 +1,0 @@
-The fix revolves around PVC immutability, StatefulSet rollback limitations. Compare the current state with the objective: Understand PVC immutability; restore data manually if needed If the level is stateful, inspect the existing release history before reinstalling anything.

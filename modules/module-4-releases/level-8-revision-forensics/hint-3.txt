@@ -1,0 +1,3 @@
+Make a new revision that changes only the one value, keeping all other user values:
+  helm upgrade product-search ./product-search -n helmissions --reuse-values --set features.search=true
+(or put the output of `helm get values product-search -o yaml` in a file, fix it and use -f).

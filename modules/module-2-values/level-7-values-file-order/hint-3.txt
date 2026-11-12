@@ -1,0 +1,3 @@
+Swap the order in deploy.sh so the most specific file comes last:
+  -f values-base.yaml -f values-prod.yaml
+Then run ./deploy.sh again (don't just edit the values files).

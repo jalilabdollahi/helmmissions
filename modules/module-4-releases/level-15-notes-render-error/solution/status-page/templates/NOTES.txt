@@ -1,0 +1,6 @@
+status-page {{ .Chart.AppVersion }} has been deployed as release "{{ .Release.Name }}".
+
+Open the page:
+  http://{{ .Values.ingress.host }}/
+
+Service port: {{ .Values.service.port }}

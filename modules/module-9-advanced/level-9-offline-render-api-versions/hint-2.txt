@@ -1,0 +1,3 @@
+The template only renders the ServiceMonitor when `.Capabilities.APIVersions.Has "monitoring.helmissions.io/v1"`.
+`helm install` fills Capabilities from the live cluster; plain `helm template` does not talk to the cluster, so it
+only knows Helm's built-in API list and the monitoring group is "missing" — the object is silently skipped.

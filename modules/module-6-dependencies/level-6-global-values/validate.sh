@@ -1,43 +1,26 @@
 #!/bin/bash
-set -euo pipefail
+set -uo pipefail
+source "$HM_LIB"
 
-RELEASE="helmissions-app"
-NS="helmissions"
-ROOT="$(cd "$(dirname "$0")" && pwd)"
-BROKEN="${HELMMISSIONS_SANDBOX:-$ROOT/broken}"
-SOLUTION="${HELMMISSIONS_SOLUTION:-$ROOT/solution}"
+hm_info "Checking the release..."
+hm_require_deployed telemetry
+[ "$(hm_release_revision telemetry)" -ge 3 ] || hm_fail "Release telemetry has not been upgraded since the region attempt — nothing was rolled out"
+manifest="$(hm_manifest_json telemetry)"
 
-echo "🔍 Comparing fixed chart to reference solution..."
-if ! diff -ru --exclude='Chart.lock' "$SOLUTION" "$BROKEN" >/tmp/helmissions-diff.txt 2>&1; then
-  echo "❌ The chart in broken/ still differs from the expected fixed chart in solution/."
-  exit 1
-fi
+hm_info "Checking that every component carries the region (from the release, not from live edits)..."
+for d in gateway collector exporter; do
+  dep="telemetry-$d"
+  region="$(echo "$manifest" | jq -r --arg d "$dep" '[.[] | select(.kind=="Deployment" and .metadata.name==$d)][0].spec.template.spec.containers[0].env // [] | map(select(.name=="REGION") | .value) | first // ""')"
+  [ "$region" = "eu-west-1" ] || hm_fail "Deployment $dep is released with REGION='${region:-<missing>}', expected eu-west-1"
+  envn="$(echo "$manifest" | jq -r --arg d "$dep" '[.[] | select(.kind=="Deployment" and .metadata.name==$d)][0].spec.template.spec.containers[0].env // [] | map(select(.name=="ENVIRONMENT") | .value) | first // ""')"
+  [ "$envn" = "production" ] || hm_fail "Deployment $dep lost ENVIRONMENT=production (got '$envn')"
+done
 
-echo "🔍 Validating dependency metadata..."
-if [[ ! -f "$BROKEN/Chart.lock" ]]; then
-  echo "❌ Chart.lock is missing"
-  exit 1
-fi
-if ! helm dependency build "$BROKEN" >/tmp/helmissions-deps.txt 2>&1; then
-  echo "❌ helm dependency build failed"
-  cat /tmp/helmissions-deps.txt
-  exit 1
-fi
+hm_info "Checking the running pods..."
+for d in gateway collector exporter; do
+  hm_wait_rollout "deployment/telemetry-$d" "$NS" 90s
+  live="$(hm_jsonpath "deployment/telemetry-$d" '{.spec.template.spec.containers[0].env[?(@.name=="REGION")].value}')"
+  [ "$live" = "eu-west-1" ] || hm_fail "Live Deployment telemetry-$d reports REGION='$live'"
+done
 
-echo "🔍 Installing chart with dependencies..."
-if ! helm upgrade --install "$RELEASE" "$BROKEN" -n "$NS" --create-namespace >/tmp/helmissions-upgrade.txt 2>&1; then
-  echo "❌ helm upgrade --install failed after dependency resolution"
-  cat /tmp/helmissions-upgrade.txt
-  exit 1
-fi
-
-DEPLOY="$(kubectl get deploy -n "$NS" -l app.kubernetes.io/instance="$RELEASE" -o jsonpath='{.items[0].metadata.name}' 2>/dev/null || true)"
-if [[ -n "$DEPLOY" ]]; then
-  kubectl rollout status "deployment/$DEPLOY" -n "$NS" --timeout=60s >/tmp/helmissions-rollout.txt 2>&1 || {
-    echo "❌ Deployment did not become ready"
-    cat /tmp/helmissions-rollout.txt
-    exit 1
-  }
-fi
-
-echo "✅ Level complete! Validation matched the behavior this mission is teaching."
+hm_pass "The whole telemetry stack reports eu-west-1."

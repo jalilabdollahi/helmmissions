@@ -1,0 +1,3 @@
+Helm stores release state somewhere you can look at. Check what exists next to the Deployment:
+  kubectl get configmaps,secrets -n helmissions
+Then read the pipeline's environment (ci/pipeline.env).

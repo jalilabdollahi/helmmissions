@@ -1,0 +1,4 @@
+replicaCount: 1
+image:
+  repository: search
+  tag: "3.1"

@@ -1,0 +1,20 @@
+name: Lint Before You Ship
+description: |
+  The CI pipeline for the `newsletter` chart is red. Its only gate is `ci/lint.sh`, which runs
+  `helm lint --strict ./newsletter` and ends with
+    Error: 1 chart(s) linted, 1 chart(s) failed
+  The output mixes [ERROR], [WARNING] and [INFO] lines about the chart's metadata and the objects it
+  creates. Nobody has deployed this chart yet.
+objective: |
+  `ci/lint.sh` passes (`helm lint --strict ./newsletter` reports 0 failed charts). The chart is still called
+  `newsletter`, has a valid SemVer chart version, and still renders the same resources (ConfigMap, Deployment,
+  Service with the same image). Release `newsletter` is then installed in namespace `helmissions` from the fixed
+  chart and its pod is Ready. A missing icon is only an INFO message and may stay.
+xp: 150
+difficulty: beginner
+expected_time: 10m
+concepts:
+  - helm lint
+  - --strict
+  - Chart.yaml metadata
+  - SemVer

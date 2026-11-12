@@ -1,0 +1,4 @@
+templates/_helpers.tpl asks `.Capabilities.APIVersions.Has "<group/version/Kind>"` whether the cluster serves
+the v1 Ingress. If the answer is false, the chart falls back to the removed v1beta1. List the strings the
+cluster really reports:  kubectl api-resources --api-group=networking.k8s.io  and compare them with the
+string in the helper character by character - including upper/lower case.

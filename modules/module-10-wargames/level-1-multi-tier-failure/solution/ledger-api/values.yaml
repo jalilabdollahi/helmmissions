@@ -1,0 +1,3 @@
+db:
+  host: ledger-db
+  port: 8080

@@ -1,0 +1,2 @@
+Rename the `resizer:` block in newsroom/values.yaml so it matches the dependency name `image-resizer`, then run
+`helm upgrade newsroom ./newsroom -n helmissions --wait`. Check with `kubectl get deploy -n helmissions`.

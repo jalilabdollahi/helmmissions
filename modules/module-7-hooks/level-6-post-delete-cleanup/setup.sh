@@ -1,12 +1,11 @@
 #!/bin/bash
 set -euo pipefail
+source "$HM_LIB"
 
-NS="helmissions"
-RELEASE="helmissions-app"
-ROOT="$(cd "$(dirname "$0")" && pwd)"
-
-kubectl create namespace "$NS" --dry-run=client -o yaml | kubectl apply -f - >/dev/null
-helm uninstall "$RELEASE" -n "$NS" >/dev/null 2>&1 || true
-kubectl delete all --all -n "$NS" >/dev/null 2>&1 || true
-
-helm install "$RELEASE" "$ROOT/broken" -n "$NS" --create-namespace >/tmp/helmissions-setup.log 2>&1 || true
+# A release that was installed and later uninstalled, leaving its runtime-created PVC behind.
+helm install exports "$SANDBOX/export-batch" -n "$NS" --wait --timeout 90s >/dev/null
+hm_assert_status exports deployed
+kubectl get pvc exports-scratch -n "$NS" >/dev/null 2>&1 || { echo "setup: the scratch PVC was not created"; exit 1; }
+helm uninstall exports -n "$NS" >/dev/null
+[ -z "$(hm_release_status exports)" ] || { echo "setup: release still exists"; exit 1; }
+kubectl get pvc exports-scratch -n "$NS" >/dev/null 2>&1 || { echo "setup: PVC unexpectedly removed by uninstall"; exit 1; }

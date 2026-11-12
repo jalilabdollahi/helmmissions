@@ -1,0 +1,20 @@
+name: Pre-rollback Hook Says No
+description: |
+  Revision 2 of `settlement-batch` is crash-looping (the Deployment cannot pull its image) and the nightly
+  settlement window opens in an hour. Your colleague already tried `helm rollback settlement-batch 1 -n helmissions`;
+  it fails with
+    Error: resource Job/helmissions/settlement-batch-drain not ready. status: Failed, message: Job Failed
+  and `helm history` shows stale `pending-rollback` revisions. The chart (in your workspace) has a
+  `pre-rollback` hook that calls a `queue-admin` service nobody has run for months.
+objective: |
+  Release `settlement-batch` in namespace `helmissions` is `deployed` and healthy again: its Deployment
+  runs `traefik/whoami:v1.10` with a Ready pod, and the release's current revision records that
+  configuration.
+xp: 300
+difficulty: advanced
+expected_time: 15m
+concepts:
+  - pre-rollback hooks
+  - helm rollback --no-hooks
+  - pending-rollback
+  - hook failures

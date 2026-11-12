@@ -1,0 +1,3 @@
+Write queue-worker/values.schema.json describing every key of values.yaml (integers for replicaCount and concurrency; strings or numbers
+for cpu/memory; integers for probes.readiness; free-form objects for extraEnv and podAnnotations) with additionalProperties false on every object except the free-form ones.
+Then `helm template ./queue-worker -f values-prod.yaml` will name the typos; fix them and upgrade with that file.

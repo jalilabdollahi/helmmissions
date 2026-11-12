@@ -1,0 +1,8 @@
+replicaCount: 2
+image:
+  repository: traefik/whoami
+  tag: v1.10
+reconcile:
+  # 1.1: incremental reconciliation only touches rows changed since the last run
+  mode: incremental
+  batchSize: 500

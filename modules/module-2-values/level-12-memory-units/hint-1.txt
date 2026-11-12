@@ -1,0 +1,4 @@
+Read the whole error message and then look at the resources block in the values file:
+  helm status image-resizer -n helmissions
+  cat image-resizer/values.yaml
+Compare the request and the limit, including their units.

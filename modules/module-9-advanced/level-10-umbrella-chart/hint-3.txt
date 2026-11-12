@@ -1,1 +1,0 @@
-Concrete direction: Fix subchart template error; understand umbrella chart failure modes. When you think you have it, verify the result the same way the mission describes: All 5 microservices deployed via umbrella chart

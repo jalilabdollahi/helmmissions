@@ -1,0 +1,4 @@
+Children must be indented further than their parent key. `resources:` sits at 10 spaces, so the toYaml
+output needs to go in at 12:  {{- toYaml .Values.resources | nindent 12 }}
+Then install (a failed first install leaves a release record, so `helm upgrade --install` is the easy way):
+  helm upgrade --install geoip ./geoip -n helmissions

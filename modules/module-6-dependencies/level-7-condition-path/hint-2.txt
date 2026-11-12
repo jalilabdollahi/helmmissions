@@ -1,0 +1,3 @@
+`condition:` on a dependency is a path into the parent's values. If the path exists and is false, the subchart is
+dropped. If the path does NOT exist in the merged values, Helm ignores the condition and keeps the subchart enabled.
+Check that the path written in Chart.yaml is exactly the key you set in values.yaml.

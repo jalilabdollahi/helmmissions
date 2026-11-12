@@ -1,1 +1,0 @@
-Concrete direction: Change to `replicaCount: 3` (no quotes). When you think you have it, verify the result the same way the mission describes: Deployment created with 3 replicas

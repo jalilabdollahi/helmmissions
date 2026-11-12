@@ -1,0 +1,3 @@
+The error names a line. Look at exactly what is on that line, including invisible characters:
+  sed -n '9p' audit-log/values.yaml | cat -A
+  helm lint ./audit-log

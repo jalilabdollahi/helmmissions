@@ -1,1 +1,0 @@
-The fix revolves around required function, values structure, template errors. Compare the current state with the objective: Add `app:\n  name: my-app` to values.yaml If the level is stateful, inspect the existing release history before reinstalling anything.

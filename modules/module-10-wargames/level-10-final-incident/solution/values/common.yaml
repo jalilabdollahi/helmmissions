@@ -1,0 +1,6 @@
+minCacheVersion: "1.2.0"
+schema:
+  current: 12
+  target: 13
+migration:
+  settleSeconds: 3

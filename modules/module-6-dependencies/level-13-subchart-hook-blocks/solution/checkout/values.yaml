@@ -1,0 +1,13 @@
+replicaCount: 1
+
+image:
+  repository: traefik/whoami
+  tag: v1.10
+
+database:
+  host: orders-db.helmissions.svc.cluster.local
+
+# The migrator subchart needs the same database as the API.
+schema-migrator:
+  database:
+    host: orders-db.helmissions.svc.cluster.local

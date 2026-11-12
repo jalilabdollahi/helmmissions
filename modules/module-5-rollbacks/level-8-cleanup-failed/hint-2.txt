@@ -1,1 +1,0 @@
-The fix revolves around recovery from repeated failures, upgrade vs reinstall. Compare the current state with the objective: Fix the template, helm upgrade to create successful revision If the level is stateful, inspect the existing release history before reinstalling anything.

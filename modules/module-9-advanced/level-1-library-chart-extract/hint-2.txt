@@ -1,0 +1,4 @@
+Create a third chart in the workspace (for example platformlib/) whose Chart.yaml says `type: library`
+and whose templates/ folder holds ONE file starting with an underscore that `define`s the label templates.
+Declare it in `dependencies:` of both charts with `repository: file://../platformlib`, and replace the
+local helpers with `include "<your-lib>.labels" .`.

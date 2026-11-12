@@ -1,0 +1,4 @@
+replicaCount: 1
+maxWidth: 1024
+quality: 85
+port: 8080

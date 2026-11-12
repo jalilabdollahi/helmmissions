@@ -1,0 +1,4 @@
+Start with the pod, then look at what Helm actually put into the ConfigMap:
+  kubectl logs deploy/landing -n helmissions
+  helm get manifest landing -n helmissions
+Compare the ConfigMap data with the contents of site.conf.

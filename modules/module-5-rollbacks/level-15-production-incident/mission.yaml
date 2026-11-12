@@ -1,13 +1,20 @@
-name: Production Is Down
-description: Full production incident simulation — identify broken revision, rollback,
-  verify recovery.
-objective: Helm history analysis, targeted rollback of specific subchart
+name: "Incident: Checkout Is Down"
+description: |
+  Checkout has been down since Friday and the marketing campaign has just gone live. The payment page answers
+  with a failure message (`curl http://checkout/checkout.txt` from inside the cluster). `INCIDENT.md` in your
+  workspace has the timeline: three revisions of `checkout`, a vendor-migration change, a hotfix someone applied
+  with kubectl during the first outage, and a "tuning" PR. The previous revision is no better than the current one.
+  Chart, pipeline and values are in your workspace.
+objective: |
+  Release `checkout` in namespace `helmissions` is deployed and healthy: `http://checkout/checkout.txt` says
+  `checkout: ok`. The release's own manifest and the live Deployment agree and are clean (no leftover manual
+  hotfix settings in the cluster), and the configuration the pipeline deploys with (`values-prod.yaml` + chart
+  defaults) renders the working payment settings, so the next `ci/deploy.sh` run does not bring the outage back.
 xp: 400
 difficulty: advanced
-expected_time: 30m
+expected_time: 25m
 concepts:
-- incident response
-- umbrella charts
-- rollback under pressure
-module: module-5-rollbacks
-level: level-15-production-incident
+  - incident response
+  - revision forensics
+  - configuration drift
+  - durable fixes

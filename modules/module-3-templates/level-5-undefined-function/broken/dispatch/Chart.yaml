@@ -1,0 +1,6 @@
+apiVersion: v2
+name: dispatch
+description: Background job dispatcher for the logistics platform
+type: application
+version: 0.9.0
+appVersion: "1.36"

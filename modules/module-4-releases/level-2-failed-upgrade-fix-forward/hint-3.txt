@@ -1,0 +1,3 @@
+Remove the redundant handler from the readinessProbe in ledger-sync/templates/deployment.yaml, then upgrade
+again so Helm records a new revision:
+  helm upgrade ledger-sync ./ledger-sync -n helmissions --wait

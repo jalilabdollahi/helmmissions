@@ -1,0 +1,20 @@
+name: Required Means Required
+description: |
+  The docs team's chart refuses to install the staging portal:
+    Error: INSTALLATION FAILED: execution error at (docs-site/templates/ingress.yaml:9:21):
+    ingressHost is required: set the public host name of the docs portal
+  The chart is shared with other environments, so its defaults must stay generic. `README.txt` in your
+  workspace lists the staging settings.
+objective: |
+  Release `docs-site` is deployed in namespace `helmissions` with the staging host from `README.txt`
+  (`docs.staging.helmissions.local`) on its Ingress and its pod Ready. The host is supplied through a
+  values file in your workspace (next to the chart, not inside it); the chart's own `values.yaml`
+  still has no host hardcoded.
+xp: 150
+difficulty: beginner
+expected_time: 10m
+concepts:
+  - required function
+  - values files
+  - helm install -f
+  - environment overrides

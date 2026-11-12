@@ -1,0 +1,20 @@
+name: Hook Job Already Exists
+description: |
+  `tax-engine` installed fine, but the next upgrade is rejected before anything changes:
+    Error: UPGRADE FAILED: pre-upgrade hooks failed: warning: Hook pre-upgrade tax-engine/templates/rate-check-job.yaml
+    failed: ... Job.batch "tax-engine-rate-check" is invalid: spec.template: Invalid value: ...: field is immutable
+  (older Helm versions word it as `jobs.batch "tax-engine-rate-check" already exists`). `helm history` shows the upgrade
+  as `failed`, and `kubectl get jobs -n helmissions` lists a completed `tax-engine-rate-check` Job from the first
+  install. Every future upgrade will hit the same wall. The chart is in your workspace under `tax-engine/`.
+objective: |
+  Release `tax-engine` in namespace `helmissions` is `deployed` after a successful upgrade, and the pre-upgrade rate check
+  still runs as a hook on every deploy. Upgrading again and again (also from a brand-new install) never trips over the
+  Job left behind by the previous run, and nobody has to delete anything by hand.
+xp: 250
+difficulty: intermediate
+expected_time: 10m
+concepts:
+  - hook-delete-policy
+  - before-hook-creation
+  - hook resources are not release-managed
+  - immutable Job spec

@@ -1,0 +1,3 @@
+When the same key appears in several -f files, Helm merges them from left to right and the LAST file
+wins. deploy.sh lists values-prod.yaml first and values-base.yaml last, so the generic defaults
+overwrite the production overrides.

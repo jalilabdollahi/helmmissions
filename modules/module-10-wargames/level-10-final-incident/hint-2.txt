@@ -1,0 +1,4 @@
+Four faults: prod's last revision is stuck in `pending-upgrade` (the killed CI run), so Helm refuses to start another operation;
+the chart's `cache` dependency in the workspace is stale (Chart.lock and charts/ are 1.1.0 while Chart.yaml wants ~1.2.0);
+prod's values ask the migration hook for schema 14 while the database is at 12 and the hook refuses to skip a version;
+and staging's values point at the production database host.

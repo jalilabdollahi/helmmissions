@@ -1,0 +1,3 @@
+Chart.lock was generated when ledger-db was still 0.3.0. `helm dependency build` only reproduces what the
+lock says and refuses when Chart.yaml's dependency declarations no longer match the lock's digest.
+Beware: a plain `helm upgrade` does not complain, it just packages whatever tarball sits in charts/.

@@ -1,45 +1,30 @@
 #!/bin/bash
-set -euo pipefail
+set -uo pipefail
+source "$HM_LIB"
+V=helmissions-verify
+trap 'helm uninstall exp-verify -n "$V" >/dev/null 2>&1 || true; kubectl delete ns "$V" --wait=false >/dev/null 2>&1 || true; rm -rf "$HM_TMP"' EXIT
 
-RELEASE="helmissions-app"
-NS="helmissions"
-ROOT="$(cd "$(dirname "$0")" && pwd)"
-BROKEN="${HELMMISSIONS_SANDBOX:-$ROOT/broken}"
-SOLUTION="${HELMMISSIONS_SOLUTION:-$ROOT/solution}"
+hm_info "Checking for volumes left behind in $NS..."
+kubectl get pvc exports-scratch -n "$NS" >/dev/null 2>&1 && hm_fail "PVC exports-scratch from the earlier uninstall is still in namespace $NS"
+hm_ok "No stale scratch volume"
 
-echo "🔍 Comparing fixed chart to reference solution..."
-if ! diff -ru --exclude='Chart.lock' "$SOLUTION" "$BROKEN" >/tmp/helmissions-diff.txt 2>&1; then
-  echo "❌ The chart in broken/ still differs from the expected fixed chart in solution/."
-  exit 1
-fi
+hm_info "Running a full install/uninstall cycle in a throwaway namespace..."
+kubectl delete ns "$V" --wait=true --timeout=90s >/dev/null 2>&1 || true
+kubectl create ns "$V" >/dev/null 2>&1 || hm_fail "Cannot create verification namespace"
+# no --wait: a PVC owned by the chart stays Pending without a consumer (WaitForFirstConsumer)
+helm install exp-verify "$SANDBOX/export-batch" -n "$V" --timeout 90s >"$HM_TMP/i.txt" 2>&1 \
+  || hm_fail "A fresh install of the chart fails" "$HM_TMP/i.txt"
+kubectl get pvc exp-verify-scratch -n "$V" >/dev/null 2>&1 \
+  || hm_fail "The install no longer creates the scratch volume (PVC exp-verify-scratch)"
+hm_ok "Install creates the scratch volume"
+helm uninstall exp-verify -n "$V" --timeout 90s >"$HM_TMP/u.txt" 2>&1 \
+  || hm_fail "helm uninstall failed" "$HM_TMP/u.txt"
+for _ in $(seq 1 20); do
+  [ -z "$(kubectl get pvc -n "$V" -o name 2>/dev/null)" ] && break
+  sleep 2
+done
+left="$(kubectl get pvc -n "$V" -o name 2>/dev/null)"
+[ -z "$left" ] || hm_fail "After helm uninstall these PVCs are still there: $(echo $left)"
+hm_ok "Uninstall leaves no PVC behind"
 
-echo "🔍 Linting chart..."
-if ! helm lint "$BROKEN" >/tmp/helmissions-lint.txt 2>&1; then
-  echo "❌ helm lint failed"
-  cat /tmp/helmissions-lint.txt
-  exit 1
-fi
-helm dependency build "$BROKEN" >/tmp/helmissions-deps.txt 2>&1 || true
-
-echo "🔍 Installing hook-enabled release..."
-if ! helm upgrade --install "$RELEASE" "$BROKEN" -n "$NS" --create-namespace >/tmp/helmissions-hooks.txt 2>&1; then
-  echo "❌ Hook-driven install/upgrade failed"
-  cat /tmp/helmissions-hooks.txt
-  exit 1
-fi
-RENDERED="$(helm template "$RELEASE" "$BROKEN" -n "$NS")"
-if [[ "$RENDERED" != *"helm.sh/hook"* ]]; then
-  echo "❌ No hook annotations found in rendered manifests"
-  exit 1
-fi
-
-DEPLOY="$(kubectl get deploy -n "$NS" -l app.kubernetes.io/instance="$RELEASE" -o jsonpath='{.items[0].metadata.name}' 2>/dev/null || true)"
-if [[ -n "$DEPLOY" ]]; then
-  kubectl rollout status "deployment/$DEPLOY" -n "$NS" --timeout=60s >/tmp/helmissions-rollout.txt 2>&1 || {
-    echo "❌ Deployment did not become ready"
-    cat /tmp/helmissions-rollout.txt
-    exit 1
-  }
-fi
-
-echo "✅ Level complete! Validation matched the behavior this mission is teaching."
+hm_pass "Uninstall cleans up after itself."

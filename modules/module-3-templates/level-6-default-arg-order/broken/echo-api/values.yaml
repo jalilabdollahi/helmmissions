@@ -1,0 +1,17 @@
+replicaCount: 2
+
+image:
+  repository: traefik/whoami
+  # Pinned by the release manager. Leave empty to follow the chart's appVersion.
+  tag: v1.10
+  pullPolicy: IfNotPresent
+
+service:
+  port: 80
+
+resources:
+  requests:
+    cpu: 10m
+    memory: 16Mi
+  limits:
+    memory: 48Mi

@@ -1,0 +1,4 @@
+Compare what changed between the chart revisions:
+  helm get manifest tsdb -n helmissions | grep -B3 -A6 volumeClaimTemplates
+  helm template tsdb ./timeseries-db | grep -A6 volumeClaimTemplates
+The error names the one StatefulSet field Kubernetes will not let you update.

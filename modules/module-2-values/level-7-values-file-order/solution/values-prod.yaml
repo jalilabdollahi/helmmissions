@@ -1,0 +1,3 @@
+# Production overrides: real capacity, quiet logs
+replicaCount: 3
+logLevel: warn

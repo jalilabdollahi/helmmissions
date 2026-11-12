@@ -1,0 +1,4 @@
+Ask Helm what the release really contains, and compare it with what the template file should produce:
+  helm get manifest status -n helmissions
+  kubectl get all -n helmissions
+Count the objects, and read the manifest section for templates/app.yaml carefully.

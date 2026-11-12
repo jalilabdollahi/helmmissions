@@ -1,0 +1,3 @@
+For OCI dependencies Helm builds the reference itself: `<repository>/<name>:<version>`. The `repository` must stop
+at the registry path that contains the chart; the chart's own name is appended from the dependency's `name:`.
+Our `repository` already ends with the chart name, so Helm asks for `.../seat-cache/seat-cache`.

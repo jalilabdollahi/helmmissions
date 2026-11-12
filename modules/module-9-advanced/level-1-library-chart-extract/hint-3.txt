@@ -1,0 +1,5 @@
+After editing Chart.yaml, copy the library into each chart's charts/ folder:
+  helm dependency update ./ledger-api
+  helm dependency update ./ledger-worker
+Then `helm upgrade` both releases. Keep the selector labels identical to what is deployed (name + instance),
+and delete the old per-chart _helpers.tpl so there is only one definition left.

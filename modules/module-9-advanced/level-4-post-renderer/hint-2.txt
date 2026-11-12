@@ -1,0 +1,3 @@
+The script copies the kustomization next to the manifests it received on stdin and runs `kubectl kustomize`
+on that directory. Compare the file name the kustomization lists under `resources:` with the file name the
+script writes the incoming manifests to.

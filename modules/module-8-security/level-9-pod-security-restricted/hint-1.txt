@@ -1,0 +1,4 @@
+The Deployment exists, the pods do not. The reason is in the ReplicaSet events:
+  kubectl describe rs -n helmissions
+  kubectl get events -n helmissions --sort-by=.lastTimestamp
+The namespace labels show the policy: kubectl get ns helmissions --show-labels

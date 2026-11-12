@@ -1,0 +1,6 @@
+apiVersion: v2
+name: search-indexer
+description: Background indexer for the product search cluster
+type: application
+version: 0.9.0
+appVersion: "1.27"

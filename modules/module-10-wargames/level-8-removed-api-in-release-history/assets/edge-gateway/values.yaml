@@ -1,0 +1,6 @@
+replicaCount: 2
+rateLimit: 150
+autoscaling:
+  minReplicas: 2
+  maxReplicas: 4
+  targetCPU: 80

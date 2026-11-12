@@ -1,45 +1,20 @@
 #!/bin/bash
-set -euo pipefail
+set -uo pipefail
+source "$HM_LIB"
 
-RELEASE="helmissions-app"
-NS="helmissions"
-ROOT="$(cd "$(dirname "$0")" && pwd)"
-BROKEN="${HELMMISSIONS_SANDBOX:-$ROOT/broken}"
-SOLUTION="${HELMMISSIONS_SOLUTION:-$ROOT/solution}"
+hm_info "Checking the release..."
+hm_require_deployed quotes-api
+desc="$(hm_release_description quotes-api)"
+case "$desc" in
+  Rollback*) hm_ok "Newest revision is a rollback record ($desc)" ;;
+  *) hm_fail "The newest revision's description is '$desc' - the release was moved forward, not returned to an earlier revision" ;;
+esac
 
-echo "🔍 Linting chart..."
-if ! helm lint "$BROKEN" >/tmp/helmissions-lint.txt 2>&1; then
-  echo "❌ helm lint failed"
-  cat /tmp/helmissions-lint.txt
-  exit 1
-fi
-helm dependency build "$BROKEN" >/tmp/helmissions-deps.txt 2>&1 || true
+hm_info "Checking the workload..."
+img="$(hm_jsonpath deployment/quotes-api '{.spec.template.spec.containers[0].image}')"
+[ "$img" = "traefik/whoami:v1.10" ] || hm_fail "Deployment quotes-api runs image '$img', not the image from before the bad upgrade"
+hm_wait_rollout deployment/quotes-api "$NS" 90s
+[ "$(hm_endpoints_count quotes-api)" -ge 1 ] || hm_fail "Service quotes-api has no ready endpoints"
+hm_http_check http://quotes-api >"$HM_TMP/body.txt" || hm_fail "http://quotes-api does not answer"
 
-echo "🔍 Checking rollback history..."
-STATUS="$(helm status "$RELEASE" -n "$NS" -o json 2>/dev/null | jq -r '.info.status // empty')"
-if [[ "$STATUS" != "deployed" ]]; then
-  echo "❌ Release is not deployed after rollback/recovery"
-  exit 1
-fi
-LATEST_DESC="$(helm history "$RELEASE" -n "$NS" -o json 2>/dev/null | jq -r '.[-1].description // ""')"
-if [[ "$LATEST_DESC" != *"Rollback"* && "$LATEST_DESC" != *"rollback"* && "$LATEST_DESC" != *"Upgrade"* ]]; then
-  echo "❌ Expected the latest history entry to show rollback or recovery activity"
-  exit 1
-fi
-
-IMAGE="$(kubectl get deploy -n "$NS" -l app.kubernetes.io/instance="$RELEASE" -o jsonpath='{.items[0].spec.template.spec.containers[0].image}' 2>/dev/null || true)"
-if [[ "$IMAGE" == *"latestt"* ]]; then
-  echo "❌ Rollback did not restore the good image"
-  exit 1
-fi
-
-DEPLOY="$(kubectl get deploy -n "$NS" -l app.kubernetes.io/instance="$RELEASE" -o jsonpath='{.items[0].metadata.name}' 2>/dev/null || true)"
-if [[ -n "$DEPLOY" ]]; then
-  kubectl rollout status "deployment/$DEPLOY" -n "$NS" --timeout=60s >/tmp/helmissions-rollout.txt 2>&1 || {
-    echo "❌ Deployment did not become ready"
-    cat /tmp/helmissions-rollout.txt
-    exit 1
-  }
-fi
-
-echo "✅ Level complete! Validation matched the behavior this mission is teaching."
+hm_pass "quotes-api is back on its last good revision."

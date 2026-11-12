@@ -1,0 +1,3 @@
+Helm validates values against a JSON Schema file named `values.schema.json` in the chart root, on install, upgrade, template and lint.
+By default JSON Schema allows extra properties; each object that should be closed needs `"additionalProperties": false`, and that
+applies to nested objects separately.

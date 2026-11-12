@@ -1,0 +1,4 @@
+Find out where `mq-defaults` comes from:
+  helm template invoice-mailer ./invoice-mailer | grep -B2 -A6 mq-defaults
+The `# Source:` comment above it names the file. Then look at how mqlib is declared:
+  helm show chart ./mqlib

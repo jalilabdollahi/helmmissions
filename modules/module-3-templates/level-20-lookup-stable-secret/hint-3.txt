@@ -1,0 +1,6 @@
+Sketch for templates/secret.yaml:
+  {{- $existing := lookup "v1" "Secret" .Release.Namespace (printf "%s-credentials" .Release.Name) }}
+  {{- $password := randAlphaNum 24 }}
+  {{- if $existing }}{{- $password = index $existing.data "password" | b64dec }}{{- end }}
+and print `{{ $password | b64enc | quote }}` as data.password. `lookup` returns an empty map under `helm template`
+and on first install - handle that case. Upgrade once with the fixed chart: the registered password survives.

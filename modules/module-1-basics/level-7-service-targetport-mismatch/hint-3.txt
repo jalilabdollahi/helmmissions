@@ -1,0 +1,3 @@
+Set service.targetPort in inventory/values.yaml to the container's port (80, or its name `http`) and
+upgrade the release:
+  helm upgrade inventory ./inventory -n helmissions

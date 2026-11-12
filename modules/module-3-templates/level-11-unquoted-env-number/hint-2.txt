@@ -1,0 +1,3 @@
+Environment variable values must be YAML strings. The template prints `.Values.listenPort` as bare text, so the
+rendered line is `value: 2525`, which YAML reads as a number. Compare with how the neighbouring variable
+(WHOAMI_NAME) is written. Changing values.yaml does not help - the problem is how the template prints it.

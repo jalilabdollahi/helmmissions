@@ -1,0 +1,21 @@
+name: Verify Before You Trust
+description: |
+  Policy PCI-7 says the payments gateway may only be deployed from a chart signed with the release key. The deploy
+  script already asks Helm to verify, and it stops the pipeline:
+    $ ./deploy.sh
+    Error: could not load provenance file dist/payments-gateway-1.0.0.tgz.prov: stat ...: no such file or directory
+  Nothing is installed. The signing key pair is in `keys/` (the secret key has no passphrase). Skipping
+  verification is not an option: the release has to be provably the artifact that the key holder signed.
+objective: |
+  A packaged `payments-gateway` 1.0.0 chart and its `.prov` provenance file exist in your workspace (`dist/`), and
+  `helm verify` accepts them with the trusted release key. Release `payments-gateway` in namespace `helmissions` is
+  deployed from that signed package (deployed after it was signed) and its 2 pods are Ready.
+xp: 350
+difficulty: advanced
+expected_time: 20m
+concepts:
+  - chart provenance
+  - helm package --sign
+  - helm verify
+  - helm install --verify
+  - GPG keyrings

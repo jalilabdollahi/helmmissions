@@ -1,0 +1,18 @@
+name: Blocked By A Hook
+description: |
+  The first deploy of `ledger-api` never gets as far as creating the Deployment. The release is stuck in `failed`:
+    Error: INSTALLATION FAILED: failed pre-install: resource Job/helmissions/ledger-api-migrate not ready.
+    status: Failed, message: Job Failed. failed: 1/1
+  The chart runs a database migration Job before anything else is installed, and `kubectl get pods -n helmissions`
+  shows that Job's pod in `Error`. The chart is in your workspace under `ledger-api/`.
+objective: |
+  Release `ledger-api` in namespace `helmissions` is `deployed` with 1 ready pod, and the pre-install migration
+  hook actually ran and completed successfully (it is still a hook of the release, not removed or skipped).
+xp: 250
+difficulty: intermediate
+expected_time: 10m
+concepts:
+  - pre-install hooks
+  - hook Jobs
+  - hook failure blocks the release
+  - kubectl logs

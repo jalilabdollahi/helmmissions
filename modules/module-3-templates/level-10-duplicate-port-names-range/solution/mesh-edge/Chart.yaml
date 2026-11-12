@@ -1,0 +1,6 @@
+apiVersion: v2
+name: mesh-edge
+description: Edge proxy exposing application, admin and metrics ports
+type: application
+version: 0.7.0
+appVersion: "v1.10"

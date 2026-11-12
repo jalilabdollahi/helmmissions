@@ -1,0 +1,3 @@
+Look at the credential that actually reached the cluster, and compare it with values.yaml:
+  kubectl get secret ledger-api-db -n helmissions -o jsonpath='{.data.DB_PASSWORD}' | base64 -d
+  kubectl logs deploy/ledger-api -n helmissions -c auth-check

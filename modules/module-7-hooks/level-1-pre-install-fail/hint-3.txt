@@ -1,1 +1,0 @@
-Concrete direction: Fix DB host in hook Job spec. When you think you have it, verify the result the same way the mission describes: Hook succeeds, release deploys

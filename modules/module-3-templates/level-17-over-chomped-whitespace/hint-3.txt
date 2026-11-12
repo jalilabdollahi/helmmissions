@@ -1,0 +1,3 @@
+templates/deployment.yaml: the line `replicas: {{ .Values.replicaCount -}}` has a right-hand trim marker that eats the
+newline and the indentation of the next line. Use plain `}}` there (keep `{{-` only where you want to join with the
+line above). Then: helm install thumbs ./thumbnailer -n helmissions

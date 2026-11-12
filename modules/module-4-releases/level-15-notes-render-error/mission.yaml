@@ -1,0 +1,17 @@
+name: Broken NOTES.txt
+description: |
+  A trivial chart, `status-page`, refuses to install even though the Deployment and Service templates look fine.
+  The error points at a file that is not even a Kubernetes manifest:
+    Error: INSTALLATION FAILED: template: status-page/templates/NOTES.txt:4:23: executing
+    "status-page/templates/NOTES.txt" at <.Values.ingress.host>: nil pointer evaluating interface {}.host
+  Nothing is created in the cluster. The chart is in your workspace under `status-page/`.
+objective: |
+  Release `status-page` is `deployed` in namespace `helmissions` with a Ready pod, and `helm get notes status-page`
+  prints the post-install notes including an `http://` URL for the page.
+xp: 150
+difficulty: beginner
+expected_time: 10m
+concepts:
+  - NOTES.txt
+  - nil pointer in templates
+  - helm get notes

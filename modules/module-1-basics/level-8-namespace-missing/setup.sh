@@ -1,13 +1,10 @@
 #!/bin/bash
 set -euo pipefail
+source "$HM_LIB"
 
-NS="helmissions"
-RELEASE="helmissions-app"
-ROOT="$(cd "$(dirname "$0")" && pwd)"
-
-kubectl create namespace "$NS" --dry-run=client -o yaml | kubectl apply -f - >/dev/null
-helm uninstall "$RELEASE" -n "$NS" >/dev/null 2>&1 || true
-kubectl delete all --all -n "$NS" >/dev/null 2>&1 || true
-
-helm uninstall "$RELEASE" -n helmissions-extra >/dev/null 2>&1 || true
-kubectl delete namespace helmissions-extra >/dev/null 2>&1 || true
+# Make sure the staging namespace really does not exist (a previous run may have left it terminating).
+kubectl delete namespace helmissions-staging --ignore-not-found --wait=true >/dev/null 2>&1 || true
+if helm install metrics-proxy "$SANDBOX/metrics-proxy" -n helmissions-staging >"$HM_TMP/install.txt" 2>&1; then
+  echo "setup: install succeeded - scenario is not broken"; exit 1
+fi
+grep -q 'namespaces "helmissions-staging" not found' "$HM_TMP/install.txt" || { cat "$HM_TMP/install.txt"; exit 1; }

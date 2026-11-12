@@ -1,0 +1,19 @@
+name: A Subchart's Hook Blocks Everything
+description: |
+  The first release of the `checkout` chart never completes. The `schema-migrator` subchart applies database
+  migrations in a pre-install hook, and the install aborts before a single application object is created:
+    Error: INSTALLATION FAILED: failed pre-install: resource Job/helmissions/checkout-schema-migrator-migrate
+    not ready. status: Failed, message: Job Failed. failed: 1/1
+  Release `checkout` is now recorded as `failed`. The application chart and the migrator subchart are in your workspace.
+objective: |
+  Release `checkout` is `deployed` in namespace `helmissions` (chart 6.2.0) and `checkout-api` is Ready. The migration
+  hook ran as part of this release and finished successfully against the same database host the API uses
+  (Job `checkout-schema-migrator-migrate` completed and logged "migrations applied"). Skipping the hooks does not count.
+xp: 350
+difficulty: advanced
+expected_time: 20m
+concepts:
+  - subchart hooks
+  - hook failure blocks the release
+  - passing values to a subchart
+  - kubectl logs job

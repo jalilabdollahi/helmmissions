@@ -1,47 +1,43 @@
 #!/bin/bash
-set -euo pipefail
+set -uo pipefail
+source "$HM_LIB"
 
-RELEASE="helmissions-app"
-NS="helmissions"
-ROOT="$(cd "$(dirname "$0")" && pwd)"
-BROKEN="${HELMMISSIONS_SANDBOX:-$ROOT/broken}"
-SOLUTION="${HELMMISSIONS_SOLUTION:-$ROOT/solution}"
+env_of() { jq -r --arg n "$1" '[.[]|select(.kind=="Deployment")][0].spec.template.spec.containers[0].env[]?|select(.name==$n).value'; }
 
-echo "🔍 Comparing fixed chart to reference solution..."
-if ! diff -ru --exclude='Chart.lock' "$SOLUTION" "$BROKEN" >/tmp/helmissions-diff.txt 2>&1; then
-  echo "❌ The chart in broken/ still differs from the expected fixed chart in solution/."
-  exit 1
-fi
+hm_info "Checking the three releases..."
+for r in ledger-db ledger-api ledger-web; do
+  st="$(hm_release_status "$r")"
+  [ -n "$st" ] || hm_fail "Release '$r' does not exist in namespace $NS"
+  [ "$st" = "deployed" ] || hm_fail "Release '$r' is in state '$st'"
+done
+hm_ok "All three releases are deployed"
 
-echo "🔍 Linting chart..."
-if ! helm lint "$BROKEN" >/tmp/helmissions-lint.txt 2>&1; then
-  echo "❌ helm lint failed"
-  cat /tmp/helmissions-lint.txt
-  exit 1
-fi
-helm dependency build "$BROKEN" >/tmp/helmissions-deps.txt 2>&1 || true
+hm_info "Checking the database migration..."
+job_ok="$(kubectl get job ledger-db-migrate -n "$NS" -o jsonpath='{.status.succeeded}' 2>/dev/null || true)"
+[ "${job_ok:-0}" -ge 1 ] 2>/dev/null || hm_fail "The database migration job has not completed successfully"
+hm_ok "Migration job completed"
 
-echo "🔍 Installing or upgrading release..."
-if ! helm upgrade --install "$RELEASE" "$BROKEN" -n "$NS" --create-namespace >/tmp/helmissions-upgrade.txt 2>&1; then
-  echo "❌ helm upgrade --install failed"
-  cat /tmp/helmissions-upgrade.txt
-  exit 1
-fi
+hm_info "Checking the pods..."
+for app in ledger-db ledger-api ledger-web; do
+  hm_wait_rollout "deployment/$app" "$NS" 60s
+done
 
-echo "🔍 Verifying live release status..."
-STATUS="$(helm status "$RELEASE" -n "$NS" -o json 2>/dev/null | jq -r '.info.status // empty')"
-if [[ "$STATUS" != "deployed" ]]; then
-  echo "❌ Release not in deployed state (got: $STATUS)"
-  exit 1
-fi
+hm_info "Checking the workspace matches the cluster..."
+for pair in "ledger-api:DB_HOST" "ledger-web:API_UPSTREAM"; do
+  chart="${pair%%:*}"; var="${pair##*:}"
+  want="$(hm_render_json "$SANDBOX/$chart" | env_of "$var")" || want=""
+  have="$(hm_manifest_json "$chart" | env_of "$var")"
+  [ -n "$want" ] && [ "$want" = "$have" ] || hm_fail "$chart: what the workspace would deploy ('$want') differs from what is running ('$have')"
+done
+want="$(hm_render_json "$SANDBOX/ledger-db" | jq -r '[.[]|select(.kind=="Job")][0].spec.template.spec.containers[0].env[0].value')"
+[ "$want" = "v3" ] || hm_fail "ledger-db in the workspace would run migration target '$want'"
+hm_ok "Workspace and cluster agree"
 
-DEPLOY="$(kubectl get deploy -n "$NS" -l app.kubernetes.io/instance="$RELEASE" -o jsonpath='{.items[0].metadata.name}' 2>/dev/null || true)"
-if [[ -n "$DEPLOY" ]]; then
-  kubectl rollout status "deployment/$DEPLOY" -n "$NS" --timeout=60s >/tmp/helmissions-rollout.txt 2>&1 || {
-    echo "❌ Deployment did not become ready"
-    cat /tmp/helmissions-rollout.txt
-    exit 1
-  }
-fi
-
-echo "✅ Level complete! Validation matched the behavior this mission is teaching."
+hm_info "Checking the stack end to end..."
+for _ in 1 2 3; do
+  hm_http_check http://ledger-web/cgi-bin/balance >"$HM_TMP/b.txt" 2>/dev/null
+  grep -q "web ok -> api ok -> db pong schema=v3" "$HM_TMP/b.txt" && break
+  sleep 4
+done
+grep -q "web ok -> api ok -> db pong schema=v3" "$HM_TMP/b.txt" || hm_fail "The health page does not report a healthy stack" "$HM_TMP/b.txt"
+hm_pass "Three tiers are back, in order."

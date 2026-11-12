@@ -1,0 +1,4 @@
+The install failed before any workload existed, so look at the hook, not the Deployment:
+  kubectl get jobs,pods -n helmissions
+  kubectl logs job/ledger-api-migrate -n helmissions
+The Job's own log tells you what it was unhappy about.

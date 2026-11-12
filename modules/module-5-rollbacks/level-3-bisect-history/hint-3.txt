@@ -1,0 +1,2 @@
+Revision 4 is the newest revision with working pods, a working probe, insurance on and rate 42.
+  helm rollback freight-quote 4 -n helmissions --wait

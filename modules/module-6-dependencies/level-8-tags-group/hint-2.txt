@@ -1,0 +1,3 @@
+A dependency is switched by the tags it lists: `tags.<name>: false` in the values disables the dependencies that
+carry that tag. Two components list `monitoring`, the third lists a tag that no value ever mentions, and a tag
+that no value mentions leaves the dependency enabled. Do not "fix" it by adding more switches in values.yaml.

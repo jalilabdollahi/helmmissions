@@ -1,0 +1,5 @@
+# Production overrides for checkout (used by ci/deploy.sh)
+# PR #4412 "tune payment client" - merged Friday 16:40
+payment:
+  provider: stripe-v2
+  timeoutMs: 300

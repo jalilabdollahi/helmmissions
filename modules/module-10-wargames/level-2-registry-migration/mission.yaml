@@ -1,0 +1,22 @@
+name: "Registry Moved"
+description: |
+  The company switched off `registry.old.internal:5000` at 01:00 and copied every shop image to the new registry
+  (see `MIGRATION.md`). After the cut-over, `deploy-all.sh` was run again and the shop is degraded: some pods are in
+  `ErrImagePull` / `ImagePullBackOff`, and even after a first round of fixes the picture does not look completely
+  clean. Three releases are involved (`shop-cart`, `shop-search`, `shop-media`); `shop-search` brings a vendored
+  subchart.
+objective: |
+  Releases `shop-cart`, `shop-search` and `shop-media` are `deployed` in namespace `helmissions`, every pod (including
+  the search `indexer` subchart pods) is Running and Ready, and every container image comes from `localhost:5001`;
+  nothing references `registry.old.internal` any more. The services answer on `http://shop-cart`, `http://shop-search`
+  and `http://shop-media`.
+  What the workspace's `values/` files and charts
+  render must use the new registry too, so the next `deploy-all.sh` run stays healthy.
+xp: 450
+difficulty: expert
+expected_time: 25m
+concepts:
+  - image registries
+  - global values
+  - subchart values
+  - image pull errors

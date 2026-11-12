@@ -1,27 +1,39 @@
-# CRD First
+# No Matches For Kind
 
-## Situation
-Chart installs CRD and CR in same release — CR fails because CRD not ready yet. In this mission the broken state is intentional, and the point is not just to make Helm stop complaining. The real lesson is learning how Helm reports failure, where chart defects surface, and how release state and rendered manifests can drift apart when a deployment goes wrong.
+## What broke
+The chart placed a CustomResourceDefinition and an instance of that custom resource side by side in
+`templates/`. On a cluster where the CRD does not exist yet, Helm cannot even map the kind `BackupSchedule` to an
+API endpoint, so the install aborts before creating anything: `no matches for kind ... ensure CRDs are installed first`.
 
-## The Fix
-Primary action: Move CRD to crds/ directory (installed before templates)
+## Why Helm behaves this way
+Helm renders all templates, sorts them by kind and then builds the Kubernetes objects for the whole release in one
+step, discovering each kind through the API server's REST mapping. A CRD that is part of the same batch cannot
+have been registered at that time. The `crds/` directory exists to solve this: its files are applied first, Helm
+waits until they are Established, and only then are templates rendered and installed. The trade-offs are
+deliberate: files in `crds/` are not templated, are installed only on `helm install` (never upgraded or deleted by Helm),
+and are not part of the release manifest, because CRD changes can destroy data.
 
-A strong solution should leave both the chart and the cluster in a healthy state. In Helm that usually means checking the source of truth first, fixing the right file or release action, and then confirming that the next install, upgrade, rollback, or hook execution behaves the way you intended.
+## The fix
+Move the CRD to `backup-scheduler/crds/`. Alternatives: install the CRD separately (kubectl, a separate chart
+or a pipeline step) and ship only the custom resources in the chart, or use a hook for one-time creation.
 
-## What To Validate
-CRD installed first, CR applies successfully
+## In real life
+Operators (cert-manager, Prometheus Operator, Argo, Crossplane) ship CRDs separately for exactly this reason,
+and upgrading them is its own procedure, since `helm upgrade` never touches `crds/`. Charts that both define and use a CRD
+are common in internal platforms; the first install on a fresh cluster is the case that gets forgotten
+in testing because the CRD already exists in staging.
 
-Helpful checks for this level:
-- `helm status helmissions-app -n helmissions`
-- `helm history helmissions-app -n helmissions`
-- `kubectl get all -n helmissions`
+## Commands worth remembering
+- `kubectl get crd | grep <group>` — is the kind registered?
+- `kubectl api-resources --api-group=<group>` — what the API server knows
+- `helm install --skip-crds` — install without the `crds/` directory
+- `helm show crds <chart>` — print the CRDs a chart would install
 
-## Why It Matters
-Review how the fix changed the Helm release for "CRD First".
+## Common mistakes
+- Adding `{{ }}` templating to files in `crds/` — they are not rendered.
+- Expecting `helm upgrade` to update a CRD that lives in `crds/` (see the CRD upgrade level in the Rollbacks module).
+- Removing the custom resource from the chart to make the error go away.
 
-This matters in release management work because Helm failures are rarely just syntax errors. In real teams they show up during CI/CD runs, emergency rollbacks, environment promotion, or cluster changes that expose assumptions hidden in a chart. If you only patch the symptom in-cluster, the same bug usually comes back on the next deployment.
-
-A good operator learns the habit behind the fix: inspect the rendered output, understand the release history, and then make the smallest durable change that restores the expected behavior. That habit scales from a single broken values file all the way up to multi-service incident response.
-
-## Concepts
-crds/ directory, CRD install ordering, helm CRD handling
+## Helm 3 vs Helm 4
+The error and the `crds/` behaviour are the same. Helm 4's wording of the REST-mapping error is unchanged;
+note that nothing is created (no failed release record) because the failure happens before the release is applied.

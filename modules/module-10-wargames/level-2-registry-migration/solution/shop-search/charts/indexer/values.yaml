@@ -1,0 +1,4 @@
+replicaCount: 1
+image:
+  repository: indexer
+  tag: "1.8"

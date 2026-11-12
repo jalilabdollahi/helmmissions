@@ -1,0 +1,5 @@
+apiVersion: v2
+name: warehouse-stock
+description: Warehouse stock level synchroniser
+version: 1.0.0
+appVersion: "1.0"

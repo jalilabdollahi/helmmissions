@@ -1,0 +1,4 @@
+Re-apply the release through Helm instead of recreating the Service yourself:
+  helm upgrade sms-gateway ./sms-gateway -n helmissions
+(`helm rollback` to a revision that contained the Service works too.) Check the Service afterwards for the
+`meta.helm.sh/release-name` annotation.

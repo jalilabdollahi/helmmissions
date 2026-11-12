@@ -1,0 +1,19 @@
+name: Values Not Reaching The Subchart
+description: |
+  The photo desk asked for a beefier image resizer for election night: 3 replicas, photos capped at 800 px and JPEG
+  quality 70. An engineer put those numbers in `newsroom/values.yaml` and upgraded, but `helm upgrade` reported
+  success and `kubectl get deploy` still shows one resizer pod with the old defaults. No error anywhere.
+  The `newsroom` chart and its `image-resizer` subchart are in your workspace; release `newsroom` is live.
+objective: |
+  Release `newsroom` in namespace `helmissions` has been upgraded (a new revision after the engineer's attempt) and its manifest asks for
+  Deployment `newsroom-image-resizer` with 3 replicas and the environment MAX_WIDTH=800 and JPEG_QUALITY=70.
+  All 3 resizer pods are Ready, and so is `newsroom-web`. Live `kubectl` edits do not count: the release itself must
+  carry the settings.
+xp: 250
+difficulty: intermediate
+expected_time: 10m
+concepts:
+  - subchart value scoping
+  - values keyed by dependency name
+  - helm get values --all
+  - helm template --debug

@@ -1,0 +1,12 @@
+#!/bin/bash
+set -euo pipefail
+source "$HM_LIB"
+
+helm template relay "$SANDBOX/smtp-relay" -n "$NS" >/dev/null || { echo "setup: chart should render client-side"; exit 1; }
+if helm install hm-probe "$SANDBOX/smtp-relay" -n "$NS" >"$HM_TMP/install.txt" 2>&1; then
+  helm uninstall hm-probe -n "$NS" >/dev/null 2>&1 || true
+  echo "setup: the broken chart installed successfully - scenario is not broken"
+  exit 1
+fi
+helm uninstall hm-probe -n "$NS" >/dev/null 2>&1 || true
+grep -qE "expected string|cannot unmarshal number" "$HM_TMP/install.txt" || { cat "$HM_TMP/install.txt"; exit 1; }

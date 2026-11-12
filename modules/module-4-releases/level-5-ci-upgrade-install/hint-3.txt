@@ -1,0 +1,3 @@
+Change ci/deploy.sh to use:
+  helm upgrade --install shipment-tracker "$CHART_DIR" --namespace "$NAMESPACE" ...
+then run `bash ci/deploy.sh` from the workspace root.

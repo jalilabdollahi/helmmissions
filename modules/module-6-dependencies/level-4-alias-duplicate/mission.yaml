@@ -1,0 +1,20 @@
+name: Same Chart Twice
+description: |
+  The inventory API must talk to a read-write key-value store and a read-only replica, so the team listed the `kvstore`
+  subchart twice in `inventory/Chart.yaml` and wrote one settings block per instance in `values.yaml`. Nothing
+  installs any more:
+    Error: INSTALLATION FAILED: validation: more than one dependency with name or alias "kvstore"
+  Both the `inventory` chart and the `kvstore` chart are in your workspace.
+objective: |
+  Release `inventory` is `deployed` in namespace `helmissions` from the workspace chart (1.4.0) and contains two
+  independent instances of the kvstore subchart: Deployments `inventory-primary` (KV_MODE=readwrite,
+  KV_MAX_MEMORY_MB=64) and `inventory-replica` (KV_MODE=readonly, KV_MAX_MEMORY_MB=32), plus the `inventory-api`
+  Deployment, all with Ready pods and Services with endpoints. `Chart.yaml` must keep depending on `kvstore` twice.
+xp: 300
+difficulty: advanced
+expected_time: 15m
+concepts:
+  - dependency alias
+  - multiple instances of one subchart
+  - per-instance values
+  - .Chart.Name in subcharts

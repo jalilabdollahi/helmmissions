@@ -1,1 +1,0 @@
-The fix revolves around helm lint, Chart.yaml required fields, template naming. Compare the current state with the objective: Add description, rename template file If the level is stateful, inspect the existing release history before reinstalling anything.

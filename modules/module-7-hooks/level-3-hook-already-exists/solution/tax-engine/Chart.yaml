@@ -1,0 +1,5 @@
+apiVersion: v2
+name: tax-engine
+description: Sales-tax calculation service with a pre-upgrade rate-table check
+version: 1.6.0
+appVersion: "1.6"

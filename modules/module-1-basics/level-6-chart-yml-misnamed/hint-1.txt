@@ -1,0 +1,3 @@
+Look at the exact file name in the error, then list the chart folder:
+  ls -la status-page
+Compare the two names character by character.

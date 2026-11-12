@@ -1,0 +1,17 @@
+apiVersion: v1
+name: hm-audit
+type: cli/v1
+runtime: subprocess
+version: 0.2.0
+config:
+  usage: "hm-audit RELEASE [-n NAMESPACE]"
+  shortHelp: "List containers without resource limits"
+  longHelp: |
+    Audits the live Deployments of a release and reports containers that
+    run without resource limits.
+runtimeConfig:
+  platformCommand:
+    - command: "${HELM_PLUGIN_DIR}/bin/audit.sh"
+  platformHooks:
+    install:
+      - command: "${HELM_PLUGIN_DIR}/hooks/install-rules.sh"

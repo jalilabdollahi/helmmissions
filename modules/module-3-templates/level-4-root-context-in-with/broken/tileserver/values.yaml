@@ -1,0 +1,21 @@
+replicaCount: 1
+
+image:
+  repository: traefik/whoami
+  tag: v1.10
+  pullPolicy: IfNotPresent
+
+# Extra labels the platform team wants on every pod (cost allocation, ownership).
+podLabels:
+  team: maps
+  cost-center: cc-4412
+
+tileZoom: "14"
+port: 8081
+
+resources:
+  requests:
+    cpu: 10m
+    memory: 16Mi
+  limits:
+    memory: 48Mi

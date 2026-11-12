@@ -1,1 +1,0 @@
-The fix revolves around nested values, --set path syntax, dot notation. Compare the current state with the objective: Change --set to `--set database.host=db` (remove extra `config.` prefix) If the level is stateful, inspect the existing release history before reinstalling anything.

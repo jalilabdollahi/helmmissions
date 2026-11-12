@@ -1,0 +1,6 @@
+environment: prod
+replicaCount: 2
+payments:
+  mode: live
+database:
+  host: billing-db.helmissions

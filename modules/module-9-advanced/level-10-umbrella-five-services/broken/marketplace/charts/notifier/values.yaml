@@ -1,0 +1,8 @@
+replicaCount: 1
+image:
+  repository: library/busybox
+  tag: "1.36"
+channel: email
+resources:
+  requests: {cpu: 5m, memory: 8Mi}
+  limits: {cpu: 20m, memory: 32Mi}

@@ -1,0 +1,3 @@
+Hooks of the same phase run in ascending order of `helm.sh/hook-weight` (lowest first, negative numbers allowed).
+Check the weights of `db-init-job.yaml` and `db-migrate-job.yaml`: the one that has to run first currently has
+the higher number, so it runs second.

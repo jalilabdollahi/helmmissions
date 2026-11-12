@@ -1,0 +1,3 @@
+A hook Job is not part of the release manifest: Helm creates it when the hook phase runs and only removes it
+when the hook-delete-policy says so. This chart's policy deletes the Job only if it fails, so the successful Job
+of the previous deploy is still there when the next upgrade tries to create the same name again.

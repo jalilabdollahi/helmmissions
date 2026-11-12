@@ -1,0 +1,4 @@
+Compare what the script emits with what a cluster-aware command emits:
+  ./render.sh && grep -c ServiceMonitor rendered/prod.yaml
+  helm template probe ./checkout --dry-run=server -f env/prod.yaml | grep -B2 -A12 ServiceMonitor
+Then read templates/servicemonitor.yaml: what condition decides whether the object is rendered?

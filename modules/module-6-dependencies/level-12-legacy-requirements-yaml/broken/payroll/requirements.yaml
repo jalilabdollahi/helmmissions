@@ -1,0 +1,5 @@
+# Helm 2 style dependency list (kept from before the chart moved to apiVersion v2)
+dependencies:
+  - name: tax-tables
+    version: 2.1.0
+    repository: file://../tax-tables

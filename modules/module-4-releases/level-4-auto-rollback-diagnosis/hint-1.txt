@@ -1,0 +1,3 @@
+The release looks healthy, so read its history for what happened in the middle:
+  helm history telemetry-gw -n helmissions
+The DESCRIPTION of the `failed` revision holds the real error.

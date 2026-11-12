@@ -1,27 +1,22 @@
 #!/bin/bash
-set -euo pipefail
+set -uo pipefail
+source "$HM_LIB"
 
-RELEASE="helmissions-app"
-NS="helmissions"
-ROOT="$(cd "$(dirname "$0")" && pwd)"
-BROKEN="${HELMMISSIONS_SANDBOX:-$ROOT/broken}"
-SOLUTION="${HELMMISSIONS_SOLUTION:-$ROOT/solution}"
+TARGET="helmissions-staging"
 
-TARGET_NS="helmissions-extra"
-echo "🔍 Checking that the release was installed into the missing namespace..."
-STATUS="$(helm status "$RELEASE" -n "$TARGET_NS" -o json 2>/dev/null | jq -r '.info.status // empty')"
-if [[ "$STATUS" != "deployed" ]]; then
-  echo "❌ Expected release $RELEASE to be deployed in $TARGET_NS"
-  exit 1
+hm_info "Checking where the release landed..."
+if hm_release_exists metrics-proxy "$NS"; then
+  hm_fail "Release metrics-proxy was installed in '$NS' - the ticket asks for namespace '$TARGET'"
 fi
+kubectl get namespace "$TARGET" >/dev/null 2>&1 || hm_fail "Namespace '$TARGET' does not exist"
+hm_require_deployed metrics-proxy "$TARGET"
+chart="$(hm_release_chart metrics-proxy "$TARGET")"
+[ "$chart" = "metrics-proxy-0.9.0" ] || hm_fail "Release metrics-proxy runs chart '$chart', expected the chart from the workspace"
 
-DEPLOY="$(kubectl get deploy -n "${TARGET_NS:-$NS}" -l app.kubernetes.io/instance="${TARGET_RELEASE:-$RELEASE}" -o jsonpath='{.items[0].metadata.name}' 2>/dev/null || true)"
-if [[ -n "$DEPLOY" ]]; then
-  kubectl rollout status "deployment/$DEPLOY" -n "${TARGET_NS:-$NS}" --timeout=60s >/tmp/helmissions-rollout.txt 2>&1 || {
-    echo "❌ Deployment did not become ready"
-    cat /tmp/helmissions-rollout.txt
-    exit 1
-  }
-fi
+hm_info "Checking the workload in $TARGET..."
+hm_wait_rollout deployment/metrics-proxy "$TARGET" 90s
+[ "$(hm_endpoints_count metrics-proxy "$TARGET")" -ge 1 ] || hm_fail "Service metrics-proxy has no ready endpoints in $TARGET"
+n="$(kubectl get deploy -n "$NS" -o name 2>/dev/null | grep -c metrics-proxy || true)"
+[ "$n" = 0 ] || hm_fail "A stray metrics-proxy Deployment exists in '$NS'"
 
-echo "✅ Level complete! Validation matched the behavior this mission is teaching."
+hm_pass "metrics-proxy is running in $TARGET."

@@ -1,0 +1,3 @@
+# Host of the database to migrate. Must be provided by whoever uses this chart.
+database:
+  host: ""

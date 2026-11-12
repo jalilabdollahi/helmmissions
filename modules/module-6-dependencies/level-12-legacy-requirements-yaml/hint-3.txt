@@ -1,0 +1,2 @@
+Chart.yaml already has the complete list. Remove payroll/requirements.yaml from the chart, re-resolve with
+`helm dependency update ./payroll`, check `helm dependency list` shows both, then `helm upgrade payroll ./payroll`.

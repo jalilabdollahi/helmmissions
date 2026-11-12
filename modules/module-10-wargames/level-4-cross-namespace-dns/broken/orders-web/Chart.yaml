@@ -1,0 +1,6 @@
+apiVersion: v2
+name: orders-web
+description: Customer dashboard
+type: application
+version: 7.0.1
+appVersion: "7.0"

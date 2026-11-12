@@ -1,1 +1,3 @@
-The fix revolves around helm repo add, repository management, helm repo list. Compare the current state with the objective: `helm repo add bitnami https://charts.bitnami.com/bitnami` If the level is stateful, inspect the existing release history before reinstalling anything.
+`@name` in a dependency's `repository:` is not a URL, it is a reference to a repository registered on the
+machine running the command (`helm repo add <name> <url>`). The reference is resolved from your local repo
+configuration, which is why the chart works for the colleague who wrote it and fails here.

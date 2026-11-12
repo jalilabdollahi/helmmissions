@@ -1,0 +1,3 @@
+There is a helm subcommand that resolves the dependencies declared in Chart.yaml (here a file:// path),
+packages each one and stores it under storefront/charts/. Run it for ./storefront, check
+`helm dependency list ./storefront` says "ok", then install the chart as `storefront` in namespace helmissions.

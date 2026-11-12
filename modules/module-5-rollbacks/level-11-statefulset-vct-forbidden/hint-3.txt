@@ -1,0 +1,3 @@
+Restore the original `storage: 1Gi` in the chart values (or pass --set storage=1Gi), keep `retention: 14d`, and upgrade:
+  helm upgrade tsdb ./timeseries-db -n helmissions --wait
+Resize the volume later with a proper PVC expansion if you really need 2Gi.

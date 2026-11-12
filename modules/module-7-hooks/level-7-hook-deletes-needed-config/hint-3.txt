@@ -1,0 +1,3 @@
+The routing table is configuration the application needs permanently, so it must be a normal resource of the release.
+Remove the hook annotations from the ConfigMap (all three of them), then upgrade the release. Do not recreate the
+ConfigMap with kubectl.

@@ -1,1 +1,0 @@
-Concrete direction: Create library chart with shared helpers, add as dependency. When you think you have it, verify the result the same way the mission describes: All 3 charts use library helpers successfully

@@ -1,0 +1,3 @@
+The repository only has redis-lite 1.2.x releases. The constraint `^2.0.0` means ">=2.0.0 and <3.0.0", which no
+published version satisfies. The chart you depend on is not going to grow a 2.x line because of your constraint,
+so the constraint is what has to change.

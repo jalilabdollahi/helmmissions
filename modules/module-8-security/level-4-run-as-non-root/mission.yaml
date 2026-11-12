@@ -1,0 +1,19 @@
+name: Root Is Not Welcome
+description: |
+  The platform baseline says every pod must set `runAsNonRoot: true`, and the `status-page` chart already does.
+  Since it was deployed, both replicas are stuck:
+    kubectl get pods   ->   STATUS: CreateContainerConfigError
+    Error: container has runAsNonRoot and image will run as root (pod: "status-page-...", container web)
+  The Deployment exists, the Service has no endpoints, and the public status page is down.
+objective: |
+  Release `status-page` in namespace `helmissions` is deployed with 2 Ready pods behind its Service, which
+  answers HTTP. Every container still runs with `runAsNonRoot: true` and the processes inside really run as a
+  non-zero UID.
+xp: 250
+difficulty: intermediate
+expected_time: 10m
+concepts:
+  - runAsNonRoot
+  - securityContext
+  - unprivileged images
+  - privileged ports

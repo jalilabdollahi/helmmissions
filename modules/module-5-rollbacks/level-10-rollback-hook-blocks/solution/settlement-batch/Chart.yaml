@@ -1,0 +1,5 @@
+apiVersion: v2
+name: settlement-batch
+description: Nightly settlement batch runner for payment partners
+version: 5.1.0
+appVersion: "5.1"

@@ -1,1 +1,0 @@
-Concrete direction: `helm rollback <release> <revision>` to restore from kept history. When you think you have it, verify the result the same way the mission describes: Release back in deployed state

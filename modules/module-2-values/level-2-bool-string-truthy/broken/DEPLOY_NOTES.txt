@@ -1,0 +1,3 @@
+storefront - deployment notes
+  - behind the API gateway: there must be NO Ingress for this release
+  - deploy with:  helm upgrade --install storefront ./storefront -n helmissions

@@ -1,0 +1,4 @@
+Use `nindent 4` (indent with a leading newline) on its own line, like the ConfigMap does:
+  labels:
+    {{- include "ledger-recon.labels" . | nindent 4 }}
+Then:  helm install reconcile ./ledger-recon -n helmissions

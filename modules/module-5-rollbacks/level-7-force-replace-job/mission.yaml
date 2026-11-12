@@ -1,0 +1,18 @@
+name: Immutable Job Template
+description: |
+  The `catalog` 1.1.0 release ships a new seed dataset, so the chart bumps the seed Job's `SEED_VERSION`
+  from 1 to 2. The upgrade fails every time:
+    UPGRADE FAILED: ... Job.batch "catalog-seed" is invalid: spec.template: Invalid value: ... field is immutable
+  `helm history catalog -n helmissions` shows revision 2 as `failed`, and the API is still serving the old
+  catalog. The chart is in your workspace under `catalog-seed/`.
+objective: |
+  Release `catalog` in namespace `helmissions` is `deployed` from the 1.1.0 chart, the seed Job that is live
+  in the cluster runs with `SEED_VERSION=2` and has completed successfully, and the API is Ready.
+xp: 300
+difficulty: advanced
+expected_time: 15m
+concepts:
+  - immutable fields
+  - Jobs
+  - helm upgrade --force-replace
+  - resource naming

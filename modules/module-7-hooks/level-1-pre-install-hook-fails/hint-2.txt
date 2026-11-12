@@ -1,0 +1,3 @@
+The migration script refuses to start because it reads one environment variable name,
+while the Job template provides the database connection string under another name.
+Compare the `env:` block of templates/migrate-job.yaml with what the script checks for.

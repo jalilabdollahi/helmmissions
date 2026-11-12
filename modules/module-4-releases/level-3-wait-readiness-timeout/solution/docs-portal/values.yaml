@@ -1,0 +1,9 @@
+# 2.1: two replicas and a readiness probe so traffic only reaches pods that can serve pages
+replicaCount: 2
+image:
+  repository: nginx
+  tag: 1.27-alpine
+siteTitle: "Engineering Docs"
+readiness:
+  path: /
+  periodSeconds: 5

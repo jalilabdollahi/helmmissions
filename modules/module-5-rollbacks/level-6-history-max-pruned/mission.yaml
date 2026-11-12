@@ -1,0 +1,19 @@
+name: The Good Revision Is Gone
+description: |
+  `geo-lookup` answers every request with `503 {"error":"provider maps-v1-eu is retired"}`. Last week it
+  worked. The obvious move is `helm rollback geo-lookup 1`, but `helm history geo-lookup -n helmissions`
+  starts at revision 2 and the rollback fails because the revision does not exist. The pipeline's
+  `ci/deploy.sh` deploys with `--history-max 3`. The chart and the pipeline's values file are in your
+  workspace.
+objective: |
+  Release `geo-lookup` in namespace `helmissions` is deployed from the workspace chart and `GET /lookup`
+  answers `200` with `"provider":"maps-v2"`, `"ttl":300` and `"trace":false`. The values the pipeline deploys
+  with (`values-prod.yaml` + chart defaults) must render that same configuration.
+xp: 250
+difficulty: intermediate
+expected_time: 15m
+concepts:
+  - history-max
+  - revision pruning
+  - fix forward
+  - values files

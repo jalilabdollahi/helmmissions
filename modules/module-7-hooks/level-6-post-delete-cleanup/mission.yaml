@@ -1,13 +1,18 @@
-name: Leave No Trace
-description: Uninstalling the chart leaves orphaned PVCs — post-delete hook should
-  clean them.
-objective: Add post-delete hook Job that deletes PVCs
+name: Uninstall Leaves A Mess
+description: |
+  Platform engineering reports that `helm uninstall exports -n helmissions` finishes with "release uninstalled", but
+  `kubectl get pvc -n helmissions` still shows `exports-scratch`, a 64Mi staging volume. Nothing in the chart's
+  templates defines a PersistentVolumeClaim: a post-install Job creates it through the API when the release is installed, so Helm does not
+  know it exists. Every uninstall of every environment leaks one more volume. The chart is in your workspace under `export-batch/`.
+objective: |
+  Uninstalling a release of the `export-batch` chart removes the scratch volume it created: after a full install and
+  uninstall cycle no PVC of that release remains (this is checked in a throwaway namespace), and the stale
+  `exports-scratch` PVC already left behind in namespace `helmissions` is gone too. The scratch volume is still created on install.
 xp: 300
 difficulty: advanced
-expected_time: 20m
+expected_time: 15m
 concepts:
-- post-delete hook
-- cleanup hooks
-- PVC management
-module: module-7-hooks
-level: level-6-post-delete-cleanup
+  - post-delete hooks
+  - resources outside the release manifest
+  - hook ServiceAccounts
+  - helm uninstall

@@ -1,0 +1,8 @@
+replicaCount: 1
+
+image:
+  repository: nginxinc/nginx-unprivileged
+  tag: 1.27-alpine
+
+# Release train shown on the page and used by dashboards to group pods
+appVersionLabel: "1.10"

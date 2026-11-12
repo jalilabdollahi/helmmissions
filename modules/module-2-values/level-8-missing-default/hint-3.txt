@@ -1,0 +1,3 @@
+Use Sprig's `default` in fetcher/templates/configmap.yaml:
+  FETCH_TIMEOUT={{ .Values.http.timeout | default 30 }}
+then helm upgrade fetcher ./fetcher -n helmissions. An explicit --set http.timeout=45 must still win.

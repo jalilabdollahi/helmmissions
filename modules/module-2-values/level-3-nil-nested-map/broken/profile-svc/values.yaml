@@ -1,0 +1,9 @@
+replicaCount: 1
+logLevel: info
+
+image:
+  repository: traefik/whoami
+  tag: v1.10
+
+service:
+  port: 80

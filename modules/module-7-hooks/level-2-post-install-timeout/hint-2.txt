@@ -1,1 +1,0 @@
-The fix revolves around activeDeadlineSeconds, hook timeout, Job completion. Compare the current state with the objective: Add `activeDeadlineSeconds: 60` to Job spec If the level is stateful, inspect the existing release history before reinstalling anything.

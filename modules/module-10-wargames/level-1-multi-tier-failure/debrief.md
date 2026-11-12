@@ -1,27 +1,49 @@
-# Full Stack Down
+# Three Tiers Down
 
-## Situation
-3-tier app (frontend/backend/database) fails on install. Database hook fails, backend CrashLoops, frontend has wrong backend URL. In this mission the broken state is intentional, and the point is not just to make Helm stop complaining. The real lesson is learning how Helm reports failure, where chart defects surface, and how release state and rendered manifests can drift apart when a deployment goes wrong.
+## What broke
+Three independent faults, one in each tier, hid behind a single symptom ("the front end errors"). The database release
+never became healthy because its `pre-install` hook Job asked for a schema migration the release does not ship, so
+Helm marked the first install `failed` and created none of the database objects. The API pod was stuck in an init
+container that waits for a database host name (`ledger-db-primary`) that no Service has. The front end was healthy
+but called the API on port 80 while the API Service listens on 8080.
 
-## The Fix
-Primary action: Fix in dependency order: database hook → backend env → frontend config
+## Why Helm behaves this way
+Hooks are part of the release lifecycle: a failing `pre-install` hook aborts the install before the main resources are
+created, and the record stays as `failed`. Hooks are not owned by the release afterwards, so the Job (and its logs)
+remains for you to read until the next run with `before-hook-creation`. Helm itself knows nothing about service
+dependencies - it applied api and web without waiting for the database - so correctness of cross-release wiring
+(host names, ports) is entirely in your values.
 
-A strong solution should leave both the chart and the cluster in a healthy state. In Helm that usually means checking the source of truth first, fixing the right file or release action, and then confirming that the next install, upgrade, rollback, or hook execution behaves the way you intended.
+## The fix
+Work in dependency order. Correct `migrations.target` (a version the chart ships) and upgrade the failed release (or
+uninstall and install it again); only then do the API's init container and the front end have something to talk to.
+Fix `db.host` and `api.upstream` in the values files, upgrade both releases, and confirm with the end-to-end health page.
 
-## What To Validate
-All 3 tiers healthy
+## In real life
+Pipelines that deploy tiers independently, without `--wait` or without checking exit codes, produce exactly this:
+a green-looking run with three half-broken releases. On call, read bottom-up: dependencies first, then consumers.
+Each fix removes noise from the next layer's symptoms, so one broken layer can mask the next fault.
 
-Helpful checks for this level:
-- `helm status helmissions-app -n helmissions`
-- `helm lint ./broken`
-- `kubectl get all -n helmissions`
+## Commands worth remembering
+- `helm list --failed --deployed -n NS`, `helm status REL`, `helm history REL`
+- `kubectl get pods,jobs,svc,endpointslices -n NS`
+- `kubectl logs job/<release>-migrate`, `kubectl logs POD -c INIT_CONTAINER`
+- `helm upgrade --install REL ./chart --wait --timeout 90s`
+- `helm get manifest REL | grep -A3 env:` to see what a release really runs
 
-## Why It Matters
-Review how the fix changed the Helm release for "Full Stack Down".
+## Common mistakes
+- Patching Deployments with `kubectl set env`: the live objects work for a minute, but the chart and the release record stay wrong.
+- Skipping the failing hook with `--no-hooks`: the schema migration is the point of the hook.
+- Fixing the visible tier (web) first and wasting time, because the cause is two tiers away.
 
-This matters in production war games work because Helm failures are rarely just syntax errors. In real teams they show up during CI/CD runs, emergency rollbacks, environment promotion, or cluster changes that expose assumptions hidden in a chart. If you only patch the symptom in-cluster, the same bug usually comes back on the next deployment.
+## Postmortem
+Root causes: an unvalidated migration target in db values; a host name copied from a different environment's naming;
+a port left over from an older Service definition. Contributing factors: the pipeline treated each release as
+independent and nobody read the pipeline result; no end-to-end smoke test after deploy.
+Prevention: deploy in dependency order with `--wait` and `set -e`, add a smoke test of the whole path as the last
+pipeline step, lint values against a schema (`values.schema.json`), and keep hook logs in the incident ticket.
 
-A good operator learns the habit behind the fix: inspect the rendered output, understand the release history, and then make the smallest durable change that restores the expected behavior. That habit scales from a single broken values file all the way up to multi-service incident response.
-
-## Concepts
-debugging multiple failures, dependency order, systematic approach
+## Helm 3 vs Helm 4
+Behaviour is the same. A failed first `helm install` leaves a `failed` release that `helm upgrade --install` can
+repair on both versions; `--atomic` (Helm 3) is called `--rollback-on-failure` in Helm 4 but would not have helped
+here, since there is no earlier revision to roll back to.

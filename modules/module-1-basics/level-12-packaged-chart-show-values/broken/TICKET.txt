@@ -1,0 +1,7 @@
+NET-512  Install the vendor probe
+---------------------------------
+The vendor sent only the packaged chart: vendor/node-probe-0.4.2.tgz (no source repository, no docs).
+Monitoring scrapes probes on port 9100, so the probe's Service must listen on 9100 (not the default).
+Keep the setting in a values file called probe-values.yaml in this workspace so it can be reviewed.
+
+Release name: node-probe     Namespace: helmissions

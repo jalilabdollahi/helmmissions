@@ -1,0 +1,6 @@
+In newsletter/Chart.yaml:
+  name: newsletter                  (lowercase)
+  version: 1.0.0                    (MAJOR.MINOR.PATCH)
+  appVersion: "2.3"                 (a string - quote it)
+  sources: ["https://github.com/helmissions-demo/newsletter"]   (a full URL)
+Then ./ci/lint.sh and  helm install newsletter ./newsletter -n helmissions

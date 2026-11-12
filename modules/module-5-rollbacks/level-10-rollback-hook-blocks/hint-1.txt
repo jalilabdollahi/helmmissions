@@ -1,0 +1,4 @@
+Find out what blocks the rollback:
+  kubectl get jobs,pods -n helmissions
+  kubectl logs job/settlement-batch-drain -n helmissions
+  helm get hooks settlement-batch -n helmissions

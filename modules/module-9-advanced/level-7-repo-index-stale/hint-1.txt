@@ -1,0 +1,4 @@
+Compare what is in the folder with what the index advertises:
+  ls repo repo/archive/legacy
+  helm search repo hm-tides/tide-tracker --versions
+  curl -s http://localhost:8879/m9-repo-index-stale/index.yaml | grep -E 'version:|urls' -A1

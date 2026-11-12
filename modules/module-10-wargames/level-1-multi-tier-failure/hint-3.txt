@@ -1,1 +1,4 @@
-Concrete direction: Fix in dependency order: database hook → backend env → frontend config. When you think you have it, verify the result the same way the mission describes: All 3 tiers healthy
+Fix the chart values in your workspace, not the running objects:
+the migration target must be one the release ships; ledger-api's db.host must be the database Service's real name;
+ledger-web's upstream must use the API Service's port.
+A failed release can be upgraded again or uninstalled and reinstalled. Repair the database first, then api, then web.

@@ -1,1 +1,3 @@
-Concrete direction: Add post-delete hook Job that deletes PVCs. When you think you have it, verify the result the same way the mission describes: helm uninstall results in clean namespace
+Add a Job to the chart annotated with a delete-phase hook that removes `<release>-scratch` through the API
+(the ServiceAccount and Role created for the volume Jobs allow `delete` and survive the uninstall).
+Remember that your already-leaked PVC has to be removed once, and test the whole cycle: install, then uninstall.

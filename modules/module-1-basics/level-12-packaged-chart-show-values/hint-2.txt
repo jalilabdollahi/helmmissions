@@ -1,0 +1,3 @@
+Charts name their own settings; `service.port` is only a common convention, and Helm silently accepts
+keys a chart does not read. Look for the key whose comment says it is the port exposed to scrapers.
+It lives under the `telemetry` section.

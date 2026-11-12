@@ -1,0 +1,12 @@
+replicaCount: 2
+
+image:
+  repository: nginxinc/nginx-unprivileged
+  tag: 1.27-alpine
+
+orders:
+  # new in 0.2.0: how long a pending order may wait for payment confirmation
+  paymentTimeoutSeconds: 45
+
+service:
+  port: 80

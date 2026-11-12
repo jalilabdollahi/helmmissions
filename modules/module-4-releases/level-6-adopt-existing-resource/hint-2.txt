@@ -1,0 +1,4 @@
+The ConfigMap was created with kubectl, so it has no `meta.helm.sh/*` annotations and no
+`app.kubernetes.io/managed-by: Helm` label, and Helm refuses to take over an object it does not own.
+You can delete it (the chart recreates it), add the metadata yourself, or ask Helm to adopt it.
+Mind that the chart's values must end up in the object.

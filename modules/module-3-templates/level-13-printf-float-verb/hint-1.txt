@@ -1,0 +1,3 @@
+Read the container's own complaint and the arguments it was started with:
+  kubectl logs deploy/ingest -n helmissions --previous
+  kubectl get deploy ingest -n helmissions -o jsonpath='{.spec.template.spec.containers[0].args}'

@@ -1,0 +1,8 @@
+apiVersion: helmissions.io/v1
+kind: SnapshotPolicy
+metadata:
+  name: nightly
+spec:
+  schedule: {{ .Values.schedule | quote }}
+  volume: warehouse-data
+  retentionDays: {{ .Values.retentionDays }}

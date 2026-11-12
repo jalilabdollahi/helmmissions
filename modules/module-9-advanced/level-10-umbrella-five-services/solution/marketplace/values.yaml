@@ -1,0 +1,13 @@
+global:
+  imageRegistry: docker.io
+
+gateway:
+  upstreams: "catalog,cart,pricing"
+catalog:
+  pageSize: 24
+cart:
+  ttlMinutes: 45
+pricing:
+  currency: EUR
+notifier:
+  channel: email

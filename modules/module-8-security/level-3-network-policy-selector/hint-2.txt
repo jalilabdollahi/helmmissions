@@ -1,0 +1,4 @@
+A NetworkPolicy only admits a source pod when the `from.podSelector` labels match that pod's labels
+EXACTLY (key and value). The allow rule in shopfront/templates/networkpolicy.yaml selects pods with a
+component label that the frontend Deployment does not use. The default-deny policy is fine — it is the
+reason the mismatch hurts.

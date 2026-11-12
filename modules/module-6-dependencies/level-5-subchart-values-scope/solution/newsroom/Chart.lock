@@ -1,0 +1,6 @@
+dependencies:
+- name: image-resizer
+  repository: file://../image-resizer
+  version: 1.0.0
+digest: sha256:504dafa6c6d9c37aece5736374fae5470ebf314c84e9da78a0df8363d97b50b6
+generated: "2026-11-12T00:24:13.697078+01:00"

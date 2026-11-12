@@ -1,0 +1,9 @@
+apiVersion: helmissions.io/v1
+kind: BackupSchedule
+metadata:
+  name: nightly
+  labels:
+    app.kubernetes.io/name: backup-scheduler
+spec:
+  cron: {{ .Values.schedule.cron | quote }}
+  retentionDays: {{ .Values.schedule.retentionDays }}

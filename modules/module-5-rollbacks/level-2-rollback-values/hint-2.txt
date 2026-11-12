@@ -1,1 +1,0 @@
-The fix revolves around values restored on rollback, what rollback restores. Compare the current state with the objective: Rollback restores replicaCount to 3 If the level is stateful, inspect the existing release history before reinstalling anything.

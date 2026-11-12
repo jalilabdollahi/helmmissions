@@ -1,0 +1,4 @@
+Fix the annotation (`"helm.sh/hook": test`), then create a new revision so the hook is stored with the release:
+  helm upgrade search ./inventory-search -n helmissions --wait
+and finally run
+  helm test search -n helmissions --logs

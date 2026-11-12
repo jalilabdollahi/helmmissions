@@ -1,0 +1,6 @@
+environment: prod
+replicaCount: 2
+database:
+  host: tideline-db.helmissions
+schema:
+  target: 14

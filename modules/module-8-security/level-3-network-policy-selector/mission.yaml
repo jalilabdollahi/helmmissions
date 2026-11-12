@@ -1,0 +1,20 @@
+name: Policy Blocks The Frontend
+description: |
+  The shop's storefront has been isolated with NetworkPolicies: a default-deny for the namespace and one
+  rule that is meant to let the web tier call the catalog backend. Since the rollout the frontend pod
+  never becomes Ready and its log says:
+    catalog unreachable (timeout)
+  The catalog backend itself is Running and its Service has endpoints — a one-off pod can't reach it either,
+  which is expected. The security team insists the zero-trust posture stays.
+objective: |
+  Release `shopfront` in namespace `helmissions` is deployed with the frontend pod Ready (it can reach the
+  catalog backend Service). The backend must remain protected: a pod that is not part of the web tier still
+  cannot connect to it, and the NetworkPolicies stay part of the release.
+xp: 300
+difficulty: advanced
+expected_time: 15m
+concepts:
+  - NetworkPolicy
+  - podSelector
+  - default deny
+  - labels and selectors

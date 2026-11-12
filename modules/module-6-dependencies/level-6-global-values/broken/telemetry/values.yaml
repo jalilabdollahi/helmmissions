@@ -1,0 +1,9 @@
+global:
+  environment: production
+
+# Region this stack runs in; every component must stamp it on the telemetry it handles.
+region: eu-west-1
+
+image:
+  repository: traefik/whoami
+  tag: v1.10

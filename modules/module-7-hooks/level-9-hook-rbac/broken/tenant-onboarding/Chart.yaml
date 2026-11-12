@@ -1,0 +1,5 @@
+apiVersion: v2
+name: tenant-onboarding
+description: Tenant onboarding API with a pre-install maintenance-window check
+version: 2.0.0
+appVersion: "2.0"

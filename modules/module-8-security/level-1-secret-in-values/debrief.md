@@ -1,27 +1,39 @@
-# Secret's Not a Secret
+# Password In Git
 
-## Situation
-Plaintext password in values.yaml committed to git. In this mission the broken state is intentional, and the point is not just to make Helm stop complaining. The real lesson is learning how Helm reports failure, where chart defects surface, and how release state and rendered manifests can drift apart when a deployment goes wrong.
+## What broke
+The chart accepted the database password as an ordinary value, so `values.yaml` carried it in plain text and
+the Deployment received it as a literal `env.value`. Nothing was failing at runtime — the problem is that the
+secret now lives in git history, in `helm get values`, in every stored release revision (Helm keeps them
+as Secrets in the namespace) and in `kubectl get deploy -o yaml`. Anyone with read access to any of those has
+the production password.
 
-## The Fix
-Primary action: Remove from values.yaml; use `--set` for secrets or external-secrets
+## Why Helm behaves this way
+Helm is a templating engine: whatever you pass as a value is written into the manifest and into the release
+record. It has no notion of "sensitive" values. Even a rendered `kind: Secret` only base64-encodes the data,
+which is encoding, not encryption, and the values that produced it are still stored with the release.
+The safe pattern keeps the secret itself outside Helm's data path: the chart takes only a *reference*
+(`existingSecret` + key) and the pod resolves it at runtime through `secretKeyRef`.
 
-A strong solution should leave both the chart and the cluster in a healthy state. In Helm that usually means checking the source of truth first, fixing the right file or release action, and then confirming that the next install, upgrade, rollback, or hook execution behaves the way you intended.
+## The fix
+Create the Secret out of band (`kubectl create secret`, an external-secrets operator, sealed-secrets, a CSI
+driver), empty the password in values, set `db.existingSecret`, and `helm upgrade`. Because the old password was
+exposed, rotate it: the new Secret must hold a different value, changed in the database as well.
 
-## What To Validate
-Helm lint passes, secret delivered via --set at install time
+## In real life
+Secret scanners (gitleaks, GitHub push protection) find these within minutes of a push, but deleting the line
+in a later commit does not help: the value stays in history, forks, CI logs (`--debug` prints values) and
+the release history. Teams get bitten when a `values-prod.yaml` is "temporarily" committed, or when
+`--set db.password=$PASS` in a pipeline shows up in the CI log and in `helm get values`. Treat anything that was
+ever in git as leaked and rotate.
 
-Helpful checks for this level:
-- `helm status helmissions-app -n helmissions`
-- `helm lint ./broken`
-- `kubectl get all -n helmissions`
+## Commands worth remembering
+- `helm get values REL -n NS` / `helm get manifest REL` — see exactly what a release exposes
+- `kubectl create secret generic NAME --from-literal=key=value` / `--from-file=key=path`
+- `kubectl get secret NAME -o jsonpath='{.data.password}' | base64 -d`
+- `helm template ... | grep -i password` — cheap CI check
 
-## Why It Matters
-Review how the fix changed the Helm release for "Secret's Not a Secret".
-
-This matters in security & linting work because Helm failures are rarely just syntax errors. In real teams they show up during CI/CD runs, emergency rollbacks, environment promotion, or cluster changes that expose assumptions hidden in a chart. If you only patch the symptom in-cluster, the same bug usually comes back on the next deployment.
-
-A good operator learns the habit behind the fix: inspect the rendered output, understand the release history, and then make the smallest durable change that restores the expected behavior. That habit scales from a single broken values file all the way up to multi-service incident response.
-
-## Concepts
-secret management, values.yaml in git, --set for secrets
+## Common mistakes
+- Moving the password into another values file (`values-secret.yaml`) — still plaintext in the repo.
+- Passing it with `--set` — it disappears from git but stays in the release record and the CI log.
+- Setting `existingSecret` before the Secret exists: the pod sits in `CreateContainerConfigError`.
+- Reusing the leaked password in the new Secret: moving it is not the same as rotating it.

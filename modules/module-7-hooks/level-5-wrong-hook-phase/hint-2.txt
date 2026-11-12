@@ -1,0 +1,3 @@
+The migration Job is a `post-upgrade` hook: Helm only runs it after the upgrade has succeeded, and with `--wait`
+that means after the new pods are ready. The new pods cannot become ready without the schema the Job creates.
+Each one is waiting for the other, so the upgrade times out and the hook never runs.

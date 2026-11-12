@@ -1,1 +1,0 @@
-The fix revolves around pending states, interrupted installs, recovery. Compare the current state with the objective: `helm uninstall <release>` to clear state (even for pending) If the level is stateful, inspect the existing release history before reinstalling anything.

@@ -1,0 +1,4 @@
+Turn the value into a YAML list in cors-gateway/values.yaml:
+  allowedOrigins:
+    - https://shop.example
+then: helm install cors-gateway ./cors-gateway -n helmissions

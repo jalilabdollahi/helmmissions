@@ -1,0 +1,6 @@
+dependencies:
+- name: ticket-search
+  repository: file://../ticket-search
+  version: 0.6.0
+digest: sha256:2996a3ba25c4dd5c8a653f2942db10ac4f4e76c6ff83e01f27cd7bc3d7464001
+generated: "2026-11-12T00:28:03.135678+01:00"

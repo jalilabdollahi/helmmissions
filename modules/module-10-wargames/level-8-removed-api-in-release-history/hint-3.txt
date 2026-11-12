@@ -1,0 +1,5 @@
+The record data is base64 (Kubernetes) of base64 of gzip of JSON; the JSON field `.manifest` holds the YAML. Decode, replace the two apiVersions,
+encode in reverse and patch the Secret of the *latest* revision (python3 does it in a few lines).
+Then fix the chart: policy/v1, autoscaling/v2 with `target: {type: Utilization, averageUtilization: ...}`, min 2 / max 4.
+Finally run a normal `helm upgrade` - do not uninstall.
+Avoid `helm rollback`: it needs the same stored manifest, fails, and leaves a `pending-rollback` revision whose Secret you then have to delete.

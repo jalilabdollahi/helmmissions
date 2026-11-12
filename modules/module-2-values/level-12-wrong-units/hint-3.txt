@@ -1,1 +1,0 @@
-Concrete direction: Change to `resources.limits.memory: 256Mi`. When you think you have it, verify the result the same way the mission describes: Pod schedules and runs without OOMKilled

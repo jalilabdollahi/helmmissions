@@ -1,0 +1,21 @@
+name: Catch Typos With A Schema
+description: |
+  Last night's order backlog was blamed on the `queue-worker` chart: prod was supposed to run 3 workers that are probed every 5
+  seconds, but `kubectl get deploy` shows a single replica probed every 2 seconds. Helm raised no error at all, because the
+  production override file `values-prod.yaml` contains misspelled keys and Helm treats unknown values as perfectly
+  fine. The incident review wants the chart to refuse values it does not know about. The chart is `queue-worker/`
+  in your workspace, `values-prod.yaml` sits next to it, and the release `queue-worker` is deployed with that file.
+objective: |
+  The chart has a `values.schema.json` that rejects unknown keys at every level of the documented values
+  (top level, `image`, `resources`, `probes.readiness`, ...) and wrong types (`replicaCount` must be an integer), while still accepting every documented
+  value and the free-form `extraEnv` / `podAnnotations` maps. Rendering with a typo'd key (for example `--set replicaCnt=3`) fails;
+  rendering the chart with its defaults works. `values-prod.yaml` passes the schema and release `queue-worker` in namespace
+  `helmissions` is upgraded with it: deployed, revision 2 or later, 3 Ready replicas, concurrency 16 and a readiness probe period of 5 seconds.
+xp: 350
+difficulty: advanced
+expected_time: 20m
+concepts:
+  - values.schema.json
+  - additionalProperties false
+  - JSON Schema types
+  - helm lint / helm template validation

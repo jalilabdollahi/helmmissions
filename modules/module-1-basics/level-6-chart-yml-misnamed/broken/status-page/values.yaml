@@ -1,0 +1,9 @@
+title: "Helmissions Status"
+message: "All systems operational"
+
+image:
+  repository: nginx
+  tag: 1.27-alpine
+
+service:
+  port: 80

@@ -1,0 +1,3 @@
+Render the Service and look at the ports section:
+  helm template edge ./mesh-edge -s templates/service.yaml
+The API server complains about the second port: what is the name of each one?

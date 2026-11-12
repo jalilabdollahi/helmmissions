@@ -1,0 +1,28 @@
+apiVersion: apiextensions.k8s.io/v1
+kind: CustomResourceDefinition
+metadata:
+  name: backupschedules.helmissions.io
+  labels:
+    helmissions.io/cleanup: "true"
+spec:
+  group: helmissions.io
+  scope: Namespaced
+  names:
+    kind: BackupSchedule
+    plural: backupschedules
+    singular: backupschedule
+  versions:
+    - name: v1
+      served: true
+      storage: true
+      schema:
+        openAPIV3Schema:
+          type: object
+          properties:
+            spec:
+              type: object
+              properties:
+                cron:
+                  type: string
+                retentionDays:
+                  type: integer

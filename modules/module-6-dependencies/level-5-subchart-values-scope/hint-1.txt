@@ -1,0 +1,4 @@
+See what Helm thinks the resizer's values are:
+  helm get values newsroom -n helmissions --all
+  helm template newsroom ./newsroom | grep -B2 -A12 'image-resizer/templates'
+Compare the structure of the computed values with what you wrote in newsroom/values.yaml.

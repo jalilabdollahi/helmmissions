@@ -1,0 +1,3 @@
+Several faults: three cluster-scoped objects (ClusterRole, ClusterRoleBinding, PriorityClass) have hard-coded, release-independent names,
+so the second release collides on each one in turn (Helm reports one conflict at a time); and the ClusterRoleBinding names team A's namespace
+as the ServiceAccount's home, so even a successful team-b install would have no permission.

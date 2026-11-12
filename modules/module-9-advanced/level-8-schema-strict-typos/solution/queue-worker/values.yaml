@@ -1,0 +1,19 @@
+replicaCount: 1
+image:
+  repository: traefik/whoami
+  tag: v1.10
+  pullPolicy: IfNotPresent
+concurrency: 4
+resources:
+  requests:
+    cpu: 10m
+    memory: 16Mi
+  limits:
+    cpu: 50m
+    memory: 64Mi
+probes:
+  readiness:
+    initialDelaySeconds: 1
+    periodSeconds: 2
+extraEnv: {}
+podAnnotations: {}

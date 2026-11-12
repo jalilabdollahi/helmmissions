@@ -1,0 +1,51 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Release.Name }}
+  labels:
+    app.kubernetes.io/name: shipment-tracker
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: shipment-tracker
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: shipment-tracker
+    spec:
+      serviceAccountName: {{ .Release.Name }}-schema
+      terminationGracePeriodSeconds: 2
+      initContainers:
+        - name: wait-for-schema
+          image: curlimages/curl:8.10.1
+          imagePullPolicy: IfNotPresent
+          command:
+            - sh
+            - -c
+            - |
+              SA=/var/run/secrets/kubernetes.io/serviceaccount
+              URL="https://kubernetes.default.svc/api/v1/namespaces/$(cat $SA/namespace)/configmaps/{{ .Release.Name }}-schema-v2"
+              if curl -fsS --cacert $SA/ca.crt -H "Authorization: Bearer $(cat $SA/token)" "$URL" >/dev/null; then
+                echo "[init] schema v2 (carrier events) is present"
+              else
+                echo "[init] FATAL: schema v2 marker not found, the carrier-events tables are missing" >&2
+                exit 1
+              fi
+          resources:
+            requests: {cpu: 10m, memory: 16Mi}
+            limits: {memory: 32Mi}
+      containers:
+        - name: api
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+          imagePullPolicy: IfNotPresent
+          ports:
+            - name: http
+              containerPort: 80
+          readinessProbe:
+            httpGet:
+              path: /health
+              port: http
+          resources:
+            requests: {cpu: 10m, memory: 16Mi}
+            limits: {memory: 64Mi}

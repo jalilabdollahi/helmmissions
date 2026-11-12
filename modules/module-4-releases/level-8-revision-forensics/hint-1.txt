@@ -1,0 +1,4 @@
+Helm keeps the user-supplied values of every revision:
+  helm get values product-search -n helmissions --revision 2
+  helm get values product-search -n helmissions --revision 3
+Compare consecutive revisions to see who changed what (`helm get manifest --revision N` shows rendered output).

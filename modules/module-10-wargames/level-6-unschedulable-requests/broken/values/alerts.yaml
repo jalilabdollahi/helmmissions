@@ -1,0 +1,10 @@
+version: "2.0"
+replicaCount: 2
+nodeSelector:
+  workload-class: telemetry
+affinity:
+  mode: required
+resources:
+  requests:
+    cpu: 50m
+    memory: 64Mi

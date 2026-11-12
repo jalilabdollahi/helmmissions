@@ -1,0 +1,4 @@
+Read what the smoke test saw and compare it with the moment it ran:
+  kubectl logs job/payments-gateway-smoke -n helmissions
+  kubectl get pods -n helmissions
+Check the pod's readiness settings in templates/deployment.yaml and the timing of the hook.

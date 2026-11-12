@@ -1,1 +1,0 @@
-The fix revolves around default with empty string, falsy values, pipe order. Compare the current state with the objective: Understand that empty string is falsy for `default` — use `| default "latest"` correctly OR use `required` If the level is stateful, inspect the existing release history before reinstalling anything.

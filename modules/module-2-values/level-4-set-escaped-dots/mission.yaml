@@ -1,0 +1,18 @@
+name: Dots In Keys
+description: |
+  Prometheus is not scraping the `telemetry-agent` pods. A colleague deployed the release with
+  `--set podAnnotations.prometheus.io/scrape=true --set podAnnotations.prometheus.io/port=9100`
+  (see DEPLOY.txt). The release is `deployed`, but when you look at the pod annotations there is
+  no `prometheus.io/scrape` - there is an odd annotation called `prometheus` instead.
+objective: |
+  Release `telemetry-agent` in namespace `helmissions` is deployed and its pod is Ready. The pod
+  template carries exactly the annotations `prometheus.io/scrape: "true"` and
+  `prometheus.io/port: "9100"` (as literal keys with dots), and no stray `prometheus` annotation
+  is left over from the broken deploy.
+xp: 200
+difficulty: intermediate
+expected_time: 10m
+concepts:
+  - --set key syntax
+  - escaping dots
+  - values files

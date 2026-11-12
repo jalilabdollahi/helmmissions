@@ -1,0 +1,3 @@
+`helm install` creates a NEW release and refuses a name that is taken. Changing a release that is already
+running to a new chart version is a different verb. And deleting the release first would throw away
+its revisions - the thing you may need for a rollback.

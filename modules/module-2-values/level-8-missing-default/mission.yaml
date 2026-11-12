@@ -1,0 +1,19 @@
+name: The Empty Timeout
+description: |
+  The `fetcher` release looks healthy in `helm list`, but its pod keeps restarting and
+  `kubectl logs` says `fetcher: invalid FETCH_TIMEOUT='' (want seconds)`. The rendered
+  config shows `FETCH_TIMEOUT=` with nothing after the equals sign. Operations says
+  the timeout was "never meant to be required - 30 seconds has always been the default",
+  but the chart's `values.yaml` only defines `http.retries`.
+objective: |
+  Release `fetcher` in namespace `helmissions` is deployed from the chart in your workspace
+  and its pod is Ready, with `FETCH_TIMEOUT=30` in the ConfigMap `fetcher-config`.
+  The chart itself must apply that default whenever `http.timeout` is not provided, and an
+  explicit `http.timeout` (for example 45) must still be honoured.
+xp: 150
+difficulty: beginner
+expected_time: 10m
+concepts:
+  - missing values render empty
+  - default function
+  - chart defaults

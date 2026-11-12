@@ -1,0 +1,18 @@
+name: Read The Label
+description: |
+  The monitoring team got a vendor chart as a single file, `vendor/node-probe-0.4.2.tgz`: no source
+  repository, no documentation page, only the archive. Ticket `TICKET.txt` asks for release `node-probe` whose Service
+  listens on port 9100 instead of the default. Nobody knows which value controls the port, and the
+  last attempt `--set service.port=9100` installed fine but the Service still listens on 80.
+objective: |
+  Release `node-probe` (chart `node-probe-0.4.2` from the packaged archive) is deployed in namespace
+  `helmissions` and its Service listens on port 9100 and answers requests there. The setting is kept in
+  `probe-values.yaml` in your workspace and that file was used for the install.
+xp: 150
+difficulty: beginner
+expected_time: 10m
+concepts:
+  - helm show values
+  - helm show readme
+  - packaged charts
+  - values files

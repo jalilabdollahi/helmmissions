@@ -1,0 +1,6 @@
+apiVersion: v2
+name: ledger-db
+description: Ledger database stand-in with a generated password
+type: application
+version: 1.0.0
+appVersion: "1.36"

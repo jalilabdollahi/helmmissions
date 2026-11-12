@@ -1,6 +1,0 @@
-apiVersion: v2
-name: if-logic-inverted
-description: Broken chart for Backwards Logic
-type: application
-version: 0.1.0
-appVersion: 1.0.0

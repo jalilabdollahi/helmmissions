@@ -1,0 +1,20 @@
+name: 403 From The API
+description: |
+  `flag-sync` polls the Kubernetes API for the pods and ConfigMaps in its namespace. After the last release
+  the pod never turns Ready and its log keeps repeating:
+    list pods -> 200, list configmaps -> 403
+  The API server answers `configmaps is forbidden: User "system:serviceaccount:helmissions:flag-sync" cannot
+  list resource "configmaps" in API group "" in the namespace "helmissions"`. The security team will review the
+  RBAC in this chart line by line.
+objective: |
+  Release `flag-sync` in namespace `helmissions` is deployed with a Ready pod whose log reports HTTP 200 for both
+  calls. The `flag-sync` ServiceAccount can read pods and ConfigMaps in its own namespace, but nothing more: no
+  wildcards in any rule, no write access, no access to Secrets or other namespaces, and no cluster-wide grants.
+xp: 300
+difficulty: advanced
+expected_time: 15m
+concepts:
+  - RBAC
+  - Role and RoleBinding
+  - least privilege
+  - kubectl auth can-i

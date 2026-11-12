@@ -1,0 +1,18 @@
+name: Not Every File Is A Manifest
+description: |
+  The helpdesk chart came with a friendly file of operator notes, and now it cannot be installed at all:
+    Error: INSTALLATION FAILED: YAML parse error on helpdesk/templates/usage-notes.yaml:
+    error converting YAML to JSON: yaml: line 6: mapping values are not allowed in this context
+  `helm lint` reports the same file. The Deployment, Service and ConfigMap templates are fine.
+objective: |
+  Release `helpdesk` is deployed in namespace `helmissions` from the chart in your workspace; the Deployment,
+  Service and ConfigMap are rendered, every rendered document is a real Kubernetes manifest, and the pod
+  is Ready. The operator notes may be kept, but not as a manifest-looking file in `templates/`.
+xp: 100
+difficulty: beginner
+expected_time: 10m
+concepts:
+  - templates directory
+  - YAML parse errors
+  - NOTES.txt
+  - helm template --debug

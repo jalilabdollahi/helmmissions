@@ -1,6 +1,0 @@
-apiVersion: v2
-name: production-incident
-description: Broken chart for Production Is Down
-type: application
-version: 0.1.0
-appVersion: 1.0.0

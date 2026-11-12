@@ -1,0 +1,4 @@
+Keep `runAsNonRoot: true`. In values.yaml switch the repository to `nginxinc/nginx-unprivileged` (same 1.27-alpine tag,
+USER 101) and set `containerPort` to 8080 — unprivileged processes cannot bind below 1024. The Service keeps port 80
+and forwards to the named container port. Then:
+  helm upgrade status-page ./status-page -n helmissions --wait

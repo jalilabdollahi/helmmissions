@@ -1,0 +1,4 @@
+Ask Helm what it believes the dependencies are, then compare with the files in the chart:
+  helm dependency list ./payroll
+  ls payroll/
+  helm show chart ./payroll

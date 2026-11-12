@@ -1,6 +1,0 @@
-apiVersion: v2
-name: wrong-image-prod
-description: Broken chart for Wrong Image in Production
-type: application
-version: 0.1.0
-appVersion: 1.0.0

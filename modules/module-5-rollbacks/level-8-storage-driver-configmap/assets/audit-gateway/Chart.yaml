@@ -1,0 +1,5 @@
+apiVersion: v2
+name: audit-gateway
+description: Ingestion gateway for compliance audit events
+version: 4.2.0
+appVersion: "4.2"

@@ -1,0 +1,3 @@
+`runAsNonRoot: true` makes the kubelet refuse to start a container whose image would run as UID 0. The guard is right;
+the image is the problem. The stock nginx image runs its master process as root and listens on port 80, a privileged
+port. Look for an image variant built to run without root (and mind which port it listens on).

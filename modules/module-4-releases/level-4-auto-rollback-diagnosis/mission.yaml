@@ -1,0 +1,19 @@
+name: The Upgrade That Undid Itself
+description: |
+  Last night's deploy of `telemetry-gw` 0.5 (3 replicas, `SAMPLE_RATE=0.25`, a 15-minute usage report)
+  ran with the atomic/rollback-on-failure flag. The pipeline went red, the gateway is still up on the old
+  settings, and nobody can tell what actually happened: `helm history` shows three revisions and the
+  release is `deployed` again. The pipeline output only said:
+    Error: UPGRADE FAILED: release telemetry-gw failed, and has been rolled back due to ...
+  The 0.5 chart is in your workspace under `telemetry-gw/`.
+objective: |
+  Release `telemetry-gw` in namespace `helmissions` is `deployed` on a newest revision that is a real
+  upgrade (not a rollback) running chart 0.5.0: 3 ready replicas, `SAMPLE_RATE=0.25` on the Deployment,
+  and the usage-report CronJob present with a valid schedule.
+xp: 300
+difficulty: advanced
+expected_time: 15m
+concepts:
+  - helm upgrade --rollback-on-failure / --atomic
+  - helm history descriptions
+  - revision lifecycle

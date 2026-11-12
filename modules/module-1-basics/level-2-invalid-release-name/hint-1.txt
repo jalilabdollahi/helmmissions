@@ -1,0 +1,2 @@
+Run the script and read the error line completely - Helm prints the rule it enforces,
+as a regular expression. Then look at the name `deploy.sh` passes to `helm install`.

@@ -1,1 +1,0 @@
-Concrete direction: Manually delete the old hook Job, or change delete policy. When you think you have it, verify the result the same way the mission describes: Upgrade succeeds with clean hook execution

@@ -1,0 +1,18 @@
+name: Default Always Wins
+description: |
+  The release manager pinned `image.tag: v1.10` in the `echo-api` chart's values.yaml, but the `echo` release
+  keeps trying to run a different tag. Pods sit in ErrImagePull / ImagePullBackOff for
+  `traefik/whoami:v1.11-rc1`, an image that was never published, and `--set image.tag=...` seems to be ignored
+  too. The chart is in your workspace under `echo-api/`.
+objective: |
+  Release `echo` in namespace `helmissions` is upgraded from the chart in your workspace (a new revision) and
+  both `echo` pods are Ready on the tag pinned in values.yaml. An explicitly set `image.tag` must win, and when
+  `image.tag` is empty the chart's appVersion must still be used as the fallback.
+xp: 250
+difficulty: intermediate
+expected_time: 10m
+concepts:
+  - default function
+  - argument order
+  - pipelines
+  - appVersion

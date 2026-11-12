@@ -1,1 +1,0 @@
-This level is about revision history. Start with `helm history` and identify the good revision before changing anything. The broken state says: Repeated failed installs left many `failed` revisions; chart fundamentally broken.

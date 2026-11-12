@@ -1,0 +1,6 @@
+apiVersion: v2
+name: image-resizer
+description: Thumbnail generation worker for product photos
+type: application
+version: 0.9.0
+appVersion: "1.36"

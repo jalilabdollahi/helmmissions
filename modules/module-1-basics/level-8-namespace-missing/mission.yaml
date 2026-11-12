@@ -1,12 +1,16 @@
-name: Where Am I?
-description: '`helm install` fails with "namespace not found".'
-objective: Add `--create-namespace` flag or pre-create the namespace
+name: Nowhere To Land
+description: |
+  Ticket OPS-2217 (see `TICKET.txt`) asks for release `metrics-proxy` in the new staging namespace
+  `helmissions-staging`. The install dies immediately:
+    Error: INSTALLATION FAILED: create: failed to create: namespaces "helmissions-staging" not found
+  The chart is fine - it simply has nowhere to land.
+objective: |
+  Release `metrics-proxy` is deployed in namespace `helmissions-staging` (and not in `helmissions`)
+  from the chart in your workspace; its pod is Ready and the Service has an endpoint.
 xp: 100
 difficulty: beginner
 expected_time: 5m
 concepts:
-- namespaces
-- --create-namespace
-- helm install flags
-module: module-1-basics
-level: level-8-namespace-missing
+  - namespaces
+  - helm install -n
+  - --create-namespace

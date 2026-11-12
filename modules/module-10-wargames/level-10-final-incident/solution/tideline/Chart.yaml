@@ -1,0 +1,10 @@
+apiVersion: v2
+name: tideline
+description: Tideline platform (api + cache)
+type: application
+version: 2.0.0
+appVersion: "2.0"
+dependencies:
+  - name: cache
+    version: "~1.2.0"
+    repository: oci://localhost:5001/m10-final-incident/charts

@@ -1,0 +1,3 @@
+The revision that was live before the uninstall is the one marked `uninstalled` (compare `helm get values
+loyalty-points --revision N`). Restore it explicitly:
+  helm rollback loyalty-points <that revision> -n helmissions --wait

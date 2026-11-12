@@ -27,19 +27,6 @@ else:
 
 console = Console()
 
-MODULE_TOTAL_XP = {
-    "module-1-basics": 1900,
-    "module-2-values": 2100,
-    "module-3-templates": 3200,
-    "module-4-releases": 2800,
-    "module-5-rollbacks": 2900,
-    "module-6-dependencies": 2600,
-    "module-7-hooks": 2500,
-    "module-8-security": 2800,
-    "module-9-advanced": 3500,
-    "module-10-wargames": 4000,
-}
-
 MODULE_TITLES = {
     "module-1-basics": "Helm Basics",
     "module-2-values": "Values & Overrides",
@@ -65,10 +52,6 @@ def module_title(module_name: str) -> str:
     return MODULE_TITLES.get(module_name, module_name.replace("-", " ").title())
 
 
-def total_module_xp(module_name: str) -> int:
-    return MODULE_TOTAL_XP.get(module_name, 0)
-
-
 _ASCII_LOGO = """\
  ██╗  ██╗███████╗██╗     ███╗   ███╗██╗███████╗███████╗██╗ ██████╗ ███╗   ██╗███████╗
  ██║  ██║██╔════╝██║     ████╗ ████║██║██╔════╝██╔════╝██║██╔═══██╗████╗  ██║██╔════╝
@@ -78,16 +61,16 @@ _ASCII_LOGO = """\
  ╚═╝  ╚═╝╚══════╝╚══════╝╚═╝     ╚═╝╚═╝╚══════╝╚══════╝╚═╝ ╚═════╝ ╚═╝  ╚═══╝╚══════╝"""
 
 
-def welcome_panel(player_name: str, total_xp: int, max_total_xp: int | None = None) -> Panel:
+def welcome_panel(player_name: str, total_xp: int, max_total_xp: int, level_count: int, module_count: int) -> Panel:
     logo = Text(_ASCII_LOGO, style="bold bright_cyan")
-    subtitle = Text("  133 challenges  •  10 modules  •  Real Helm", style="grey70")
+    subtitle = Text(f"  {level_count} challenges  •  {module_count} modules  •  Real Helm", style="grey70")
     attribution = Text("  Design and implementation by: Jalil Abdollahi", style="bold white")
     contact = Text("  jalil.abdollahi@gmail.com", style="bright_magenta")
     agent = Text.assemble(
         ("  Agent: ", "grey70"),
         (player_name or "Unassigned", "bold bright_magenta"),
         ("    XP: ", "grey70"),
-        (f"{total_xp:,} / {(max_total_xp or 55925):,}", "bold bright_magenta"),
+        (f"{total_xp:,} / {max_total_xp:,}", "bold bright_magenta"),
     )
     body = Group(logo, Text(""), attribution, contact, Text(""), subtitle, Text(""), agent)
     return Panel(body, border_style="bright_cyan", box=box.ROUNDED, padding=(1, 2))
@@ -97,26 +80,27 @@ def progress_rows(
     modules: list[dict],
     completed_levels: set[str],
     total_xp_by_module: dict[str, int],
-    max_xp_by_module: dict[str, int] | None = None,
+    max_xp_by_module: dict[str, int],
+    skipped_levels: set[str] | None = None,
 ) -> Table:
+    skipped_levels = skipped_levels or set()
     table = Table(box=box.SIMPLE_HEAVY, expand=True)
+    table.add_column("#", style="grey70", justify="right")
     table.add_column("Module", style="bright_cyan", ratio=2)
-    table.add_column("Progress", style="white", ratio=3)
+    table.add_column("Progress", style="white", ratio=2)
+    table.add_column("Skipped", style="yellow", justify="right")
     table.add_column("XP", justify="right", style="bright_magenta")
-    for module in modules:
+    for index, module in enumerate(modules, start=1):
         level_ids = {level["id"] for level in module["levels"]}
         completed = len(level_ids & completed_levels)
+        skipped = len(level_ids & skipped_levels)
         total = len(module["levels"])
-        xp = total_xp_by_module.get(module["name"], 0)
-        # Use dynamic max XP if provided, fall back to hardcoded dict (#11)
-        if max_xp_by_module is not None:
-            max_xp = max_xp_by_module.get(module["name"], total_module_xp(module["name"]))
-        else:
-            max_xp = total_module_xp(module["name"])
         table.add_row(
+            str(index),
             module_title(module["name"]),
-            f"{completed}/{total}",
-            f"{xp:,} / {max_xp:,}",
+            f"{completed}/{total}" + ("  ✔" if completed == total else ""),
+            str(skipped) if skipped else "",
+            f"{total_xp_by_module.get(module['name'], 0):,} / {max_xp_by_module.get(module['name'], 0):,}",
         )
     return table
 
@@ -127,15 +111,17 @@ def show_welcome(
     modules: list[dict],
     completed_levels: set[str],
     total_xp_by_module: dict[str, int],
-    max_xp_by_module: dict[str, int] | None = None,
-    max_total_xp: int | None = None,
+    max_xp_by_module: dict[str, int],
+    max_total_xp: int,
 ) -> None:
-    effective_max = max_total_xp or sum(MODULE_TOTAL_XP.values())
-    console.print(welcome_panel(player_name, total_xp, effective_max))
+    level_count = sum(len(m["levels"]) for m in modules)
+    console.print(welcome_panel(player_name, total_xp, max_total_xp, level_count, len(modules)))
     console.print(progress_rows(modules, completed_levels, total_xp_by_module, max_xp_by_module))
 
 
-def show_mission_briefing(module_index: int, module_count: int, level_index: int, level_count: int, mission: dict) -> None:
+def show_mission_briefing(
+    module_index: int, module_count: int, level_index: int, level_count: int, mission: dict, workspace: str | None = None
+) -> None:
     difficulty = mission.get("difficulty", "beginner")
     meta_line = Text.assemble(
         (f"Module {module_index}/{module_count} • Level {level_index}/{level_count}", "bright_cyan"),
@@ -151,8 +137,13 @@ def show_mission_briefing(module_index: int, module_count: int, level_index: int
         Rule(style="grey50"),
         Text(f"NAME: {mission.get('name', 'Unknown Mission')}", style="bold white"),
         Text(""),
-        Text(f"SITUATION: {mission.get('description', '')}", style="white"),
-        Text(f"OBJECTIVE: {mission.get('objective', '')}", style="bright_green"),
+        Text("SITUATION", style="bold white"),
+        Text(str(mission.get("description", "")).strip(), style="white"),
+        Text(""),
+        Text("OBJECTIVE", style="bold bright_green"),
+        Text(str(mission.get("objective", "")).strip(), style="bright_green"),
+        Text(""),
+        *([Text(f"WORKSPACE: {workspace}", style="bright_cyan")] if workspace else []),
         Text(f"XP REWARD: +{mission.get('xp', 0)} XP", style="bright_magenta"),
         Text(f"CONCEPTS: {' • '.join(mission.get('concepts', []))}", style="grey70"),
     )
@@ -202,13 +193,13 @@ def show_status(
     completed_levels: set[str],
     total_xp_by_module: dict[str, int],
     total_xp: int,
-    max_xp_by_module: dict[str, int] | None = None,
-    max_total_xp: int | None = None,
+    max_xp_by_module: dict[str, int],
+    max_total_xp: int,
+    skipped: set[str] | None = None,
 ) -> None:
-    effective_max = max_total_xp or sum(MODULE_TOTAL_XP.values())
     console.print(Rule("[bright_cyan]Mission Progress[/bright_cyan]"))
-    console.print(progress_rows(modules, completed_levels, total_xp_by_module, max_xp_by_module))
-    console.print(Panel(Text(f"Total XP: {total_xp:,} / {effective_max:,}", style="bold bright_magenta"), border_style="bright_magenta"))
+    console.print(progress_rows(modules, completed_levels, total_xp_by_module, max_xp_by_module, skipped))
+    console.print(Panel(Text(f"Total XP: {total_xp:,} / {max_total_xp:,}", style="bold bright_magenta"), border_style="bright_magenta"))
 
 
 # ─────────────────────────────────────────────────────────────────────────────
@@ -372,12 +363,15 @@ def show_help() -> None:
         ("8", "skip", "grey70"),
         ("9", "quit", "grey70"),
         ("0", "reset-progress", "grey70"),
+        ("", "goto M.L", "grey70"),
+        ("", "briefing", "grey70"),
     ]
 
     body = Text()
     body.append("  ", style="white")
     for index, (num, cmd, color) in enumerate(items):
-        body.append(f"({num}) ", style="grey50")
+        if num:
+            body.append(f"({num}) ", style="grey50")
         body.append(cmd, style=f"bold {color}")
         if index != len(items) - 1:
             body.append("   ", style="white")
@@ -402,7 +396,7 @@ def show_post_level_debrief(
     elapsed_seconds: int | None = None,
     expected_time: str | None = None,
 ) -> None:
-    """Paginate debrief.md then common-mistakes.md after a level passes."""
+    """Paginate debrief.md (and optional common-mistakes.md) after a level passes."""
     debrief = level_path / "debrief.md"
     mistakes = level_path / "common-mistakes.md"
 

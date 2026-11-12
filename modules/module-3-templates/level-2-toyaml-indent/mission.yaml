@@ -1,0 +1,19 @@
+name: Mis-indented Resources
+description: |
+  The platform team added CPU and memory limits to the `geoip` lookup service by passing the `resources`
+  block from values.yaml through `toYaml`. The deploy has not worked since:
+    Error: INSTALLATION FAILED: server-side apply failed for object helmissions/geoip-lookup apps/v1, Kind=Deployment:
+    ... .spec.template.spec.containers[name="lookup"].limits: field not declared in schema
+  The chart is in your workspace under `geoip/`.
+objective: |
+  Release `geoip` is deployed in namespace `helmissions`. The `lookup` container of Deployment
+  `geoip-lookup` carries the requests and limits defined in the chart's `resources` value (and follows
+  it when it is overridden), and its pod is Ready.
+xp: 250
+difficulty: intermediate
+expected_time: 10m
+concepts:
+  - toYaml
+  - nindent
+  - YAML indentation
+  - helm template

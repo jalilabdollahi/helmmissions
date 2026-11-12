@@ -1,0 +1,3 @@
+Release names become part of Kubernetes object names, so they must be valid DNS-1123
+labels: lowercase letters, digits and dashes only. The name in deploy.sh contains an
+uppercase letter and an underscore, and both are forbidden.

@@ -1,0 +1,3 @@
+Pipe the value through `quote` in templates/deployment.yaml:  value: {{ .Values.listenPort | quote }}
+Check:  helm template relay ./smtp-relay | grep -A1 WHOAMI_PORT_NUMBER   (it must show "2525" in quotes)
+Then:  helm upgrade --install relay ./smtp-relay -n helmissions

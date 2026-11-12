@@ -1,0 +1,10 @@
+replicaCount: 1
+
+image:
+  repository: busybox
+  tag: "1.36"
+
+db:
+  user: ledger
+  # rotated on 2024-11-01, see the finance runbook
+  password: Harbor Light #2024

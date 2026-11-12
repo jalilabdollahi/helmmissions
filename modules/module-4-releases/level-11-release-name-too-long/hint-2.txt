@@ -1,0 +1,3 @@
+Kubernetes limits Service names (DNS labels) to 63 characters. The chart's `fullname` helper concatenates
+release name and chart name with no length cap, so long release names overflow it. Fix the helper, not the
+release name.

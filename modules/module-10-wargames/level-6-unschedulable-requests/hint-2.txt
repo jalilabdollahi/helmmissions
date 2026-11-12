@@ -1,0 +1,3 @@
+Four faults across three releases: the ingest CPU request is missing its unit suffix (a bare number means whole cores);
+rollup asks for memory in the wrong unit (Gi where Mi was meant); alerts has a nodeSelector that no node matches,
+and its required pod anti-affinity needs a second node for the second replica (this cluster has one).

@@ -1,0 +1,7 @@
+image:
+  repository: traefik/whoami
+  tag: v1.10
+
+upstream: "http://exporters.internal:9100"
+service:
+  port: 8080

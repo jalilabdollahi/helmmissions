@@ -1,0 +1,18 @@
+name: The Disappearing Deployment
+description: |
+  The `status` release (chart `status-page`) installed without a single error and `helm status status` says
+  `deployed`. But the public status page is down: `kubectl get pods -n helmissions` shows nothing at all, while
+  a Service called `status` exists and points at nothing. The chart keeps its Deployment and Service together in
+  `templates/app.yaml`. The chart is in your workspace under `status-page/`.
+objective: |
+  Release `status` in namespace `helmissions` is upgraded from the chart in your workspace (a new revision). The
+  release contains both a Deployment and a Service named `status`, 2 pods are Ready, and the Service has 2 ready
+  endpoints.
+xp: 250
+difficulty: intermediate
+expected_time: 10m
+concepts:
+  - multi-document YAML
+  - "--- separator"
+  - helm get manifest
+  - helm upgrade

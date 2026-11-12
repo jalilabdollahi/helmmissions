@@ -1,0 +1,10 @@
+replicaCount: 1
+
+image:
+  repository: nginx
+  tag: 1.27-alpine
+
+config:
+  apiUrl: https://api.weather.helmissions.example/v1
+  units: metric
+  refreshSeconds: 300
