@@ -112,10 +112,25 @@ hm_endpoints_count() {
 # hm_http_check URL [NS] [TRIES] → curl URL from a one-shot pod inside the namespace, prints the body;
 #   retries (default 5 tries, 3s apart) because new Services/endpoints take a moment to become reachable
 hm_http_check() {
-  local tries="${3:-5}" n
+  local tries="${3:-5}" n out
   for n in $(seq 1 "$tries"); do
-    _hm_http_once "$1" "${2:-$NS}" && return 0
+    if out="$(_hm_http_once "$1" "${2:-$NS}")"; then
+      printf '%s\n' "$out"
+      return 0
+    fi
     [ "$n" -lt "$tries" ] && sleep 3
+  done
+  printf '%s\n' "$out" >&2
+  return 1
+}
+# hm_wait_old_pods_gone SELECTOR [NS] [TIMEOUT_SECONDS] → wait until no terminating pods match SELECTOR
+#   (after a rollout, terminating pods can still answer through the Service for a few seconds)
+hm_wait_old_pods_gone() {
+  local i
+  for i in $(seq 1 "${3:-60}"); do
+    [ "$(kubectl get pods -n "${2:-$NS}" -l "$1" -o json 2>/dev/null \
+         | jq '[.items[] | select(.metadata.deletionTimestamp != null)] | length' 2>/dev/null || echo 0)" = "0" ] && return 0
+    sleep 1
   done
   return 1
 }
