@@ -1,0 +1,3 @@
+Two ways out, both legitimate: make the install wait for the workload before post-install hooks run (look at the
+helm flags in ci/deploy.sh), or make the smoke test itself patient (retry loop in the script, or allow the Job to
+retry). Do not remove the hook and do not make the test unable to fail. Re-run ci/deploy.sh afterwards.

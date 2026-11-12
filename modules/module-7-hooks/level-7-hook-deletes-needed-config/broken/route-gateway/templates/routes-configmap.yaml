@@ -1,0 +1,20 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ .Release.Name }}-routes
+  labels:
+    app.kubernetes.io/name: route-gateway
+  annotations:
+    # copied from the "validate-config" pre-install snippet in the platform wiki
+    "helm.sh/hook": pre-install,pre-upgrade
+    "helm.sh/hook-weight": "-5"
+    "helm.sh/hook-delete-policy": hook-succeeded
+data:
+  default.conf: |
+    server {
+      listen 80;
+      location = /healthz { return 200 "ok\n"; }
+      location / {
+        return 200 "gateway routes {{ .Values.routes.version }}: /api -> {{ .Values.routes.upstreams.api }}, /pay -> {{ .Values.routes.upstreams.pay }}\n";
+      }
+    }

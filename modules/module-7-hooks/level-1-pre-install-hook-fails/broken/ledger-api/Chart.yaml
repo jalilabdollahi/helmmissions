@@ -1,0 +1,5 @@
+apiVersion: v2
+name: ledger-api
+description: Double-entry ledger HTTP API with a schema migration hook
+version: 0.4.0
+appVersion: "0.4"

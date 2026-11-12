@@ -1,0 +1,19 @@
+name: The Config That Hooked Itself Away
+description: |
+  `helm install gateway ./route-gateway` reports success and `helm list` shows the release as `deployed`, yet the gateway never
+  serves traffic: the pod sits in `ContainerCreating` and `kubectl describe pod` shows
+    MountVolume.SetUp failed for volume "routes" : configmap "gateway-routes" not found
+  The routing table ConfigMap is clearly defined in the chart, but `kubectl get configmap -n helmissions` does not list it, and
+  `helm get manifest gateway` does not contain it either. The chart is in your workspace under `route-gateway/`.
+objective: |
+  Release `gateway` in namespace `helmissions` is `deployed` with 1 ready pod that serves the routing table (the response of
+  `http://gateway/` starts with "gateway routes v3"). The routing ConfigMap is an ordinary resource of the release: it is listed
+  by `helm get manifest gateway` and persists between deploys.
+xp: 300
+difficulty: advanced
+expected_time: 15m
+concepts:
+  - hook annotations on regular resources
+  - hook-delete-policy hook-succeeded
+  - helm get manifest vs helm get hooks
+  - config volumes

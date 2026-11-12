@@ -1,0 +1,3 @@
+Change one of the weights so that the schema initialisation sorts before the migration (for example init "-5"
+or migrate "20"). Weights are strings in the annotation, so keep the quotes. Then run helm upgrade on the failed
+release (the Jobs are also pre-upgrade hooks) or reinstall.

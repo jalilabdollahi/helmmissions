@@ -1,0 +1,19 @@
+name: Forbidden Inside The Hook
+description: |
+  The first install of `tenants` (chart `tenant-onboarding`) fails in its pre-install phase. The chart's pre-flight Job asks the
+  Kubernetes API whether a maintenance window is active in the namespace, and that call is refused:
+    [preflight] FATAL: could not confirm that the namespace is free of maintenance windows
+    "message": "configmaps is forbidden: User \"system:serviceaccount:helmissions:default\" cannot list resource \"configmaps\" in API group \"\" in the namespace \"helmissions\""
+  Helm reports `failed pre-install: resource Job/helmissions/tenants-preflight not ready`. The chart is in your workspace under `tenant-onboarding/`.
+objective: |
+  Release `tenants` in namespace `helmissions` is `deployed` with 1 ready pod, and its pre-install preflight Job completed
+  successfully using permissions that the chart itself provides. A brand-new install of the chart into an empty namespace succeeds too,
+  without anyone creating RBAC objects by hand.
+xp: 350
+difficulty: advanced
+expected_time: 20m
+concepts:
+  - hooks and RBAC
+  - hook ServiceAccounts
+  - hook-weight
+  - pre-install ordering

@@ -1,0 +1,3 @@
+The PVC is created at runtime by a post-install hook Job, so it is not part of the release manifest and
+`helm uninstall` never deletes it. Anything created outside the manifest has to be cleaned up by something
+that runs when the release goes away: a hook for the delete lifecycle phase.

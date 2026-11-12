@@ -1,0 +1,3 @@
+Add a Job to the chart annotated with a delete-phase hook that removes `<release>-scratch` through the API
+(the ServiceAccount and Role created for the volume Jobs allow `delete` and survive the uninstall).
+Remember that your already-leaked PVC has to be removed once, and test the whole cycle: install, then uninstall.

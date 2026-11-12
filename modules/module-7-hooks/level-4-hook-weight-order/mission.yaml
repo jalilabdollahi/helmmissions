@@ -1,0 +1,20 @@
+name: Migrations Before The Database
+description: |
+  The `orders` release (chart `order-service`) fails its first install in the pre-install phase. Two hook Jobs prepare the
+  database: `orders-db-init` creates the schema and `orders-db-migrate` applies the order migrations on top of it. The
+  migration Job is the one that fails:
+    [db-migrate] FATAL: schema 'orders' does not exist (ConfigMap orders-schema-state not found)
+  Yet the init Job is part of the chart, nothing was deleted, and it works when run on its own. The hooks involved are the
+  ones in `order-service/templates/` (`db-init-job.yaml`, `db-migrate-job.yaml`).
+objective: |
+  Release `orders` in namespace `helmissions` is `deployed` with 1 ready pod, and both database hooks completed. A brand-new
+  install of the chart into an empty namespace also succeeds: the schema is always initialised first and migrated second,
+  proven by the state ConfigMap that the Jobs write (`initialized-at` before `migrated-at`).
+xp: 300
+difficulty: advanced
+expected_time: 15m
+concepts:
+  - hook-weight
+  - hook ordering
+  - pre-install hooks
+  - hook ServiceAccounts

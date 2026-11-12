@@ -1,0 +1,4 @@
+Find out where the leaked volume comes from and whether Helm knows about it:
+  kubectl get pvc exports-scratch -n helmissions -o yaml     # labels, owner references?
+  helm template exports ./export-batch | grep -c PersistentVolumeClaim
+  grep -rn "persistentvolumeclaims" export-batch/templates

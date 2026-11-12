@@ -1,0 +1,5 @@
+Find out why the Job's pod never started:
+  kubectl get pods -n helmissions
+  kubectl describe pod -l app.kubernetes.io/component=db-bootstrap -n helmissions
+  kubectl get secret -n helmissions
+Then compare WHEN Helm creates the Secret with WHEN it runs the Job.

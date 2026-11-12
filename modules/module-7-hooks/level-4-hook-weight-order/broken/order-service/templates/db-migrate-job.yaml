@@ -1,0 +1,43 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: {{ .Release.Name }}-db-migrate
+  labels:
+    app.kubernetes.io/name: order-service
+    app.kubernetes.io/component: db-migrate
+  annotations:
+    "helm.sh/hook": pre-install,pre-upgrade
+    "helm.sh/hook-weight": "0"
+    "helm.sh/hook-delete-policy": before-hook-creation
+spec:
+  backoffLimit: 0
+  activeDeadlineSeconds: 60
+  template:
+    spec:
+      serviceAccountName: {{ .Release.Name }}-db-hooks
+      restartPolicy: Never
+      terminationGracePeriodSeconds: 2
+      containers:
+        - name: migrate
+          image: curlimages/curl:8.10.1
+          imagePullPolicy: IfNotPresent
+          command:
+            - sh
+            - -c
+            - |
+              SA=/var/run/secrets/kubernetes.io/serviceaccount
+              API="https://kubernetes.default.svc/api/v1/namespaces/$(cat $SA/namespace)/configmaps/orders-schema-state"
+              AUTH="Authorization: Bearer $(cat $SA/token)"
+              echo "[db-migrate] applying order migrations"
+              code=$(curl -sS -o /dev/null -w '%{http_code}' --cacert $SA/ca.crt -H "$AUTH" "$API")
+              if [ "$code" = 404 ]; then
+                echo "[db-migrate] FATAL: schema 'orders' does not exist (ConfigMap orders-schema-state not found)" >&2
+                exit 1
+              fi
+              body="{\"data\":{\"migrated-at\":\"$(date -u +%Y-%m-%dT%H:%M:%SZ)\",\"migrations\":\"001_orders,002_order_lines,003_shipping\"}}"
+              code=$(curl -sS -o /dev/null -w '%{http_code}' --cacert $SA/ca.crt -H "$AUTH" -H 'Content-Type: application/merge-patch+json' -X PATCH "$API" -d "$body")
+              [ "$code" = 200 ] || { echo "[db-migrate] FATAL: could not record migrations (HTTP $code)" >&2; exit 1; }
+              echo "[db-migrate] 3 migrations applied on schema 'orders'"
+          resources:
+            requests: {cpu: 10m, memory: 16Mi}
+            limits: {memory: 32Mi}

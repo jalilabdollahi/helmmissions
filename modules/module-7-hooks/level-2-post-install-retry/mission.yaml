@@ -1,0 +1,20 @@
+name: Too Impatient
+description: |
+  The deploy pipeline (`ci/deploy.sh`) for `payments-gateway` now fails on every fresh environment:
+    Error: INSTALLATION FAILED: failed post-install: resource Job/helmissions/payments-gateway-smoke not ready.
+    status: Failed, message: Job Failed. failed: 1/1
+  The post-install smoke test Job reports `curl: (7) Failed to connect to payments-gateway port 80`, yet a minute
+  later the gateway is perfectly healthy and answers requests. Nobody wants to delete the smoke test.
+  The chart and the pipeline script are in your workspace (`payments-gateway/`, `ci/deploy.sh`).
+objective: |
+  Release `payments-gateway` in namespace `helmissions` is `deployed` with 1 ready pod and its smoke test hook Job
+  completed successfully against the live Service. Running `ci/deploy.sh` against a brand-new namespace and release name
+  (`NAMESPACE=helmissions-verify RELEASE=...`) succeeds as well, with the smoke test still in place and still checking the gateway.
+xp: 300
+difficulty: advanced
+expected_time: 15m
+concepts:
+  - post-install hooks
+  - hook timing
+  - helm install --wait
+  - Job backoffLimit

@@ -1,0 +1,21 @@
+name: The Secret Isn't There Yet
+description: |
+  The first install of `payroll` hangs until the CI timeout (40s) and then fails:
+    Error: INSTALLATION FAILED: failed pre-install: resource Job/helmissions/payroll-db-bootstrap not ready.
+    status: InProgress, message: Job in progress
+    context deadline exceeded
+  The bootstrap Job's pod never starts: `kubectl describe pod` shows `Error: secret "payroll-db" not found`
+  (`CreateContainerConfigError`). But the Secret is right there in the chart, and the Deployment uses it too.
+  The chart is in your workspace under `payroll-api/`.
+objective: |
+  Release `payroll` in namespace `helmissions` is `deployed` with 1 ready pod, the pre-install bootstrap Job completed successfully
+  using the `payroll-db` Secret, and the Secret still exists afterwards for the application pod to use. A brand-new install of the chart
+  into an empty namespace works as well.
+xp: 350
+difficulty: advanced
+expected_time: 20m
+concepts:
+  - hooks run before regular resources
+  - hook-weight
+  - secrets as hooks
+  - CreateContainerConfigError

@@ -1,0 +1,3 @@
+`helm.sh/hook: tests` is not a hook Helm knows. Unknown hook names are skipped: the pod is neither created at install time nor stored
+in the release, so `helm test` finds nothing and exits 0. The name Helm looks for is a single word, `test`.
+Also remember that Helm reads hooks from the stored release, not from your files.

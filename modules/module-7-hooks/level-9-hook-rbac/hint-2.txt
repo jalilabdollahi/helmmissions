@@ -1,0 +1,3 @@
+The Job runs as the namespace's `default` ServiceAccount, which has no permissions at all. Giving it
+a Role and RoleBinding is the right idea, but think about WHEN they are created: pre-install hooks run
+before Helm creates any regular template.

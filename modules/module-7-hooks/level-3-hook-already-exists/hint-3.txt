@@ -1,0 +1,3 @@
+Deleting the Job by hand lets this one upgrade through, but the next deploy will collide again.
+Change the hook's delete policy in the chart so a previous run's Job is cleaned up automatically
+(there is a policy that deletes the old resource right before the hook creates the new one), then upgrade.

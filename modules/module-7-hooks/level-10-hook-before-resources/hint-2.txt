@@ -1,0 +1,3 @@
+The Secret is a regular template, and Helm creates regular templates only after the pre-install hooks have finished.
+The bootstrap hook needs the Secret before that, so it waits for something that will never exist while the hook
+is running, until its deadline expires and the release is marked failed.

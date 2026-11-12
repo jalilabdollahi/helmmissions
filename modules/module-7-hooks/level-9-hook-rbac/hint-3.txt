@@ -1,0 +1,3 @@
+The ServiceAccount (or binding for default), Role and RoleBinding must exist before the Job runs, so make them hooks too
+(same phase, a lower `helm.sh/hook-weight` than the Job). Point the Job at the account with `serviceAccountName`.
+The permission needed is `list` on `configmaps`. Do not create RBAC objects by hand.

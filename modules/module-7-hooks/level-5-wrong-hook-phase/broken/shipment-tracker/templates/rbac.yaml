@@ -1,0 +1,27 @@
+# Identity used by the schema tooling (the pods read the schema marker, the migration Job writes it).
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: {{ .Release.Name }}-schema
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  name: {{ .Release.Name }}-schema
+rules:
+  - apiGroups: [""]
+    resources: ["configmaps"]
+    verbs: ["get", "create"]
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: {{ .Release.Name }}-schema
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: Role
+  name: {{ .Release.Name }}-schema
+subjects:
+  - kind: ServiceAccount
+    name: {{ .Release.Name }}-schema
+    namespace: {{ .Release.Namespace }}

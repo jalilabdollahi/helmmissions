@@ -1,0 +1,36 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: {{ .Release.Name }}-migrate-v2
+  labels:
+    app.kubernetes.io/name: shipment-tracker
+    app.kubernetes.io/component: migration
+  annotations:
+    "helm.sh/hook": post-upgrade
+    "helm.sh/hook-delete-policy": before-hook-creation
+spec:
+  backoffLimit: 0
+  activeDeadlineSeconds: 60
+  template:
+    spec:
+      serviceAccountName: {{ .Release.Name }}-schema
+      restartPolicy: Never
+      terminationGracePeriodSeconds: 2
+      containers:
+        - name: migrate
+          image: curlimages/curl:8.10.1
+          imagePullPolicy: IfNotPresent
+          command:
+            - sh
+            - -c
+            - |
+              SA=/var/run/secrets/kubernetes.io/serviceaccount
+              API="https://kubernetes.default.svc/api/v1/namespaces/$(cat $SA/namespace)/configmaps"
+              echo "[migrate] creating carrier-events tables (schema v2)"
+              body="{\"apiVersion\":\"v1\",\"kind\":\"ConfigMap\",\"metadata\":{\"name\":\"{{ .Release.Name }}-schema-v2\"},\"data\":{\"migrated-at\":\"$(date -u +%Y-%m-%dT%H:%M:%SZ)\",\"tables\":\"carrier_events,event_types\"}}"
+              code=$(curl -sS -o /dev/null -w '%{http_code}' --cacert $SA/ca.crt -H "Authorization: Bearer $(cat $SA/token)" -H 'Content-Type: application/json' -X POST "$API" -d "$body")
+              if [ "$code" != 201 ] && [ "$code" != 409 ]; then echo "[migrate] FATAL: could not record schema v2 (HTTP $code)" >&2; exit 1; fi
+              echo "[migrate] schema v2 ready"
+          resources:
+            requests: {cpu: 10m, memory: 16Mi}
+            limits: {memory: 32Mi}

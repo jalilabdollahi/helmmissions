@@ -1,0 +1,42 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: {{ .Release.Name }}-preflight
+  labels:
+    app.kubernetes.io/name: tenant-onboarding
+    app.kubernetes.io/component: preflight
+  annotations:
+    "helm.sh/hook": pre-install,pre-upgrade
+    "helm.sh/hook-weight": "0"
+    "helm.sh/hook-delete-policy": before-hook-creation
+spec:
+  backoffLimit: 0
+  activeDeadlineSeconds: 60
+  template:
+    spec:
+      serviceAccountName: {{ .Release.Name }}-preflight
+      restartPolicy: Never
+      terminationGracePeriodSeconds: 2
+      containers:
+        - name: preflight
+          image: curlimages/curl:8.10.1
+          imagePullPolicy: IfNotPresent
+          command:
+            - sh
+            - -c
+            - |
+              SA=/var/run/secrets/kubernetes.io/serviceaccount
+              NSN=$(cat $SA/namespace)
+              API="https://kubernetes.default.svc/api/v1/namespaces/$NSN/configmaps?labelSelector=maintenance%3Dtrue"
+              echo "[preflight] checking namespace $NSN for an active maintenance window"
+              curl -sS --cacert $SA/ca.crt -H "Authorization: Bearer $(cat $SA/token)" "$API" >/tmp/out.json
+              if grep -q '"items": \[\]' /tmp/out.json; then
+                echo "[preflight] no maintenance window active, deploy may proceed"
+              else
+                echo "[preflight] FATAL: could not confirm that the namespace is free of maintenance windows" >&2
+                grep -E '"(message|reason)"' /tmp/out.json >&2
+                exit 1
+              fi
+          resources:
+            requests: {cpu: 10m, memory: 16Mi}
+            limits: {memory: 32Mi}

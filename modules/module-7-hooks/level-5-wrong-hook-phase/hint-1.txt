@@ -1,0 +1,5 @@
+Find out what the new pod is waiting for and whether the thing it needs was ever created:
+  kubectl get pods,jobs -n helmissions
+  kubectl logs <new-pod> -c wait-for-schema -n helmissions
+  helm get hooks shipments -n helmissions
+Look at WHEN the migration hook is supposed to run.

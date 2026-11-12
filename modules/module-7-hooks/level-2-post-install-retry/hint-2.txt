@@ -1,0 +1,3 @@
+A post-install hook starts as soon as Helm has *submitted* the resources, not when they are ready, unless the
+install waits for readiness. The gateway needs about ten seconds to warm up, and the smoke test Job gives up
+at the first connection error (backoffLimit: 0). The test is right; it is just racing the deployment.

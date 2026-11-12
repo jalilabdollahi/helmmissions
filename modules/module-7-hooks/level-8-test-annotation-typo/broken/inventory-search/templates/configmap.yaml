@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ .Release.Name }}-conf
+  labels:
+    app.kubernetes.io/name: inventory-search
+data:
+  default.conf: |
+    server {
+      listen 80;
+      location = /healthz { return 200 "ok\n"; }
+      location = /search {
+        default_type application/json;
+        return 200 '{"query":"$arg_q","hits":3,"items":["trail boots","rain boots","work boots"]}\n';
+      }
+    }

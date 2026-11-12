@@ -1,0 +1,3 @@
+Make the two names agree (fix the chart, not the live Job), then deploy again. The first install
+left a failed release behind: you can `helm upgrade` it (the hook also runs on upgrade) or
+uninstall it and install again. Keep the migration a hook.

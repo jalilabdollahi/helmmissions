@@ -1,0 +1,4 @@
+Look at what the failed upgrade complains about and at what the first install left behind:
+  helm history tax-engine -n helmissions
+  kubectl get jobs -n helmissions
+Then read the annotations of templates/rate-check-job.yaml.
