@@ -1,0 +1,2 @@
+Prove it from inside the front-end pod instead of guessing: `kubectl exec deploy/orders-web -n helmissions-web -- sh -c '...'`
+with `nslookup`, `cat /etc/resolv.conf` and `wget`. Test name resolution, then the connection, as separate steps.

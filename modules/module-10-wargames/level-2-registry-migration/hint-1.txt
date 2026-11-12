@@ -1,0 +1,3 @@
+Look at the pull errors first: `kubectl describe pod` on the failing pods shows which image ref is wrong.
+Then compare `helm get manifest` of each release with what you expect, and check every container, not just the
+parent charts. Do not stop when the first round of pods recovers: re-check all pods after each rollout.

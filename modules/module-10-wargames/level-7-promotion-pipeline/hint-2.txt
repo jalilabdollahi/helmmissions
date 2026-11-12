@@ -1,0 +1,4 @@
+Three faults: staging never deployed because `values/staging.yaml` does not exist;
+the script has no fail-fast handling, so it went on and promoted an empty build id to prod
+(prod pods have an invalid image name and the prod release is `failed`).
+Fixing the data alone leaves the next staging outage to repeat the incident.

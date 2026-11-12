@@ -1,0 +1,4 @@
+New registry prefix: localhost:5001/m10-registry-migration. Set it in values/global.yaml.
+For the subchart, either make its template honour `.Values.global.imageRegistry` or override its image repository
+from the parent release's values file. For the tag, ask the registry: `curl -s http://localhost:5001/v2/m10-registry-migration/media/tags/list`.
+Then run deploy-all.sh.

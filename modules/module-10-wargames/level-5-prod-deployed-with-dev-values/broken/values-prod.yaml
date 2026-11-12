@@ -1,0 +1,3 @@
+environment: prod
+replicaCount: 2
+loglevel: warn

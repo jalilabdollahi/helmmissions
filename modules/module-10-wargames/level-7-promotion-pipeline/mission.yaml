@@ -1,0 +1,19 @@
+name: "Silent Pipeline Failure"
+description: |
+  Prod billing broke after last night's promotion run, yet the pipeline job was green. `bash pipeline.sh` in your workspace promotes a
+  build through dev, staging and prod (`PIPELINE.md` has the table of releases, namespaces and what each environment must look like).
+  The run printed `Error:` lines, then carried on to prod anyway. Release `billing` in `helmissions` is in state `failed`, a new pod is
+  not starting, and the old pods are the only reason billing still answers.
+objective: |
+  Running `bash pipeline.sh` from the workspace succeeds and leaves all three environments `deployed` and healthy: `billing-dev` in
+  `helmissions-dev`, `billing-staging` in `helmissions-staging` and `billing` in `helmissions`, each serving the page described in
+  `PIPELINE.md` and prod running the build that staging ran. The pipeline must also stop at the first failing stage: if staging cannot be
+  deployed, it exits non-zero and does not touch prod.
+xp: 450
+difficulty: expert
+expected_time: 30m
+concepts:
+  - promotion pipelines
+  - fail-fast scripts
+  - exit codes
+  - failed releases

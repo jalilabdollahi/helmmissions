@@ -1,0 +1,19 @@
+name: "Unable To Build Kubernetes Objects"
+description: |
+  Since the cluster upgrade, every `helm upgrade` of the `edge-gateway` release fails before it changes anything with
+  `resource mapping not found ... no matches for kind ... in version ...`. Even `helm status` on the release is unhappy. The gateway itself is up and serving, but the 1.4.0 chart in your workspace
+  (see `UPGRADE-NOTES.md`) cannot be released and the change window is open. The gateway must not be removed and recreated.
+objective: |
+  Release `edge-gateway` in namespace `helmissions` is `deployed` on a new revision (at least revision 3) created by upgrading the
+  existing release with the workspace chart, the earlier revisions are still in `helm history`, and
+  `http://edge-gateway/` answers `edge-gateway version=1.4 rate_limit=200`. The release's current manifest and the workspace chart
+  use only API versions the cluster serves, the PodDisruptionBudget and HorizontalPodAutoscaler exist with sane settings
+  (autoscaling between 2 and 4 replicas) and the gateway has 2 or more ready pods.
+xp: 500
+difficulty: expert
+expected_time: 30m
+concepts:
+  - removed Kubernetes APIs
+  - release records
+  - mapkubeapis technique
+  - helm history

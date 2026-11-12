@@ -1,0 +1,2 @@
+Read the pipeline's own output first (run it, or re-read last night's `Error:` lines), then `helm list --failed --deployed -A`
+and `kubectl get pods -A` for the three namespaces. Ask which stage failed first and what the later stages did with its (missing) output.

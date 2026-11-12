@@ -1,0 +1,8 @@
+environment: dev
+replicaCount: 1
+logLevel: debug
+debugEndpoints: true
+payments:
+  mode: sandbox
+database:
+  host: invoice-db.helmissions-dev

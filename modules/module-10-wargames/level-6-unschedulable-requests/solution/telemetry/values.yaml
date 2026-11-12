@@ -1,0 +1,10 @@
+version: "1.0"
+replicaCount: 1
+nodeSelector: {}
+affinity:
+  # none | required | preferred - spread replicas over nodes
+  mode: none
+resources:
+  requests:
+    cpu: 10m
+    memory: 16Mi

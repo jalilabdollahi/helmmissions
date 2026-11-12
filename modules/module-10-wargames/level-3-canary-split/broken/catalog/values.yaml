@@ -1,0 +1,10 @@
+track: stable
+version: "1.9"
+replicaCount: 1
+# value of the app.kubernetes.io/name label that the shared Service selects on
+appName: catalog
+probe:
+  path: /healthz
+service:
+  enabled: false
+  port: 80

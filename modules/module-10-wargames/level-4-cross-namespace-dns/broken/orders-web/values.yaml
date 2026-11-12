@@ -1,0 +1,6 @@
+ordersApi:
+  host: orders-api
+  port: 80
+# Carried over from the old shared-namespace chart
+network:
+  dnsPolicy: Default

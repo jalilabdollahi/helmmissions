@@ -1,0 +1,3 @@
+Three faults: the shared values/global.yaml still points at the retired registry;
+the `indexer` subchart builds its image from its own repository value and ignores `global.imageRegistry`;
+and one release uses an image tag that was renamed during the copy (check the registry's tag list).

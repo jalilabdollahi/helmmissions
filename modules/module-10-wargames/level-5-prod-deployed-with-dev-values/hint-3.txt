@@ -1,0 +1,3 @@
+In deploy.sh: use values-prod.yaml for prod and make every run start from the file, not from the previous release's values
+(--reset-values, or simply drop --reuse-values). In values-prod.yaml: use the exact key name the chart defines for the log level.
+Then run `bash deploy.sh prod` and check the config page and `helm get values invoice`.

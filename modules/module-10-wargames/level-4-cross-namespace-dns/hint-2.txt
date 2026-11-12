@@ -1,0 +1,3 @@
+Three layers: the front end uses a short Service name that only resolves in its own namespace;
+its pod spec carries a `dnsPolicy` that bypasses the cluster DNS entirely (fixing the name alone will not help);
+and the back end Service forwards to a port the container does not listen on.

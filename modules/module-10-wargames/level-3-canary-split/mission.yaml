@@ -1,0 +1,19 @@
+name: "The 50% Canary"
+description: |
+  The catalog 2.0 canary was supposed to see about 10% of the traffic: 9 stable pods and 1 canary pod behind the shared
+  `catalog` Service. Instead the dashboard shows 50/50 splits at one moment and zero canary traffic the next, the canary
+  release is not green, and the rollout notes in `ROLLOUT.md` say everything was deployed with `release.sh`.
+  `curl http://catalog/` (from inside the cluster) shows which track answered.
+objective: |
+  Release `catalog-stable` runs 9 ready pods and release `catalog-canary` runs 1 ready pod, both `deployed` in namespace
+  `helmissions`. The Service `catalog` load-balances over all 10 pods (the canary is one of its endpoints) and real
+  requests to `http://catalog/` are answered by the canary some of the time but by the stable track the vast majority of
+  the time. What the workspace's values and chart render must say the same, so the next `release.sh` keeps the split.
+xp: 400
+difficulty: expert
+expected_time: 20m
+concepts:
+  - canary releases
+  - label selectors
+  - readiness probes
+  - replica ratios

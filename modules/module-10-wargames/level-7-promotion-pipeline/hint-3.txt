@@ -1,0 +1,3 @@
+Create values/staging.yaml from the table in PIPELINE.md (environment, replicas, payments, database host).
+Make pipeline.sh stop on the first failing command (set -euo pipefail, or check each helm call) so prod is never touched
+after a failed stage. Then run the pipeline: prod, in state `failed`, is upgraded to a good revision.

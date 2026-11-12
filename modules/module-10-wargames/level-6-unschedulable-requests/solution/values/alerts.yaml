@@ -1,0 +1,8 @@
+version: "2.0"
+replicaCount: 2
+affinity:
+  mode: preferred
+resources:
+  requests:
+    cpu: 50m
+    memory: 64Mi

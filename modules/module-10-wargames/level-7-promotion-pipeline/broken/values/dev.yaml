@@ -1,0 +1,6 @@
+environment: dev
+replicaCount: 1
+payments:
+  mode: sandbox
+database:
+  host: billing-db.helmissions-dev

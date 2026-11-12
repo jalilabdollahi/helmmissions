@@ -1,0 +1,3 @@
+Triage from the bottom of the stack up, not from the symptom down.
+Start with `helm list` and `helm status` for every release, then `kubectl get pods,jobs -n helmissions`.
+Whatever the dependency chain says should start first is where the first real failure lives.

@@ -1,0 +1,4 @@
+environment: staging
+replicaCount: 1
+database:
+  host: tideline-db.helmissions-staging

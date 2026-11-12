@@ -1,0 +1,6 @@
+dependencies:
+- name: cache
+  repository: oci://localhost:5001/m10-final-incident/charts
+  version: 1.1.0
+digest: sha256:aadc470cb5b605d6fe792344fd255f6bee40eb30f78ab078c0c3e9111beb0dca
+generated: "2026-11-12T01:20:32.785081+01:00"

@@ -1,0 +1,3 @@
+Three problems: the prod branch of deploy.sh selects the dev values file; the helm call uses --reuse-values, so keys set by
+earlier revisions survive later upgrades (fixing only the file selection still leaves debug endpoints on);
+and values-prod.yaml has a key the chart never reads (check the spelling and case against the chart's values.yaml).

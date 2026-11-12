@@ -1,0 +1,20 @@
+name: "Two Teams, One ClusterRole"
+description: |
+  Team B's rollout of the shared `collector` chart failed with `Unable to continue with install: ClusterRole "..." in namespace "" exists
+  and cannot be imported into the current release: invalid ownership metadata`. The same chart has been running for team A for weeks in its own
+  namespace. Both teams need their own collector, in their own namespace, each with its own access to the pod list. Beware: the first error is
+  rarely the last one for a chart written for a single tenant. `TEAMS.md` lists the releases, namespaces and values files.
+objective: |
+  Releases `team-a` (namespace `helmissions-team-a`) and `team-b` (namespace `helmissions-team-b`) are both `deployed` from the chart in the
+  workspace. They share no cluster-scoped object: every ClusterRole, ClusterRoleBinding and PriorityClass in one release's manifest has a name
+  that is scoped to its own release (contains the release name or its namespace), each is owned by its own release, and each collector's
+  ServiceAccount is really allowed to list pods (`http://team-a-collector/status` in `helmissions-team-a` and `http://team-b-collector/status`
+  in `helmissions-team-b` report `pods-api=200`). The chart must render the same shape for any release name and namespace.
+xp: 450
+difficulty: expert
+expected_time: 25m
+concepts:
+  - cluster-scoped resources
+  - release ownership
+  - multi-tenancy
+  - RBAC subjects

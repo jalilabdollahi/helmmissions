@@ -1,0 +1,2 @@
+Start with what is really deployed: `helm get values invoice -n helmissions` and the config page, then read `deploy.sh` top to bottom.
+Compare the three value sources the release can see: chart defaults, `values-prod.yaml` and whatever earlier revisions left behind.

@@ -1,0 +1,3 @@
+Use <service>.<namespace>.svc.cluster.local (or <service>.<namespace>) for the back end, set the front end's dnsPolicy back to
+the default one for in-cluster workloads (ClusterFirst), and make the back end Service's targetPort match the containerPort (8080).
+Change the values in the workspace and run deploy.sh.

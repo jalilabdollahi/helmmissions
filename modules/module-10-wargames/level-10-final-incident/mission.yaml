@@ -1,0 +1,23 @@
+name: "The Final Incident"
+description: |
+  INC-4471: Tideline 2.0 has to be live in staging and prod before the 15:00 freeze, and nothing about the release is clean. The
+  prod deploy was killed mid-run by the CI runner, and every `helm upgrade` of `tideline` has been refused since. Staging was deployed
+  earlier today and QA says it "feels wrong". The umbrella chart pulls a `cache` dependency from the internal chart registry, and the
+  status pages (`http://tideline/cgi-bin/status` in `helmissions`, `http://tideline-staging/cgi-bin/status` in `helmissions-staging`) do
+  not look like the healthy answer described in `INCIDENT.md`. You have the whole pipeline in your workspace. Work like the on-call engineer
+  you are: several things are wrong at once, and they hide each other.
+objective: |
+  Both environments run Tideline 2.0 from the workspace and are healthy. Release `tideline` (prod, namespace `helmissions`) and release
+  `tideline-staging` (namespace `helmissions-staging`) are `deployed`, prod's newest revision is a finished upgrade (nothing stuck in a pending state), and each
+  environment's database-migration hook has run to completion. Each status page reports `status=ok`, schema `13`, cache `1.2.x`
+  and a database host that belongs to its own environment (`tideline-db.<its namespace>`). The chart's dependencies in the workspace are consistent
+  (`helm dependency list` reports `ok`), and `bash deploy.sh staging` followed by `bash deploy.sh prod` run cleanly from the workspace.
+xp: 600
+difficulty: expert
+expected_time: 45m
+concepts:
+  - incident command
+  - stuck releases
+  - dependency management
+  - hooks
+  - environment values

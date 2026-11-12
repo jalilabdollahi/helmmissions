@@ -1,0 +1,48 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Release.Name }}
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: invoice
+      app.kubernetes.io/instance: {{ .Release.Name }}
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: invoice
+        app.kubernetes.io/instance: {{ .Release.Name }}
+    spec:
+      terminationGracePeriodSeconds: 2
+      containers:
+        - name: invoice
+          image: busybox:1.36
+          imagePullPolicy: IfNotPresent
+          env:
+            - {name: ENVIRONMENT, value: {{ .Values.environment | quote }}}
+            - {name: LOG_LEVEL, value: {{ .Values.logLevel | quote }}}
+            - {name: DEBUG_ENDPOINTS, value: {{ .Values.debugEndpoints | quote }}}
+            - {name: PAYMENTS_MODE, value: {{ .Values.payments.mode | quote }}}
+            - {name: DB_HOST, value: {{ .Values.database.host | quote }}}
+          command: ["sh", "-c"]
+          args:
+            - |
+              mkdir -p /www
+              {
+                echo "environment=$ENVIRONMENT"
+                echo "log_level=$LOG_LEVEL"
+                echo "debug_endpoints=$DEBUG_ENDPOINTS"
+                echo "payments=$PAYMENTS_MODE"
+                echo "database=$DB_HOST"
+              } > /www/config.txt
+              exec httpd -f -p 8080 -h /www
+          ports:
+            - name: http
+              containerPort: 8080
+          readinessProbe:
+            tcpSocket:
+              port: http
+          resources:
+            requests: {cpu: 5m, memory: 8Mi}
+            limits: {memory: 64Mi}

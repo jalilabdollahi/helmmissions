@@ -1,0 +1,4 @@
+Refresh dependencies with `helm dependency update ./tideline --plain-http`.
+Free the stuck release: `helm rollback tideline <last good revision>` (or delete the pending revision's Secret `sh.helm.release.v1.tideline.v<N>`).
+Set schema.target to 13 for prod (drop the override) and the staging database host to tideline-db.helmissions-staging.
+Ship with `bash deploy.sh staging` then `bash deploy.sh prod`; do not use --no-hooks.

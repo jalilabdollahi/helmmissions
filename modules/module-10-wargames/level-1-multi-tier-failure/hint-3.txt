@@ -1,0 +1,4 @@
+Fix the chart values in your workspace, not the running objects:
+the migration target must be one the release ships; ledger-api's db.host must be the database Service's real name;
+ledger-web's upstream must use the API Service's port.
+A failed release can be upgraded again or uninstalled and reinstalled. Repair the database first, then api, then web.

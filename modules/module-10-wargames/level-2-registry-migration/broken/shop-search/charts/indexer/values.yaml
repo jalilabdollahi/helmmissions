@@ -1,0 +1,4 @@
+replicaCount: 1
+image:
+  repository: registry.old.internal:5000/shop/indexer
+  tag: "1.8"

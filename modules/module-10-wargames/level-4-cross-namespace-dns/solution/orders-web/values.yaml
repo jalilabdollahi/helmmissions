@@ -1,0 +1,6 @@
+ordersApi:
+  host: orders-api.helmissions-api.svc.cluster.local
+  port: 80
+# Carried over from the old shared-namespace chart
+network:
+  dnsPolicy: ClusterFirst
