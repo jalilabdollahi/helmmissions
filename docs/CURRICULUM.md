@@ -8,6 +8,11 @@ vary them so no two levels feel alike. All levels follow [LEVEL_SPEC.md](LEVEL_S
 
 Format: `L<n> slug — Title (XP · difficulty · time)`
 
+> **Status (2026-11-12):** all 133 levels are built and pass `scripts/test_levels.py`. Where a premise
+> turned out to be false on Helm 4.3 / Kubernetes 1.37 the level was adapted to keep the same lesson,
+> and the level's `debrief.md` explains it under `## Helm 3 vs Helm 4`. The level directories (and the
+> generated `levels.json`) are the source of truth for final titles, XP and wording.
+
 ---
 
 ## Module 1 — Helm Basics (beginner)
