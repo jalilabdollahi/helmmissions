@@ -30,6 +30,7 @@ venv/bin/python3 -m pip install -q --disable-pip-version-check -r requirements.t
 echo "✅ Python packages installed"
 
 bash scripts/cluster.sh create helmissions
+kind export kubeconfig --name helmissions >/dev/null   # make sure your kubeconfig has the context
 kubectl config use-context kind-helmissions >/dev/null
 kubectl create namespace helmissions --dry-run=client -o yaml | kubectl apply -f - >/dev/null
 
